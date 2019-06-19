@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AuthorService;
 import services.ConferenceService;
+import services.ReportService;
 import services.SubmissionService;
 import domain.Submission;
 
@@ -26,17 +28,25 @@ public class SubmissionAdministratorController extends AbstractController {
 	AuthorService		authorService;
 	@Autowired
 	ConferenceService	conferenceService;
+	@Autowired
+	ReportService		reportService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> submissions;
-
 		submissions = this.submissionService.findAll();
+		boolean allowed = false;
+		for (final Submission s : submissions)
+			if (s.getConference().getSubmissionDeadline().before(new Date()))
+				allowed = true;
 
 		result = new ModelAndView("submission/list");
+
 		result.addObject("submissions", submissions);
+		result.addObject("allowed", allowed);
+
 		result.addObject("requestURI", "submission/administrator/list.do");
 
 		return result;
@@ -44,7 +54,9 @@ public class SubmissionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/decisionMaking", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int submissionId) {
 		ModelAndView result;
+
 		this.submissionService.submissionStatus(submissionId);
+
 		result = new ModelAndView("redirect:list.do");
 		return result;
 	}

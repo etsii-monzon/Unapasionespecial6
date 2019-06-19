@@ -65,14 +65,19 @@
 			</a>
 		</display:column>
 		</security:authorize>
+		
 		<security:authorize access="hasRole('ADMIN')">
 		
 		<display:column title="Decision making">
+			<jstl:if test="${allowed }">
+		
 			<a href="submission/administrator/decisionMaking.do?submissionId=${row.id}">
 				<spring:message code="submission.decision" />
 			</a>
+			</jstl:if>
 		</display:column>
 		</security:authorize>
+		
 		<security:authorize access="hasRole('AUTHOR')">
 		<display:column title="Paper to Review">
 			<a href="paper/author/showp.do?submissionId=${row.id}">
@@ -96,7 +101,6 @@
 			<a href="report/reviewer/create.do?subId=${row.id}">
 				<spring:message code="report.create" />
 			</a>
-	
 		</display:column>
 	</security:authorize>
 	
