@@ -79,11 +79,8 @@ public class AuthorService {
 		return d;
 	}
 	public Author save(final Author d) {
-		Assert.notNull(d);
-		Assert.isTrue(this.actorService.checkUserEmail(d.getEmail()));
 
-		Assert.isTrue(!d.getUserAccount().getUsername().isEmpty());
-		Assert.isTrue(!d.getUserAccount().getPassword().isEmpty());
+		Assert.notNull(d);
 
 		if (d.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
