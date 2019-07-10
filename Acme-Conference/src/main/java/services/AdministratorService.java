@@ -15,7 +15,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
-import domain.CreditCard;
 
 @Service
 @Transactional
@@ -26,8 +25,6 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 
 	//Supporting services
-	@Autowired
-	private CreditCardService		creditCardService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -43,15 +40,11 @@ public class AdministratorService {
 		Administrator a;
 		UserAccount userAccount;
 		Authority auth;
-		CreditCard cCard;
-
-		this.checkPrincipal();
 
 		//Authority
 		a = new Administrator();
 		userAccount = new UserAccount();
 		auth = new Authority();
-		cCard = new CreditCard();
 
 		auth.setAuthority("ADMIN");
 		userAccount.addAuthority(auth);
