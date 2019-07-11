@@ -19,7 +19,7 @@
 	<label for="keyword"> <spring:message code="conference.keyword" />
 	</label>
 	<input type="text" name="keyword" id="keyword"
-		placeholder="Search by TITLE, VENUE OR DESCRIPTION" />
+		placeholder="Search by TITLE, VENUE" />
 	<acme:submit name="search" code="conference.search" />
 	<br />
 

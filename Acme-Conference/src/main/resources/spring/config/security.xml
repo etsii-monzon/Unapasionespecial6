@@ -80,8 +80,12 @@
 			access="hasRole('REVIEWER')" />
 		<security:intercept-url pattern="/report/reviewer/**"
 			access="hasRole('REVIEWER')" />
-		<security:intercept-url pattern="/message/**"
-			access="permitAll" />
+
+		<!-- Mensajes -->
+		<security:intercept-url pattern="/message/actor/**"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/administrator/**"
+			access="hasRole('ADMIN')" />
 
 		<!-- Registro y edición de perfil Author -->
 

@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
 import domain.Actor;
+import domain.Author;
 import domain.Message;
 
 @Service
@@ -27,6 +28,9 @@ public class MessageService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private AuthorService			authorService;
 
 
 	//Supporting services
@@ -118,4 +122,47 @@ public class MessageService {
 		return m;
 	}
 
+	public Message messAuthors() {
+		this.administratorService.checkPrincipal();
+		Message m;
+
+		m = this.create();
+		final Collection<Actor> recipients = new ArrayList<>();
+		for (final Author au : this.authorService.findAll())
+			recipients.add(au);
+
+		m.setRecipients(recipients);
+		return m;
+	}
+	public Message messAuthorsSub() {
+		this.administratorService.checkPrincipal();
+		final Message m;
+
+		m = this.create();
+
+		final Collection<Actor> recipients = new ArrayList<>();
+		//Cogemos todos los autores que tienen submisions
+		for (final Author au : this.authorService.findAll())
+			if (!au.getSubmissions().isEmpty())
+				recipients.add(au);
+		m.setRecipients(recipients);
+
+		return m;
+	}
+
+	public Message messAuthorsRegistrations() {
+		this.administratorService.checkPrincipal();
+		final Message m;
+
+		m = this.create();
+
+		final Collection<Actor> recipients = new ArrayList<>();
+		//Cogemos todos los autores que tienen registrations
+		for (final Author au : this.authorService.findAll())
+			if (!au.getRegistrations().isEmpty())
+				recipients.add(au);
+		m.setRecipients(recipients);
+
+		return m;
+	}
 }

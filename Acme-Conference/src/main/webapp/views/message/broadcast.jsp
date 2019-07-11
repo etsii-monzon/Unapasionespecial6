@@ -17,38 +17,49 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<%-- 	<form:hidden path="sender" />
-	<form:hidden path="date" /> --%>
+	<form:hidden path="sender" />
+	<form:hidden path="date" />
+	<form:hidden path="recipients" />
 
 
 
+	<form:label path="subject">
+		<spring:message code="message.subject" />
+	</form:label>
+	<form:input path="subject" />
+	<form:errors class="error" path="subject" />
+	<br>
+	<br>
 
 
-
-	<acme:textbox code="message.subject" path="subject" />
-	<acme:textarea code="message.body" path="body" />
-	<acme:textbox code="message.optionalTags" path="optionalTags" />
-
-
-	<spring:message code="message.priority" />
-	<form:select path="priority">
-		<form:option value="-" label="-" selected="selected" />
-		<form:option value="LOW" label="LOW" />
-		<form:option value="NEUTRAL" label="NEUTRAL" />
-		<form:option value="HIGH" label="HIGH" />
-
-	</form:select>
-	<form:errors cssClass="error" path="priority" />
-
-	<br />
+	<%-- Body --%>
+	<form:label path="body">
+		<spring:message code="message.body" />
+	</form:label>
+	<form:textarea path="body" />
+	<form:errors class="error" path="body" />
+	<br>
+	<br>
 
 
+	<%-- Topic --%>
+	<spring:message code="message.topic" />
+	<form:input path="topic" />
+	<form:errors class="error" path="topic" />
+	<br>
+	<br>
 
+	<%-- Buttons --%>
 
-	<acme:submit name="save" code="message.save" />
-	<acme:cancel url="messageBox/actor/list.do" code="message.cancel" />
-	<br />
+	<input type="submit" name="save"
+		value="<spring:message code="message.save"/>" />
 
+	<input type="button" name="cancel"
+		value="<spring:message code="message.cancel" />"
+		onClick="javascript: window.location.replace('message/list.do')" />
+
+	<br>
+	<br>
 
 
 </form:form>

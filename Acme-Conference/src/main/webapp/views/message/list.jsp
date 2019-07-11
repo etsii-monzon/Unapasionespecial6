@@ -15,8 +15,36 @@
 
 <!-- Listing grid -->
 
-<!-- Hay que a�adir el Search -->
+<div>
+	<button type="button"
+		onclick="javascript: relativeRedir('message/actor/create.do')">
+		<spring:message code="message.create" />
+	</button>
 
+	<security:authorize access="hasRole('ADMIN')">
+		<button type="button"
+			onclick="javascript: relativeRedir('message/administrator/broadcast.do')">
+			<spring:message code="message.broadcast" />
+		</button>
+
+		<button type="button"
+			onclick="javascript: relativeRedir('message/administrator/messageAuthors.do')">
+			<spring:message code="message.authors" />
+		</button>
+
+		<button type="button"
+			onclick="javascript: relativeRedir('message/administrator/messageAuthorsSub.do')">
+			<spring:message code="message.authorsSub" />
+		</button>
+
+		<button type="button"
+			onclick="javascript: relativeRedir('message/administrator/messageAuthorsRegistration.do')">
+			<spring:message code="message.authorsRegistrations" />
+		</button>
+	</security:authorize>
+
+
+</div>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="messages" requestURI="${requestURI}" id="row">
@@ -24,6 +52,8 @@
 
 
 	<!-- Action links -->
+
+
 
 	<!-- Attributes -->
 
@@ -55,11 +85,5 @@
 
 </display:table>
 
-<div>
 
-	<button type="button"
-		onclick="javascript: relativeRedir('message/actor/create.do')">
-		<spring:message code="message.create" />
-	</button>
-</div>
 

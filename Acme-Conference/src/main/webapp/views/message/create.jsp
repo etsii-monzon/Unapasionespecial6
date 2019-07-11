@@ -12,13 +12,19 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="message/actor/edit.do" modelAttribute="m">
+
+
+
+<form:form action="${requestURI}" modelAttribute="m">
 
 	<%-- Hidden properties from message--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="sender" />
 	<form:hidden path="date" />
+	<jstl:if test="${requestURI != 'message/administrator/create.do' }">
+		<form:hidden path="recipients" />
+	</jstl:if>
 
 
 	<%-- Subject --%>
@@ -41,13 +47,16 @@
 	<br>
 
 	<%-- Recipients --%>
-	<spring:message code="message.recipients" />
-	<form:select path="recipients" multiple="true" itemValue="id">
-		<form:options items="${recipients}" itemLabel="email" itemValue="id" />
-	</form:select>
-	<form:errors class="error" path="recipients" />
-	<br>
-	<br>
+	<jstl:if test="${requestURI == 'message/actor/create.do' }">
+		<spring:message code="message.recipients" />
+		<form:select path="recipients" multiple="true" itemValue="id">
+			<form:options items="${recipients}" itemLabel="email" itemValue="id" />
+		</form:select>
+		<form:errors class="error" path="recipients" />
+
+		<br>
+		<br>
+	</jstl:if>
 
 	<%-- Topic --%>
 	<spring:message code="message.topic" />
@@ -63,7 +72,7 @@
 
 	<input type="button" name="cancel"
 		value="<spring:message code="message.cancel" />"
-		onClick="javascript: window.location.replace('message/list.do')" />
+		onClick="javascript: window.location.replace('message/actor/list.do')" />
 
 	<br>
 	<br>

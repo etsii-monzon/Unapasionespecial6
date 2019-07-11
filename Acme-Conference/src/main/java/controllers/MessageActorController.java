@@ -52,6 +52,7 @@ public class MessageActorController extends AbstractController {
 		m = this.messageService.create();
 		result = this.createEditModelAndView(m);
 		result.addObject("m", m);
+		result.addObject("requestURI", "message/actor/create.do");
 
 		return result;
 	}
