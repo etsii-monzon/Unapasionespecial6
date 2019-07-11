@@ -46,30 +46,8 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="userAccount4" class="security.UserAccount">
-		<property name="username" value="reviewer2" />
-		<property name="password" value="2693b57f0f59df94caacefb811e99851" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
 
-	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="reviewer3" />
-		<property name="password" value="315d31e7c8f3a136610aafa220d689be" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="REVIEWER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
+
 
 	<!-- Other domain beans come here -->
 
@@ -144,73 +122,7 @@
 
 			</list>
 		</property>
-		<property name="keywords">
-			<list>
-				<value>no</value>
-				<value>sitio</value>
-			</list>
-		</property>
-	
-	</bean>
-	
-	<bean id="reviewer2" class="domain.Reviewer">
-		<property name="name" value="Pedro" />
-		<property name="surname" value="Almodovar" />
-		<property name="middleName" value="José" />
 
-		<property name="email" value="pjalmod@hotmail.com" />
-		<property name="phoneNumber" value="+34 633147152" />
-		<property name="address" value="Luna 18" />
-		<property name="optionalPhoto" value="" />
-		<property name="userAccount" ref="userAccount4" />
-		<property name="experience" value="experience1, experience2" />
-
-		<property name="reports">
-			<list>
-
-			</list>
-		</property>
-		<property name="messages">
-			<list>
-
-			</list>
-		</property>
-		<property name="keywords">
-			<list>
-				<value>submission1</value>
-				<value>coincidir</value>
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="reviewer3" class="domain.Reviewer">
-		<property name="name" value="Anastasia" />
-		<property name="surname" value="Baeza" />
-		<property name="middleName" value="Josefa" />
-
-		<property name="email" value="anasbae@hotmail.com" />
-		<property name="phoneNumber" value="+34 676138883" />
-		<property name="address" value="Castañuela 13" />
-		<property name="optionalPhoto" value="" />
-		<property name="userAccount" ref="userAccount5" />
-		<property name="experience" value="experience1, experience2" />
-
-		<property name="reports">
-			<list>
-
-			</list>
-		</property>
-		<property name="messages">
-			<list>
-
-			</list>
-		</property>
-		<property name="keywords">
-			<list>
-				<value>fantasia</value>
-				<value>cosas</value>
-			</list>
-		</property>
 	</bean>
 
 	<bean id="configuration" class="domain.Configuration">

@@ -1,40 +1,72 @@
-<%--
- * create.jsp
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
-
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<p>
-	<spring:message code="message.create" />
-</p>
 
-	<div>
-		<form:form action="message/actor/edit.do" method="POST"
-			id="formCreate" name="formCreate" modelAttribute="message">
+<form:form action="message/actor/edit.do" modelAttribute="m">
 
-			
-				
+	<%-- Hidden properties from message--%>
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="sender" />
+	<form:hidden path="date" />
 
-			<input type="submit" name="save"
-				value="<spring:message code="message"></spring:message>" />
 
-			<spring:message code="message.cancel" var="cancelHeader"></spring:message>
-			<input type="button" name="cancel" value="${cancelHeader}"
-				onclick="javascript:relativeRedir('message/actor/list.do')" />
-		</form:form>
+	<%-- Subject --%>
+	<form:label path="subject">
+		<spring:message code="message.subject" />
+	</form:label>
+	<form:input path="subject" />
+	<form:errors class="error" path="subject" />
+	<br>
+	<br>
 
-	</div>
+
+	<%-- Body --%>
+	<form:label path="body">
+		<spring:message code="message.body" />
+	</form:label>
+	<form:textarea path="body" />
+	<form:errors class="error" path="body" />
+	<br>
+	<br>
+
+	<%-- Recipients --%>
+	<spring:message code="message.recipients" />
+	<form:select path="recipients" multiple="true" itemValue="id">
+		<form:options items="${recipients}" itemLabel="email" itemValue="id" />
+	</form:select>
+	<form:errors class="error" path="recipients" />
+	<br>
+	<br>
+
+	<%-- Topic --%>
+	<spring:message code="message.topic" />
+	<form:input path="topic" />
+	<form:errors class="error" path="topic" />
+	<br>
+	<br>
+
+	<%-- Buttons --%>
+
+	<input type="submit" name="save"
+		value="<spring:message code="message.save"/>" />
+
+	<input type="button" name="cancel"
+		value="<spring:message code="message.cancel" />"
+		onClick="javascript: window.location.replace('message/list.do')" />
+
+	<br>
+	<br>
+
+
+</form:form>

@@ -9,7 +9,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -46,7 +45,6 @@ public class Paper extends DomainEntity {
 		this.summary = summary;
 	}
 	@NotBlank
-	@URL
 	public String getDocument() {
 		return this.document;
 	}

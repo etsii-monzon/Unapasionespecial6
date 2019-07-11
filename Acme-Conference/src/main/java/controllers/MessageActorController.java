@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,65 +47,66 @@ public class MessageActorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Message message;
+		Message m;
 
-		message = this.messageService.create();
-		result = this.createEditModelAndView(message);
+		m = this.messageService.create();
+		result = this.createEditModelAndView(m);
+		result.addObject("m", m);
 
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int messageId) {
 		ModelAndView result;
-		final Message message;
+		final Message m;
 
-		message = this.messageService.findOne(messageId);
-		Assert.notNull(message);
+		m = this.messageService.findOne(messageId);
+		Assert.notNull(m);
 
-		result = this.createEditModelAndView(message);
+		result = this.createEditModelAndView(m);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Message message) {
+	protected ModelAndView createEditModelAndView(final Message m) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(message, null);
+		result = this.createEditModelAndView(m, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Message message, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final Message m, final String messageCode) {
 		final ModelAndView result;
 		final Collection<Actor> recipients = this.actorService.findAll();
 		recipients.remove(this.actorService.findByPrincipal());
 
-		result = new ModelAndView("message/edit");
+		result = new ModelAndView("message/create");
 		result.addObject("recipients", recipients);
 
-		result.addObject("message", message);
+		result.addObject("m", m);
 
 		result.addObject("message", messageCode);
 
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Message message, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("m") @Valid final Message m, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.print(binding);
-			result = this.createEditModelAndView(message);
+			result = this.createEditModelAndView(m);
 
 		} else
 			try {
 				System.out.print("Entra");
 
-				this.messageService.save(message);
+				this.messageService.save(m);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				System.out.print(oops);
 
-				result = this.createEditModelAndView(message, "message.commit.error");
+				result = this.createEditModelAndView(m, "message.commit.error");
 			}
 		return result;
 	}
@@ -112,14 +114,23 @@ public class MessageActorController extends AbstractController {
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int messageId) {
 		final ModelAndView result;
-		final Message message;
+		final Message m;
 
-		message = this.messageService.findOne(messageId);
+		m = this.messageService.findOne(messageId);
 
 		result = new ModelAndView("message/show");
 		result.addObject("requestURI", "message/actor/show.do");
-		result.addObject("message", message);
+		result.addObject("m", m);
+
 		return result;
 	}
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int messageId) {
+		ModelAndView result;
+		final Message m = this.messageService.findOne(messageId);
 
+		this.messageService.delete(m);
+		result = new ModelAndView("redirect:list.do");
+		return result;
+	}
 }

@@ -29,6 +29,11 @@
 		<value>/views/report/messages</value>
 		<value>/views/message/messages</value>
 
+		<value>/views/author/messages</value>
+		<value>/views/reviewer/messages</value>
+
+
+
 	</util:list>
 
 </beans>

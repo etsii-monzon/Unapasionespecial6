@@ -15,7 +15,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
-import domain.CreditCard;
 
 @Service
 @Transactional
@@ -26,8 +25,6 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 
 	//Supporting services
-	@Autowired
-	private CreditCardService		creditCardService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -43,15 +40,11 @@ public class AdministratorService {
 		Administrator a;
 		UserAccount userAccount;
 		Authority auth;
-		CreditCard cCard;
-
-		this.checkPrincipal();
 
 		//Authority
 		a = new Administrator();
 		userAccount = new UserAccount();
 		auth = new Authority();
-		cCard = new CreditCard();
 
 		auth.setAuthority("ADMIN");
 		userAccount.addAuthority(auth);
@@ -115,7 +108,7 @@ public class AdministratorService {
 		return res;
 	}
 
-	public Boolean checkPrincipal() {
+	public void checkPrincipal() {
 
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
@@ -126,7 +119,7 @@ public class AdministratorService {
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.ADMIN);
 
-		return authorities.contains(auth);
+		Assert.isTrue(authorities.contains(auth));
 	}
 	public void flush() {
 		this.administratorRepository.flush();
