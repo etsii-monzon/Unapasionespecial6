@@ -16,13 +16,13 @@
 
 
 <form:form action="${requestURI}" modelAttribute="m">
-
+	<jstl:out value="${requestURI}"></jstl:out>
 	<%-- Hidden properties from message--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="sender" />
 	<form:hidden path="date" />
-	<jstl:if test="${requestURI != 'message/administrator/create.do' }">
+	<jstl:if test="${requestURI != 'message/actor/send.do' }">
 		<form:hidden path="recipients" />
 	</jstl:if>
 
@@ -47,7 +47,7 @@
 	<br>
 
 	<%-- Recipients --%>
-	<jstl:if test="${requestURI == 'message/actor/create.do' }">
+	<jstl:if test="${requestURI == 'message/actor/send.do' }">
 		<spring:message code="message.recipients" />
 		<form:select path="recipients" multiple="true" itemValue="id">
 			<form:options items="${recipients}" itemLabel="email" itemValue="id" />

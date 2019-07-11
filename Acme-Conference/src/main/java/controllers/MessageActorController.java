@@ -44,27 +44,14 @@ public class MessageActorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	@RequestMapping(value = "/send", method = RequestMethod.GET)
+	public ModelAndView send() {
 		ModelAndView result;
 		Message m;
 
 		m = this.messageService.create();
 		result = this.createEditModelAndView(m);
-		result.addObject("m", m);
-		result.addObject("requestURI", "message/actor/create.do");
-
-		return result;
-	}
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int messageId) {
-		ModelAndView result;
-		final Message m;
-
-		m = this.messageService.findOne(messageId);
-		Assert.notNull(m);
-
-		result = this.createEditModelAndView(m);
+		//		result.addObject("m", m);
 
 		return result;
 	}
@@ -84,14 +71,13 @@ public class MessageActorController extends AbstractController {
 
 		result = new ModelAndView("message/create");
 		result.addObject("recipients", recipients);
-
 		result.addObject("m", m);
-
 		result.addObject("message", messageCode);
+		result.addObject("requestURI", "message/actor/send.do");
 
 		return result;
 	}
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("m") @Valid final Message m, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
@@ -104,6 +90,7 @@ public class MessageActorController extends AbstractController {
 
 				this.messageService.save(m);
 				result = new ModelAndView("redirect:list.do");
+
 			} catch (final Throwable oops) {
 				System.out.print(oops);
 
@@ -114,24 +101,37 @@ public class MessageActorController extends AbstractController {
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int messageId) {
-		final ModelAndView result;
+		ModelAndView result;
 		final Message m;
 
-		m = this.messageService.findOne(messageId);
+		try {
+			m = this.messageService.findOne(messageId);
+			Assert.isTrue(this.actorService.findByPrincipal().getMessages().contains(m));
 
-		result = new ModelAndView("message/show");
-		result.addObject("requestURI", "message/actor/show.do");
-		result.addObject("m", m);
+			result = new ModelAndView("message/show");
+			result.addObject("requestURI", "message/actor/show.do");
+			result.addObject("m", m);
+		} catch (final IllegalArgumentException e) {
+			// TODO: handle exception
+			result = new ModelAndView("misc/403");
+		}
 
 		return result;
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int messageId) {
 		ModelAndView result;
-		final Message m = this.messageService.findOne(messageId);
+		try {
+			final Message m = this.messageService.findOne(messageId);
+			Assert.isTrue(this.actorService.findByPrincipal().getMessages().contains(m));
 
-		this.messageService.delete(m);
-		result = new ModelAndView("redirect:list.do");
+			this.messageService.delete(m);
+			result = new ModelAndView("redirect:list.do");
+			return result;
+		} catch (final IllegalArgumentException e) {
+			// TODO: handle exception
+			result = new ModelAndView("misc/403");
+		}
 		return result;
 	}
 }

@@ -63,7 +63,7 @@
 		<property name="userAccount" ref="userAccount1" />
 		<property name="conferences">
 			<list>
-
+				<ref bean="conference1" />
 			</list>
 		</property>
 		<property name="messages">
@@ -122,6 +122,22 @@
 
 			</list>
 		</property>
+
+	</bean>
+
+	<bean id="conference1" class="domain.Conference">
+		<property name="title" value="Learn Unity" />
+		<property name="acronym" value="LU" />
+		<property name="venue" value="ETSII" />
+
+		<property name="submissionDeadline" value="01/06/2020 00:00" />
+		<property name="notificationDeadline" value="02/06/2020 00:00" />
+		<property name="cameraDeadline" value="03/06/2020 00:00" />
+		<property name="startDate" value="05/06/2020 16:00" />
+		<property name="endDate" value="05/06/2020 20:00" />
+		<property name="fee" value="24.99" />
+		<property name="draftMode" value="false" />
+
 
 	</bean>
 

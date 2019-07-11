@@ -74,7 +74,7 @@ public class MessageAdministratorController extends AbstractController {
 
 		m = this.messageService.messAuthorsRegistrations();
 		result = this.createEditModelAndView(m);
-		result.addObject("requestURI", "message/administrator//messageAuthorsRegistration.do");
+		result.addObject("requestURI", "message/administrator/messageAuthorsRegistration.do");
 
 		return result;
 	}

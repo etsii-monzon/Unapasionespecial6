@@ -17,7 +17,7 @@
 
 <div>
 	<button type="button"
-		onclick="javascript: relativeRedir('message/actor/create.do')">
+		onclick="javascript: relativeRedir('message/actor/send.do')">
 		<spring:message code="message.create" />
 	</button>
 
