@@ -7,7 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -91,7 +91,7 @@ public abstract class Actor extends DomainEntity {
 	public void setAddress(final String address) {
 		this.address = address;
 	}
-	@OneToMany
+	@ManyToMany
 	public Collection<Message> getMessages() {
 		return this.messages;
 	}

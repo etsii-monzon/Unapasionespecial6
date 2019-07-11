@@ -30,18 +30,20 @@
 	<display:column property="sender.email" titleKey="message.sender"
 		sortable="true" />
 	<display:column property="subject" titleKey="message.subject" />
-	<display:column property="priority" titleKey="message.priority"
+	<display:column property="recipients" titleKey="message.recipients"
+		sortable="true" />
+	<display:column property="topic" titleKey="message.topic"
 		sortable="true" />
 
 	<display:column property="date" titleKey="message.date" sortable="true" />
 
-	<display:column title="Show">
+	<display:column titleKey="message.show">
 		<a href="message/actor/show.do?messageId=${row.id}"> <spring:message
 				code="message.show" />
 		</a>
 	</display:column>
 
-	<display:column title="Delete">
+	<display:column titleKey="message.delete">
 		<a href="message/actor/delete.do?messageId=${row.id}"> <spring:message
 				code="message.delete" />
 		</a>
@@ -53,11 +55,11 @@
 
 </display:table>
 
-	<div>
-		
-		<button type="button"
-			onclick="javascript: relativeRedir('message/actor/create.do')">
-			<spring:message code="message.create" />
-		</button>
-	</div>
+<div>
+
+	<button type="button"
+		onclick="javascript: relativeRedir('message/actor/create.do')">
+		<spring:message code="message.create" />
+	</button>
+</div>
 
