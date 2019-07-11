@@ -36,17 +36,14 @@
 		<jstl:out value="${submission.status }" />
 	</p>
 	
-	
-	<p>
-		<b><spring:message code="submission.reviewers" />: </b>
-		<td><jstl:out value="${submission.reviewers}" />
-	</p>
+
+
 	
 
 <br />
 
 
-<acme:cancel url="submission/administrator/list.do"
+<acme:cancel url="submission/author/list.do"
 	code="submission.cancel" /> 
 
 <br />

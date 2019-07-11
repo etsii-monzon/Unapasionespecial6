@@ -1,9 +1,13 @@
 #./src/main/resources/Entities.map
-#Thu Jul 11 13:19:15 CEST 2019
-author1=12
-userAccount3=10
-admin1=11
-userAccount2=9
-reviewer1=13
-userAccount1=8
-configuration=14
+#Thu Jul 11 13:57:46 CEST 2019
+admin1=17
+configuration=22
+author1=18
+reviewer3=21
+userAccount5=16
+reviewer2=20
+userAccount4=15
+reviewer1=19
+userAccount3=14
+userAccount2=13
+userAccount1=12

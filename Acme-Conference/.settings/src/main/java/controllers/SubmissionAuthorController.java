@@ -2,8 +2,6 @@
 package controllers;
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.validation.Valid;
 
@@ -40,12 +38,10 @@ public class SubmissionAuthorController extends AbstractController {
 		ModelAndView result;
 		Collection<Submission> submissions;
 
-		final Date fechaActual = new GregorianCalendar().getTime();
 		submissions = this.authorService.findByPrincipal().getSubmissions();
 
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
-		result.addObject("fechaActual", fechaActual);
 		result.addObject("requestURI", "submission/author/list.do");
 
 		return result;
@@ -88,11 +84,8 @@ public class SubmissionAuthorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Submission submission, final String messageCode) {
 		final ModelAndView result;
 		final Collection<Conference> conferences = this.conferenceService.conferencesToSubmission();
-
 		result = new ModelAndView("submission/edit");
 
-		if (submission.getStatus() == "ACCEPTED")
-			submission.setCameraReady(true);
 		result.addObject("submission", submission);
 		result.addObject("conferences", conferences);
 
@@ -100,7 +93,6 @@ public class SubmissionAuthorController extends AbstractController {
 
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Submission submission, final BindingResult binding) {
 		ModelAndView result;
