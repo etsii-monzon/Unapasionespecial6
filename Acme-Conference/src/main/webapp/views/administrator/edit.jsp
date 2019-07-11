@@ -33,10 +33,8 @@
 	<form:hidden path="messages" />
 	<form:hidden path="conferences" />
 
-	<jstl:if test="${author.id != 0}">
-		<form:hidden path="userAccount.username" />
-		<form:hidden path="userAccount.password" />
-	</jstl:if>
+	<form:hidden path="userAccount.username" />
+	<form:hidden path="userAccount.password" />
 
 
 

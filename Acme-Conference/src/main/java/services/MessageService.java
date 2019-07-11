@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -62,26 +63,44 @@ public class MessageService {
 		Assert.notNull(a);
 		final Message res;
 
-		final Actor b = this.actorService.findByPrincipal();
-		final Collection<Message> f = b.getMessages();
 		res = this.messageRepository.save(a);
-		if (!f.contains(res))
-			f.add(res);
+
+		//Mensaje se guarada en vensajes de sender
+		a.getSender().getMessages().add(res);
+
+		//Mensaje se guarda en mensajes de recipients
+		for (final Actor actor : a.getRecipients())
+			actor.getMessages().add(res);
 
 		return res;
 	}
-	public void delete(final Message p) {
+	public void delete(final Message message) {
 
-		Assert.notNull(p);
-		Assert.isTrue(p.getId() != 0);
+		Assert.notNull(message);
+		Assert.isTrue(message.getId() != 0);
 
-		final Actor dir = this.actorService.findByPrincipal();
+		final Collection<Actor> actoresSendReci = new ArrayList<Actor>();
+		final Collection<Actor> actoresConMensaje = new ArrayList<Actor>();
 
-		dir.getMessages().remove(p);
+		actoresSendReci.add(message.getSender());
+		actoresSendReci.addAll(message.getRecipients());
 
-		this.messageRepository.delete(p);
+		for (final Actor ac : actoresSendReci)
+			if (ac.getMessages().contains(message))
+				actoresConMensaje.add(ac);
+		System.out.println(actoresConMensaje);
+		System.out.println(actoresSendReci);
+		for (final Actor a : actoresConMensaje)
+			if (a.equals(this.actorService.findByPrincipal()))
+				a.getMessages().remove(message);
+		actoresConMensaje.remove(this.actorService.findByPrincipal());
+
+		System.out.println(actoresConMensaje);
+		System.out.println(actoresSendReci);
+		if (actoresConMensaje.isEmpty())
+			this.messageRepository.delete(message);
+
 	}
-
 	public Message broadcast() {
 		this.administratorService.checkPrincipal();
 		Message m;

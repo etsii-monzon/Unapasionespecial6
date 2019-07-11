@@ -13,31 +13,31 @@
 
 <p>
 	<b><spring:message code="message.sender" />: </b>
-	<jstl:out value="${message.sender.email}" />
+	<jstl:out value="${m.sender.email}" />
 </p>
 
 <p>
 	<b><spring:message code="message.recipients" />: </b>
-	<jstl:forEach items="${message.recipients }" var="actor">
+	<jstl:forEach items="${m.recipients }" var="actor">
 		<jstl:out value="${actor.email},"></jstl:out>
 	</jstl:forEach>
 </p>
 <p>
 	<b><spring:message code="message.subject" />: </b>
-	<jstl:out value="${message.subject }" />
+	<jstl:out value="${m.subject }" />
 
 </p>
 <p>
 	<b><spring:message code="message.body" />: </b>
-	<jstl:out value="${message.body }" />
+	<jstl:out value="${m.body }" />
 </p>
 <p>
 	<b><spring:message code="message.date" />: </b>
-	<jstl:out value="${message.date }" />
+	<jstl:out value="${m.date }" />
 </p>
 <p>
-	<b><spring:message code="message.priority" />: </b>
-	<jstl:out value="${message.priority}" />
+	<b><spring:message code="message.topic" />: </b>
+	<jstl:out value="${m.topic}" />
 </p>
 
 
@@ -47,6 +47,9 @@
 <br />
 
 
-<acme:cancel url="${requestURI}" code="message.return" />
- 
+<input type="button" name="cancel"
+	value="<spring:message code="message.return" />"
+	onClick="javascript: window.location.replace('message/actor/list.do')" />
+
+
 <br />
