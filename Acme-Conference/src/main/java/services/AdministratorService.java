@@ -83,7 +83,6 @@ public class AdministratorService {
 		}
 
 		//Comprobamos si el núemro de teléfono está vacio sino comprobamos que empieze por +
-		System.out.println(a.getPhoneNumber());
 		if (a.getPhoneNumber() != null)
 			if (ConfigurationService.isNumeric(a.getPhoneNumber()) == true && !(a.getPhoneNumber().isEmpty()))
 				if (a.getPhoneNumber().length() > 3 && !(a.getPhoneNumber().startsWith("+")))
