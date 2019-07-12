@@ -12,31 +12,22 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
+<form:form action="${requestURI }">
 
-<form:form action="${RequestURI }" modelAttribute="configuration">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
 
-	<acme:textbox code="configuration.sistemName" path="sistemName" />
+	<%-- Topic --%>
+	<spring:message code="configuration.topic" />
+	<jstl:if test="${topic != '' }">
+		<input name="topic" value="${topic }">
+	</jstl:if>
+
+	<jstl:if test="${topic == '' }">
+		<input name="topic" />
+	</jstl:if>
+
+
 	<br>
-
-
-	<acme:textbox code="configuration.welcomeSP" path="welcomeSP" />
-	<br>
-
-
-	<acme:textbox code="configuration.welcomeEN" path="welcomeEN" />
-	<br>
-
-
-	<acme:textbox code="configuration.bannerURL" path="bannerURL" />
-	<br>
-
-
-
-	<acme:number code="configuration.countryCode" path="countryCode"
-		min="1" />
 	<br>
 
 
@@ -46,15 +37,8 @@
 	
 	<input type="button" name="cancel"
 		value="<spring:message code="configuration.cancel" />"
-		onclick="javascript:  window.location.replace('welcome/index.do');" />
+		onclick="javascript:  window.location.replace('configuration/administrator/topic/list.do');" />
 	<br>
 </form:form>
-
-<div>
-	<button type="button"
-		onclick="javascript: relativeRedir('configuration/administrator/topic/list.do')">
-		<spring:message code="configuration.topic.manage" />
-	</button>
-</div>
 <br>
 <div></div>

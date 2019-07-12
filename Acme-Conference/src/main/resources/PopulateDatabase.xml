@@ -149,6 +149,16 @@
 		<property name="welcomeSP"
 			value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos" />
 		<property name="countryCode" value="34" />
+		<property name="topics">
+			<list>
+				<value>INQUIRY</value>
+				<value>REBUTTAL</value>
+				<value>REGISTRATION</value>
+				<value>TOPICS</value>
+				<value>OTHERS</value>
+
+			</list>
+		</property>
 	</bean>
 
 </beans>
