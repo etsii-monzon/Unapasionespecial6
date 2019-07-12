@@ -88,8 +88,9 @@ public class ReviewerService {
 			e.getUserAccount().setPassword(hash);
 		}
 		if (e.getPhoneNumber() != null)
-			if (!(e.getPhoneNumber().startsWith("+")))
-				e.setPhoneNumber("+" + this.configurationService.find().getCountryCode() + " " + e.getPhoneNumber());
+			if (ConfigurationService.isNumeric(e.getPhoneNumber()) == true && !(e.getPhoneNumber().isEmpty()))
+				if (e.getPhoneNumber().length() > 3 && !(e.getPhoneNumber().startsWith("+")))
+					e.setPhoneNumber("+" + this.configurationService.find().getCountryCode() + " " + e.getPhoneNumber());
 		Reviewer res;
 		res = this.reviewerRepository.save(e);
 		return res;

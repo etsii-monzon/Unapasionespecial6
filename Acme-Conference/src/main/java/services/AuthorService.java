@@ -88,8 +88,9 @@ public class AuthorService {
 			d.getUserAccount().setPassword(hash);
 		}
 		if (d.getPhoneNumber() != null)
-			if (!(d.getPhoneNumber().startsWith("+")))
-				d.setPhoneNumber("+" + this.configurationService.find().getCountryCode() + " " + d.getPhoneNumber());
+			if (ConfigurationService.isNumeric(d.getPhoneNumber()) == true && !(d.getPhoneNumber().isEmpty()))
+				if (d.getPhoneNumber().length() > 3 && !(d.getPhoneNumber().startsWith("+")))
+					d.setPhoneNumber("+" + this.configurationService.find().getCountryCode() + " " + d.getPhoneNumber());
 		Author res;
 		res = this.authorRepository.save(d);
 		return res;

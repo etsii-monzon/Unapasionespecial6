@@ -18,11 +18,28 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<!-- Función comprobar phoneNumber -->
 
-
+<script type="text/javascript">
+	function checkPhoneNumber() {
+		var pN = $("input#phoneNumber").val();
+		//[+],[(],[)] coincide carï¿½cteres de dentro de los corchetes
+		//\d cualquier nï¿½mero de 0-9
+		//? puede ser 0 o 1,esdecir,puede aparecer el +CC o el +CC (AC)
+		//{4,} mï¿½nimo 4 dï¿½gitos
+		var regex = /^(([+]\d{1,3})\s(([(]\d{1,3}[)]\s)?))?\d{4,}$/;
+		if (regex.test(pN)) {
+			return true;
+		} else {
+			return confirm("<spring:message code="administrator.checkPhoneNumber"/>");
+		}
+	}
+</script>
 
 <form:form action="administrator/administrator/edit.do"
-	modelAttribute="administrator">
+	modelAttribute="administrator" onsubmit="return checkPhoneNumber()">
+
+	<%-- Atributos Ocultos --%>
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -78,7 +95,7 @@
 	<form:label path="phoneNumber">
 		<spring:message code="administrator.phoneNumber" />
 	</form:label>
-	<form:input path="phoneNumber" />
+	<form:input path="phoneNumber" pattern="[0-9+()\s]+" />
 	<form:errors class="error" path="phoneNumber" />
 	<br>
 	<br>

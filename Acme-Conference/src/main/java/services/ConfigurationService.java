@@ -86,4 +86,18 @@ public class ConfigurationService {
 
 	}
 
+	public static boolean isNumeric(final String cadena) {
+
+		boolean resultado;
+
+		try {
+			Integer.parseInt(cadena);
+			resultado = true;
+		} catch (final NumberFormatException excepcion) {
+			resultado = false;
+		}
+
+		return resultado;
+	}
+
 }
