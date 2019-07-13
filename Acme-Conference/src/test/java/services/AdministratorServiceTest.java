@@ -21,6 +21,9 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Administrator;
+import domain.Author;
+import domain.Message;
+import domain.Submission;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -33,6 +36,15 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private MessageService			messageService;
+
+	@Autowired
+	private SubmissionService		submissionService;
+
+	@Autowired
+	private AuthorService			authorService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -55,6 +67,29 @@ public class AdministratorServiceTest extends AbstractTest {
 		final Administrator result = this.administratorService.save(res);
 		Assert.isTrue(this.administratorService.findAll().contains(result));
 		Assert.isTrue(result.equals(res));
+
+		super.unauthenticate();
+
+	}
+
+	/*
+	 * Test comprobación notificación recibida por author de decisión de su submission
+	 * Req Funcional: 14.5
+	 */
+	@Test
+	public void testNotificationProcedure() {
+		super.authenticate("admin");
+
+		final Submission s = this.submissionService.findOne(super.getEntityId("submission1"));
+		this.messageService.notificationDecision(s);
+
+		final Author recipient = this.authorService.findAuthorBySubmissionId(s.getId());
+
+		for (final Message m : recipient.getMessages())
+			if (m.getTopic() == "RESOLUTION") {
+				Assert.isTrue(recipient.getMessages().contains(m));
+				break;
+			}
 
 		super.unauthenticate();
 

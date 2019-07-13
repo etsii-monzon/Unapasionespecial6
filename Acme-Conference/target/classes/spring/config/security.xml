@@ -81,6 +81,9 @@
 		<security:intercept-url pattern="/report/reviewer/**"
 			access="hasRole('REVIEWER')" />
 
+		<security:intercept-url pattern="/report/author/**"
+			access="hasRole('AUTHOR')" />
+
 		<!-- Mensajes -->
 		<security:intercept-url pattern="/message/actor/**"
 			access="isAuthenticated()" />

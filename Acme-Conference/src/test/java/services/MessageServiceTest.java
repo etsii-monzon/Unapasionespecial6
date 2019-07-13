@@ -171,4 +171,58 @@ public class MessageServiceTest extends AbstractTest {
 
 	}
 
+	/*
+	 * Test enviar mensaje a todos los AUTORES que hayan entregado en una conferencia como administrador(Broadcast).
+	 * Req Funcional: 14.7
+	 */
+	@Test
+	public void testBroadcastAuthorsSubmissionMessage() {
+		super.authenticate("admin");
+
+		final Message res = this.messageService.messAuthorsSub();
+		Assert.notNull(res);
+
+		res.setSubject("IMPORTANTE");
+		res.setBody("TEST");
+		res.setTopic("OTHERS");
+
+		final Message result = this.messageService.save(res);
+		Assert.notNull(result);
+
+		Assert.isTrue(this.messageService.findAll().contains(result));
+		Assert.isTrue(this.actorService.findByPrincipal().getMessages().contains(result));
+		final Actor recipient = this.actorService.findOne(super.getEntityId("author1"));
+		Assert.isTrue(recipient.getMessages().contains(result));
+
+		super.unauthenticate();
+
+	}
+
+	/*
+	 * Test enviar mensaje a todos los AUTORES que hayan registrado en una conferencia como administrador(Broadcast).
+	 * Req Funcional: 14.7
+	 */
+	@Test
+	public void testBroadcastAuthorsRegistrationMessage() {
+		super.authenticate("admin");
+
+		final Message res = this.messageService.messAuthorsRegistrations();
+		Assert.notNull(res);
+
+		res.setSubject("IMPORTANTE");
+		res.setBody("TEST");
+		res.setTopic("OTHERS");
+
+		final Message result = this.messageService.save(res);
+		Assert.notNull(result);
+
+		Assert.isTrue(this.messageService.findAll().contains(result));
+		Assert.isTrue(this.actorService.findByPrincipal().getMessages().contains(result));
+		final Actor recipient = this.actorService.findOne(super.getEntityId("author1"));
+		Assert.isTrue(recipient.getMessages().contains(result));
+
+		super.unauthenticate();
+
+	}
+
 }

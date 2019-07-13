@@ -14,9 +14,7 @@
 
 
 
-
 <form:form action="${requestURI}" modelAttribute="m">
-	<jstl:out value="${requestURI}"></jstl:out>
 	<%-- Hidden properties from message--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />

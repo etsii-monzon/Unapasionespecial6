@@ -35,6 +35,9 @@ public class SubmissionService {
 	@Autowired
 	private PaperService			paperService;
 
+	@Autowired
+	private MessageService			messageService;
+
 
 	// SIMPLE CRUD METHODS
 
@@ -50,12 +53,11 @@ public class SubmissionService {
 		final char b = this.authorService.findByPrincipal().getSurname().charAt(0);
 		final String x = "XX";
 		char c = x.charAt(0);
-		if (this.authorService.findByPrincipal().getMiddleName().length()>1){
+		if (this.authorService.findByPrincipal().getMiddleName().length() > 1)
 			c = this.authorService.findByPrincipal().getMiddleName().charAt(0);
-		}else{
+		else
 			c = x.charAt(0);
-			}
-		
+
 		sub.setTicker(a + "" + b + "" + c + "-" + this.configurationService.createTicker());
 		return sub;
 	}
@@ -145,6 +147,10 @@ public class SubmissionService {
 			res = this.submissionRepository.save(this.findOne(submissionId));
 
 		}
+
+		//Notificación Decisión
+		this.messageService.notificationDecision(res);
+
 		System.out.println("reportsAll" + reportsAll.size());
 		System.out.println("reports" + reports.size());
 

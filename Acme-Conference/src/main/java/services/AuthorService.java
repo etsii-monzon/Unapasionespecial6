@@ -135,6 +135,10 @@ public class AuthorService {
 		Assert.isTrue(authorities.contains(auth));
 	}
 
+	public Author findAuthorBySubmissionId(final int id) {
+		return this.authorRepository.findAuthorBySubmissionId(id);
+	}
+
 	public void flush() {
 		this.authorRepository.flush();
 	}

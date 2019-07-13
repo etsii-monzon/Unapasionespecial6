@@ -14,6 +14,7 @@ import repositories.MessageRepository;
 import domain.Actor;
 import domain.Author;
 import domain.Message;
+import domain.Submission;
 
 @Service
 @Transactional
@@ -161,5 +162,23 @@ public class MessageService {
 		m.setRecipients(recipients);
 
 		return m;
+	}
+
+	public void notificationDecision(final Submission submission) {
+		this.administratorService.checkPrincipal();
+		final Message notificacion;
+
+		notificacion = this.create();
+
+		final Actor recipient = this.authorService.findAuthorBySubmissionId(submission.getId());
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(recipient);
+		notificacion.setRecipients(recipients);
+		notificacion.setSubject("SUBMISSION IS:" + submission.getStatus());
+		notificacion.setBody("This message is a simple notification of the decision of your submission. You can consult the report.");
+		notificacion.setTopic("RESOLUTION");
+
+		this.save(notificacion);
+
 	}
 }

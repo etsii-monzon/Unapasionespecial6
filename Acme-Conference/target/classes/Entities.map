@@ -1,11 +1,22 @@
 #./src/main/resources/Entities.map
-#Sat Jul 13 12:02:27 CEST 2019
-admin1=13
-configuration=18
-message1=17
-conference1=16
-author1=14
-reviewer1=15
-userAccount3=12
-userAccount2=11
-userAccount1=10
+#Sat Jul 13 16:47:20 CEST 2019
+registration1=35
+reviewer1=37
+admin1=24
+message1=39
+author1=32
+configuration=40
+conference7=31
+conference6=30
+userAccount3=23
+conference5=29
+userAccount2=22
+conference4=28
+userAccount1=21
+creditCard1=36
+conference3=27
+conference2=26
+report1=38
+conference1=25
+submission1=33
+paper1=34

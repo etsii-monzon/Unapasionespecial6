@@ -14,18 +14,18 @@
 
 
 <!-- Search -->
+
 <form:form action="conference/searchList.do" method="GET">
 
 	<label for="keyword"> <spring:message code="conference.keyword" />
 	</label>
-	<input type="text" name="keyword" id="keyword"
+	<input type="search" name="keyword" id="keyword" size="35"
 		placeholder="Search by TITLE, VENUE" />
+	<br>
 	<acme:submit name="search" code="conference.search" />
-	<br />
+	<input type="button" name="cancel"
+		value="<spring:message code="conference.return" />"
+		onClick="javascript: window.location.replace('welcome/index.do');" />
 
 
 </form:form>
-
-<input type="button" name="cancel"
-	value="<spring:message code="conference.return" />"
-	onClick="javascript: window.location.replace('welcome/index.do');" />
