@@ -92,15 +92,12 @@ public class MessageService {
 		for (final Actor ac : actoresSendReci)
 			if (ac.getMessages().contains(message))
 				actoresConMensaje.add(ac);
-		System.out.println(actoresConMensaje);
-		System.out.println(actoresSendReci);
+
 		for (final Actor a : actoresConMensaje)
 			if (a.equals(this.actorService.findByPrincipal()))
 				a.getMessages().remove(message);
 		actoresConMensaje.remove(this.actorService.findByPrincipal());
 
-		System.out.println(actoresConMensaje);
-		System.out.println(actoresSendReci);
 		if (actoresConMensaje.isEmpty())
 			this.messageRepository.delete(message);
 

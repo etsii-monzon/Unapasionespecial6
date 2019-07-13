@@ -10,6 +10,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -20,19 +22,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Administrator;
+import domain.Conference;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class AdministratorTest extends AbstractTest {
+public class ConferenceServiceTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private ConferenceService	conferenceService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -42,19 +44,21 @@ public class AdministratorTest extends AbstractTest {
 	// it using JUnit.
 
 	/*
-	 * Test comprobación edición datos personales usuario autenticado como Admin
-	 * Req Funcional: 12.2
+	 * Test comprobación búsqueda de conferencia introduciendo una palabra clave
+	 * Req Funcional: 11.4
 	 */
 	@Test
-	public void testEditAndSaveAdministrator() {
-		super.authenticate("admin");
-		final Administrator res = this.administratorService.findByPrincipal();
+	public void testSearchConferenceByKeyword() {
+		super.authenticate(null);
 
-		res.setName("Rodrigo");
+		final String keyword = "ETSII";
 
-		final Administrator result = this.administratorService.save(res);
-		Assert.isTrue(this.administratorService.findAll().contains(result));
-		Assert.isTrue(result.equals(res));
+		final Collection<Conference> res = this.conferenceService.searchConferenceByKeyword(keyword);
+
+		Assert.notNull(res);
+		Assert.isTrue(this.conferenceService.findAll().containsAll(res));
+
+		super.unauthenticate();
 
 	}
 }

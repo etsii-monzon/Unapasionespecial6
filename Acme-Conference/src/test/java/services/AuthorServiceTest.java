@@ -20,19 +20,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Reviewer;
+import domain.Author;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class ReviewerTest extends AbstractTest {
+public class AuthorServiceTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 
 	@Autowired
-	private ReviewerService	reviewerService;
+	private AuthorService	authorService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -42,43 +42,47 @@ public class ReviewerTest extends AbstractTest {
 	// it using JUnit.
 
 	/*
-	 * Test comprobación registrar usuario no autenticado como Reviewer
-	 * Req Funcional: 11.6
+	 * Test comprobación registrar usuario no autenticado como Author
+	 * Req Funcional: 11.5
 	 */
 	@Test
-	public void testRegisterAndSaveReviewer() {
+	public void testRegisterAndSaveAuthor() {
 		super.authenticate(null);
-		final Reviewer res = this.reviewerService.create();
+		final Author res = this.authorService.create();
 
-		res.getUserAccount().setUsername("usuarioR");
+		res.getUserAccount().setUsername("usuario123");
 		res.getUserAccount().setPassword("passs123");
 
-		res.setName("Jose");
-		res.setSurname("Román Aguado");
-		res.setEmail("jose145@gmail.com");
-		res.setAddress("Paseo de la Conferencia");
-		res.setPhoneNumber("659865342");
+		res.setName("Luis");
+		res.setSurname("López Aguado");
+		res.setEmail("raulfth@gmail.com");
+		res.setAddress("MOnzón");
+		res.setPhoneNumber("659 86 53 42");
 
-		final Reviewer result = this.reviewerService.save(res);
-		Assert.isTrue(this.reviewerService.findAll().contains(result));
+		final Author result = this.authorService.save(res);
+		Assert.isTrue(this.authorService.findAll().contains(result));
+
+		super.unauthenticate();
 
 	}
 
 	/*
-	 * Test comprobación edición datos personales usuario autenticado como Reviewer
+	 * Test comprobación edición datos personales usuario autenticado como Author
 	 * Req Funcional: 12.2
 	 */
 	@Test
-	public void testEditAndSaveReviewer() {
-		super.authenticate("reviewer1");
-		final Reviewer res = this.reviewerService.findByPrincipal();
+	public void testEditAndSaveAuthor() {
+		super.authenticate("author1");
+		final Author res = this.authorService.findByPrincipal();
 
-		res.setAddress("Avd.Reina Mercedes");
+		res.setAddress("Lorca");
 		res.setPhoneNumber("");
 
-		final Reviewer result = this.reviewerService.save(res);
-		Assert.isTrue(this.reviewerService.findAll().contains(result));
+		final Author result = this.authorService.save(res);
+		Assert.isTrue(this.authorService.findAll().contains(result));
 		Assert.isTrue(result.equals(res));
+
+		super.unauthenticate();
 
 	}
 }

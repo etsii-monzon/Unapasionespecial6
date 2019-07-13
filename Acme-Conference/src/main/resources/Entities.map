@@ -1,10 +1,11 @@
 #./src/main/resources/Entities.map
-#Fri Jul 12 11:40:17 CEST 2019
-author1=13
-userAccount3=11
-admin1=12
-userAccount2=10
+#Sat Jul 13 12:58:11 CEST 2019
+admin1=13
+configuration=18
+message1=17
 conference1=15
-reviewer1=14
-userAccount1=9
-configuration=16
+author1=14
+reviewer1=16
+userAccount3=12
+userAccount2=11
+userAccount1=10

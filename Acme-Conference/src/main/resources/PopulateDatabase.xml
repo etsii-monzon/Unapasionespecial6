@@ -73,32 +73,97 @@
 		</property>
 	</bean>
 
+	<!-- AUTHOR 1 -->
+
+
 	<bean id="author1" class="domain.Author">
 		<property name="name" value="Manuel" />
 		<property name="surname" value="Saez yure" />
-		<property name="middleName" value="ayacuch" />
-
+		<property name="middleName" value="Ayacuch" />
 		<property name="email" value="manu@hotmail.com" />
 		<property name="phoneNumber" value="+34 602145205" />
 		<property name="address" value="Monzón 28" />
 		<property name="optionalPhoto" value="" />
 		<property name="userAccount" ref="userAccount2" />
+
 		<property name="registrations">
 			<list>
-
-			</list>
+<!-- 				<ref bean="registration1" />
+ -->			</list>
 		</property>
 		<property name="messages">
 			<list>
-
+				<ref bean="message1" />
 			</list>
 		</property>
 		<property name="submissions">
 			<list>
-
-			</list>
+	<!-- <ref bean="submission1" /> -->			</list>
 		</property>
 	</bean>
+
+
+<!-- 	<bean id="submission1" class="domain.Submission">
+
+		<property name="ticker" value="MSA-8K6L" />
+		<property name="moment" value="01/06/2019 00:00" />
+		<property name="status" value="ACCEPTED" />
+
+		<property name="paper" ref="paper1" />
+		<property name="conference" ref="conference1" />
+
+		<property name="cameraPaper" value="" />
+
+	</bean>
+
+	<bean id="paper1" class="domain.Paper">
+
+		<property name="title" value="MSA-8K6L" />
+		<property name="authors" value="01/06/2019 00:00" />
+		<property name="summary" value="ACCEPTED" />
+		<property name="document" value="" />
+
+	</bean>
+
+	<bean id="registration1" class="domain.Registration">
+
+		<property name="creditCard" ref="creditCard1" />
+		<property name="conference" ref="conference1" />
+
+
+	</bean>
+
+
+	<bean id="creditCard1" class="domain.CreditCard">
+
+		<property name="holderName" value="Manuel" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4111111111111111" />
+		<property name="expMonth" value="10" />
+		<property name="expYear" value="22" />
+		<property name="cvv" value="123" />
+
+	</bean> -->
+
+	<bean id="conference1" class="domain.Conference">
+
+		<property name="title" value="Learn Unity" />
+		<property name="acronym" value="LU" />
+		<property name="venue" value="ETSII" />
+
+		<property name="submissionDeadline" value="01/06/2020 00:00" />
+		<property name="notificationDeadline" value="02/06/2020 00:00" />
+		<property name="cameraDeadline" value="03/06/2020 00:00" />
+		<property name="startDate" value="05/06/2020 16:00" />
+		<property name="endDate" value="05/06/2020 20:00" />
+		<property name="fee" value="24.99" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+
+
+	<!-- REVIEWER 1 -->
 
 	<bean id="reviewer1" class="domain.Reviewer">
 		<property name="name" value="Ana" />
@@ -119,24 +184,29 @@
 		</property>
 		<property name="messages">
 			<list>
+				<ref bean="message1" />
 
 			</list>
 		</property>
 
 	</bean>
 
-	<bean id="conference1" class="domain.Conference">
-		<property name="title" value="Learn Unity" />
-		<property name="acronym" value="LU" />
-		<property name="venue" value="ETSII" />
 
-		<property name="submissionDeadline" value="01/06/2020 00:00" />
-		<property name="notificationDeadline" value="02/06/2020 00:00" />
-		<property name="cameraDeadline" value="03/06/2020 00:00" />
-		<property name="startDate" value="05/06/2020 16:00" />
-		<property name="endDate" value="05/06/2020 20:00" />
-		<property name="fee" value="24.99" />
-		<property name="draftMode" value="false" />
+
+
+	<bean id="message1" class="domain.Message">
+		<property name="body" value="TEST" />
+		<property name="subject" value="IMPORTANT" />
+		<property name="date" value="01/06/2020 00:00" />
+		<property name="topic" value="OTHERS" />
+
+		<property name="recipients">
+			<list>
+				<ref bean="reviewer1" />
+			</list>
+		</property>
+		<property name="sender" ref="author1" />
+
 
 
 	</bean>
