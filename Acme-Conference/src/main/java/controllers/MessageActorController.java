@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.ConfigurationService;
 import services.MessageService;
 import domain.Actor;
 import domain.Message;
@@ -25,10 +26,13 @@ import domain.Message;
 public class MessageActorController extends AbstractController {
 
 	@Autowired
-	MessageService	messageService;
+	MessageService			messageService;
 
 	@Autowired
-	ActorService	actorService;
+	ActorService			actorService;
+
+	@Autowired
+	ConfigurationService	configurationService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -38,6 +42,7 @@ public class MessageActorController extends AbstractController {
 		final Collection<Message> messages = this.actorService.findByPrincipal().getMessages();
 
 		result = new ModelAndView("message/list");
+
 		result.addObject("messages", messages);
 		result.addObject("requestURI", "message/actor/list.do");
 
@@ -72,6 +77,7 @@ public class MessageActorController extends AbstractController {
 		result = new ModelAndView("message/create");
 		result.addObject("recipients", recipients);
 		result.addObject("m", m);
+		result.addObject("topics", this.configurationService.find().getTopics());
 		result.addObject("message", messageCode);
 		result.addObject("requestURI", "message/actor/send.do");
 

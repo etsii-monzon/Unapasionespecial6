@@ -80,7 +80,7 @@
 						code="master.page.conferences" /></a>
 				<ul>
 					<li class="arrow"></li>
-					
+
 					<li><a href="conference/search.do"><spring:message
 								code="master.page.conference.search" /></a></li>
 
@@ -98,9 +98,25 @@
 
 
 		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv"><spring:message
+						code="master.page.message" /></a>
+				<ul>
+					<li class="arrow"></li>
 
-			<li><a href="message/actor/list.do"><spring:message
-						code="master.page.message" /></a></li>
+					<li><a href="message/actor/list.do"><spring:message
+								code="master.page.message.list" /></a></li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li><a href="message/administrator/broadcast.do"><spring:message
+									code="master.page.message.allActors" /></a></li>
+						<li><a href="message/administrator/messageAuthors.do"><spring:message
+									code="master.page.message.allAuthors" /></a></li>
+						<li><a href="message/administrator/messageAuthorsSub.do"><spring:message
+									code="master.page.message.allAuthorsSub" /></a></li>
+						<li><a
+							href="message/administrator/messageAuthorsRegistration.do"><spring:message
+									code="master.page.message.allAuthorsRegister" /></a></li>
+					</security:authorize>
+				</ul></li>
 		</security:authorize>
 		<security:authorize access="isAnonymous()">
 

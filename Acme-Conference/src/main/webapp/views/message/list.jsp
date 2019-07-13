@@ -14,35 +14,11 @@
 
 
 <!-- Listing grid -->
-
 <div>
 	<button type="button"
 		onclick="javascript: relativeRedir('message/actor/send.do')">
 		<spring:message code="message.create" />
 	</button>
-
-	<security:authorize access="hasRole('ADMIN')">
-		<button type="button"
-			onclick="javascript: relativeRedir('message/administrator/broadcast.do')">
-			<spring:message code="message.broadcast" />
-		</button>
-
-		<button type="button"
-			onclick="javascript: relativeRedir('message/administrator/messageAuthors.do')">
-			<spring:message code="message.authors" />
-		</button>
-
-		<button type="button"
-			onclick="javascript: relativeRedir('message/administrator/messageAuthorsSub.do')">
-			<spring:message code="message.authorsSub" />
-		</button>
-
-		<button type="button"
-			onclick="javascript: relativeRedir('message/administrator/messageAuthorsRegistration.do')">
-			<spring:message code="message.authorsRegistrations" />
-		</button>
-	</security:authorize>
-
 
 </div>
 
@@ -57,14 +33,25 @@
 
 	<!-- Attributes -->
 
+	<!-- Email -->
 	<display:column property="sender.email" titleKey="message.sender"
 		sortable="true" />
+
+	<!-- Subject -->
 	<display:column property="subject" titleKey="message.subject" />
-	<display:column property="recipients" titleKey="message.recipients"
-		sortable="true" />
+
+	<!-- Recipients -->
+	<display:column titleKey="message.recipients" sortable="true">
+		<jstl:forEach items="${row.recipients }" var="x">
+			<jstl:out value="${x.email}"></jstl:out>
+		</jstl:forEach>
+	</display:column>
+
+	<!-- Topic -->
 	<display:column property="topic" titleKey="message.topic"
 		sortable="true" />
 
+	<!-- Date -->
 	<display:column property="date" titleKey="message.date" sortable="true" />
 
 	<display:column titleKey="message.show">

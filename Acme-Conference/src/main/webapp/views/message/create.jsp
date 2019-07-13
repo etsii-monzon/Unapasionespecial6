@@ -58,7 +58,9 @@
 
 	<%-- Topic --%>
 	<spring:message code="message.topic" />
-	<form:input path="topic" />
+	<form:select path="topic">
+		<form:options items="${topics}" />
+	</form:select>
 	<form:errors class="error" path="topic" />
 	<br>
 	<br>

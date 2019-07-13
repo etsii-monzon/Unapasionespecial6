@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.ConfigurationService;
 import services.MessageService;
 import domain.Actor;
 import domain.Message;
@@ -23,10 +24,13 @@ import domain.Message;
 public class MessageAdministratorController extends AbstractController {
 
 	@Autowired
-	MessageService	messageService;
+	MessageService			messageService;
 
 	@Autowired
-	ActorService	actorService;
+	ActorService			actorService;
+
+	@Autowired
+	ConfigurationService	configurationService;
 
 
 	@RequestMapping(value = "/broadcast", method = RequestMethod.GET)
@@ -116,6 +120,7 @@ public class MessageAdministratorController extends AbstractController {
 		recipients.remove(this.actorService.findByPrincipal());
 
 		result = new ModelAndView("message/create");
+		result.addObject("topics", this.configurationService.find().getTopics());
 		result.addObject("m", m);
 		result.addObject("message", messageCode);
 

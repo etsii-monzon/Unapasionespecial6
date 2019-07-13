@@ -56,7 +56,7 @@
 		<property name="surname" value="Marín Mateos" />
 		<property name="middleName" value="Marín Mateos" />
 
-		<property name="email" value="super@hotmail.com" />
+		<property name="email" value="admin@hotmail.com" />
 		<property name="phoneNumber" value="+34 675359045" />
 		<property name="address" value="Monzón 28" />
 		<property name="optionalPhoto" value="" />
@@ -180,7 +180,7 @@
 
 
 	</bean>
-	
+
 	<bean id="conference7" class="domain.Conference">
 
 		<property name="title" value="Learn Django" />
@@ -204,7 +204,7 @@
 		<property name="name" value="Manuel" />
 		<property name="surname" value="Saez yure" />
 		<property name="middleName" value="Ayacuch" />
-		<property name="email" value="manu@hotmail.com" />
+		<property name="email" value="author1@hotmail.com" />
 		<property name="phoneNumber" value="+34 602145205" />
 		<property name="address" value="Monzón 28" />
 		<property name="optionalPhoto" value="" />
@@ -267,7 +267,7 @@
 		<property name="surname" value="Gómez" />
 		<property name="middleName" value="" />
 
-		<property name="email" value="ana@hotmail.com" />
+		<property name="email" value="reviewer1@hotmail.com" />
 		<property name="phoneNumber" value="+34 620148002" />
 		<property name="address" value="Sol 28" />
 		<property name="optionalPhoto" value="" />
@@ -306,8 +306,8 @@
 	<bean id="message1" class="domain.Message">
 		<property name="body" value="TEST" />
 		<property name="subject" value="IMPORTANT" />
-		<property name="date" value="01/06/2020 00:00" />
-		<property name="topic" value="OTHERS" />
+		<property name="date" value="01/06/2019 00:00" />
+		<property name="topic" value="OTHER" />
 
 		<property name="recipients">
 			<list>
