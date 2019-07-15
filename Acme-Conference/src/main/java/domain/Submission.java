@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -21,7 +22,6 @@ public class Submission extends DomainEntity {
 
 	private String		ticker;
 	private Date		moment;
-	private String		document;
 	private String		status;
 	private Paper		paper;
 	private Conference	conference;
@@ -29,6 +29,7 @@ public class Submission extends DomainEntity {
 
 
 	@NotBlank
+	@Column(unique = true)
 	public String getTicker() {
 		return this.ticker;
 	}
@@ -44,14 +45,6 @@ public class Submission extends DomainEntity {
 
 	public void setMoment(final Date moment) {
 		this.moment = moment;
-	}
-	@NotBlank
-	public String getDocument() {
-		return this.document;
-	}
-
-	public void setDocument(final String document) {
-		this.document = document;
 	}
 
 	@NotBlank

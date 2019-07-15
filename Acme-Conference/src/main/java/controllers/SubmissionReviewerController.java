@@ -39,9 +39,8 @@ public class SubmissionReviewerController extends AbstractController {
 		result = new ModelAndView("submission/list");
 
 		result.addObject("submissions", submissions);
-		result.addObject("requestURI", "submission/reviewer/list");
+		result.addObject("requestURI", "submission/reviewer/list.do");
 
 		return result;
 	}
-
 }

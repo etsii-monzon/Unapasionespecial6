@@ -39,7 +39,7 @@ public class SubmissionAdministratorController extends AbstractController {
 		submissions = this.submissionService.findAll();
 		boolean allowed = false;
 		for (final Submission s : submissions)
-			if (s.getConference().getSubmissionDeadline().before(new Date()))
+			if (s.getConference().getSubmissionDeadline().before(new Date()) && s.getConference().getNotificationDeadline().after(new Date()))
 				allowed = true;
 
 		result = new ModelAndView("submission/list");

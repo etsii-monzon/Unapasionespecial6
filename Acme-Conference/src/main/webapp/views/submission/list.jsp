@@ -37,16 +37,7 @@
 			</a>
 		</display:column>
 	</security:authorize>
-	<security:authorize access="hasRole('AUTHOR')">
-		<display:column>
 
-
-			<a href="submission/author/edit.do?submissionId=${row.id}"> <spring:message
-					code="submission.edit" />
-			</a>
-
-		</display:column>
-	</security:authorize>
 
 	<!-- Attributes -->
 
@@ -56,8 +47,6 @@
 	<display:column property="ticker" titleKey="submission.ticker"
 		sortable="false" />
 	<display:column property="moment" titleKey="submission.moment"
-		sortable="false" />
-	<display:column property="document" titleKey="submission.document"
 		sortable="false" />
 	<display:column property="status" titleKey="submission.status"
 		sortable="true" />
@@ -113,13 +102,14 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('REVIEWER')">
+
 		<display:column>
-
-
 			<a href="report/reviewer/create.do?subId=${row.id}"> <spring:message
 					code="report.create" />
 			</a>
 		</display:column>
+
+
 	</security:authorize>
 
 

@@ -11,39 +11,34 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-	<p>
-		<b><spring:message code="submission.ticker" />: </b>
-		<jstl:out value="${submission.ticker }" />
-	</p>
-	
-	<p>
-		<b><spring:message code="submission.moment" />: </b>
-		<jstl:out value="${submission.moment }" />
-	</p>
-	
-	<p>
-		<b><spring:message code="submission.document" />: </b>
-		<jstl:out value="${submission.document }" />
-	</p>
-	
-	<p>
-		<b><spring:message code="submission.cameraPaper" />: </b>
-		<jstl:out value="${submission.cameraPaper }" />
-	</p>
-	
-	<p>
-		<b><spring:message code="submission.status" />: </b>
-		<jstl:out value="${submission.status }" />
-	</p>
-	
+<p>
+	<b><spring:message code="submission.ticker" />: </b>
+	<jstl:out value="${submission.ticker }" />
+</p>
+
+<p>
+	<b><spring:message code="submission.moment" />: </b>
+	<jstl:out value="${submission.moment }" />
+</p>
 
 
-	
+<p>
+	<b><spring:message code="submission.cameraPaper" />: </b>
+	<jstl:out value="${submission.cameraPaper }" />
+</p>
+
+<p>
+	<b><spring:message code="submission.status" />: </b>
+	<jstl:out value="${submission.status }" />
+</p>
+
+
+
+
 
 <br />
 
 
-<acme:cancel url="submission/author/list.do"
-	code="submission.cancel" /> 
+<acme:cancel url="submission/author/list.do" code="submission.cancel" />
 
 <br />
