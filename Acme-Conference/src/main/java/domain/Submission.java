@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -8,6 +9,7 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +22,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Submission extends DomainEntity {
 
-
 	private String					ticker;
 	private Date					moment;
 	private String					status;
@@ -29,7 +30,6 @@ public class Submission extends DomainEntity {
 	private String					cameraPaper;
 	private Collection<Reviewer>	reviewers;
 	private Boolean					cameraReady;
-
 
 
 	@NotBlank
@@ -105,6 +105,5 @@ public class Submission extends DomainEntity {
 	public void setCameraReady(final Boolean cameraReady) {
 		this.cameraReady = cameraReady;
 	}
-
 
 }

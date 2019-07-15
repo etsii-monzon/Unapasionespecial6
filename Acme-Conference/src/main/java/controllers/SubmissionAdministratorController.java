@@ -29,8 +29,6 @@ public class SubmissionAdministratorController extends AbstractController {
 	private ConferenceService	conferenceService;
 	@Autowired
 	private ReportService		reportService;
-	@Autowired
-	private ReviewerService		revService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

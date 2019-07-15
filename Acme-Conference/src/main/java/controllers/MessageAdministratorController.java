@@ -32,11 +32,6 @@ public class MessageAdministratorController extends AbstractController {
 	@Autowired
 	ConfigurationService	configurationService;
 
-	MessageService	messageService;
-
-	@Autowired
-	ActorService	actorService;
-
 
 	@RequestMapping(value = "/broadcast", method = RequestMethod.GET)
 	public ModelAndView broadcast() {

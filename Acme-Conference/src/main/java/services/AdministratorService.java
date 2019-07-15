@@ -111,7 +111,6 @@ public class AdministratorService {
 		return res;
 	}
 
-
 	public boolean checkPrincipal() {
 
 		final UserAccount userAccount = LoginService.getPrincipal();

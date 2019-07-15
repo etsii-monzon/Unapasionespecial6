@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.SubmissionRepository;
 import domain.Author;
 import domain.Report;
+import domain.Reviewer;
 import domain.Submission;
 
 @Service
@@ -36,6 +37,8 @@ public class SubmissionService {
 	private PaperService			paperService;
 	@Autowired
 	private MessageService			messageService;
+	@Autowired
+	private ReviewerService			revService;
 
 
 	// SIMPLE CRUD METHODS
