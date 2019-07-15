@@ -14,39 +14,47 @@
 
 
 <!-- Listing grid -->
-<security:authorize access="hasRole('ADMIN')">
+<div>
+	<security:authorize access="hasRole('ADMIN')">
+
+		<button type="button"
+			onclick="javascript: relativeRedir('conference/administrator/list.do')">
+			<spring:message code="conference.list" />
+		</button>
+	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
+		<button type="button"
+			onclick="javascript: relativeRedir('conference/administrator/listsub.do')">
+			<spring:message code="conference.submissionDeadlineList" />
+		</button>
+
+	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
 
 
-	<button type="button"
-		onclick="javascript: relativeRedir('conference/administrator/listsub.do')">
-		<spring:message code="conference.submissionDeadlineList" />
-	</button>
+		<button type="button"
+			onclick="javascript: relativeRedir('conference/administrator/listnot.do')">
+			<spring:message code="conference.notificationDeadlineList" />
+		</button>
 
-</security:authorize>
-<security:authorize access="hasRole('ADMIN')">
+	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
+
+		<button type="button"
+			onclick="javascript: relativeRedir('conference/administrator/listcam.do')">
+			<spring:message code="conference.cameraDeadlineList" />
+		</button>
+	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
+
+		<button type="button"
+			onclick="javascript: relativeRedir('conference/administrator/listst.do')">
+			<spring:message code="conference.startList" />
+		</button>
+	</security:authorize>
 
 
-	<button type="button"
-		onclick="javascript: relativeRedir('conference/administrator/listnot.do')">
-		<spring:message code="conference.notificationDeadlineList" />
-	</button>
-
-</security:authorize>
-<security:authorize access="hasRole('ADMIN')">
-
-	<button type="button"
-		onclick="javascript: relativeRedir('conference/administrator/listcam.do')">
-		<spring:message code="conference.cameraDeadlineList" />
-	</button>
-</security:authorize>
-<security:authorize access="hasRole('ADMIN')">
-
-	<button type="button"
-		onclick="javascript: relativeRedir('conference/administrator/listst.do')">
-		<spring:message code="conference.startList" />
-	</button>
-</security:authorize>
-
+</div>
 
 
 

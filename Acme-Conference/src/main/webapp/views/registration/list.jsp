@@ -24,27 +24,17 @@
 
 
 	<!-- Action links -->
-	
-	<security:authorize access="hasRole('AUTHOR')">
-		<display:column title="Edit">
-		
 
-			<a href="registration/author/edit.do?registrationId=${row.id}">
-				<spring:message code="registration.edit" />
-			</a>
-	
-		</display:column>
-	</security:authorize>
 	<!-- Attributes -->
 
 
-	<display:column property="conference.title" titleKey="registration.conference"
-		sortable="false" />
+	<display:column property="conference.title"
+		titleKey="registration.conference" sortable="false" />
 
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column title="Show the conference details">
-			<a href="registration/author/show.do?registrationId=${row.id}">
-				<spring:message code="registration.show" />
+			<a href="registration/author/show.do?registrationId=${row.id}"> <spring:message
+					code="registration.show" />
 			</a>
 		</display:column>
 	</security:authorize>
@@ -60,7 +50,7 @@
 </display:table>
 <security:authorize access="hasRole('AUTHOR')">
 	<div>
-		
+
 		<button type="button"
 			onclick="javascript: relativeRedir('registration/author/create.do')">
 			<spring:message code="registration.create" />
