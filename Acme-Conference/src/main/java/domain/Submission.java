@@ -19,13 +19,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Submission extends DomainEntity {
 
-	private String		ticker;
-	private Date		moment;
-	private String		document;
-	private String		status;
-	private Paper		paper;
-	private Conference	conference;
-	private String		cameraPaper;
+
+	private String					ticker;
+	private Date					moment;
+	private String					document;
+	private String					status;
+	private Paper					paper;
+	private Conference				conference;
+	private String					cameraPaper;
+	private Collection<Reviewer>	reviewers;
+	private Boolean					cameraReady;
 
 
 	@NotBlank
@@ -90,5 +93,24 @@ public class Submission extends DomainEntity {
 	public void setCameraPaper(final String cameraPaper) {
 		this.cameraPaper = cameraPaper;
 	}
+
+	@ManyToMany
+	public Collection<Reviewer> getReviewers() {
+		return this.reviewers;
+	}
+
+	public void setReviewers(final Collection<Reviewer> reviewers) {
+		this.reviewers = reviewers;
+	}
+
+	@NotNull
+	public Boolean getCameraReady() {
+		return this.cameraReady;
+	}
+
+	public void setCameraReady(final Boolean cameraReady) {
+		this.cameraReady = cameraReady;
+	}
+
 
 }

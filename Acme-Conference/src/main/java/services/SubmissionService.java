@@ -34,7 +34,6 @@ public class SubmissionService {
 	private ReportService			reportService;
 	@Autowired
 	private PaperService			paperService;
-
 	@Autowired
 	private MessageService			messageService;
 
@@ -79,7 +78,6 @@ public class SubmissionService {
 		return fm;
 	}
 	public Submission save(final Submission a) {
-
 		Assert.notNull(a);
 		Submission res;
 		final Author b = this.authorService.findByPrincipal();
@@ -156,6 +154,37 @@ public class SubmissionService {
 
 		System.out.println("acepted" + reportsAc.size());
 		System.out.println("rejected" + reportsRe.size());
+
+	}
+
+	public void assignReviewers() {
+		final Collection<Submission> submissions = this.findAll();
+
+		for (final Submission s : submissions) {
+			final Collection<Reviewer> reviewers = this.revService.findAll();
+
+			for (final Reviewer r : s.getReviewers())
+				reviewers.remove(r);
+			final String p = s.getConference().getTitle() + " " + s.getConference().getSummary();
+
+			for (final Reviewer r : reviewers) {
+				if (s.getReviewers().size() == 3)
+					break;
+
+				System.out.println("PASA POR AQUI");
+				for (final String key : r.getKeywords()) {
+					System.out.println("ILLO QUE");
+					if (p.contains(key)) {
+						s.getReviewers().add(r);
+						System.out.println("POR QUE NO FUNCIONAS PERRO");
+						this.submissionRepository.save(s);
+						break;
+					}
+				}
+
+			}
+
+		}
 
 	}
 

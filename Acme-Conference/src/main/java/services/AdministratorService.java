@@ -111,7 +111,8 @@ public class AdministratorService {
 		return res;
 	}
 
-	public void checkPrincipal() {
+
+	public boolean checkPrincipal() {
 
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);

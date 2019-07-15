@@ -23,8 +23,7 @@
 		<bean class="converters.AuthorityToStringConverter" />
 		<bean class="converters.ReviewerToStringConverter" />
 		<bean class="converters.AdministratorToStringConverter" />
-
-
+		<bean class="converters.PaperToStringConverter" />
 
 
 
@@ -39,6 +38,7 @@
 		<bean class="converters.StringToAuthorityConverter" />
 		<bean class="converters.StringToReviewerConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.StringToPaperConverter" />
 
 
 	</util:list>

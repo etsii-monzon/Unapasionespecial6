@@ -22,14 +22,15 @@ import domain.Submission;
 public class SubmissionAdministratorController extends AbstractController {
 
 	@Autowired
-	SubmissionService	submissionService;
-
+	private SubmissionService	submissionService;
 	@Autowired
-	AuthorService		authorService;
+	private AuthorService		authorService;
 	@Autowired
-	ConferenceService	conferenceService;
+	private ConferenceService	conferenceService;
 	@Autowired
-	ReportService		reportService;
+	private ReportService		reportService;
+	@Autowired
+	private ReviewerService		revService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
