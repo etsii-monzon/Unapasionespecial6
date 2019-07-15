@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.ReportRepository;
 import domain.Report;
 import domain.Reviewer;
+import domain.Submission;
 
 @Service
 @Transactional
@@ -78,6 +79,10 @@ public class ReportService {
 		dir.getReports().remove(p);
 
 		this.reportRepository.delete(p);
+	}
+
+	public Collection<Report> findReportsOfSubmission(final Submission s) {
+		return this.reportRepository.findReportsOfSubmission(s);
 	}
 
 }

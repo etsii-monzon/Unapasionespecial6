@@ -30,13 +30,15 @@ public class SubmissionService {
 	@Autowired
 	private AuthorService			authorService;
 	@Autowired
-	private AdministratorService	adminService;
-	@Autowired
 	private ConfigurationService	configurationService;
 	@Autowired
 	private ReportService			reportService;
 	@Autowired
 	private PaperService			paperService;
+
+	@Autowired
+	private MessageService			messageService;
+
 	@Autowired
 	private ReviewerService			revService;
 
@@ -44,15 +46,13 @@ public class SubmissionService {
 	// SIMPLE CRUD METHODS
 
 	public Submission create() {
-		Assert.isTrue(this.authorService.checkPrincipal());
-		//		final Collection<Reviewer> revs = new ArrayList<Reviewer>();
+		this.authorService.checkPrincipal();
+
 		Submission sub;
 		sub = new Submission();
-
 		final Date actualMoment = new java.util.Date();
 		sub.setMoment(actualMoment);
 		sub.setStatus("UNDER-REVIEW");
-		//		sub.setReviewers(revs);
 		final char a = this.authorService.findByPrincipal().getName().charAt(0);
 		final char b = this.authorService.findByPrincipal().getSurname().charAt(0);
 		final String x = "XX";
@@ -74,7 +74,6 @@ public class SubmissionService {
 		return fms;
 
 	}
-
 	public Submission findOne(final int submissionId) {
 
 		Assert.notNull(submissionId);
@@ -84,7 +83,6 @@ public class SubmissionService {
 		return fm;
 	}
 	public Submission save(final Submission a) {
-
 		Assert.notNull(a);
 		Submission res;
 		final Author b = this.authorService.findByPrincipal();
@@ -157,6 +155,10 @@ public class SubmissionService {
 			res = this.submissionRepository.save(this.findOne(submissionId));
 
 		}
+
+		//Notificación Decisión
+		this.messageService.notificationDecision(res);
+
 		System.out.println("reportsAll" + reportsAll.size());
 		System.out.println("reports" + reports.size());
 
@@ -171,8 +173,8 @@ public class SubmissionService {
 		for (final Submission s : submissions) {
 			final Collection<Reviewer> reviewers = this.revService.findAll();
 
-			//			for (final Reviewer r : s.getReviewers())
-			//				reviewers.remove(r);
+			for (final Reviewer r : s.getReviewers())
+				reviewers.remove(r);
 			final String p = s.getConference().getTitle() + " " + s.getConference().getSummary();
 
 			for (final Reviewer r : reviewers) {

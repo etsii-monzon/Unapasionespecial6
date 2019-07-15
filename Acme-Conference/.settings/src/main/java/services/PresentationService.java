@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +38,30 @@ public class PresentationService {
 
 		return res;
 	}
+
+	public Presentation save(final Presentation s) {
+		Assert.isTrue(this.adminService.checkPrincipal());
+		final Presentation res;
+
+		res = this.presentRepository.save(s);
+		return res;
+	}
+
+	public Presentation findOne(final int presentationId) {
+		Assert.isTrue(this.adminService.checkPrincipal());
+		return this.presentRepository.findOne(presentationId);
+	}
+
+	public Collection<Presentation> findAll() {
+		Assert.isTrue(this.adminService.checkPrincipal());
+		return this.presentRepository.findAll();
+	}
+
+	public void delete(final Presentation t) {
+		Assert.isTrue(this.adminService.checkPrincipal());
+		Assert.notNull(t);
+		this.presentRepository.delete(t);
+
+	}
+
 }

@@ -11,12 +11,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,8 +23,7 @@ public class Message extends DomainEntity {
 	private String				body;
 	private String				subject;
 	private Date				date;
-	private String				priority;
-	private String				optionalTags;
+	private String				topic;
 
 	private Collection<Actor>	recipients;
 	private Actor				sender;
@@ -45,7 +41,6 @@ public class Message extends DomainEntity {
 	}
 
 	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBody() {
 		return this.body;
 	}
@@ -54,7 +49,6 @@ public class Message extends DomainEntity {
 		this.body = body;
 	}
 	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSubject() {
 		return this.subject;
 	}
@@ -71,25 +65,6 @@ public class Message extends DomainEntity {
 	public void setDate(final Date date) {
 		this.date = date;
 	}
-	@NotBlank
-	@Pattern(regexp = "^(HIGH)|(NEUTRAL)|(LOW)$")
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getPriority() {
-		return this.priority;
-	}
-
-	public void setPriority(final String priority) {
-		this.priority = priority;
-	}
-
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getOptionalTags() {
-		return this.optionalTags;
-	}
-
-	public void setOptionalTags(final String optionalTags) {
-		this.optionalTags = optionalTags;
-	}
 
 	@ManyToMany
 	@NotEmpty
@@ -99,6 +74,15 @@ public class Message extends DomainEntity {
 
 	public void setRecipients(final Collection<Actor> recipients) {
 		this.recipients = recipients;
+	}
+
+	@NotBlank
+	public String getTopic() {
+		return this.topic;
+	}
+
+	public void setTopic(final String topic) {
+		this.topic = topic;
 	}
 
 }

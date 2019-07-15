@@ -15,22 +15,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Submission extends DomainEntity {
 
-	private String				ticker;
-	private Date				moment;
-	private String				document;
-	private String				status;
-	private Paper				paper;
-	private Conference			conference;
-	private String				cameraPaper;
-	private boolean				cameraReady;
-	public Collection<Reviewer>	reviewers;
+	private String					ticker;
+	private Date					moment;
+	private String					document;
+	private String					status;
+	private Paper					paper;
+	private Conference				conference;
+	private String					cameraPaper;
+	private Collection<Reviewer>	reviewers;
+	private Boolean					cameraReady;
 
 
 	@NotBlank
@@ -51,7 +50,6 @@ public class Submission extends DomainEntity {
 		this.moment = moment;
 	}
 	@NotBlank
-	@URL
 	public String getDocument() {
 		return this.document;
 	}
@@ -81,7 +79,6 @@ public class Submission extends DomainEntity {
 		this.paper = paper;
 	}
 	@OneToOne
-	@NotNull
 	public Conference getConference() {
 		return this.conference;
 	}
@@ -90,21 +87,12 @@ public class Submission extends DomainEntity {
 		this.conference = conference;
 	}
 
-	@URL
 	public String getCameraPaper() {
 		return this.cameraPaper;
 	}
 
 	public void setCameraPaper(final String cameraPaper) {
 		this.cameraPaper = cameraPaper;
-	}
-
-	public boolean isCameraReady() {
-		return this.cameraReady;
-	}
-
-	public void setCameraReady(final boolean cameraReady) {
-		this.cameraReady = cameraReady;
 	}
 
 	@ManyToMany
@@ -114,6 +102,15 @@ public class Submission extends DomainEntity {
 
 	public void setReviewers(final Collection<Reviewer> reviewers) {
 		this.reviewers = reviewers;
+	}
+
+	@NotNull
+	public Boolean getCameraReady() {
+		return this.cameraReady;
+	}
+
+	public void setCameraReady(final Boolean cameraReady) {
+		this.cameraReady = cameraReady;
 	}
 
 }

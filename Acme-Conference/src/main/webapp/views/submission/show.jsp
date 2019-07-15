@@ -38,15 +38,23 @@
 	
 	
 	<p>
-		<b><spring:message code="submission.reviewers" />: </b>
-		<td><jstl:out value="${submission.reviewers}" />
-	</p>
+	<b><spring:message code="submission.reviewers" />
+	:</b></p>
+	<td><jstl:out value="${submission.reviewers}" /></td>
+	
+	</br>
 	
 
 <br />
 
+<security:authorize access="hasRole('AUTHOR')">
+	<acme:cancel url="submission/author/list.do"
+		code="submission.cancel" /> 
+</security:authorize>
 
-<acme:cancel url="submission/administrator/list.do"
-	code="submission.cancel" /> 
+<security:authorize access="hasRole('ADMIN')">
+	<acme:cancel url="submission/administrator/list.do"
+		code="submission.cancel" /> 
+</security:authorize>
 
 <br />

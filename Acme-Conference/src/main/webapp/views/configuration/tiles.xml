@@ -12,9 +12,27 @@
 <tiles-definitions>
 
 
-	<definition name="configuration/edit" extends="master.page">	
+	<definition name="configuration/edit" extends="master.page">
 		<put-attribute name="title" value="Edit configuration " />
 		<put-attribute name="body" value="/views/configuration/edit.jsp" />
+	</definition>
+
+	<definition name="configuration/topic/list" extends="master.page">
+		<put-attribute name="title" value="List Topics" />
+		<put-attribute name="body"
+			value="/views/configuration/topic/list.jsp" />
+	</definition>
+
+	<definition name="configuration/topic/create" extends="master.page">
+		<put-attribute name="title" value="Create Topic" />
+		<put-attribute name="body"
+			value="/views/configuration/topic/edit.jsp" />
+	</definition>
+
+	<definition name="configuration/topic/edit" extends="master.page">
+		<put-attribute name="title" value="Edit Topic" />
+		<put-attribute name="body"
+			value="/views/configuration/topic/edit.jsp" />
 	</definition>
 
 

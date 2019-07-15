@@ -22,7 +22,7 @@
 	<acme:textbox code="conference.title" path="title" />
 	<acme:textbox code="conference.acronym" path="acronym" />
 	<acme:textbox code="conference.venue" path="venue" />
-	<acme:textbox code="conference.summary" path="summary" />
+
 
 		<acme:moment code="conference.submissionDeadline" path="submissionDeadline" />
 		<acme:moment code="conference.notificationDeadline" path="notificationDeadline" />

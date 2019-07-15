@@ -29,7 +29,7 @@
 	</definition>
 	
 	<definition name="submission/assign" extends="master.page">
-		<put-attribute name="title" value="Assign reviewers to the submission" />
+		<put-attribute name="title" value="Assign a submission" />
 		<put-attribute name="body" value="/views/submission/assign.jsp" />
 	</definition>
 

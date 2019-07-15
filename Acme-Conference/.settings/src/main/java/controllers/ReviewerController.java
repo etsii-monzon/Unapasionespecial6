@@ -51,9 +51,7 @@ public class ReviewerController extends AbstractController {
 		if (binding.hasErrors()) {
 			System.out.println(binding);
 			result = this.createEditModelAndView(reviewer);
-		} else if (reviewer.getPhoneNumber().length() < 4)
-			result = this.createEditModelAndView(reviewer, "reviewer.phone.error");
-		else
+		} else
 			try {
 				this.reviewerService.save(reviewer);
 				result = new ModelAndView("redirect:/welcome/index.do");

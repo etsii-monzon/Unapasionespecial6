@@ -125,17 +125,8 @@ public class ConferenceService {
 		return conferences;
 	}
 
-	public Collection<Submission> getSubmissionsByConference(final Conference conf) {
-		final Collection<Submission> res = new ArrayList<Submission>();
-		Collection<Submission> aux = new ArrayList<Submission>();
-
-		aux = this.submissionService.findAll();
-
-		for (final Submission s : aux)
-			if (s.getConference().equals(conf))
-				res.add(s);
-
-		return res;
+	public Collection<Conference> searchConferenceByKeyword(final String keyword) {
+		return this.conferenceRepository.searchConferenceByKeyword(keyword);
 	}
 
 }

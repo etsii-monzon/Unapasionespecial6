@@ -12,6 +12,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
+
 <form:form action="${RequestURI }" modelAttribute="configuration">
 
 	<form:hidden path="id" />
@@ -48,7 +49,12 @@
 		onclick="javascript:  window.location.replace('welcome/index.do');" />
 	<br>
 </form:form>
-<br>
-<div>
 
+<div>
+	<button type="button"
+		onclick="javascript: relativeRedir('configuration/administrator/topic/list.do')">
+		<spring:message code="configuration.topic.manage" />
+	</button>
 </div>
+<br>
+<div></div>

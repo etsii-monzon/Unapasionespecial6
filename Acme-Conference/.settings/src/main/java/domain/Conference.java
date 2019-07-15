@@ -18,6 +18,7 @@ public class Conference extends DomainEntity {
 	public String	title;
 	public String	acronym;
 	public String	venue;
+	public String	summary;
 	public Date		submissionDeadline;
 	public Date		notificationDeadline;
 	public Date		cameraDeadline;
@@ -35,6 +36,7 @@ public class Conference extends DomainEntity {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
+
 	@NotBlank
 	public String getAcronym() {
 		return this.acronym;
@@ -51,6 +53,16 @@ public class Conference extends DomainEntity {
 	public void setVenue(final String venue) {
 		this.venue = venue;
 	}
+
+	@NotBlank
+	public String getSummary() {
+		return this.summary;
+	}
+
+	public void setSummary(final String summary) {
+		this.summary = summary;
+	}
+
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getSubmissionDeadline() {

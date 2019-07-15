@@ -76,17 +76,26 @@
 		</security:authorize>
 
 		<security:authorize access="permitAll">
-			<li><a class="fNiv" href="conference/listProx.do"><spring:message
-						code="master.page.conference.prox" /></a></li>
+			<li><a class="fNiv"><spring:message
+						code="master.page.conferences" /></a>
+				<ul>
+					<li class="arrow"></li>
+					
+					<li><a href="conference/search.do"><spring:message
+								code="master.page.conference.search" /></a></li>
+
+					<li><a href="conference/listProx.do"><spring:message
+								code="master.page.conference.prox" /></a></li>
+
+					<li><a href="conference/listPast.do"><spring:message
+								code="master.page.conference.past" /></a></li>
+
+					<li><a href="conference/listEjec.do"><spring:message
+								code="master.page.conference.ejec" /></a></li>
+				</ul></li>
+
 		</security:authorize>
-		<security:authorize access="permitAll">
-			<li><a class="fNiv" href="conference/listPast.do"><spring:message
-						code="master.page.conference.past" /></a></li>
-		</security:authorize>
-		<security:authorize access="permitAll">
-			<li><a class="fNiv" href="conference/listEjec.do"><spring:message
-						code="master.page.conference.ejec" /></a></li>
-		</security:authorize>
+
 
 		<security:authorize access="isAuthenticated()">
 
@@ -126,12 +135,12 @@
 						<li><a href="author/author/edit.do"><spring:message
 									code="master.page.author.edit" /></a></li>
 					</security:authorize>
-					
+
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a href="administrator/administrator/edit.do"><spring:message
 									code="master.page.admin.edit" /></a></li>
 					</security:authorize>
-					
+
 					<security:authorize access="hasRole('REVIEWER')">
 						<li><a href="reviewer/reviewer/edit.do"><spring:message
 									code="master.page.reviewer.edit" /></a></li>

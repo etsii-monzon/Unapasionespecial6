@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -11,7 +12,9 @@ import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
 import domain.Actor;
+import domain.Author;
 import domain.Message;
+import domain.Submission;
 
 @Service
 @Transactional
@@ -26,6 +29,9 @@ public class MessageService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private AuthorService			authorService;
 
 
 	//Supporting services
@@ -62,26 +68,41 @@ public class MessageService {
 		Assert.notNull(a);
 		final Message res;
 
-		final Actor b = this.actorService.findByPrincipal();
-		final Collection<Message> f = b.getMessages();
 		res = this.messageRepository.save(a);
-		if (!f.contains(res))
-			f.add(res);
+
+		//Mensaje se guarada en vensajes de sender
+		a.getSender().getMessages().add(res);
+
+		//Mensaje se guarda en mensajes de recipients
+		for (final Actor actor : a.getRecipients())
+			actor.getMessages().add(res);
 
 		return res;
 	}
-	public void delete(final Message p) {
+	public void delete(final Message message) {
 
-		Assert.notNull(p);
-		Assert.isTrue(p.getId() != 0);
+		Assert.notNull(message);
+		Assert.isTrue(message.getId() != 0);
 
-		final Actor dir = this.actorService.findByPrincipal();
+		final Collection<Actor> actoresSendReci = new ArrayList<Actor>();
+		final Collection<Actor> actoresConMensaje = new ArrayList<Actor>();
 
-		dir.getMessages().remove(p);
+		actoresSendReci.add(message.getSender());
+		actoresSendReci.addAll(message.getRecipients());
 
-		this.messageRepository.delete(p);
+		for (final Actor ac : actoresSendReci)
+			if (ac.getMessages().contains(message))
+				actoresConMensaje.add(ac);
+
+		for (final Actor a : actoresConMensaje)
+			if (a.equals(this.actorService.findByPrincipal()))
+				a.getMessages().remove(message);
+		actoresConMensaje.remove(this.actorService.findByPrincipal());
+
+		if (actoresConMensaje.isEmpty())
+			this.messageRepository.delete(message);
+
 	}
-
 	public Message broadcast() {
 		this.administratorService.checkPrincipal();
 		Message m;
@@ -99,4 +120,65 @@ public class MessageService {
 		return m;
 	}
 
+	public Message messAuthors() {
+		this.administratorService.checkPrincipal();
+		Message m;
+
+		m = this.create();
+		final Collection<Actor> recipients = new ArrayList<>();
+		for (final Author au : this.authorService.findAll())
+			recipients.add(au);
+
+		m.setRecipients(recipients);
+		return m;
+	}
+	public Message messAuthorsSub() {
+		this.administratorService.checkPrincipal();
+		final Message m;
+
+		m = this.create();
+
+		final Collection<Actor> recipients = new ArrayList<>();
+		//Cogemos todos los autores que tienen submisions
+		for (final Author au : this.authorService.findAll())
+			if (!au.getSubmissions().isEmpty())
+				recipients.add(au);
+		m.setRecipients(recipients);
+
+		return m;
+	}
+
+	public Message messAuthorsRegistrations() {
+		this.administratorService.checkPrincipal();
+		final Message m;
+
+		m = this.create();
+
+		final Collection<Actor> recipients = new ArrayList<>();
+		//Cogemos todos los autores que tienen registrations
+		for (final Author au : this.authorService.findAll())
+			if (!au.getRegistrations().isEmpty())
+				recipients.add(au);
+		m.setRecipients(recipients);
+
+		return m;
+	}
+
+	public void notificationDecision(final Submission submission) {
+		this.administratorService.checkPrincipal();
+		final Message notificacion;
+
+		notificacion = this.create();
+
+		final Actor recipient = this.authorService.findAuthorBySubmissionId(submission.getId());
+		final Collection<Actor> recipients = new ArrayList<>();
+		recipients.add(recipient);
+		notificacion.setRecipients(recipients);
+		notificacion.setSubject("SUBMISSION IS:" + submission.getStatus());
+		notificacion.setBody("This message is a simple notification of the decision of your submission. You can consult the report.");
+		notificacion.setTopic("RESOLUTION");
+
+		this.save(notificacion);
+
+	}
 }

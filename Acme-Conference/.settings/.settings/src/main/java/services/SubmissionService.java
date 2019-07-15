@@ -14,7 +14,6 @@ import org.springframework.util.Assert;
 import repositories.SubmissionRepository;
 import domain.Author;
 import domain.Report;
-import domain.Reviewer;
 import domain.Submission;
 
 @Service
@@ -30,29 +29,26 @@ public class SubmissionService {
 	@Autowired
 	private AuthorService			authorService;
 	@Autowired
-	private AdministratorService	adminService;
-	@Autowired
 	private ConfigurationService	configurationService;
 	@Autowired
 	private ReportService			reportService;
 	@Autowired
 	private PaperService			paperService;
+
 	@Autowired
-	private ReviewerService			revService;
+	private MessageService			messageService;
 
 
 	// SIMPLE CRUD METHODS
 
 	public Submission create() {
-		Assert.isTrue(this.authorService.checkPrincipal());
-		//		final Collection<Reviewer> revs = new ArrayList<Reviewer>();
+		this.authorService.checkPrincipal();
+
 		Submission sub;
 		sub = new Submission();
-
 		final Date actualMoment = new java.util.Date();
 		sub.setMoment(actualMoment);
 		sub.setStatus("UNDER-REVIEW");
-		//		sub.setReviewers(revs);
 		final char a = this.authorService.findByPrincipal().getName().charAt(0);
 		final char b = this.authorService.findByPrincipal().getSurname().charAt(0);
 		final String x = "XX";
@@ -74,7 +70,6 @@ public class SubmissionService {
 		return fms;
 
 	}
-
 	public Submission findOne(final int submissionId) {
 
 		Assert.notNull(submissionId);
@@ -88,15 +83,10 @@ public class SubmissionService {
 		Assert.notNull(a);
 		Submission res;
 		final Author b = this.authorService.findByPrincipal();
-		if (b != null) {
-			final Collection<Submission> f = b.getSubmissions();
-			if (a.getStatus() == "ACCEPTED")
-				a.setCameraReady(false);
-			res = this.submissionRepository.save(a);
-			if (!f.contains(res))
-				f.add(res);
-		} else
-			res = this.submissionRepository.save(a);
+		final Collection<Submission> f = b.getSubmissions();
+		res = this.submissionRepository.save(a);
+		if (!f.contains(res))
+			f.add(res);
 
 		return res;
 	}
@@ -157,42 +147,15 @@ public class SubmissionService {
 			res = this.submissionRepository.save(this.findOne(submissionId));
 
 		}
+
+		//Notificación Decisión
+		this.messageService.notificationDecision(res);
+
 		System.out.println("reportsAll" + reportsAll.size());
 		System.out.println("reports" + reports.size());
 
 		System.out.println("acepted" + reportsAc.size());
 		System.out.println("rejected" + reportsRe.size());
-
-	}
-
-	public void assignReviewers() {
-		final Collection<Submission> submissions = this.findAll();
-
-		for (final Submission s : submissions) {
-			final Collection<Reviewer> reviewers = this.revService.findAll();
-
-			//			for (final Reviewer r : s.getReviewers())
-			//				reviewers.remove(r);
-			final String p = s.getConference().getTitle() + " " + s.getConference().getSummary();
-
-			for (final Reviewer r : reviewers) {
-				if (s.getReviewers().size() == 3)
-					break;
-
-				System.out.println("PASA POR AQUI");
-				for (final String key : r.getKeywords()) {
-					System.out.println("ILLO QUE");
-					if (p.contains(key)) {
-						s.getReviewers().add(r);
-						System.out.println("POR QUE NO FUNCIONAS PERRO");
-						this.submissionRepository.save(s);
-						break;
-					}
-				}
-
-			}
-
-		}
 
 	}
 

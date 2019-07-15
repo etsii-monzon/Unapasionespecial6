@@ -46,6 +46,7 @@ public class AdministratorAdministratorController extends AbstractController {
 		final Administrator administrator;
 
 		administrator = this.administratorService.findByPrincipal();
+		System.out.println(administrator.getPhoneNumber());
 		result = this.createEditModelAndView(administrator);
 
 		return result;
@@ -57,10 +58,9 @@ public class AdministratorAdministratorController extends AbstractController {
 		if (binding.hasErrors()) {
 			System.out.println(binding);
 			result = this.createEditModelAndView(adminsitrator);
-		} else if (adminsitrator.getPhoneNumber().length() < 4)
-			result = this.createEditModelAndView(adminsitrator, "administrator.phone.error");
-		else
+		} else
 			try {
+				System.out.println(adminsitrator.getPhoneNumber());
 				this.administratorService.save(adminsitrator);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final DataIntegrityViolationException oops) {

@@ -16,7 +16,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Conference extends DomainEntity {
 
 	public String	title;
-	public String	summary;
 	public String	acronym;
 	public String	venue;
 	public Date		submissionDeadline;
@@ -113,15 +112,6 @@ public class Conference extends DomainEntity {
 
 	public void setDraftMode(final boolean draftMode) {
 		this.draftMode = draftMode;
-	}
-
-	@NotBlank
-	public String getSummary() {
-		return this.summary;
-	}
-
-	public void setSummary(final String summary) {
-		this.summary = summary;
 	}
 
 }

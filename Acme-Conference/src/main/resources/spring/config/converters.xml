@@ -17,17 +17,30 @@
 		<bean class="converters.SubmissionToStringConverter" />
 		<bean class="converters.ReportToStringConverter" />
 		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.UserAccountToStringConverter" />
+		<bean class="converters.AuthorToStringConverter" />
+		<bean class="converters.AuthorityToStringConverter" />
 		<bean class="converters.ReviewerToStringConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.PaperToStringConverter" />
+
 
 
 		<bean class="converters.StringToConferenceConverter" />
 		<bean class="converters.StringToSubmissionConverter" />
 		<bean class="converters.StringToReportConverter" />
 		<bean class="converters.StringToMessageConverter" />
-    	<bean class="converters.StringToRegistrationConverter" />
-    	<bean class="converters.StringToReviewerConverter" />
-    	<bean class="converters.StringToPaperConverter" />
+		<bean class="converters.StringToRegistrationConverter" />
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.StringToUserAccountConverter" />
+		<bean class="converters.StringToAuthorConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		<bean class="converters.StringToReviewerConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.StringToPaperConverter" />
+
+
 	</util:list>
 
 </beans>

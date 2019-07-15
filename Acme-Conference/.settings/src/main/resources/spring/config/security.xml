@@ -80,8 +80,15 @@
 			access="hasRole('REVIEWER')" />
 		<security:intercept-url pattern="/report/reviewer/**"
 			access="hasRole('REVIEWER')" />
-		<security:intercept-url pattern="/message/**"
-			access="permitAll" />
+
+		<security:intercept-url pattern="/report/author/**"
+			access="hasRole('AUTHOR')" />
+
+		<!-- Mensajes -->
+		<security:intercept-url pattern="/message/actor/**"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/administrator/**"
+			access="hasRole('ADMIN')" />
 
 		<!-- Registro y edición de perfil Author -->
 
@@ -106,11 +113,19 @@
 		<security:intercept-url pattern="/administrator/administrator/**"
 			access="hasRole('ADMIN')" />
 
+		<!-- Listado Conferences -->
+
 		<security:intercept-url pattern="/conference/listProx.do"
 			access="permitAll" />
 		<security:intercept-url pattern="/conference/listPast.do"
 			access="permitAll" />
 		<security:intercept-url pattern="/conference/listEjec.do"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/conference/search.do"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/conference/searchList.do"
 			access="permitAll" />
 
 		<security:intercept-url pattern="/**"

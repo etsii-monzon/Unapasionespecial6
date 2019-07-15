@@ -15,7 +15,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
-import domain.CreditCard;
 
 @Service
 @Transactional
@@ -26,8 +25,6 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 
 	//Supporting services
-	@Autowired
-	private CreditCardService		creditCardService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -43,15 +40,11 @@ public class AdministratorService {
 		Administrator a;
 		UserAccount userAccount;
 		Authority auth;
-		CreditCard cCard;
-
-		this.checkPrincipal();
 
 		//Authority
 		a = new Administrator();
 		userAccount = new UserAccount();
 		auth = new Authority();
-		cCard = new CreditCard();
 
 		auth.setAuthority("ADMIN");
 		userAccount.addAuthority(auth);
@@ -82,15 +75,18 @@ public class AdministratorService {
 		Assert.isTrue(!a.getUserAccount().getUsername().isEmpty());
 		Assert.isTrue(!a.getUserAccount().getPassword().isEmpty());
 
-		if (a.getId() == 0 || a.getId() != 0) {
+		//Hasheamos la contraseña
+		if (a.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String hash = encoder.encodePassword(a.getUserAccount().getPassword(), null);
 			a.getUserAccount().setPassword(hash);
 		}
 
+		//Comprobamos si el núemro de teléfono está vacio sino comprobamos que empieze por +
 		if (a.getPhoneNumber() != null)
-			if (!(a.getPhoneNumber().startsWith("+")))
-				a.setPhoneNumber("+" + this.configurationService.find().getCountryCode() + " " + a.getPhoneNumber());
+			if (ConfigurationService.isNumeric(a.getPhoneNumber()) == true && !(a.getPhoneNumber().isEmpty()))
+				if (a.getPhoneNumber().length() > 3 && !(a.getPhoneNumber().startsWith("+")))
+					a.setPhoneNumber("+" + this.configurationService.find().getCountryCode() + " " + a.getPhoneNumber());
 		Administrator res;
 		res = this.administratorRepository.save(a);
 		return res;
@@ -115,7 +111,7 @@ public class AdministratorService {
 		return res;
 	}
 
-	public Boolean checkPrincipal() {
+	public void checkPrincipal() {
 
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
@@ -126,7 +122,7 @@ public class AdministratorService {
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.ADMIN);
 
-		return authorities.contains(auth);
+		Assert.isTrue(authorities.contains(auth));
 	}
 	public void flush() {
 		this.administratorRepository.flush();

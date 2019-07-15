@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
@@ -76,6 +77,27 @@ public class ConferenceController extends AbstractController {
 		result = new ModelAndView("conference/listEjec");
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/listEjec.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public ModelAndView search() {
+		ModelAndView res;
+		res = new ModelAndView("conference/search");
+
+		return res;
+	}
+
+	@RequestMapping(value = "/searchList", method = RequestMethod.GET, params = "search")
+	public ModelAndView searchList(@RequestParam final String keyword) {
+		ModelAndView result;
+
+		final Collection<Conference> conferences = this.conferenceService.searchConferenceByKeyword(keyword);
+
+		result = new ModelAndView("conference/list");
+		result.addObject("conferences", conferences);
+		result.addObject("requestURI", "conference/searchList.do");
 
 		return result;
 	}

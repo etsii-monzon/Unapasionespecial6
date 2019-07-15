@@ -32,15 +32,12 @@ public class SubmissionAdministratorController extends AbstractController {
 
 	@Autowired
 	private AuthorService		authorService;
-
 	@Autowired
 	private ConferenceService	conferenceService;
-
-	@Autowired
-	private ReviewerService		revService;
-
 	@Autowired
 	private ReportService		reportService;
+	@Autowired
+	private ReviewerService		revService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

@@ -1,8 +1,11 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -13,11 +16,12 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class Configuration extends DomainEntity {
 
-	private String	sistemName;
-	private String	countryCode;
-	private String	bannerURL;
-	private String	welcomeEN;
-	private String	welcomeSP;
+	private String				sistemName;
+	private String				countryCode;
+	private String				bannerURL;
+	private String				welcomeEN;
+	private String				welcomeSP;
+	private Collection<String>	topics;
 
 
 	@NotBlank
@@ -60,6 +64,15 @@ public class Configuration extends DomainEntity {
 
 	public void setWelcomeSP(final String welcomeSP) {
 		this.welcomeSP = welcomeSP;
+	}
+
+	@ElementCollection
+	public Collection<String> getTopics() {
+		return this.topics;
+	}
+
+	public void setTopics(final Collection<String> topics) {
+		this.topics = topics;
 	}
 
 }

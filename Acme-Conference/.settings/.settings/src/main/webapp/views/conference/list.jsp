@@ -15,36 +15,36 @@
 
 <!-- Listing grid -->
 <security:authorize access="hasRole('ADMIN')">
-	
-		
-		<button type="button"
-			onclick="javascript: relativeRedir('conference/administrator/listsub.do')">
-			<spring:message code="conference.submissionDeadlineList" />
-		</button>
-	
+
+
+	<button type="button"
+		onclick="javascript: relativeRedir('conference/administrator/listsub.do')">
+		<spring:message code="conference.submissionDeadlineList" />
+	</button>
+
 </security:authorize>
 <security:authorize access="hasRole('ADMIN')">
-	
-		
-		<button type="button"
-			onclick="javascript: relativeRedir('conference/administrator/listnot.do')">
-			<spring:message code="conference.notificationDeadlineList" />
-		</button>
-	
+
+
+	<button type="button"
+		onclick="javascript: relativeRedir('conference/administrator/listnot.do')">
+		<spring:message code="conference.notificationDeadlineList" />
+	</button>
+
 </security:authorize>
 <security:authorize access="hasRole('ADMIN')">
-		
-		<button type="button"
-			onclick="javascript: relativeRedir('conference/administrator/listcam.do')">
-			<spring:message code="conference.cameraDeadlineList" />
-		</button>
+
+	<button type="button"
+		onclick="javascript: relativeRedir('conference/administrator/listcam.do')">
+		<spring:message code="conference.cameraDeadlineList" />
+	</button>
 </security:authorize>
 <security:authorize access="hasRole('ADMIN')">
-		
-		<button type="button"
-			onclick="javascript: relativeRedir('conference/administrator/listst.do')">
-			<spring:message code="conference.startList" />
-		</button>
+
+	<button type="button"
+		onclick="javascript: relativeRedir('conference/administrator/listst.do')">
+		<spring:message code="conference.startList" />
+	</button>
 </security:authorize>
 
 
@@ -65,13 +65,13 @@
 	</security:authorize>
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-					<jstl:if test="${row.draftMode=='true'}">
-		
+			<jstl:if test="${row.draftMode=='true'}">
 
-			<a href="conference/administrator/edit.do?conferenceId=${row.id}">
-				<spring:message code="conference.edit" />
-			</a>
-	</jstl:if>
+
+				<a href="conference/administrator/edit.do?conferenceId=${row.id}">
+					<spring:message code="conference.edit" />
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	<!-- Attributes -->
@@ -85,15 +85,18 @@
 	<display:column property="venue" titleKey="conference.venue"
 		sortable="false" />
 	<display:column property="submissionDeadline"
-		titleKey="conference.submissionDeadline" sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" />
+		titleKey="conference.submissionDeadline" sortable="false"
+		format="{0,date,dd/MM/yyyy HH:mm}" />
 	<display:column property="notificationDeadline"
-		titleKey="conference.notificationDeadline" sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" />
+		titleKey="conference.notificationDeadline" sortable="false"
+		format="{0,date,dd/MM/yyyy HH:mm}" />
 	<display:column property="cameraDeadline"
-		titleKey="conference.cameraDeadline" sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" />
+		titleKey="conference.cameraDeadline" sortable="false"
+		format="{0,date,dd/MM/yyyy HH:mm}" />
 	<display:column property="startDate" titleKey="conference.startDate"
-		sortable="false" format="{0,date,dd/MM/yyyy HH:mm}"/>
+		sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" />
 	<display:column property="endDate" titleKey="conference.endDate"
-		sortable="false" format="{0,date,dd/MM/yyyy HH:mm}"/>
+		sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" />
 	<display:column property="fee" titleKey="conference.fee"
 		sortable="false" />
 	<security:authorize access="hasRole('ADMIN')">
@@ -114,10 +117,18 @@
 </display:table>
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-		
+
 		<button type="button"
 			onclick="javascript: relativeRedir('conference/administrator/create.do')">
 			<spring:message code="conference.create" />
 		</button>
 	</div>
 </security:authorize>
+
+
+<jstl:if test="${requestURI=='conference/searchList.do' }">
+
+	<input type="button" name="cancel"
+		value="<spring:message code="conference.return" />"
+		onClick="javascript: window.location.replace('conference/search.do');" />
+</jstl:if>

@@ -57,9 +57,7 @@ public class AuthorAuthorController extends AbstractController {
 		if (binding.hasErrors()) {
 			System.out.println(binding);
 			result = this.createEditModelAndView(author);
-		} else if (author.getPhoneNumber().length() < 4)
-			result = this.createEditModelAndView(author, "author.phone.error");
-		else
+		} else
 			try {
 				this.authorService.save(author);
 				result = new ModelAndView("redirect:/welcome/index.do");

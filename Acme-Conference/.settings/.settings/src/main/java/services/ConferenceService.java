@@ -125,4 +125,8 @@ public class ConferenceService {
 		return conferences;
 	}
 
+	public Collection<Conference> searchConferenceByKeyword(final String keyword) {
+		return this.conferenceRepository.searchConferenceByKeyword(keyword);
+	}
+
 }
