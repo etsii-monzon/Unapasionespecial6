@@ -22,14 +22,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Submission extends DomainEntity {
 
-	private String					ticker;
-	private Date					moment;
-	private String					status;
-	private Paper					paper;
-	private Conference				conference;
-	private String					cameraPaper;
-	private Collection<Reviewer>	reviewers;
-	private Boolean					cameraReady;
+	private String				ticker;
+	private Date				moment;
+	private String				document;
+	private String				status;
+	private Paper				paper;
+	private Conference			conference;
+	private String				cameraPaper;
+	public boolean				cameraReady;
+	public Collection<Reviewer>	reviewers;
 
 
 	@NotBlank
@@ -98,11 +99,11 @@ public class Submission extends DomainEntity {
 	}
 
 	@NotNull
-	public Boolean getCameraReady() {
+	public boolean isCameraReady() {
 		return this.cameraReady;
 	}
 
-	public void setCameraReady(final Boolean cameraReady) {
+	public void setCameraReady(final boolean cameraReady) {
 		this.cameraReady = cameraReady;
 	}
 

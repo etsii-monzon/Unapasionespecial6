@@ -40,6 +40,9 @@ public class SubmissionService {
 	@Autowired
 	private ReviewerService			revService;
 
+	@Autowired
+	private ReviewerService			revService;
+
 
 	// SIMPLE CRUD METHODS
 
@@ -84,10 +87,15 @@ public class SubmissionService {
 		Assert.notNull(a);
 		Submission res;
 		final Author b = this.authorService.findByPrincipal();
-		final Collection<Submission> f = b.getSubmissions();
-		res = this.submissionRepository.save(a);
-		if (!f.contains(res))
-			f.add(res);
+		if (b != null) {
+			final Collection<Submission> f = b.getSubmissions();
+			if (a.getStatus() == "ACCEPTED")
+				a.setCameraReady(false);
+			res = this.submissionRepository.save(a);
+			if (!f.contains(res))
+				f.add(res);
+		} else
+			res = this.submissionRepository.save(a);
 
 		return res;
 	}

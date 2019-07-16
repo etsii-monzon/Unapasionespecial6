@@ -27,6 +27,7 @@
 
 
 
+		<bean class="converters.StringToPaperConverter" />
 		<bean class="converters.StringToConferenceConverter" />
 		<bean class="converters.StringToSubmissionConverter" />
 		<bean class="converters.StringToReportConverter" />

@@ -246,6 +246,7 @@
 		<property name="paper" ref="paper1" />
 		<property name="conference" ref="conference7" />
 		<property name="cameraPaper" value="" />
+		<property name="document" value="x" />
 		<property name="cameraReady" value="false" />
 	</bean>
 	<bean id="paper1" class="domain.Paper">
@@ -297,6 +298,43 @@
 
 			</list>
 		</property>
+		<property name="keywords">
+			<list>
+				<value>submission1</value>
+				<value>Learn</value>
+			</list>
+		</property>
+
+	</bean>
+	
+	<bean id="reviewer2" class="domain.Reviewer">
+		<property name="name" value="Anastasia" />
+		<property name="surname" value="Gónzalez" />
+		<property name="middleName" value="" />
+
+		<property name="email" value="anagon@hotmail.com" />
+		<property name="phoneNumber" value="+34 633148002" />
+		<property name="address" value="Gran Via 28" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="experience" value="experience1, experience2" />
+
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+		<property name="keywords">
+			<list>
+				<value>Python</value>
+				<value>Plantinar</value>
+			</list>
+</property>
 
 	</bean>
 

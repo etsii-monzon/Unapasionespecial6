@@ -15,16 +15,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Conference extends DomainEntity {
 
-	public String	title;
-	public String	acronym;
-	public String	venue;
-	public String	summary;
-	public Date		submissionDeadline;
-	public Date		notificationDeadline;
-	public Date		cameraDeadline;
-	public Date		startDate;
-	public Date		endDate;
-	public Double	fee;
+	private String	title;
+	private String	acronym;
+	private String	venue;
+	private String	summary;
+	private Date	submissionDeadline;
+	private Date	notificationDeadline;
+	private Date	cameraDeadline;
+	private Date	startDate;
+	private Date	endDate;
+	private Double	fee;
 	private boolean	draftMode;
 
 
