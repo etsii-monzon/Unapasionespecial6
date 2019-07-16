@@ -15,6 +15,7 @@ public class Reviewer extends Actor {
 
 	private Collection<Report>	reports;
 	private Collection<String>	experience;
+	private Collection<String>	keywords;
 
 
 	@ElementCollection
@@ -33,6 +34,15 @@ public class Reviewer extends Actor {
 
 	public void setReports(final Collection<Report> reports) {
 		this.reports = reports;
+	}
+
+	@ElementCollection
+	public Collection<String> getKeywords() {
+		return this.keywords;
+	}
+
+	public void setKeywords(final Collection<String> keywords) {
+		this.keywords = keywords;
 	}
 
 }

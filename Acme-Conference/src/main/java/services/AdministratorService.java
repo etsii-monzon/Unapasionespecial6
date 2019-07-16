@@ -111,7 +111,7 @@ public class AdministratorService {
 		return res;
 	}
 
-	public void checkPrincipal() {
+	public boolean checkPrincipal() {
 
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
@@ -122,7 +122,7 @@ public class AdministratorService {
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.ADMIN);
 
-		Assert.isTrue(authorities.contains(auth));
+		return authorities.contains(auth);
 	}
 	public void flush() {
 		this.administratorRepository.flush();

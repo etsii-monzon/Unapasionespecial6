@@ -37,6 +37,14 @@
 			</a>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column title="Show">
+			<a href="submission/administrator/show.do?submissionId=${row.id}"> <spring:message
+					code="submission.show" />
+			</a>
+		</display:column>
+	</security:authorize>
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column>
 
@@ -123,15 +131,29 @@
 	</security:authorize>
 
 
+<security:authorize access="hasRole('ADMIN')">
+		<display:column titleKey="submission.assign">
 
 
-
-
-
-
+			<a href="submission/administrator/assign.do?submissionId=${row.id}"> <spring:message
+					code="submission.assign" />
+			</a>
+		</display:column>
+</security:authorize>
 
 
 </display:table>
+
+<security:authorize access="hasRole('ADMIN')">
+	<div>
+		
+		<button type="button"
+			onclick="javascript: relativeRedir('submission/administrator/assignReviewers.do')">
+			<spring:message code="submission.assignAuto" />
+		</button>
+	</div>
+</security:authorize>
+
 <security:authorize access="hasRole('AUTHOR')">
 	<div>
 

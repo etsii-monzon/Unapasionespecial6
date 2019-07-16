@@ -47,6 +47,17 @@
 		</property>
 	</bean>
 
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="reviewer2" />
+		<property name="password" value="2693b57f0f59df94caacefb811e99851" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 
 	<!-- Other domain beans come here -->
@@ -87,7 +98,7 @@
 		<property name="title" value="Learn Unity" />
 		<property name="acronym" value="LU" />
 		<property name="venue" value="ETSII" />
-
+		<property name="summary" value="ETSII" />
 		<property name="submissionDeadline" value="02/01/2020 14:04" />
 		<property name="notificationDeadline" value="02/06/2020 00:00" />
 		<property name="cameraDeadline" value="03/06/2020 00:00" />
@@ -103,7 +114,7 @@
 		<property name="title" value="Hacking" />
 		<property name="acronym" value="HACK" />
 		<property name="venue" value="Reina Mercedes" />
-
+		<property name="summary" value="Reina Mercedes" />
 		<property name="submissionDeadline" value="09/15/2020 14:04" />
 		<property name="notificationDeadline" value="09/17/2020 00:00" />
 		<property name="cameraDeadline" value="09/20/2020 00:00" />
@@ -119,7 +130,7 @@
 		<property name="title" value="Andr4All" />
 		<property name="acronym" value="A4" />
 		<property name="venue" value="Cartuja" />
-
+		<property name="summary" value="Cartuja" />
 		<property name="submissionDeadline" value="01/15/2020 14:04" />
 		<property name="notificationDeadline" value="01/17/2020 00:00" />
 		<property name="cameraDeadline" value="01/20/2020 00:00" />
@@ -136,7 +147,7 @@
 		<property name="title" value="BigData" />
 		<property name="acronym" value="BD" />
 		<property name="venue" value="Reina Sofia" />
-
+		<property name="summary" value="Reina Sofia" />
 		<property name="submissionDeadline" value="06/15/2019 14:04" />
 		<property name="notificationDeadline" value="06/17/2019 00:00" />
 		<property name="cameraDeadline" value="06/20/2019 00:00" />
@@ -152,7 +163,7 @@
 		<property name="title" value="Java 10" />
 		<property name="acronym" value="J10" />
 		<property name="venue" value="Fibes" />
-
+		<property name="summary" value="Fibes" />
 		<property name="submissionDeadline" value="06/15/2019 14:04" />
 		<property name="notificationDeadline" value="06/17/2019 00:00" />
 		<property name="cameraDeadline" value="06/20/2019 00:00" />
@@ -169,7 +180,7 @@
 		<property name="title" value="Pyhton and Django" />
 		<property name="acronym" value="PD" />
 		<property name="venue" value="Sant Patrick" />
-
+		<property name="summary" value="Sant Patrick" />
 		<property name="submissionDeadline" value="06/15/2018 14:04" />
 		<property name="notificationDeadline" value="06/17/2018 00:00" />
 		<property name="cameraDeadline" value="06/20/2018 00:00" />
@@ -186,7 +197,7 @@
 		<property name="title" value="Learn Django" />
 		<property name="acronym" value="LearDj" />
 		<property name="venue" value="Plantinar" />
-
+		<property name="summary" value="Plantinar" />
 		<property name="submissionDeadline" value="06/15/2018 14:04" />
 		<property name="notificationDeadline" value="06/17/2018 00:00" />
 		<property name="cameraDeadline" value="06/20/2018 00:00" />
@@ -236,6 +247,7 @@
 		<property name="conference" ref="conference7" />
 		<property name="cameraPaper" value="" />
 		<property name="document" value="x" />
+		<property name="cameraReady" value="false" />
 	</bean>
 	<bean id="paper1" class="domain.Paper">
 		<property name="title" value="MSA-8K6L" />
@@ -286,6 +298,43 @@
 
 			</list>
 		</property>
+		<property name="keywords">
+			<list>
+				<value>submission1</value>
+				<value>Learn</value>
+			</list>
+		</property>
+
+	</bean>
+	
+	<bean id="reviewer2" class="domain.Reviewer">
+		<property name="name" value="Anastasia" />
+		<property name="surname" value="Gónzalez" />
+		<property name="middleName" value="" />
+
+		<property name="email" value="anagon@hotmail.com" />
+		<property name="phoneNumber" value="+34 633148002" />
+		<property name="address" value="Gran Via 28" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="experience" value="experience1, experience2" />
+
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+		<property name="keywords">
+			<list>
+				<value>Python</value>
+				<value>Plantinar</value>
+			</list>
+</property>
 
 	</bean>
 
