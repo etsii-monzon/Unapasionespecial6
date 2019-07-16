@@ -196,4 +196,20 @@ public class SubmissionService {
 
 	}
 
+	public Double avgSubmissionsPerConference() {
+		return this.submissionRepository.avgSubmissionsPerConference();
+	}
+
+	public Integer minSubmissionsPerConference() {
+		return this.submissionRepository.minSubmissionsPerConference();
+	}
+
+	public Integer maxSubmissionsPerConference() {
+		return this.submissionRepository.maxSubmissionsPerConference();
+	}
+
+	public Double stdDevSubmissionsPerConference() {
+		return this.submissionRepository.stdDevSubmissionsPerConference();
+	}
+
 }

@@ -141,11 +141,16 @@ public class ConferenceService {
 			final Date start = startDates.get(i);
 
 			final int days = end.getDate() - start.getDate();
-			final int months = end.getMonth() - start.getMonth();
+			int months = end.getMonth() - start.getMonth();
 			final int years = end.getYear() - start.getYear();
 
-			final int duracion = (int) (end.getTime() - start.getTime()) / 86400000;
-
+			Integer duracion = 0;
+			if (days >= 0 && months >= 0)
+				duracion = days + 30 * months;
+			else if (days <= 0 && months < 0 && years > 0) {
+				months = (12 - months) * 30;
+				duracion = months + days;
+			}
 			res.add(duracion);
 
 		}
@@ -189,5 +194,35 @@ public class ConferenceService {
 				res = d;
 
 		return res;
+	}
+
+	public Double stdDevDaysPerConference() {
+		Double res = 0.0;
+		final Collection<Integer> aux = this.daysPerConference();
+		Integer sum = 0;
+		final Double avg = this.avgDaysPerConference();
+		final Integer count = aux.size();
+		final Double avgPot = avg * avg;
+
+		for (final Integer d : aux)
+			sum += d * d;
+		res = Math.sqrt(sum / count - avgPot);
+		return res;
+	}
+
+	public Double avgConferenceFees() {
+		return this.conferenceRepository.avgFeesPerConference();
+	}
+
+	public Double minConferenceFees() {
+		return this.conferenceRepository.minFeesPerConference();
+	}
+
+	public Double maxConferenceFees() {
+		return this.conferenceRepository.maxFeesPerConference();
+	}
+
+	public Double stdConferenceFees() {
+		return this.conferenceRepository.stdDevFeesPerConference();
 	}
 }

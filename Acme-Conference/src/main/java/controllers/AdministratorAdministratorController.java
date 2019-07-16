@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.ConferenceService;
+import services.RegistrationService;
+import services.SubmissionService;
 import domain.Administrator;
 
 @Controller
@@ -31,6 +34,15 @@ public class AdministratorAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private ConferenceService		confService;
+
+	@Autowired
+	private SubmissionService		submService;
+
+	@Autowired
+	private RegistrationService		regService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -84,6 +96,50 @@ public class AdministratorAdministratorController extends AbstractController {
 
 		result.addObject("administrator", administrator);
 		result.addObject("message", messageCode);
+		return result;
+	}
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		final ModelAndView result;
+
+		final Double avgSubs = this.submService.avgSubmissionsPerConference();
+		final Integer minSubs = this.submService.minSubmissionsPerConference();
+		final Integer maxSubs = this.submService.maxSubmissionsPerConference();
+		final Double stdSubs = this.submService.stdDevSubmissionsPerConference();
+
+		final Double avgDays = this.confService.avgDaysPerConference();
+		final Integer minDays = this.confService.minDaysPerConference();
+		final Integer maxDays = this.confService.maxDaysPerConference();
+		final Double stdDevDays = this.confService.stdDevDaysPerConference();
+
+		final Double avgRegs = this.regService.avgRegistrationsPerConference();
+		final Integer minRegs = this.regService.minRegistrationsPerConference();
+		final Integer maxRegs = this.regService.maxRegistrationsPerConference();
+		final Double stdRegs = this.regService.stdDevRegistrationsPerConference();
+
+		final Double avgFees = this.confService.avgConferenceFees();
+		final Double minFees = this.confService.minConferenceFees();
+		final Double maxFees = this.confService.maxConferenceFees();
+		final Double stdFees = this.confService.stdConferenceFees();
+
+		result = new ModelAndView("administrator/list");
+		result.addObject("avgDays", avgDays);
+		result.addObject("minDays", minDays);
+		result.addObject("maxDays", maxDays);
+		result.addObject("stdDevDays", stdDevDays);
+		result.addObject("avgSubs", avgSubs);
+		result.addObject("minSubs", minSubs);
+		result.addObject("maxSubs", maxSubs);
+		result.addObject("stdSubs", stdSubs);
+		result.addObject("avgRegs", avgRegs);
+		result.addObject("minRegs", minRegs);
+		result.addObject("maxRegs", maxRegs);
+		result.addObject("stdRegs", stdRegs);
+		result.addObject("avgFees", avgFees);
+		result.addObject("minFees", minFees);
+		result.addObject("maxFees", maxFees);
+		result.addObject("stdFees", stdFees);
+
 		return result;
 	}
 
