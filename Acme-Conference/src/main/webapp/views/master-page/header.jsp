@@ -33,6 +33,8 @@
 								code="master.page.conference.list" /></a></li>
 					<li><a href="submission/administrator/list.do"><spring:message
 								code="master.page.submissionad.list" /></a></li>
+					<li><a href="administrator/administrator/list.do"><spring:message
+								code="master.page.dashboard" /></a></li>
 					<%-- 	<li><a href="conference/administrator/listst.do"><spring:message
 								code="master.page.conferencest.list" /></a></li>
 					<li><a href="conference/administrator/listnot.do"><spring:message

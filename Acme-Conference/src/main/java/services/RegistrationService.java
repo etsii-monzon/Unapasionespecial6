@@ -77,4 +77,19 @@ public class RegistrationService {
 		this.registrationRepository.delete(p);
 	}
 
+	public Double avgRegistrationsPerConference() {
+		return this.registrationRepository.avgRegistrationsPerConference();
+	}
+
+	public Integer minRegistrationsPerConference() {
+		return this.registrationRepository.minRegistrationsPerConference();
+	}
+
+	public Integer maxRegistrationsPerConference() {
+		return this.registrationRepository.maxRegistrationsPerConference();
+	}
+
+	public Double stdDevRegistrationsPerConference() {
+		return this.registrationRepository.stdDevRegistrationsPerConference();
+	}
 }
