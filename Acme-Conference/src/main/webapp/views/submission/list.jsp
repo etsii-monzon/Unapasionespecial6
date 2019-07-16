@@ -52,7 +52,8 @@
 			<a href="submission/author/edit.do?submissionId=${row.id}"> <spring:message
 					code="submission.edit" />
 			</a>
-
+		</display:column>
+	</security:authorize>
 
 	<!-- Attributes -->
 
@@ -130,12 +131,6 @@
 
 <security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.assign">
-
-			<a href="submission/administrator/assign.do?submissionId=${row.id}"> <spring:message
-					code="submission.assign" />
-			</a>
-		</display:column>
-</security:authorize>
 
 			<a href="submission/administrator/assign.do?submissionId=${row.id}"> <spring:message
 					code="submission.assign" />

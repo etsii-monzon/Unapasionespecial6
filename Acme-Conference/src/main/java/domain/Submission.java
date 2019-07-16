@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -24,7 +25,6 @@ public class Submission extends DomainEntity {
 
 	private String				ticker;
 	private Date				moment;
-	private String				document;
 	private String				status;
 	private Paper				paper;
 	private Conference			conference;
@@ -106,5 +106,7 @@ public class Submission extends DomainEntity {
 	public void setCameraReady(final boolean cameraReady) {
 		this.cameraReady = cameraReady;
 	}
+
+
 
 }

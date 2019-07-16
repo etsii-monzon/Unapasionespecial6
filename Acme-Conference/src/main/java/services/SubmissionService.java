@@ -40,9 +40,6 @@ public class SubmissionService {
 	@Autowired
 	private ReviewerService			revService;
 
-	@Autowired
-	private ReviewerService			revService;
-
 
 	// SIMPLE CRUD METHODS
 

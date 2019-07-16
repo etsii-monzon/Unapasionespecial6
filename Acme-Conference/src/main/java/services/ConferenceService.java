@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -129,4 +130,64 @@ public class ConferenceService {
 		return this.conferenceRepository.searchConferenceByKeyword(keyword);
 	}
 
+	@SuppressWarnings("deprecation")
+	public Collection<Integer> daysPerConference() {
+		final List<Date> endDates = (List<Date>) this.conferenceRepository.findEndDateFromConferencs();
+		final List<Date> startDates = (List<Date>) this.conferenceRepository.findStartDateFromConferencs();
+		final Collection<Integer> res = new ArrayList<Integer>();
+
+		for (int i = 0; i < endDates.size(); i++) {
+			final Date end = endDates.get(i);
+			final Date start = startDates.get(i);
+
+			final int days = end.getDate() - start.getDate();
+			final int months = end.getMonth() - start.getMonth();
+			final int years = end.getYear() - start.getYear();
+
+			final int duracion = (int) (end.getTime() - start.getTime()) / 86400000;
+
+			res.add(duracion);
+
+		}
+
+		return res;
+	}
+
+	public Double avgDaysPerConference() {
+		Double res = 0.0;
+		Double total = 0.0;
+		final Collection<Integer> aux = this.daysPerConference();
+
+		for (final Integer d : aux)
+			total += d;
+
+		res = total / aux.size();
+		return res;
+	}
+
+	public Integer minDaysPerConference() {
+		Integer res = 0;
+		final Collection<Integer> aux = this.daysPerConference();
+
+		for (final Integer d : aux)
+			if (res == 0)
+				res = d;
+			else if (d < res)
+				res = d;
+
+		return res;
+	}
+
+	public Integer maxDaysPerConference() {
+		Integer res = 0;
+		final Collection<Integer> aux = this.daysPerConference();
+
+		for (final Integer d : aux)
+			if (res == 0)
+				res = d;
+			else if (d > res)
+				res = d;
+
+		return res;
+	}
 }
