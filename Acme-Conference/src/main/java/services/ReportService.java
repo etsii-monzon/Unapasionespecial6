@@ -32,7 +32,7 @@ public class ReportService {
 	// SIMPLE CRUD METHODS
 
 	public Report create(final int subId) {
-		this.reviewerService.checkPrincipal();
+		Assert.isTrue(this.reviewerService.checkPrincipal());
 
 		final Report rep = new Report();
 		rep.setSubmission(this.submissionService.findOne(subId));
@@ -55,7 +55,7 @@ public class ReportService {
 		return rep;
 	}
 	public Report save(final Report a) {
-		this.reviewerService.checkPrincipal();
+		Assert.isTrue(this.reviewerService.checkPrincipal());
 
 		Assert.notNull(a);
 		final Report res;

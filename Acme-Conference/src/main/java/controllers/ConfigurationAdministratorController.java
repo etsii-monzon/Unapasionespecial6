@@ -34,7 +34,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		ModelAndView result;
 		Configuration configuration;
 
-		configuration = (Configuration) this.configurationService.findall().toArray()[0];
+		configuration = (Configuration) this.configurationService.findAll().toArray()[0];
 
 		result = this.createEditModelAndView(configuration);
 

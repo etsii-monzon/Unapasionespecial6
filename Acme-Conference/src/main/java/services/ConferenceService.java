@@ -40,7 +40,7 @@ public class ConferenceService {
 	// SIMPLE CRUD METHODS
 
 	public Conference create() {
-		this.administratorService.checkPrincipal();
+		Assert.isTrue(this.administratorService.checkPrincipal());
 
 		Conference con;
 		con = new Conference();

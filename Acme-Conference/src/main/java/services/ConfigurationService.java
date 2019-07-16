@@ -37,7 +37,7 @@ public class ConfigurationService {
 	public Configuration save(final Configuration c) {
 
 		Assert.notNull(c);
-		this.administratorService.checkPrincipal();
+		Assert.isTrue(this.administratorService.checkPrincipal());
 
 		final Configuration result = this.configurationRepository.save(c);
 		Assert.notNull(result);
@@ -46,8 +46,8 @@ public class ConfigurationService {
 
 	}
 
-	public Collection<Configuration> findall() {
-		this.administratorService.checkPrincipal();
+	public Collection<Configuration> findAll() {
+		Assert.isTrue(this.administratorService.checkPrincipal());
 
 		final Collection<Configuration> res = this.configurationRepository.findAll();
 		Assert.notNull(res);

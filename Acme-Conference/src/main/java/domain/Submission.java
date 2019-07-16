@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -106,7 +105,5 @@ public class Submission extends DomainEntity {
 	public void setCameraReady(final boolean cameraReady) {
 		this.cameraReady = cameraReady;
 	}
-
-
 
 }

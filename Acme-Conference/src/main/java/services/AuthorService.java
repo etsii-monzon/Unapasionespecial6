@@ -121,7 +121,7 @@ public class AuthorService {
 		return res;
 	}
 
-	public void checkPrincipal() {
+	public boolean checkPrincipal() {
 
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
@@ -132,7 +132,7 @@ public class AuthorService {
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.AUTHOR);
 
-		Assert.isTrue(authorities.contains(auth));
+		return authorities.contains(auth);
 	}
 
 	public Author findAuthorBySubmissionId(final int id) {

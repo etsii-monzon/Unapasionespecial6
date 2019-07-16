@@ -29,7 +29,7 @@ public class PaperService {
 	// SIMPLE CRUD METHODS
 
 	public Paper create() {
-		this.authorService.checkPrincipal();
+		Assert.isTrue(this.authorService.checkPrincipal());
 
 		Paper pap;
 		pap = new Paper();

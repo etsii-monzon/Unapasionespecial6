@@ -136,7 +136,7 @@ public class ReviewerService {
 		return res;
 	}
 
-	public void checkPrincipal() {
+	public boolean checkPrincipal() {
 
 		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
@@ -147,7 +147,7 @@ public class ReviewerService {
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.REVIEWER);
 
-		Assert.isTrue(authorities.contains(auth));
+		return authorities.contains(auth);
 	}
 
 	public void flush() {

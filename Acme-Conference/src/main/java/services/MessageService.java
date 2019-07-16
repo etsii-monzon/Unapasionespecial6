@@ -104,7 +104,7 @@ public class MessageService {
 
 	}
 	public Message broadcast() {
-		this.administratorService.checkPrincipal();
+		Assert.isTrue(this.administratorService.checkPrincipal());
 		Message m;
 
 		m = new Message();
@@ -121,7 +121,7 @@ public class MessageService {
 	}
 
 	public Message messAuthors() {
-		this.administratorService.checkPrincipal();
+		Assert.isTrue(this.administratorService.checkPrincipal());
 		Message m;
 
 		m = this.create();
@@ -133,7 +133,7 @@ public class MessageService {
 		return m;
 	}
 	public Message messAuthorsSub() {
-		this.administratorService.checkPrincipal();
+		Assert.isTrue(this.administratorService.checkPrincipal());
 		final Message m;
 
 		m = this.create();
@@ -149,7 +149,7 @@ public class MessageService {
 	}
 
 	public Message messAuthorsRegistrations() {
-		this.administratorService.checkPrincipal();
+		Assert.isTrue(this.administratorService.checkPrincipal());
 		final Message m;
 
 		m = this.create();
@@ -165,7 +165,7 @@ public class MessageService {
 	}
 
 	public void notificationDecision(final Submission submission) {
-		this.administratorService.checkPrincipal();
+		Assert.isTrue(this.administratorService.checkPrincipal());
 		final Message notificacion;
 
 		notificacion = this.create();

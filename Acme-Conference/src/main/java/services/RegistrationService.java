@@ -29,7 +29,7 @@ public class RegistrationService {
 	// SIMPLE CRUD METHODS
 
 	public Registration create() {
-		this.authorService.checkPrincipal();
+		Assert.isTrue(this.authorService.checkPrincipal());
 
 		Registration pro;
 		pro = new Registration();

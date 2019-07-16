@@ -44,7 +44,7 @@ public class SubmissionService {
 	// SIMPLE CRUD METHODS
 
 	public Submission create() {
-		this.authorService.checkPrincipal();
+		Assert.isTrue(this.authorService.checkPrincipal());
 
 		Submission sub;
 		sub = new Submission();
