@@ -31,7 +31,7 @@
 
 	<!-- Action links -->
 	<security:authorize access="hasRole('AUTHOR')">
-		<display:column title="Show">
+		<display:column titleKey="submission.show">
 			<a href="submission/author/show.do?submissionId=${row.id}"> <spring:message
 					code="submission.show" />
 			</a>
@@ -39,7 +39,7 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
-		<display:column title="Show">
+		<display:column titleKey="submission.show">
 			<a href="submission/administrator/show.do?submissionId=${row.id}"> <spring:message
 					code="submission.show" />
 			</a>
@@ -89,7 +89,7 @@
 	<jstl:if test="${row.status == 'UNDER-REVIEW' }">
 		<security:authorize access="hasRole('ADMIN')">
 
-			<display:column title="Decision making">
+			<display:column titleKey="submission.decission">
 				<jstl:if test="${allowed }">
 
 					<a onclick="return confirmNotify()"
@@ -102,7 +102,7 @@
 	</jstl:if>
 
 	<security:authorize access="hasRole('AUTHOR')">
-		<display:column title="Paper to Review">
+		<display:column titleKey="submission.paper">
 			<a href="paper/author/showp.do?submissionId=${row.id}"> <spring:message
 					code="paper.show" />
 			</a>
@@ -110,7 +110,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('REVIEWER')">
-		<display:column title="Paper to Review">
+		<display:column titleKey="submission.paper">
 			<a href="paper/reviewer/showp.do?submissionId=${row.id}"> <spring:message
 					code="paper.show" />
 			</a>

@@ -32,7 +32,7 @@
 		titleKey="registration.conference" sortable="false" />
 
 	<security:authorize access="hasRole('AUTHOR')">
-		<display:column title="Show the conference details">
+		<display:column titleKey="registration.show">
 			<a href="registration/author/show.do?registrationId=${row.id}"> <spring:message
 					code="registration.show" />
 			</a>

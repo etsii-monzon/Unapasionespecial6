@@ -65,7 +65,7 @@
 
 	<!-- Action links -->
 	<security:authorize access="hasRole('ADMIN')">
-		<display:column title="Show">
+		<display:column titleKey="conference.show">
 			<a href="conference/administrator/show.do?conferenceId=${row.id}">
 				<spring:message code="conference.show" />
 			</a>
