@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.PaperRepository;
+import domain.Author;
 import domain.Paper;
 
 @Service
@@ -33,6 +35,10 @@ public class PaperService {
 
 		Paper pap;
 		pap = new Paper();
+
+		final Collection<Author> authors = new ArrayList<>();
+
+		pap.setAuthors(authors);
 
 		return pap;
 	}

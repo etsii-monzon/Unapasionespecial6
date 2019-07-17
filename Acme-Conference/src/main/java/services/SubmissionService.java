@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.SubmissionRepository;
 import domain.Author;
+import domain.Paper;
 import domain.Report;
 import domain.Reviewer;
 import domain.Submission;
@@ -48,9 +49,11 @@ public class SubmissionService {
 
 		Submission sub;
 		sub = new Submission();
+
 		final Date actualMoment = new java.util.Date();
-		sub.setMoment(actualMoment);
-		sub.setStatus("UNDER-REVIEW");
+		//Creamos paper y añadimos al actor principal como autor
+		final Paper paper = this.paperService.create();
+
 		final char a = this.authorService.findByPrincipal().getName().charAt(0);
 		final char b = this.authorService.findByPrincipal().getSurname().charAt(0);
 		final String x = "XX";
@@ -61,9 +64,12 @@ public class SubmissionService {
 			c = x.charAt(0);
 
 		sub.setTicker(a + "" + b + "" + c + "-" + this.configurationService.createTicker());
+		sub.setMoment(actualMoment);
+		sub.setStatus("UNDER-REVIEW");
+		sub.setPaper(paper);
+
 		return sub;
 	}
-
 	public Collection<Submission> findAll() {
 
 		Collection<Submission> fms;
@@ -86,6 +92,7 @@ public class SubmissionService {
 		final Author b = this.authorService.findByPrincipal();
 		if (b != null) {
 			final Collection<Submission> f = b.getSubmissions();
+			System.out.println(a.getPaper().getAuthors());
 			if (a.getStatus() == "ACCEPTED")
 				a.setCameraReady(false);
 			res = this.submissionRepository.save(a);

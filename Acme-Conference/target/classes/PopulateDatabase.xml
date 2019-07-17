@@ -59,6 +59,18 @@
 		</property>
 	</bean>
 
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="author2" />
+		<property name="password" value="9bd97baef2b853ec00cc3cffd269f679" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUTHOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
 
 	<!-- Other domain beans come here -->
 
@@ -191,7 +203,7 @@
 
 
 	</bean>
-	
+
 	<bean id="conference7" class="domain.Conference">
 
 		<property name="title" value="Learn Django" />
@@ -250,7 +262,11 @@
 	</bean>
 	<bean id="paper1" class="domain.Paper">
 		<property name="title" value="MSA-8K6L" />
-		<property name="authors" value="Manuel" />
+		<property name="authors">
+			<list>
+				<ref bean="author1" />
+			</list>
+		</property>
 		<property name="summary" value="Summary" />
 		<property name="document" value="Document" />
 	</bean>
@@ -269,7 +285,32 @@
 	</bean>
 
 
+	<!-- AUTHOR 2 -->
 
+
+	<bean id="author2" class="domain.Author">
+		<property name="name" value="José" />
+		<property name="surname" value="López Retamino" />
+		<property name="middleName" value="" />
+		<property name="email" value="author2@hotmail.com" />
+		<property name="phoneNumber" value="+34 602145204" />
+		<property name="address" value="Barqueta 4" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount5" />
+
+		<property name="registrations">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="submissions">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- REVIEWER 1 -->
 
@@ -305,7 +346,7 @@
 		</property>
 
 	</bean>
-	
+
 	<bean id="reviewer2" class="domain.Reviewer">
 		<property name="name" value="Anastasia" />
 		<property name="surname" value="Gónzalez" />
@@ -333,7 +374,7 @@
 				<value>Python</value>
 				<value>Plantinar</value>
 			</list>
-</property>
+		</property>
 
 	</bean>
 

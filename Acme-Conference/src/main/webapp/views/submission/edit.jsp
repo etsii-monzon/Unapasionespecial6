@@ -12,7 +12,8 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="submission/author/edit.do" modelAttribute="submission">
+<form:form action="submission/author/edit.do"
+	modelAttribute="submission">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -22,23 +23,32 @@
 
 
 
-	<acme:select code="submission.conference" path="conference" items="${conferences}" itemLabel="title"/>
+	<acme:select code="submission.conference" path="conference"
+		items="${conferences}" itemLabel="title" />
 	<acme:textbox code="submission.cameraPaper" path="cameraPaper" />
-		<br />
-			<br />
-	
-		<fieldset>
+	<br />
+	<br />
+
+	<fieldset>
 		<legend>
 			<strong><spring:message code="author.paper" /></strong>
 		</legend>
 
 		<acme:textbox code="paper.title" path="paper.title" />
-		<acme:textbox code="paper.authors" path="paper.authors" />
+		<%-- Authors --%>
+		<spring:message code="paper.authors" />
+		<form:select path="paper.authors" multiple="true" itemValue="id">
+			<form:options items="${authors}" itemLabel="userAccount.username"
+				itemValue="id" />
+		</form:select>
+		<form:errors class="error" path="paper.authors" />
+
+
 		<acme:textbox code="paper.summary" path="paper.summary" />
 		<acme:textbox code="paper.document" path="paper.document" />
-		
+
 	</fieldset>
-	
+
 	<br />
 
 

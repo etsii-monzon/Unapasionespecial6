@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AuthorService;
 import services.ConferenceService;
 import services.SubmissionService;
+import domain.Author;
 import domain.Conference;
 import domain.Submission;
 
@@ -70,10 +72,12 @@ public class SubmissionAuthorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Submission submission, final String messageCode) {
 		final ModelAndView result;
 		final Collection<Conference> conferences = this.conferenceService.conferencesToSubmission();
+		final Collection<Author> othersAuthors = this.authorService.findAll();
 		result = new ModelAndView("submission/edit");
 
 		result.addObject("submission", submission);
 		result.addObject("conferences", conferences);
+		result.addObject("authors", othersAuthors);
 
 		result.addObject("message", messageCode);
 
@@ -89,13 +93,15 @@ public class SubmissionAuthorController extends AbstractController {
 		} else
 			try {
 				System.out.print("Entra");
-
+				Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
 				this.submissionService.save(submission);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				System.out.print(oops);
+				if (oops.getMessage().equals("Actor logueado debe ser autor del paper"))
+					result = this.createEditModelAndView(submission, "submission.author.error");
+				else
 
-				result = this.createEditModelAndView(submission, "submission.commit.error");
+					result = this.createEditModelAndView(submission, "submission.commit.error");
 			}
 		return result;
 	}

@@ -11,39 +11,39 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-	<p>
-		<b><spring:message code="paper.title" />: </b>
-		<jstl:out value="${paper.title}" />
-	</p>
-	
-	<p>
-		<b><spring:message code="paper.authors" />: </b>
-		<jstl:out value="${paper.authors}" />
-	</p>
-	
-	<p>
-		<b><spring:message code="paper.summary" />: </b>
-		<jstl:out value="${paper.summary}" />
-	</p>
-	<p>
-		<b><spring:message code="paper.document" />: </b>
-		<jstl:out value="${paper.document}" />
-	</p>
-	
+<p>
+	<b><spring:message code="paper.title" />: </b>
+	<jstl:out value="${paper.title}" />
+</p>
+
+<p>
+	<b><spring:message code="paper.authors" />: </b>
+	<jstl:forEach items="${paper.authors }" var="actor">
+		<jstl:out value="${actor.userAccount.username}"></jstl:out>
+	</jstl:forEach>
+</p>
+
+<p>
+	<b><spring:message code="paper.summary" />: </b>
+	<jstl:out value="${paper.summary}" />
+</p>
+<p>
+	<b><spring:message code="paper.document" />: </b>
+	<jstl:out value="${paper.document}" />
+</p>
 
 
-	
+
+
 
 <br />
 
 <security:authorize access="hasRole('AUTHOR')">
 
-<acme:cancel url="submission/author/list.do"
-	code="submission.cancel" /> 
+	<acme:cancel url="submission/author/list.do" code="submission.cancel" />
 </security:authorize>
 <security:authorize access="hasRole('REVIEWER')">
 
-<acme:cancel url="submission/reviewer/list.do"
-	code="submission.cancel" /> 
+	<acme:cancel url="submission/reviewer/list.do" code="submission.cancel" />
 </security:authorize>
 <br />
