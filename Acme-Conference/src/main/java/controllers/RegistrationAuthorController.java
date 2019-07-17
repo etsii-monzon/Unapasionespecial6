@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AuthorService;
 import services.ConferenceService;
+import services.ConfigurationService;
 import services.RegistrationService;
 import domain.Conference;
 import domain.Registration;
@@ -25,12 +26,14 @@ import domain.Registration;
 public class RegistrationAuthorController extends AbstractController {
 
 	@Autowired
-	RegistrationService	registrationService;
+	RegistrationService		registrationService;
 
 	@Autowired
-	AuthorService		authorService;
+	AuthorService			authorService;
 	@Autowired
-	ConferenceService	conferenceService;
+	ConferenceService		conferenceService;
+	@Autowired
+	ConfigurationService	configurationService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -87,6 +90,7 @@ public class RegistrationAuthorController extends AbstractController {
 		final Collection<Conference> conferences = this.conferenceService.conferencesToRegist();
 
 		result = new ModelAndView("registration/edit");
+		result.addObject("brandNames", this.configurationService.find().getMakes());
 
 		result.addObject("registration", registration);
 		result.addObject("conferences", conferences);

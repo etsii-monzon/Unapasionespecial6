@@ -22,6 +22,7 @@ public class Configuration extends DomainEntity {
 	private String				welcomeEN;
 	private String				welcomeSP;
 	private Collection<String>	topics;
+	private Collection<String>	makes;
 
 
 	@NotBlank
@@ -73,6 +74,15 @@ public class Configuration extends DomainEntity {
 
 	public void setTopics(final Collection<String> topics) {
 		this.topics = topics;
+	}
+
+	@ElementCollection
+	public Collection<String> getMakes() {
+		return this.makes;
+	}
+
+	public void setMakes(final Collection<String> makes) {
+		this.makes = makes;
 	}
 
 }

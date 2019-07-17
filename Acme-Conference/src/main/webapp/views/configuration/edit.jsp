@@ -57,4 +57,11 @@
 	</button>
 </div>
 <br>
+<div>
+	<button type="button"
+		onclick="javascript: relativeRedir('configuration/administrator/brandName/list.do')">
+		<spring:message code="configuration.brandName.manage" />
+	</button>
+</div>
+<br>
 <div></div>

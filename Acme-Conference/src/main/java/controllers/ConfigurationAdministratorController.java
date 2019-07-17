@@ -170,7 +170,6 @@ public class ConfigurationAdministratorController extends AbstractController {
 		}
 		return result;
 	}
-
 	//Ancillary methods------------------
 
 	protected ModelAndView createEditModelAndView(final String topic) {
@@ -189,6 +188,94 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 		result = new ModelAndView("configuration/topic/edit");
 		result.addObject("topic", topic);
+		result.addObject("message", messageCode);
+		result.addObject("RequestURI", "configuration/administrator/edit.do");
+
+		return result;
+
+	}
+
+	//Makes
+
+	@RequestMapping(value = "/brandName/list", method = RequestMethod.GET)
+	public ModelAndView listB() {
+		ModelAndView result;
+
+		final Collection<String> brandNames = this.configurationService.find().getMakes();
+
+		result = new ModelAndView("configuration/brandName/list");
+		result.addObject("brandNames", brandNames);
+		result.addObject("requestURI", "configuration/administrator/brandName/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/brandName/create", method = RequestMethod.GET)
+	public ModelAndView createBrandName() {
+		ModelAndView result;
+
+		result = new ModelAndView("configuration/brandName/create");
+		result.addObject("requestURI", "configuration/administrator/brandName/create.do");
+
+		return result;
+	}
+	@RequestMapping(value = "/brandName/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveB(@ModelAttribute("brandName") final String brandName, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors()) {
+			System.out.print(binding);
+			result = this.createEditModelAndView(brandName);
+
+		} else
+			try {
+				System.out.print("Entra");
+
+				this.configurationService.find().getMakes().add(brandName);
+				this.configurationService.save(this.configurationService.find());
+				result = new ModelAndView("redirect:list.do");
+
+			} catch (final Throwable oops) {
+				System.out.print(oops);
+
+				result = this.createEditModelAndView(brandName, "message.commit.error");
+			}
+		return result;
+	}
+
+	@RequestMapping(value = "/brandName/delete", method = RequestMethod.GET)
+	public ModelAndView deleteB(@RequestParam final String brandName) {
+		ModelAndView result;
+		try {
+
+			this.configurationService.find().getMakes().remove(brandName);
+			this.configurationService.save(this.configurationService.find());
+			result = new ModelAndView("redirect:list.do");
+			return result;
+		} catch (final IllegalArgumentException e) {
+			// TODO: handle exception
+			result = new ModelAndView("misc/403");
+		}
+		return result;
+	}
+
+	//Ancillary methods------------------
+
+	protected ModelAndView createEditModelAndViewB(final String brandName) {
+
+		Assert.notNull(brandName);
+		ModelAndView result;
+		System.out.println(brandName);
+		result = this.createEditModelAndView(brandName, null);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewB(final String brandName, final String messageCode) {
+		Assert.notNull(brandName);
+
+		ModelAndView result;
+
+		result = new ModelAndView("configuration/brandName/edit");
+		result.addObject("brandName", brandName);
 		result.addObject("message", messageCode);
 		result.addObject("RequestURI", "configuration/administrator/edit.do");
 
