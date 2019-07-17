@@ -386,6 +386,15 @@
 
 			</list>
 		</property>
+		<property name="makes">
+			<list>
+				<value>VISA</value>
+				<value>MASTER</value>
+				<value>DINNERS</value>
+				<value>AMEX</value>
+
+			</list>
+		</property>
 	</bean>
 
 </beans>

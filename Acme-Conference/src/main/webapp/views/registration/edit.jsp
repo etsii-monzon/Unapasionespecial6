@@ -12,24 +12,35 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="registration/author/edit.do" modelAttribute="registration">
+<form:form action="registration/author/edit.do"
+	modelAttribute="registration">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
 
 
-	<acme:select code="registration.conference" path="conference" items="${conferences}" itemLabel="title"/>
-	
-	
-		<fieldset>
+	<acme:select code="registration.conference" path="conference"
+		items="${conferences}" itemLabel="title" />
+
+
+	<fieldset>
 		<legend>
 			<spring:message code="author.creditCard" />
 		</legend>
 
 		<acme:textbox code="creditCard.holderName"
 			path="creditCard.holderName" />
-		<acme:textbox code="creditCard.brandName" path="creditCard.brandName" />
+			
+			
+		<spring:message code="creditCard.brandName" />
+		<form:select path="creditCard.brandName">
+			<form:options items="${brandNames}" />
+		</form:select>
+		<form:errors class="error" path="creditCard.brandName" />
+		<br> 
+		
+		
 		<acme:creditCardNumber code="author.creditCard.number"
 			path="creditCard.number" />
 		<acme:number code="creditCard.expMonth" path="creditCard.expMonth"
@@ -39,7 +50,7 @@
 		<acme:number code="creditCard.cvv" path="creditCard.cvv" min="100" />
 
 	</fieldset>
-	
+
 	<br />
 
 
