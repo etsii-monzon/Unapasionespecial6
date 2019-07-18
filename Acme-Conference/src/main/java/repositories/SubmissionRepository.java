@@ -21,4 +21,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 
 	@Query("select stddev(1.0*(select count(s) from Submission s where s.conference.id=c.id)) from Conference c")
 	Double stdDevSubmissionsPerConference();
+
+	@Query("select s from Submission s where s.ticker = ?1")
+	Submission checkTicker(String ticker);
 }

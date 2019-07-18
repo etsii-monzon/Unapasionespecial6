@@ -54,16 +54,7 @@ public class SubmissionService {
 		//Creamos paper y añadimos al actor principal como autor
 		final Paper paper = this.paperService.create();
 
-		final char a = this.authorService.findByPrincipal().getName().charAt(0);
-		final char b = this.authorService.findByPrincipal().getSurname().charAt(0);
-		final String x = "XX";
-		char c = x.charAt(0);
-		if (this.authorService.findByPrincipal().getMiddleName().length() > 1)
-			c = this.authorService.findByPrincipal().getMiddleName().charAt(0);
-		else
-			c = x.charAt(0);
-
-		sub.setTicker(a + "" + b + "" + c + "-" + this.configurationService.createTicker());
+		sub.setTicker(this.createSubmissionTicker());
 		sub.setMoment(actualMoment);
 		sub.setStatus("UNDER-REVIEW");
 		sub.setPaper(paper);
@@ -219,4 +210,29 @@ public class SubmissionService {
 		return this.submissionRepository.stdDevSubmissionsPerConference();
 	}
 
+	public Submission checkTicker(final String ticker) {
+		return this.submissionRepository.checkTicker(ticker);
+	}
+	public String createSubmissionTicker() {
+
+		final char a = this.authorService.findByPrincipal().getName().charAt(0);
+		final char b = this.authorService.findByPrincipal().getSurname().charAt(0);
+		final String x = "XX";
+		char c = x.charAt(0);
+		if (this.authorService.findByPrincipal().getMiddleName().length() > 1)
+			c = this.authorService.findByPrincipal().getMiddleName().charAt(0);
+		else
+			c = x.charAt(0);
+
+		final String ticker = a + "" + b + "" + c + "-" + this.configurationService.createTicker();
+
+		//Comprobamos unicidad del ticker
+		//Si el Ticker ya existe,hacemos una llamada recursiva al método para crear otro
+		if (this.checkTicker(ticker) != null)
+			return this.createSubmissionTicker();
+		else
+			//Si el ticker no existe(devuelve null) devolvemos el generado
+			return ticker;
+
+	}
 }
