@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdministratorService;
 import services.ConfigurationService;
 import domain.Configuration;
 
@@ -24,6 +25,9 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private AdministratorService	administratorService;
 
 
 	//To open the view to edit-----------------
@@ -55,7 +59,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		else
 			try {
 				this.configurationService.save(configuration);
-				result = new ModelAndView("redirect:/welcome/index.do");
+				result = new ModelAndView("redirect:show.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(configuration, "configuration.commit.error");
 			}
@@ -83,6 +87,26 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 		return result;
 
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show() {
+		ModelAndView result;
+		final Configuration configuration;
+
+		try {
+			configuration = this.configurationService.find();
+			Assert.isTrue(this.administratorService.checkPrincipal());
+
+			result = new ModelAndView("configuration/show");
+			result.addObject("requestURI", "configuration/administrator/show.do");
+			result.addObject("configuration", configuration);
+		} catch (final IllegalArgumentException e) {
+			// TODO: handle exception
+			result = new ModelAndView("misc/403");
+		}
+
+		return result;
 	}
 	//Ancillary methods------------------
 

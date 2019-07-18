@@ -17,6 +17,11 @@
 		<put-attribute name="body" value="/views/configuration/edit.jsp" />
 	</definition>
 
+	<definition name="configuration/show" extends="master.page">
+		<put-attribute name="title" value="Configuration " />
+		<put-attribute name="body" value="/views/configuration/show.jsp" />
+	</definition>
+
 	<definition name="configuration/topic/list" extends="master.page">
 		<put-attribute name="title" value="List Topics" />
 		<put-attribute name="body"
@@ -34,7 +39,7 @@
 		<put-attribute name="body"
 			value="/views/configuration/topic/edit.jsp" />
 	</definition>
-		<definition name="configuration/brandName/list" extends="master.page">
+	<definition name="configuration/brandName/list" extends="master.page">
 		<put-attribute name="title" value="List Brand names" />
 		<put-attribute name="body"
 			value="/views/configuration/brandName/list.jsp" />

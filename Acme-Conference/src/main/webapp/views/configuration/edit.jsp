@@ -17,6 +17,9 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="makes" />
+	<form:hidden path="topics" />
+
 
 	<acme:textbox code="configuration.sistemName" path="sistemName" />
 	<br>
@@ -46,22 +49,10 @@
 	
 	<input type="button" name="cancel"
 		value="<spring:message code="configuration.cancel" />"
-		onclick="javascript:  window.location.replace('welcome/index.do');" />
+		onclick="javascript:  window.location.replace('configuration/administrator/show.do');" />
 	<br>
 </form:form>
 
-<div>
-	<button type="button"
-		onclick="javascript: relativeRedir('configuration/administrator/topic/list.do')">
-		<spring:message code="configuration.topic.manage" />
-	</button>
-</div>
-<br>
-<div>
-	<button type="button"
-		onclick="javascript: relativeRedir('configuration/administrator/brandName/list.do')">
-		<spring:message code="configuration.brandName.manage" />
-	</button>
-</div>
+
 <br>
 <div></div>

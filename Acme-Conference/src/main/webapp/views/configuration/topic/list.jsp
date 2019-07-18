@@ -46,7 +46,7 @@
 
 <div>
 	<button type="button"
-		onclick="javascript: relativeRedir('configuration/administrator/edit.do')">
+		onclick="javascript: relativeRedir('configuration/administrator/show.do')">
 		<spring:message code="configuration.return" />
 	</button>
 </div>
