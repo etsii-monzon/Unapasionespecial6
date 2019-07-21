@@ -72,6 +72,7 @@ public class Submission extends DomainEntity {
 		this.paper = paper;
 	}
 	@OneToOne
+	@NotNull
 	public Conference getConference() {
 		return this.conference;
 	}

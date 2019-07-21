@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AuthorService;
 import services.ConferenceService;
+import services.ReportService;
 import services.ReviewerService;
 import services.SubmissionService;
 import domain.Submission;
@@ -27,14 +28,23 @@ public class SubmissionReviewerController extends AbstractController {
 	AuthorService		authorService;
 	@Autowired
 	ConferenceService	conferenceService;
+	@Autowired
+	ReportService		reportService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Submission> submissions;
+		final Collection<Submission> submissions;
 
 		submissions = this.submissionService.findAll();
+
+		//		final Collection<Report> reps = this.reviewerService.findByPrincipal().getReports();
+		//
+		//		for (final Submission s : submissions)
+		//			for (final Report r : reps)
+		//				if (r.getSubmission().equals(s) || r.getSubmission()==s)
+		//					submissions.remove(s);
 
 		result = new ModelAndView("submission/list");
 
