@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.SubmissionRepository;
 import domain.Author;
 import domain.Paper;
+import domain.Conference;
 import domain.Report;
 import domain.Reviewer;
 import domain.Submission;
@@ -40,6 +41,8 @@ public class SubmissionService {
 	private MessageService			messageService;
 	@Autowired
 	private ReviewerService			revService;
+	@Autowired
+	private ConferenceService		confService;
 
 
 	// SIMPLE CRUD METHODS
@@ -51,7 +54,7 @@ public class SubmissionService {
 		sub = new Submission();
 
 		final Date actualMoment = new java.util.Date();
-		//Creamos paper y añadimos al actor principal como autor
+		//Creamos paper y aï¿½adimos al actor principal como autor
 		final Paper paper = this.paperService.create();
 
 		sub.setTicker(this.createSubmissionTicker());
@@ -152,7 +155,7 @@ public class SubmissionService {
 
 		}
 
-		//Notificación Decisión
+		//Notificaciï¿½n Decisiï¿½n
 		this.messageService.notificationDecision(res);
 
 		System.out.println("reportsAll" + reportsAll.size());
@@ -194,6 +197,19 @@ public class SubmissionService {
 
 	}
 
+	public Collection<Submission> findAllCameraReadyVersion(final int conferenceId) {
+		final Collection<Submission> res = new ArrayList<Submission>();
+		final Collection<Submission> aux = this.submissionRepository.findAll();
+		final Conference conf = this.confService.findOne(conferenceId);
+
+		for (final Submission s : aux)
+			if (s.getConference().equals(conf))
+				if (s.isCameraReady())
+					res.add(s);
+
+		return res;
+	}
+
 	public Double avgSubmissionsPerConference() {
 		return this.submissionRepository.avgSubmissionsPerConference();
 	}
@@ -227,7 +243,7 @@ public class SubmissionService {
 		final String ticker = a + "" + b + "" + c + "-" + this.configurationService.createTicker();
 
 		//Comprobamos unicidad del ticker
-		//Si el Ticker ya existe,hacemos una llamada recursiva al método para crear otro
+		//Si el Ticker ya existe,hacemos una llamada recursiva al mï¿½todo para crear otro
 		if (this.checkTicker(ticker) != null)
 			return this.createSubmissionTicker();
 		else

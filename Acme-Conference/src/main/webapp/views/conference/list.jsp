@@ -107,21 +107,21 @@
 		sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" />
 	<display:column property="fee" titleKey="conference.fee"
 		sortable="false" />
+
 	<security:authorize access="hasRole('ADMIN')">
 
 		<display:column property="draftMode" titleKey="conference.draftMode"
 			sortable="false" />
 
+	
+
+	<display:column titleKey = "conference.activities">
+		
+		<a href="activity/administrator/list.do?conferenceId=${row.id}"> <spring:message
+			code="conference.activities" />
+		</a>
+	</display:column>
 	</security:authorize>
-
-
-
-
-
-
-
-
-
 </display:table>
 <security:authorize access="hasRole('ADMIN')">
 	<div>

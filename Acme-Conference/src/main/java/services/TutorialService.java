@@ -28,19 +28,19 @@ public class TutorialService {
 	@Autowired
 	private ConferenceService		confService;
 
+	@Autowired
+	private SectionService			sectService;
+
 
 	public Tutorial create(final int conferenceId) {
 		Assert.isTrue(this.adminService.checkPrincipal());
 		Tutorial res;
 		Conference conf;
-		Collection<Section> sections;
 
 		conf = this.confService.findOne(conferenceId);
 		res = new Tutorial();
-		sections = new ArrayList<Section>();
 
 		res.setConference(conf);
-		res.setSection(sections);
 
 		return res;
 	}
@@ -50,6 +50,7 @@ public class TutorialService {
 		final Tutorial res;
 
 		res = this.tutorialRepository.save(s);
+		this.tutorialRepository.flush();
 		return res;
 	}
 
@@ -66,8 +67,21 @@ public class TutorialService {
 	public void delete(final Tutorial t) {
 		Assert.isTrue(this.adminService.checkPrincipal());
 		Assert.notNull(t);
+		final Collection<Section> sections = this.sectService.findAllByTutorial(t);
+		for (final Section s : sections)
+			this.sectService.delete(s);
 		this.tutorialRepository.delete(t);
 
+	}
+	public Collection<Tutorial> findAllTutorialsByConference(final Conference conf) {
+		final Collection<Tutorial> res = new ArrayList<Tutorial>();
+		final Collection<Tutorial> aux = this.findAll();
+
+		for (final Tutorial act : aux)
+			if (act.getConference().equals(conf))
+				res.add(act);
+
+		return res;
 	}
 
 }
