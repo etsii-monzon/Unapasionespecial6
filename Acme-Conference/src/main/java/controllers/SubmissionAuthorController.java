@@ -2,6 +2,8 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.validation.Valid;
 
@@ -38,12 +40,27 @@ public class SubmissionAuthorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> submissions;
+		final Date fechaActual = new GregorianCalendar().getTime();
 
 		submissions = this.authorService.findByPrincipal().getSubmissions();
 
 		result = new ModelAndView("submission/list");
 		result.addObject("submissions", submissions);
 		result.addObject("requestURI", "submission/author/list.do");
+		result.addObject("fecha", fechaActual);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public ModelAndView upload(@RequestParam final int submissionId) {
+		ModelAndView result;
+		Submission submission;
+
+		submission = this.submissionService.findOne(submissionId);
+
+		result = this.createEditModelAndView(submission);
+		result.addObject("submission", submission);
 
 		return result;
 	}
@@ -94,6 +111,8 @@ public class SubmissionAuthorController extends AbstractController {
 			try {
 				System.out.print("Entra");
 				Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
+				if (submission.getId() != 0 && !submission.isCameraReady())
+					submission.setCameraReady(true);
 				this.submissionService.save(submission);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {

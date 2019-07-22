@@ -211,8 +211,8 @@
 		<property name="venue" value="Plantinar" />
 		<property name="summary" value="Plantinar" />
 		<property name="submissionDeadline" value="26/12/2018 14:04" />
-		<property name="notificationDeadline" value="09/01/2019 00:00" />
-		<property name="cameraDeadline" value="09/20/2019 00:00" />
+		<property name="notificationDeadline" value="07/01/2019 00:00" />
+		<property name="cameraDeadline" value="07/20/2019 00:00" />
 		<property name="startDate" value="07/01/2020 16:00" />
 		<property name="endDate" value="05/10/2020 20:00" />
 		<property name="fee" value="15.0" />
@@ -261,17 +261,11 @@
 		<property name="paper" ref="paper1" />
 		<property name="conference" ref="conference7" />
 		<property name="cameraPaper" value="" />
-		<property name="cameraReady" value="true" />
-	</bean>
-	<bean id="paper2" class="domain.Paper">
-		<property name="title" value="QQE-8K6L" />
-		<property name="authors" value="Manuel" />
-		<property name="summary" value="Summary" />
-		<property name="document" value="Document" />
+		<property name="cameraReady" value="false" />
 	</bean>
 	
 	<bean id="submission3" class="domain.Submission">
-		<property name="ticker" value="MOM--8K6L" />
+		<property name="ticker" value="MOM-8K6L" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper1" />
@@ -281,7 +275,12 @@
 	</bean>
 	<bean id="paper3" class="domain.Paper">
 		<property name="title" value="MOM-8K6L" />
-		<property name="authors" value="Manuel" />
+		<property name="authors">
+			<list>
+				<ref bean="author1" />
+
+			</list>
+		</property>
 		<property name="summary" value="Summary" />
 		<property name="document" value="Document" />
 	</bean>
@@ -292,15 +291,6 @@
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="paper" ref="paper1" />
 		<property name="conference" ref="conference7" />
-		<property name="cameraPaper" value="" />
-		<property name="cameraReady" value="false" />
-	</bean>
-	<bean id="submission2" class="domain.Submission">
-		<property name="ticker" value="ABC-23R4" />
-		<property name="moment" value="21/06/2019 00:00" />
-		<property name="status" value="UNDER-REVIEW" />
-		<property name="paper" ref="paper2" />
-		<property name="conference" ref="conference6" />
 		<property name="cameraPaper" value="" />
 		<property name="cameraReady" value="false" />
 	</bean>
@@ -318,7 +308,6 @@
 		<property name="title" value="PAPER" />
 		<property name="authors">
 			<list>
-				<ref bean="author1" />
 				<ref bean="author2" />
 
 			</list>
@@ -364,7 +353,6 @@
 		</property>
 		<property name="submissions">
 			<list>
-				<ref bean= "submission2"></ref>
 			</list>
 		</property>
 	</bean>

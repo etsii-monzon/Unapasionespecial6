@@ -46,12 +46,15 @@
 		</display:column>
 	</security:authorize>
 	<security:authorize access="hasRole('AUTHOR')">
-		<display:column>
+		<display:column titleKey="submission.edit">
 
-
-			<a href="submission/author/edit.do?submissionId=${row.id}"> <spring:message
-					code="submission.edit" />
-			</a>
+			<jstl:if test="${row.status=='ACCEPTED'}">
+				<jstl:if test="${row.conference.cameraDeadline < fecha }">
+					<a href="submission/author/upload.do?submissionId=${row.id}"> <spring:message
+						code="submission.upload" />
+					</a>
+					</jstl:if>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 
