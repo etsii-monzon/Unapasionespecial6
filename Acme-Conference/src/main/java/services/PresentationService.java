@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -62,6 +63,17 @@ public class PresentationService {
 		Assert.notNull(t);
 		this.presentRepository.delete(t);
 
+	}
+
+	public Collection<Presentation> findAllPresentationsByConference(final Conference conf) {
+		final Collection<Presentation> res = new ArrayList<Presentation>();
+		final Collection<Presentation> aux = this.findAll();
+
+		for (final Presentation act : aux)
+			if (act.getConference().equals(conf))
+				res.add(act);
+
+		return res;
 	}
 
 }

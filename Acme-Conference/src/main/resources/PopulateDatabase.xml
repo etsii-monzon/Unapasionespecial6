@@ -234,10 +234,45 @@
 		<property name="submissions">
 			<list>
 				<ref bean="submission1" />
+				<ref bean="submission2" />
+				<ref bean="submission3" />
+				
 			</list>
 		</property>
 	</bean>
 
+
+	<bean id="submission2" class="domain.Submission">
+		<property name="ticker" value="QQE-8K6L" />
+		<property name="moment" value="01/06/2019 00:00" />
+		<property name="status" value="ACCEPTED" />
+		<property name="paper" ref="paper1" />
+		<property name="conference" ref="conference7" />
+		<property name="cameraPaper" value="" />
+		<property name="cameraReady" value="true" />
+	</bean>
+	<bean id="paper2" class="domain.Paper">
+		<property name="title" value="QQE-8K6L" />
+		<property name="authors" value="Manuel" />
+		<property name="summary" value="Summary" />
+		<property name="document" value="Document" />
+	</bean>
+	
+	<bean id="submission3" class="domain.Submission">
+		<property name="ticker" value="MOM--8K6L" />
+		<property name="moment" value="01/06/2019 00:00" />
+		<property name="status" value="ACCEPTED" />
+		<property name="paper" ref="paper1" />
+		<property name="conference" ref="conference7" />
+		<property name="cameraPaper" value="" />
+		<property name="cameraReady" value="true" />
+	</bean>
+	<bean id="paper3" class="domain.Paper">
+		<property name="title" value="MOM-8K6L" />
+		<property name="authors" value="Manuel" />
+		<property name="summary" value="Summary" />
+		<property name="document" value="Document" />
+	</bean>
 
 	<bean id="submission1" class="domain.Submission">
 		<property name="ticker" value="MSA-8K6L" />
@@ -254,7 +289,7 @@
 		<property name="summary" value="Summary" />
 		<property name="document" value="Document" />
 	</bean>
-
+	
 	<bean id="registration1" class="domain.Registration">
 		<property name="creditCard" ref="creditCard1" />
 		<property name="conference" ref="conference1" />
@@ -320,6 +355,8 @@
 
 		<property name="reports">
 			<list>
+				<ref bean="report2"/>
+				<ref bean="report3"/>
 			</list>
 		</property>
 
@@ -347,6 +384,31 @@
 
 
 	</bean>
+	
+	
+	<bean id="report2" class="domain.Report">
+		<property name="originality" value="8" />
+		<property name="quality" value="8" />
+		<property name="readability" value="7" />
+		<property name="decision" value="ACCEPT" />
+		<property name="comment" value="No comments." />
+		<property name="submission" ref="submission2" />
+
+
+	</bean>
+	
+	
+	<bean id="report3" class="domain.Report">
+		<property name="originality" value="7" />
+		<property name="quality" value="10" />
+		<property name="readability" value="7" />
+		<property name="decision" value="ACCEPT" />
+		<property name="comment" value="No comments." />
+		<property name="submission" ref="submission3" />
+
+
+	</bean>
+	
 
 
 

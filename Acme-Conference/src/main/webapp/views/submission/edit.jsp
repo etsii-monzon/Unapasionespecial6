@@ -27,7 +27,7 @@
 		<br />
 			<br />
 	
-		<fieldset>
+	<fieldset>
 		<legend>
 			<strong><spring:message code="author.paper" /></strong>
 		</legend>

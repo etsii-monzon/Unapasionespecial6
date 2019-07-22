@@ -24,9 +24,10 @@
 		<bean class="converters.ReviewerToStringConverter" />
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.PaperToStringConverter" />
+		<bean class="converters.TutorialToStringConverter" />
 
 
-
+		<bean class="converters.StringToTutorialConverter" />
 		<bean class="converters.StringToPaperConverter" />
 		<bean class="converters.StringToConferenceConverter" />
 		<bean class="converters.StringToSubmissionConverter" />

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -60,7 +61,7 @@ public class PanelService {
 		Assert.isTrue(p.getStartMoment().getMonth() == p.getEndMoment().getMonth());
 		Assert.isTrue(p.getStartMoment().getYear() == p.getEndMoment().getYear());
 
-		Assert.isTrue((p.getStartMoment().getHours() > p.getEndMoment().getHours()) || (p.getStartMoment().getMinutes() > p.getEndMoment().getMinutes()));
+		Assert.isTrue((p.getStartMoment().getHours() < p.getEndMoment().getHours()) || (p.getStartMoment().getMinutes() < p.getEndMoment().getMinutes()));
 		res = this.panelRepository.save(p);
 
 		return res;
@@ -72,6 +73,17 @@ public class PanelService {
 		Assert.notNull(p);
 		this.panelRepository.delete(p);
 
+	}
+
+	public Collection<Panel> findAllPanelsByConference(final Conference conf) {
+		final Collection<Panel> res = new ArrayList<Panel>();
+		final Collection<Panel> aux = this.findAll();
+
+		for (final Panel act : aux)
+			if (act.getConference().equals(conf))
+				res.add(act);
+
+		return res;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.SubmissionRepository;
 import domain.Author;
+import domain.Conference;
 import domain.Report;
 import domain.Reviewer;
 import domain.Submission;
@@ -39,6 +40,8 @@ public class SubmissionService {
 	private MessageService			messageService;
 	@Autowired
 	private ReviewerService			revService;
+	@Autowired
+	private ConferenceService		confService;
 
 
 	// SIMPLE CRUD METHODS
@@ -194,6 +197,19 @@ public class SubmissionService {
 
 		}
 
+	}
+
+	public Collection<Submission> findAllCameraReadyVersion(final int conferenceId) {
+		final Collection<Submission> res = new ArrayList<Submission>();
+		final Collection<Submission> aux = this.submissionRepository.findAll();
+		final Conference conf = this.confService.findOne(conferenceId);
+
+		for (final Submission s : aux)
+			if (s.getConference().equals(conf))
+				if (s.isCameraReady())
+					res.add(s);
+
+		return res;
 	}
 
 	public Double avgSubmissionsPerConference() {
