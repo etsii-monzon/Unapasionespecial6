@@ -14,6 +14,7 @@ import services.ConferenceService;
 import services.ReportService;
 import services.ReviewerService;
 import services.SubmissionService;
+import domain.Report;
 import domain.Submission;
 
 @Controller
@@ -39,18 +40,17 @@ public class SubmissionReviewerController extends AbstractController {
 
 		submissions = this.submissionService.findAll();
 
-		//		final Collection<Report> reps = this.reviewerService.findByPrincipal().getReports();
-		//
-		//		for (final Submission s : submissions)
-		//			for (final Report r : reps)
-		//				if (r.getSubmission().equals(s) || r.getSubmission()==s)
-		//					submissions.remove(s);
+		final Collection<Report> reps = this.reviewerService.findByPrincipal().getReports();
+
+		for (final Report r : reps)
+			if (submissions.contains(r.getSubmission()))
+				submissions.remove(r.getSubmission());
+		System.out.println(submissions);
 
 		result = new ModelAndView("submission/list");
 
 		result.addObject("submissions", submissions);
 		result.addObject("requestURI", "submission/reviewer/list.do");
-
 		return result;
 	}
 }

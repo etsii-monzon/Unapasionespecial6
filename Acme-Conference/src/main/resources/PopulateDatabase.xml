@@ -260,11 +260,32 @@
 		<property name="cameraPaper" value="" />
 		<property name="cameraReady" value="false" />
 	</bean>
+	<bean id="submission2" class="domain.Submission">
+		<property name="ticker" value="ABC-23R4" />
+		<property name="moment" value="21/06/2019 00:00" />
+		<property name="status" value="UNDER-REVIEW" />
+		<property name="paper" ref="paper2" />
+		<property name="conference" ref="conference6" />
+		<property name="cameraPaper" value="" />
+		<property name="cameraReady" value="false" />
+	</bean>
 	<bean id="paper1" class="domain.Paper">
 		<property name="title" value="MSA-8K6L" />
 		<property name="authors">
 			<list>
 				<ref bean="author1" />
+			</list>
+		</property>
+		<property name="summary" value="Summary" />
+		<property name="document" value="Document" />
+	</bean>
+	<bean id="paper2" class="domain.Paper">
+		<property name="title" value="PAPER" />
+		<property name="authors">
+			<list>
+				<ref bean="author1" />
+				<ref bean="author2" />
+
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
@@ -308,6 +329,7 @@
 		</property>
 		<property name="submissions">
 			<list>
+				<ref bean= "submission2"></ref>
 			</list>
 		</property>
 	</bean>
