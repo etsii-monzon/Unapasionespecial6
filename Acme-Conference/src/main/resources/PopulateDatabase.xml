@@ -248,7 +248,7 @@
 				<ref bean="submission1" />
 				<ref bean="submission2" />
 				<ref bean="submission3" />
-				
+
 			</list>
 		</property>
 	</bean>
@@ -263,7 +263,7 @@
 		<property name="cameraPaper" value="" />
 		<property name="cameraReady" value="false" />
 	</bean>
-	
+
 	<bean id="submission3" class="domain.Submission">
 		<property name="ticker" value="MOM-8K6L" />
 		<property name="moment" value="01/06/2019 00:00" />
@@ -315,7 +315,7 @@
 		<property name="summary" value="Summary" />
 		<property name="document" value="Document" />
 	</bean>
-	
+
 	<bean id="registration1" class="domain.Registration">
 		<property name="creditCard" ref="creditCard1" />
 		<property name="conference" ref="conference1" />
@@ -406,8 +406,8 @@
 
 		<property name="reports">
 			<list>
-				<ref bean="report2"/>
-				<ref bean="report3"/>
+				<ref bean="report2" />
+				<ref bean="report3" />
 			</list>
 		</property>
 
@@ -435,8 +435,8 @@
 
 
 	</bean>
-	
-	
+
+
 	<bean id="report2" class="domain.Report">
 		<property name="originality" value="8" />
 		<property name="quality" value="8" />
@@ -447,8 +447,8 @@
 
 
 	</bean>
-	
-	
+
+
 	<bean id="report3" class="domain.Report">
 		<property name="originality" value="7" />
 		<property name="quality" value="10" />
@@ -459,7 +459,7 @@
 
 
 	</bean>
-	
+
 
 
 
@@ -480,6 +480,27 @@
 
 
 	</bean>
+	<bean id="topic1" class="domain.Topic">
+		<property name="englishName" value="INQUIRY" />
+		<property name="spanishName" value="INVESTIGACIÓN" />
+	</bean>
+	<bean id="topic2" class="domain.Topic">
+		<property name="englishName" value="REBUTTAL" />
+		<property name="spanishName" value="REFUTACIÓN" />
+	</bean>
+	<bean id="topic3" class="domain.Topic">
+		<property name="englishName" value="TOPICS" />
+		<property name="spanishName" value="TEMAS" />
+	</bean>
+	<bean id="topic4" class="domain.Topic">
+		<property name="englishName" value="REGISTRATION" />
+		<property name="spanishName" value="REGISTRO" />
+	</bean>
+	<bean id="topic5" class="domain.Topic">
+		<property name="englishName" value="OTHER" />
+		<property name="spanishName" value="OTRO" />
+	</bean>
+
 
 	<bean id="configuration" class="domain.Configuration">
 		<property name="sistemName" value="Acme Conference" />
@@ -491,16 +512,11 @@
 		<property name="countryCode" value="34" />
 		<property name="topics">
 			<list>
-				<value>INQUIRY</value>
-				<value>REBUTTAL</value>
-				<value>REGISTRATION</value>
-				<value>TOPICS</value>
-				<value>OTHER</value>
-				<value>INVESTIGACIÓN</value>
-				<value>REGUTACIÓN</value>
-				<value>REGISTRO</value>
-				<value>TEMAS</value>
-				<value>OTRO</value>
+				<ref bean="topic1" />
+				<ref bean="topic2" />
+				<ref bean="topic3" />
+				<ref bean="topic4" />
+				<ref bean="topic5" />
 
 			</list>
 		</property>

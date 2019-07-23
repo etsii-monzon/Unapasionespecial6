@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -17,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import services.ConfigurationService;
+import services.TopicService;
 import domain.Configuration;
+import domain.Topic;
 
 @Controller
 @RequestMapping(value = "/configuration/administrator")
@@ -28,6 +31,9 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private TopicService			topicService;
 
 
 	//To open the view to edit-----------------
@@ -93,6 +99,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 	public ModelAndView show() {
 		ModelAndView result;
 		final Configuration configuration;
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		try {
 			configuration = this.configurationService.find();
@@ -101,6 +108,8 @@ public class ConfigurationAdministratorController extends AbstractController {
 			result = new ModelAndView("configuration/show");
 			result.addObject("requestURI", "configuration/administrator/show.do");
 			result.addObject("configuration", configuration);
+			result.addObject("languaje", languaje);
+
 		} catch (final IllegalArgumentException e) {
 			// TODO: handle exception
 			result = new ModelAndView("misc/403");
@@ -138,9 +147,9 @@ public class ConfigurationAdministratorController extends AbstractController {
 	public ModelAndView listTopic() {
 		ModelAndView result;
 
-		final Collection<String> topics = this.configurationService.find().getTopics();
+		final Collection<Topic> topics = this.configurationService.find().getTopics();
 
-		result = new ModelAndView("configuration/topic/list");
+		result = new ModelAndView("topic/list");
 		result.addObject("topics", topics);
 		result.addObject("requestURI", "configuration/administrator/topic/list.do");
 
@@ -151,41 +160,54 @@ public class ConfigurationAdministratorController extends AbstractController {
 	public ModelAndView createTopic() {
 		ModelAndView result;
 
-		result = new ModelAndView("configuration/topic/create");
+		final Topic topic = this.topicService.create();
+
+		result = this.createEditModelAndViewTopic(topic);
 		result.addObject("requestURI", "configuration/administrator/topic/create.do");
+		result.addObject("topic", topic);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/topic/edit", method = RequestMethod.GET)
+	public ModelAndView editTopic(@RequestParam final int topicId) {
+		ModelAndView result;
+
+		final Topic topic = this.topicService.findOne(topicId);
+
+		result = this.createEditModelAndViewTopic(topic);
+		result.addObject("requestURI", "configuration/administrator/topic/create.do");
+		result.addObject("topic", topic);
 
 		return result;
 	}
 	@RequestMapping(value = "/topic/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("topic") final String topic, final BindingResult binding) {
+	public ModelAndView save(@Valid final Topic topic, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.print(binding);
-			result = this.createEditModelAndView(topic);
+			result = this.createEditModelAndViewTopic(topic);
 
 		} else
 			try {
 				System.out.print("Entra");
-
-				this.configurationService.find().getTopics().add(topic);
-				this.configurationService.save(this.configurationService.find());
+				this.topicService.save(topic);
 				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				System.out.print(oops);
 
-				result = this.createEditModelAndView(topic, "message.commit.error");
+				result = this.createEditModelAndViewTopic(topic, "message.commit.error");
 			}
 		return result;
 	}
 
 	@RequestMapping(value = "/topic/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final String topic) {
+	public ModelAndView delete(@RequestParam final int topicId) {
 		ModelAndView result;
 		try {
-
-			this.configurationService.find().getTopics().remove(topic);
-			this.configurationService.save(this.configurationService.find());
+			final Topic topic = this.topicService.findOne(topicId);
+			this.topicService.delete(topic);
 			result = new ModelAndView("redirect:list.do");
 			return result;
 		} catch (final IllegalArgumentException e) {
@@ -196,24 +218,24 @@ public class ConfigurationAdministratorController extends AbstractController {
 	}
 	//Ancillary methods------------------
 
-	protected ModelAndView createEditModelAndView(final String topic) {
+	protected ModelAndView createEditModelAndViewTopic(final Topic topic) {
 
 		Assert.notNull(topic);
 		ModelAndView result;
 		System.out.println(topic);
-		result = this.createEditModelAndView(topic, null);
+		result = this.createEditModelAndViewTopic(topic, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final String topic, final String messageCode) {
+	protected ModelAndView createEditModelAndViewTopic(final Topic topic, final String messageCode) {
 		Assert.notNull(topic);
 
 		ModelAndView result;
 
-		result = new ModelAndView("configuration/topic/edit");
+		result = new ModelAndView("topic/edit");
 		result.addObject("topic", topic);
 		result.addObject("message", messageCode);
-		result.addObject("RequestURI", "configuration/administrator/edit.do");
+		result.addObject("requestURI", "configuration/administrator/topic/create.do");
 
 		return result;
 
@@ -248,7 +270,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.print(binding);
-			result = this.createEditModelAndView(brandName);
+			result = this.createEditModelAndViewB(brandName);
 
 		} else
 			try {
@@ -261,7 +283,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 			} catch (final Throwable oops) {
 				System.out.print(oops);
 
-				result = this.createEditModelAndView(brandName, "message.commit.error");
+				result = this.createEditModelAndViewB(brandName, "message.commit.error");
 			}
 		return result;
 	}
@@ -289,7 +311,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		Assert.notNull(brandName);
 		ModelAndView result;
 		System.out.println(brandName);
-		result = this.createEditModelAndView(brandName, null);
+		result = this.createEditModelAndViewB(brandName, null);
 		return result;
 	}
 

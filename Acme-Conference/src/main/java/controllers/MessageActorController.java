@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -40,11 +41,13 @@ public class MessageActorController extends AbstractController {
 		ModelAndView result;
 
 		final Collection<Message> messages = this.actorService.findByPrincipal().getMessages();
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("message/list");
 
 		result.addObject("messages", messages);
 		result.addObject("requestURI", "message/actor/list.do");
+		result.addObject("languaje", languaje);
 
 		return result;
 	}
@@ -53,10 +56,11 @@ public class MessageActorController extends AbstractController {
 	public ModelAndView send() {
 		ModelAndView result;
 		Message m;
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		m = this.messageService.create();
 		result = this.createEditModelAndView(m);
-		//		result.addObject("m", m);
+		result.addObject("languaje", languaje);
 
 		return result;
 	}

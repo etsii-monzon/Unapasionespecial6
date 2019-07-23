@@ -34,7 +34,10 @@
 
 		<value>/views/activity/messages</value>
 		<value>/views/section/messages</value>
-		
+
+		<value>/views/topic/messages</value>
+
+
 
 	</util:list>
 

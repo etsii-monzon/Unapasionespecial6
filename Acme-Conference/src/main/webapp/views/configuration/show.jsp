@@ -33,10 +33,18 @@
 	<jstl:out value="+${configuration.countryCode}" />
 </p>
 <!-- TOPICS -->
+
 <p>
 	<b><spring:message code="configuration.topic" />: </b>
 	<jstl:forEach items="${configuration.topics}" var="actor">
-		<jstl:out value="${actor},"></jstl:out>
+		<!--  Si el idioma es inglés-->
+		<jstl:if test="${languaje == 'en' }">
+			<jstl:out value="${actor.englishName},"></jstl:out>
+		</jstl:if>
+
+		<jstl:if test="${languaje == 'es' }">
+			<jstl:out value="${actor.spanishName},"></jstl:out>
+		</jstl:if>
 	</jstl:forEach>
 
 	<button type="button"

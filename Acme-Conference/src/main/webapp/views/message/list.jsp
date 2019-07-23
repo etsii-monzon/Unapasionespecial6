@@ -51,6 +51,7 @@
 	<display:column property="topic" titleKey="message.topic"
 		sortable="true" />
 
+
 	<!-- Date -->
 	<display:column property="date" titleKey="message.date" sortable="true" />
 

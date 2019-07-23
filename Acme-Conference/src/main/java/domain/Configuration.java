@@ -21,7 +21,7 @@ public class Configuration extends DomainEntity {
 	private String				bannerURL;
 	private String				welcomeEN;
 	private String				welcomeSP;
-	private Collection<String>	topics;
+	private Collection<Topic>	topics;
 	private Collection<String>	makes;
 
 
@@ -68,11 +68,11 @@ public class Configuration extends DomainEntity {
 	}
 
 	@ElementCollection
-	public Collection<String> getTopics() {
+	public Collection<Topic> getTopics() {
 		return this.topics;
 	}
 
-	public void setTopics(final Collection<String> topics) {
+	public void setTopics(final Collection<Topic> topics) {
 		this.topics = topics;
 	}
 

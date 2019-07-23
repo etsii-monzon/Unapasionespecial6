@@ -36,8 +36,14 @@
 	<jstl:out value="${m.date }" />
 </p>
 <p>
-	<b><spring:message code="message.topic" />: </b>
-	<jstl:out value="${m.topic}" />
+	<jstl:if test="${languaje == 'en' }">
+		<b><spring:message code="message.topic" />: </b>
+		<jstl:out value="${m.topic.englishName}" />
+	</jstl:if>
+	<jstl:if test="${languaje == 'es' }">
+		<b><spring:message code="message.topic" />: </b>
+		<jstl:out value="${m.topic.spanishName}" />
+	</jstl:if>
 </p>
 
 
