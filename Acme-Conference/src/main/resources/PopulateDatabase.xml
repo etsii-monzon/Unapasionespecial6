@@ -496,6 +496,11 @@
 				<value>REGISTRATION</value>
 				<value>TOPICS</value>
 				<value>OTHER</value>
+				<value>INVESTIGACIÓN</value>
+				<value>REGUTACIÓN</value>
+				<value>REGISTRO</value>
+				<value>TEMAS</value>
+				<value>OTRO</value>
 
 			</list>
 		</property>

@@ -33,7 +33,8 @@
 		<value>/views/author/tiles.xml</value>
 		<value>/views/reviewer/tiles.xml</value>
 
-
+		<value>/views/activity/tiles.xml</value>
+		<value>/views/section/tiles.xml</value>
 
 	</util:list>
 
