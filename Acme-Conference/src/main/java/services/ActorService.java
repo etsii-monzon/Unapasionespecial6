@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -70,53 +71,65 @@ public class ActorService {
 	}
 
 	public boolean checkUserEmail(final String email) {
-		//La forma 'identifier@domain' ya es validada con la anotación @Email
+		//Comprobamos primero la forma alias <identifier@domain>
 		String pattern[] = null;
-		String alias;
+		String aliases[];
 		String identifiers[];
-		String identifier;
-		String domain = "";
-		boolean res = true;
+		String domains[];
+		int i = 0;
+		Boolean res = true;
 
-		if (email.contains("<") && email.contains(">") && email.contains("@")) {
-			//Comprobamos si es de la forma "alias <identifier@domain>" 
-			pattern = email.split("//<");
-			alias = pattern[0];
-			alias = alias.replaceAll("//s+", "");
-			alias = alias.replaceAll(" ", "");
+		if (!email.contains("@"))
+			res = false;
+		else if (email.contains("<") && email.contains(">")) {
+			pattern = email.split("\\<");
+			final String alias = pattern[0];
+			aliases = alias.split("\\s+");
 
-			//Comprobamos si el alias es alfa-numérico, caracter a caracter
-			if (!alias.matches("[A-Za-z0-9]+"))
-				res = false;
+			final Collection<String> aux = new ArrayList<String>();
+			for (final String s : aliases)
+				aux.add(s);
 
-			//Comprobamos el identifier@domain de dentro de los < >
-			identifiers = pattern[1].substring(0, pattern[1].length() - 1).split("//@");
-			identifier = identifiers[0];
-			domain = identifiers[1];
+			for (i = 0; i < aux.size(); i++)
+				if (!aliases[i].matches("[A-Za-z0-9]+"))
+					res = false;
+			final String mail = pattern[1].substring(0, pattern[1].length() - 1);
+			identifiers = mail.split("\\@");
+			final String identifier = identifiers[0];
+			final String domain = identifiers[1];
 			//Checking that identifier is alpha-numeric
 			if (!identifier.matches("[A-Za-z0-9]+"))
 				res = false;
 			else {
-				domain = domain.replaceAll("\\.", "");
-
-				if (!domain.matches("[A-Za-z0-9]+"))
-					res = false;
+				domains = domain.split("\\.");
+				//Creating a list to know a size to end the for.
+				final Collection<String> aux2 = new ArrayList<String>();
+				for (final String s : domains)
+					aux2.add(s);
+				for (i = 0; i < aux2.size(); i++)
+					if (!domains[i].matches("[A-Za-z0-9]+"))
+						res = false;
 			}
-
-		} else if (email.contains("@")) {
-			//Comprobamos la forma "identifier@domain"
-			identifiers = email.substring(0, email.length() - 1).split("\\@");
-			identifier = identifiers[0];
-			if (identifiers.length == 2)
-				domain = identifiers[1];
-			//Checking that identifier is alpha-numeric
+		} else {
+			//Comprobamos la forma "identifier@domain" 
+			identifiers = email.split("\\@");
+			final String identifier = identifiers[0];
 			if (!identifier.matches("[A-Za-z0-9]+"))
 				res = false;
 			else {
-				domain = domain.replaceAll("\\.", "");
-
-				if (!domain.matches("[A-Za-z0-9]+"))
+				final String domain = identifiers[1];
+				domains = domain.split("\\.");
+				if (domains.length <= 1)
 					res = false;
+				else {
+
+					final Collection<String> aux3 = new ArrayList<String>();
+					for (final String s : domains)
+						aux3.add(s);
+					for (i = 0; i < aux3.size(); i++)
+						if (!domains[i].matches("[A-Za-z0-9]+"))
+							res = false;
+				}
 			}
 		}
 		return res;
