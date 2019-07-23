@@ -74,6 +74,7 @@ public class AdministratorService {
 
 		Assert.isTrue(!a.getUserAccount().getUsername().isEmpty());
 		Assert.isTrue(!a.getUserAccount().getPassword().isEmpty());
+		Assert.isTrue(this.checkAdminEmail(a.getEmail()), "El formato del email es incorrecto, debe de ser identifier@ o alias <identifier@>");
 
 		//Hasheamos la contraseña
 		if (a.getId() == 0) {
@@ -128,15 +129,15 @@ public class AdministratorService {
 		this.administratorRepository.flush();
 	}
 
-	public boolean checkAdminEmail(final String email) {
-		//La forma 'identifier@domain' ya es validada con la anotaciï¿½n @Email
+	public boolean checkAdminEmail(String email) {
 		String pattern[] = null;
 		String alias;
 		String identifier;
 		Boolean res = true;
 
 		if (email.contains("<") && email.contains(">")) {
-			//Comprobamos si es de la forma "alias <identifier>" 
+			//Comprobamos si es de la forma "alias <identifier@>"
+			email = email.replaceAll("\\s+", "");
 			pattern = email.split("\\<");
 			alias = pattern[0];
 			//Quitamos los espacios del alias
@@ -148,26 +149,31 @@ public class AdministratorService {
 
 			//Comprobamos el identifier@domain de dentro de los < >
 			identifier = pattern[1].substring(0, pattern[1].length() - 1);
+			if (!identifier.contains("@"))
+				res = false;
 
+			identifier = identifier.replaceAll("@", "");
 			//Checking that identifier is alpha-numeric
 			if (!identifier.matches("[A-Za-z0-9]+"))
 				res = false;
 
-		} else if (email.contains("@")) {
+		} else if (!email.contains("@"))
+			res = false;
+		else if (email.contains("@")) {
+
 			//Comprobamos la forma "identifier@"
 			pattern = email.split("\\@");
-			final int k = email.indexOf("@");
-			identifier = email.substring(0, k);
+			identifier = pattern[0];
 
 			if (!identifier.matches("[A-Za-z0-9]+"))
 				res = false;
 
-			//			if (!pattern[1].isEmpty())
-			//				res = false;
+			if (pattern.length > 1)
+				res = false;
 
 		}
-		//Los admins tambiï¿½n pueden tener la misma forma de email que los demï¿½s usuarios
-		return res || this.actorService.checkUserEmail(email);
+
+		return res;
 	}
 
 }
