@@ -70,11 +70,10 @@ public class AdministratorService {
 	}
 	public Administrator save(final Administrator a) {
 		Assert.notNull(a);
-		//		Assert.isTrue(this.checkAdminEmail(a.getEmail()));
 
 		Assert.isTrue(!a.getUserAccount().getUsername().isEmpty());
 		Assert.isTrue(!a.getUserAccount().getPassword().isEmpty());
-		Assert.isTrue(this.checkAdminEmail(a.getEmail()), "El formato del email es incorrecto, debe de ser identifier@ o alias <identifier@>");
+		Assert.isTrue(this.checkAdminEmail(a.getEmail()), "email error");
 
 		//Hasheamos la contraseña
 		if (a.getId() == 0) {

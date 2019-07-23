@@ -112,14 +112,17 @@ public class MessageActorController extends AbstractController {
 
 		try {
 			m = this.messageService.findOne(messageId);
-			Assert.isTrue(this.actorService.findByPrincipal().getMessages().contains(m));
+			Assert.isTrue(this.actorService.findByPrincipal().getMessages().contains(m), "hacking");
 
 			result = new ModelAndView("message/show");
 			result.addObject("requestURI", "message/actor/show.do");
 			result.addObject("m", m);
-		} catch (final IllegalArgumentException e) {
+		} catch (final Throwable oops) {
 			// TODO: handle exception
-			result = new ModelAndView("misc/403");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
 		}
 
 		return result;

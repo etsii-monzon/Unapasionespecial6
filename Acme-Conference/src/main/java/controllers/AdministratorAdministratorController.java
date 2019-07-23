@@ -79,7 +79,10 @@ public class AdministratorAdministratorController extends AbstractController {
 				result = this.createEditModelAndView(adminsitrator, "administrator.username.error");
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-				result = this.createEditModelAndView(adminsitrator, "administrator.commit.error");
+				if (oops.getMessage().equals("email error"))
+					result = this.createEditModelAndView(adminsitrator, "administrator.email.error");
+				else
+					result = this.createEditModelAndView(adminsitrator, "administrator.commit.error");
 			}
 		return result;
 	}
