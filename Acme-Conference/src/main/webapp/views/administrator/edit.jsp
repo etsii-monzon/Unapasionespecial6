@@ -8,8 +8,8 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -18,15 +18,15 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<!-- Funci�n comprobar phoneNumber -->
+<!-- Función comprobar phoneNumber -->
 
 <script type="text/javascript">
 	function checkPhoneNumber() {
 		var pN = $("input#phoneNumber").val();
-		//[+],[(],[)] coincide car�cteres de dentro de los corchetes
-		//\d cualquier n�mero de 0-9
+		//[+],[(],[)] coincide carï¿½cteres de dentro de los corchetes
+		//\d cualquier nï¿½mero de 0-9
 		//? puede ser 0 o 1,esdecir,puede aparecer el +CC o el +CC (AC)
-		//{4,} m�nimo 4 d�gitos
+		//{4,} mï¿½nimo 4 dï¿½gitos
 		var regex = /^(([+]\d{1,3})\s(([(]\d{1,3}[)]\s)?))?\d{4,}$/;
 		if (regex.test(pN)) {
 			return true;

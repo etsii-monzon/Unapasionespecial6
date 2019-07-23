@@ -72,14 +72,17 @@ public class ActivityAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Tutorial tut = this.tutorialService.findOne(tutorialId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(tut.getConference()));
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(tut.getConference()), "hacking");
 			final int id = tut.getConference().getId();
 			this.tutorialService.delete(tut);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + id);
 			return result;
-		} catch (final IllegalArgumentException e) {
+		} catch (final Throwable oops) {
 			// TODO: handle exception
-			result = new ModelAndView("misc/403");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
@@ -140,12 +143,15 @@ public class ActivityAdministratorController extends AbstractController {
 		}
 		try {
 			System.out.print("Entra");
-
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(tutorial.getConference()), "hacking");
 			final Tutorial tut = this.tutorialService.save(tutorial);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + tut.getConference().getId());
 		} catch (final Throwable oops) {
 			System.out.print(oops);
-			result = this.createEditTutModelAndView(tutorial, "tutorial.commit.error");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = this.createEditTutModelAndView(tutorial, "tutorial.commit.error");
 		}
 		return result;
 	}
@@ -155,14 +161,17 @@ public class ActivityAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Panel pa = this.panelService.findOne(panelId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pa.getConference()));
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pa.getConference()), "hacking");
 			final int id = pa.getConference().getId();
 			this.panelService.delete(pa);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + id);
 			return result;
-		} catch (final IllegalArgumentException e) {
+		} catch (final Throwable oops) {
 			// TODO: handle exception
-			result = new ModelAndView("misc/403");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
@@ -226,12 +235,13 @@ public class ActivityAdministratorController extends AbstractController {
 			System.out.print("Entra");
 
 			final Panel pa = this.panelService.save(panel);
-			//			Assert.notNull(pa);
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pa.getConference()), "hacking");
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + pa.getConference().getId());
 		} catch (final Throwable oops) {
-			System.out.print(oops);
-			System.out.println("Y AQUÍ");
-			result = this.createEditPaModelAndView(panel, "panel.commit.error");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = this.createEditPaModelAndView(panel, "panel.commit.error");
 		}
 		return result;
 	}
@@ -241,14 +251,17 @@ public class ActivityAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Presentation pr = this.presentationService.findOne(presentationId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pr.getConference()));
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pr.getConference()), "hacking");
 			final int id = pr.getConference().getId();
 			this.presentationService.delete(pr);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + id);
 			return result;
-		} catch (final IllegalArgumentException e) {
+		} catch (final Throwable oops) {
 			// TODO: handle exception
-			result = new ModelAndView("misc/403");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
@@ -312,13 +325,15 @@ public class ActivityAdministratorController extends AbstractController {
 		}
 		try {
 			System.out.print("Entra");
-
 			final Presentation pre = this.presentationService.save(pres);
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pres.getConference()), "hacking");
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + pre.getConference().getId());
 		} catch (final Throwable oops) {
 			System.out.print(oops);
-
-			result = this.createEditPrModelAndView(pres, "presentation.commit.error");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = this.createEditPrModelAndView(pres, "presentation.commit.error");
 		}
 		return result;
 	}

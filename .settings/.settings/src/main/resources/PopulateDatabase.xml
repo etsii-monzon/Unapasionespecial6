@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="author1" />
+		<property name="password" value="b312ba4ffd5245fa2a1ab819ec0d0347" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUTHOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="reviewer1" />
+		<property name="password" value="6ce19528a40dde9521d97cf7ba264eca" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- Other domain beans come here -->
+
+	<bean id="admin1" class="domain.Administrator">
+		<property name="name" value="Juan José" />
+		<property name="surname" value="Marín Mateos" />
+		<property name="middleName" value="Marín Mateos" />
+
+		<property name="email" value="super@hotmail.com" />
+		<property name="phoneNumber" value="+34 675359045" />
+		<property name="address" value="Monzón 28" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount1" />
+		<property name="conferences">
+			<list>
+				<ref bean="conference1" />
+				<ref bean="conference2" />
+				<ref bean="conference3" />
+				<ref bean="conference4" />
+				<ref bean="conference5" />
+				<ref bean="conference6" />
+				<ref bean="conference7" />
+
+
+
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="conference1" class="domain.Conference">
+
+		<property name="title" value="Learn Unity" />
+		<property name="acronym" value="LU" />
+		<property name="venue" value="ETSII" />
+
+		<property name="submissionDeadline" value="02/01/2020 14:04" />
+		<property name="notificationDeadline" value="02/06/2020 00:00" />
+		<property name="cameraDeadline" value="03/06/2020 00:00" />
+		<property name="startDate" value="05/06/2020 16:00" />
+		<property name="endDate" value="05/06/2020 20:00" />
+		<property name="fee" value="24.99" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+	<bean id="conference2" class="domain.Conference">
+
+		<property name="title" value="Hacking" />
+		<property name="acronym" value="HACK" />
+		<property name="venue" value="Reina Mercedes" />
+
+		<property name="submissionDeadline" value="09/15/2020 14:04" />
+		<property name="notificationDeadline" value="09/17/2020 00:00" />
+		<property name="cameraDeadline" value="09/20/2020 00:00" />
+		<property name="startDate" value="05/06/2020 16:00" />
+		<property name="endDate" value="05/06/2020 20:00" />
+		<property name="fee" value="249.99" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+	<bean id="conference3" class="domain.Conference">
+
+		<property name="title" value="Andr4All" />
+		<property name="acronym" value="A4" />
+		<property name="venue" value="Cartuja" />
+
+		<property name="submissionDeadline" value="01/15/2020 14:04" />
+		<property name="notificationDeadline" value="01/17/2020 00:00" />
+		<property name="cameraDeadline" value="01/20/2020 00:00" />
+		<property name="startDate" value="01/06/2020 16:00" />
+		<property name="endDate" value="01/10/2020 20:00" />
+		<property name="fee" value="9.99" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+
+	<bean id="conference4" class="domain.Conference">
+
+		<property name="title" value="BigData" />
+		<property name="acronym" value="BD" />
+		<property name="venue" value="Reina Sofia" />
+
+		<property name="submissionDeadline" value="06/15/2019 14:04" />
+		<property name="notificationDeadline" value="06/17/2019 00:00" />
+		<property name="cameraDeadline" value="06/20/2019 00:00" />
+		<property name="startDate" value="07/01/2019 16:00" />
+		<property name="endDate" value="09/30/2019 20:00" />
+		<property name="fee" value="599.0" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+	<bean id="conference5" class="domain.Conference">
+
+		<property name="title" value="Java 10" />
+		<property name="acronym" value="J10" />
+		<property name="venue" value="Fibes" />
+
+		<property name="submissionDeadline" value="06/15/2019 14:04" />
+		<property name="notificationDeadline" value="06/17/2019 00:00" />
+		<property name="cameraDeadline" value="06/20/2019 00:00" />
+		<property name="startDate" value="07/01/2019 16:00" />
+		<property name="endDate" value="09/15/2019 20:00" />
+		<property name="fee" value="359.0" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+
+	<bean id="conference6" class="domain.Conference">
+
+		<property name="title" value="Pyhton and Django" />
+		<property name="acronym" value="PD" />
+		<property name="venue" value="Sant Patrick" />
+
+		<property name="submissionDeadline" value="06/15/2018 14:04" />
+		<property name="notificationDeadline" value="06/17/2018 00:00" />
+		<property name="cameraDeadline" value="06/20/2018 00:00" />
+		<property name="startDate" value="07/01/2018 16:00" />
+		<property name="endDate" value="05/10/2018 20:00" />
+		<property name="fee" value="199.99" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+	
+	<bean id="conference7" class="domain.Conference">
+
+		<property name="title" value="Learn Django" />
+		<property name="acronym" value="LearDj" />
+		<property name="venue" value="Plantinar" />
+
+		<property name="submissionDeadline" value="06/15/2018 14:04" />
+		<property name="notificationDeadline" value="06/17/2018 00:00" />
+		<property name="cameraDeadline" value="06/20/2018 00:00" />
+		<property name="startDate" value="07/01/2020 16:00" />
+		<property name="endDate" value="05/10/2020 20:00" />
+		<property name="fee" value="15.0" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+	<!-- AUTHOR 1 -->
+
+
+	<bean id="author1" class="domain.Author">
+		<property name="name" value="Manuel" />
+		<property name="surname" value="Saez yure" />
+		<property name="middleName" value="Ayacuch" />
+		<property name="email" value="manu@hotmail.com" />
+		<property name="phoneNumber" value="+34 602145205" />
+		<property name="address" value="Monzón 28" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount2" />
+
+		<property name="registrations">
+			<list>
+				<ref bean="registration1" />
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+				<ref bean="message1" />
+			</list>
+		</property>
+		<property name="submissions">
+			<list>
+				<ref bean="submission1" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="submission1" class="domain.Submission">
+		<property name="ticker" value="MSA-8K6L" />
+		<property name="moment" value="01/06/2019 00:00" />
+		<property name="status" value="UNDER-REVIEW" />
+		<property name="paper" ref="paper1" />
+		<property name="conference" ref="conference7" />
+		<property name="cameraPaper" value="" />
+		<property name="document" value="x" />
+	</bean>
+	<bean id="paper1" class="domain.Paper">
+		<property name="title" value="MSA-8K6L" />
+		<property name="authors" value="Manuel" />
+		<property name="summary" value="Summary" />
+		<property name="document" value="Document" />
+	</bean>
+
+	<bean id="registration1" class="domain.Registration">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="conference" ref="conference1" />
+	</bean>
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Manuel" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4111111111111111" />
+		<property name="expMonth" value="10" />
+		<property name="expYear" value="22" />
+		<property name="cvv" value="123" />
+	</bean>
+
+
+
+
+	<!-- REVIEWER 1 -->
+
+	<bean id="reviewer1" class="domain.Reviewer">
+		<property name="name" value="Ana" />
+		<property name="surname" value="Gómez" />
+		<property name="middleName" value="" />
+
+		<property name="email" value="ana@hotmail.com" />
+		<property name="phoneNumber" value="+34 620148002" />
+		<property name="address" value="Sol 28" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="experience" value="experience1, experience2" />
+
+		<property name="reports">
+			<list>
+				<ref bean="report1" />
+			</list>
+		</property>
+
+		<property name="messages">
+			<list>
+				<ref bean="message1" />
+
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="report1" class="domain.Report">
+		<property name="originality" value="8" />
+		<property name="quality" value="7" />
+		<property name="readability" value="5" />
+		<property name="decision" value="ACCEPT" />
+		<property name="comment" value="No comments." />
+		<property name="submission" ref="submission1" />
+
+
+	</bean>
+
+
+
+
+	<bean id="message1" class="domain.Message">
+		<property name="body" value="TEST" />
+		<property name="subject" value="IMPORTANT" />
+		<property name="date" value="01/06/2020 00:00" />
+		<property name="topic" value="OTHERS" />
+
+		<property name="recipients">
+			<list>
+				<ref bean="reviewer1" />
+			</list>
+		</property>
+		<property name="sender" ref="author1" />
+
+
+
+	</bean>
+
+	<bean id="configuration" class="domain.Configuration">
+		<property name="sistemName" value="Acme Conference" />
+		<property name="bannerURL" value="https://i.ibb.co/GVpZCtM/acme-conference.png" />
+		<property name="welcomeEN"
+			value="Welcome to Acme Conference! Your scientific event manager" />
+		<property name="welcomeSP"
+			value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos" />
+		<property name="countryCode" value="34" />
+		<property name="topics">
+			<list>
+				<value>INQUIRY</value>
+				<value>REBUTTAL</value>
+				<value>REGISTRATION</value>
+				<value>TOPICS</value>
+				<value>OTHER</value>
+
+			</list>
+		</property>
+	</bean>
+
+</beans>

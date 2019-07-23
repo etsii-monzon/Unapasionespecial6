@@ -58,7 +58,9 @@ public class AuthorController extends AbstractController {
 			} catch (final DataIntegrityViolationException oops) {
 				result = this.createEditModelAndView(author, "author.username.error");
 			} catch (final Throwable oops) {
-				System.out.println(oops);
+
+				if (oops.getMessage().equals("email error"))
+					result = this.createEditModelAndView(author, "author.email.error");
 				result = this.createEditModelAndView(author, "author.commit.error");
 			}
 		return result;

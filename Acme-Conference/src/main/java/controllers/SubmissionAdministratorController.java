@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdministratorService;
 import services.AuthorService;
 import services.ConferenceService;
 import services.ReportService;
@@ -28,16 +29,19 @@ import domain.Submission;
 public class SubmissionAdministratorController extends AbstractController {
 
 	@Autowired
-	private SubmissionService	submissionService;
+	private SubmissionService		submissionService;
 
 	@Autowired
-	private AuthorService		authorService;
+	private AdministratorService	adminService;
+
 	@Autowired
-	private ConferenceService	conferenceService;
+	private AuthorService			authorService;
 	@Autowired
-	private ReportService		reportService;
+	private ConferenceService		conferenceService;
 	@Autowired
-	private ReviewerService		revService;
+	private ReportService			reportService;
+	@Autowired
+	private ReviewerService			revService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -74,16 +78,22 @@ public class SubmissionAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int submissionId) {
-		final ModelAndView result;
+		ModelAndView result;
 		final Submission submission;
-
-		submission = this.submissionService.findOne(submissionId);
-		result = new ModelAndView("submission/show");
-		result.addObject("requestURI", "submission/administrator/show.do");
-		result.addObject("submission", submission);
+		try {
+			submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(submission.getConference()), "hacking");
+			result = new ModelAndView("submission/show");
+			result.addObject("requestURI", "submission/administrator/show.do");
+			result.addObject("submission", submission);
+		} catch (final Throwable oops) {
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
+		}
 		return result;
 	}
-
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
 	public ModelAndView assignManually(@RequestParam final int submissionId) {
 		ModelAndView result;
@@ -135,12 +145,15 @@ public class SubmissionAdministratorController extends AbstractController {
 			try {
 				System.out.print("Entra");
 				Assert.isTrue(submission.getReviewers().size() <= 3);
-				this.submissionService.save(submission);
+				final Submission sub = this.submissionService.save(submission);
+				Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(sub.getConference()), "hacking");
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				System.out.print(oops);
-
-				result = this.createAssignModelAndView(submission, "submission.commit.error");
+				if (oops.getMessage().equals("hacking"))
+					result = new ModelAndView("misc/403");
+				else
+					result = this.createAssignModelAndView(submission, "submission.commit.error");
 			}
 		return result;
 	}
@@ -149,9 +162,19 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView delete(@RequestParam final int submissionId) {
 		ModelAndView result;
 
-		this.submissionService.submissionStatus(submissionId);
+		try {
+			this.submissionService.submissionStatus(submissionId);
+			final Submission submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(submission.getConference()), "hacking");
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
 
-		result = new ModelAndView("redirect:list.do");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
+		}
+
 		return result;
 	}
 

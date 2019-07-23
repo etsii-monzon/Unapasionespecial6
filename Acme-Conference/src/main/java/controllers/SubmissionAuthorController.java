@@ -131,9 +131,12 @@ public class SubmissionAuthorController extends AbstractController {
 		ModelAndView result;
 		try {
 			this.submissionService.delete(submission);
+			Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			System.out.println(oops);
+			if (oops.getMessage().equals("Actor logueado debe ser autor del paper"))
+				result = new ModelAndView("misc/403");
 			result = this.createEditModelAndView(submission, "submission.commit.error");
 		}
 		return result;
@@ -141,14 +144,21 @@ public class SubmissionAuthorController extends AbstractController {
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int submissionId) {
-		final ModelAndView result;
+		ModelAndView result;
 		final Submission submission;
+		try {
+			submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
+			result = new ModelAndView("submission/show");
+			result.addObject("requestURI", "submission/author/show.do");
+			result.addObject("submission", submission);
+		} catch (final Throwable oops) {
+			if (oops.getMessage().equals("Actor logueado debe ser autor del paper"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("submission/list");
+		}
 
-		submission = this.submissionService.findOne(submissionId);
-
-		result = new ModelAndView("submission/show");
-		result.addObject("requestURI", "submission/author/show.do");
-		result.addObject("submission", submission);
 		return result;
 	}
 
