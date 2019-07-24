@@ -117,10 +117,13 @@ public class MessageActorController extends AbstractController {
 		try {
 			m = this.messageService.findOne(messageId);
 			Assert.isTrue(this.actorService.findByPrincipal().getMessages().contains(m), "hacking");
+			final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 			result = new ModelAndView("message/show");
 			result.addObject("requestURI", "message/actor/show.do");
 			result.addObject("m", m);
+			result.addObject("languaje", languaje);
+
 		} catch (final Throwable oops) {
 			// TODO: handle exception
 			if (oops.getMessage().equals("hacking"))
