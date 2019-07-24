@@ -11,6 +11,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -34,7 +35,9 @@ public class ConferenceServiceTest extends AbstractTest {
 	// System under test ------------------------------------------------------
 
 	@Autowired
-	private ConferenceService	conferenceService;
+	private ConferenceService		conferenceService;
+	@Autowired
+	private AdministratorService	adminService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -57,6 +60,54 @@ public class ConferenceServiceTest extends AbstractTest {
 
 		Assert.notNull(res);
 		Assert.isTrue(this.conferenceService.findAll().containsAll(res));
+
+		super.unauthenticate();
+
+	}
+	/*
+	 * Test comprobación crear una conference.
+	 * Req Funcional:
+	 */
+	@Test
+	public void testCreateConference() {
+		super.authenticate("admin");
+
+		final Conference res = this.conferenceService.create();
+		Assert.notNull(res);
+
+		res.setSubmissionDeadline(new Date());
+		res.setNotificationDeadline(new Date());
+		res.setCameraDeadline(new Date());
+		res.setStartDate(new Date());
+		res.setEndDate(new Date());
+		res.setAcronym("aeiou");
+		res.setDraftMode(false);
+		res.setFee(125.);
+		res.setSummary("sum");
+		res.setTitle("hola");
+		res.setVenue("hola");
+
+		final Conference result = this.conferenceService.save(res);
+
+		Assert.notNull(result);
+		Assert.isTrue(this.conferenceService.findAll().contains(result));
+		Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(result));
+
+		super.unauthenticate();
+
+	}
+
+	/*
+	 * Test comprobación un admin lista sus conferences.
+	 * Req Funcional:
+	 */
+	@Test
+	public void testListConferences() {
+		super.authenticate("admin");
+
+		final Collection<Conference> res = this.adminService.findByPrincipal().getConferences();
+
+		Assert.notNull(res);
 
 		super.unauthenticate();
 
