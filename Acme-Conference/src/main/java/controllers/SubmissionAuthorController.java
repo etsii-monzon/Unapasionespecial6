@@ -111,8 +111,6 @@ public class SubmissionAuthorController extends AbstractController {
 			try {
 				System.out.print("Entra");
 				Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
-				if (submission.getId() != 0 && !submission.isCameraReady())
-					submission.setCameraReady(true);
 				this.submissionService.save(submission);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {

@@ -84,7 +84,7 @@ public class ReviewerService {
 
 		Assert.isTrue(!e.getUserAccount().getUsername().isEmpty());
 		Assert.isTrue(!e.getUserAccount().getPassword().isEmpty());
-		Assert.isTrue(this.actorService.checkUserEmail(e.getEmail()), "El formato del email es incorrecto, debe de ser identifier@domain o alias <identifier@domain>");
+		Assert.isTrue(this.actorService.checkUserEmail(e.getEmail()), "email error");
 
 		if (e.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();

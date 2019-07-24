@@ -81,7 +81,7 @@ public class AuthorService {
 	public Author save(final Author d) {
 
 		Assert.notNull(d);
-		Assert.isTrue(this.actorService.checkUserEmail(d.getEmail()), "El formato del email es incorrecto, debe de ser identifier@domain o alias <identifier@domain>");
+		Assert.isTrue(this.actorService.checkUserEmail(d.getEmail()), "email error");
 
 		if (d.getId() == 0) {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();

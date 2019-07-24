@@ -65,7 +65,10 @@ public class AuthorAuthorController extends AbstractController {
 				result = this.createEditModelAndView(author, "author.username.error");
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-				result = this.createEditModelAndView(author, "author.commit.error");
+				if (oops.getMessage().equals("email error"))
+					result = this.createEditModelAndView(author, "author.email.error");
+				else
+					result = this.createEditModelAndView(author, "author.commit.error");
 			}
 		return result;
 	}

@@ -46,6 +46,12 @@ public class AdministratorServiceTest extends AbstractTest {
 	@Autowired
 	private AuthorService			authorService;
 
+	@Autowired
+	private RegistrationService		regService;
+
+	@Autowired
+	private ConferenceService		confService;
+
 
 	// Tests ------------------------------------------------------------------
 
@@ -91,6 +97,30 @@ public class AdministratorServiceTest extends AbstractTest {
 				break;
 			}
 
+		super.unauthenticate();
+
+	}
+
+	@Test
+	public void testDashboard() {
+		super.authenticate("admin");
+
+		Assert.notNull(this.submissionService.avgSubmissionsPerConference());
+		Assert.notNull(this.submissionService.minSubmissionsPerConference());
+		Assert.notNull(this.submissionService.maxSubmissionsPerConference());
+		Assert.notNull(this.submissionService.stdDevSubmissionsPerConference());
+		Assert.notNull(this.regService.avgRegistrationsPerConference());
+		Assert.notNull(this.regService.maxRegistrationsPerConference());
+		Assert.notNull(this.regService.minRegistrationsPerConference());
+		Assert.notNull(this.regService.stdDevRegistrationsPerConference());
+		Assert.notNull(this.confService.avgConferenceFees());
+		Assert.notNull(this.confService.maxConferenceFees());
+		Assert.notNull(this.confService.minConferenceFees());
+		Assert.notNull(this.confService.stdConferenceFees());
+		Assert.notNull(this.confService.avgDaysPerConference());
+		Assert.notNull(this.confService.maxDaysPerConference());
+		Assert.notNull(this.confService.minDaysPerConference());
+		Assert.notNull(this.confService.stdDevDaysPerConference());
 		super.unauthenticate();
 
 	}
