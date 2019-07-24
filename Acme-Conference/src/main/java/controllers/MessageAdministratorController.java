@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -118,11 +119,13 @@ public class MessageAdministratorController extends AbstractController {
 
 		final Collection<Actor> recipients = this.actorService.findAll();
 		recipients.remove(this.actorService.findByPrincipal());
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("message/create");
 		result.addObject("topics", this.configurationService.find().getTopics());
 		result.addObject("m", m);
 		result.addObject("message", messageCode);
+		result.addObject("languaje", languaje);
 
 		return result;
 	}

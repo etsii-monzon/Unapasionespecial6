@@ -59,7 +59,15 @@
 	<%-- Topic --%>
 	<spring:message code="message.topic" />
 	<form:select path="topic">
-		<form:options items="${topics}" />
+		<jstl:if test="${languaje == 'en' }">
+			<form:options items="${topics}" itemLabel="englishName"
+				itemValue="englishName" />
+		</jstl:if>
+
+		<jstl:if test="${languaje == 'es' }">
+			<form:options items="${topics}" itemLabel="spanishName"
+				itemValue="spanishName" />
+		</jstl:if>
 	</form:select>
 	<form:errors class="error" path="topic" />
 	<br>

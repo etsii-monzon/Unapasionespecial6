@@ -12,23 +12,32 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="${requestURI }">
+<form:form action="${requestURI}" modelAttribute="topic">
+	<%-- Hidden properties from topics--%>
+	<form:hidden path="id" />
+	<form:hidden path="version" />
 
 
 
 	<%-- Topic --%>
-	<spring:message code="configuration.topic" />
-	<jstl:if test="${topic != '' }">
-		<input name="topic" value="${topic }">
-	</jstl:if>
-
-	<jstl:if test="${topic == '' }">
-		<input name="topic" />
-	</jstl:if>
-
-
+	<%-- ENglish Name --%>
+	<form:label path="englishName">
+		<spring:message code="topic.englishName" />
+	</form:label>
+	<form:input path="englishName" />
+	<form:errors class="error" path="englishName" />
 	<br>
 	<br>
+
+	<%-- Spanish Name --%>
+	<form:label path="spanishName">
+		<spring:message code="topic.spanishName" />
+	</form:label>
+	<form:input path="spanishName" />
+	<form:errors class="error" path="spanishName" />
+	<br>
+	<br>
+
 
 
 

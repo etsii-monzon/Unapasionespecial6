@@ -27,17 +27,25 @@
 	<!-- Action links -->
 
 
-
+	<display:column titleKey="configuration.edit">
+		<a href="configuration/administrator/topic/edit.do?topicId=${row.id}">
+			<spring:message code="configuration.edit" />
+		</a>
+	</display:column>
 	<!-- Attributes -->
 
-	<display:column titleKey="configuration.topic" sortable="true">
-		<jstl:out value="${row }"></jstl:out>
-	</display:column>
+	<!-- ENGLISH NAME -->
+	<display:column property="englishName" titleKey="topic.en"
+		sortable="true" />
+	<!-- SPANISH NAME -->
+	<display:column property="spanishName" titleKey="topic.sp"
+		sortable="true" />
 
 
 
 	<display:column titleKey="configuration.delete">
-		<a href="configuration/administrator/topic/delete.do?topic=${row}">
+		<a
+			href="configuration/administrator/topic/delete.do?topicId=${row.id}">
 			<spring:message code="configuration.delete" />
 		</a>
 	</display:column>
@@ -46,7 +54,7 @@
 
 <div>
 	<button type="button"
-		onclick="javascript: relativeRedir('configuration/administrator/edit.do')">
+		onclick="javascript: relativeRedir('configuration/administrator/show.do')">
 		<spring:message code="configuration.return" />
 	</button>
 </div>
