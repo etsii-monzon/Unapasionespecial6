@@ -197,7 +197,7 @@
 		<property name="notificationDeadline" value="16/12/2018 00:00" />
 		<property name="cameraDeadline" value="06/20/2018 00:00" />
 		<property name="startDate" value="07/01/2018 16:00" />
-		<property name="endDate" value="05/10/2018 20:00" />
+		<property name="endDate" value="07/10/2018 20:00" />
 		<property name="fee" value="199.99" />
 		<property name="draftMode" value="false" />
 
@@ -210,11 +210,11 @@
 		<property name="acronym" value="LearDj" />
 		<property name="venue" value="Plantinar" />
 		<property name="summary" value="Plantinar" />
-		<property name="submissionDeadline" value="26/12/2018 14:04" />
-		<property name="notificationDeadline" value="07/01/2019 00:00" />
-		<property name="cameraDeadline" value="07/20/2019 00:00" />
-		<property name="startDate" value="07/01/2020 16:00" />
-		<property name="endDate" value="05/10/2020 20:00" />
+		<property name="submissionDeadline" value="12/12/2018 14:04" />
+		<property name="notificationDeadline" value="10/01/2019 00:00" />
+		<property name="cameraDeadline" value="10/20/2019 00:00" />
+		<property name="startDate" value="11/01/2020 16:00" />
+		<property name="endDate" value="11/10/2020 20:00" />
 		<property name="fee" value="15.0" />
 		<property name="draftMode" value="false" />
 

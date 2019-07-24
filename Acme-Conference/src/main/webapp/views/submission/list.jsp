@@ -37,11 +37,11 @@
 			</a>
 		</display:column>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.show">
-			<a href="submission/administrator/show.do?submissionId=${row.id}"> <spring:message
-					code="submission.show" />
+			<a href="submission/administrator/show.do?submissionId=${row.id}">
+				<spring:message code="submission.show" />
 			</a>
 		</display:column>
 	</security:authorize>
@@ -51,9 +51,9 @@
 			<jstl:if test="${row.status=='ACCEPTED'}">
 				<jstl:if test="${row.conference.cameraDeadline < fecha }">
 					<a href="submission/author/upload.do?submissionId=${row.id}"> <spring:message
-						code="submission.upload" />
+							code="submission.upload" />
 					</a>
-					</jstl:if>
+				</jstl:if>
 			</jstl:if>
 		</display:column>
 	</security:authorize>
@@ -71,14 +71,15 @@
 		sortable="true" />
 	<display:column property="cameraPaper" titleKey="submission.camera"
 		sortable="false" />
-	<security:authorize access="hasRole('ADMIN')">
 
-		<display:column title="Reports">
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column titleKey="submission.reports">
 			<a href="report/administrator/list.do?submissionId=${row.id}"> <spring:message
 					code="reports.show" />
 			</a>
 		</display:column>
 	</security:authorize>
+
 	<jstl:if test="${row.status != 'UNDER-REVIEW' }">
 		<security:authorize access="hasRole('AUTHOR')">
 			<display:column titleKey="submission.reports">
@@ -88,21 +89,20 @@
 			</display:column>
 		</security:authorize>
 	</jstl:if>
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column titleKey="submission.decission">
+			<jstl:if test="${row.status == 'UNDER-REVIEW' }">
 
-	<jstl:if test="${row.status == 'UNDER-REVIEW' }">
-		<security:authorize access="hasRole('ADMIN')">
-
-			<display:column titleKey="submission.decission">
 				<jstl:if test="${allowed }">
-
 					<a onclick="return confirmNotify()"
 						href="submission/administrator/decisionMaking.do?submissionId=${row.id}">
 						<spring:message code="submission.decision" />
 					</a>
 				</jstl:if>
-			</display:column>
-		</security:authorize>
-	</jstl:if>
+			</jstl:if>
+
+		</display:column>
+	</security:authorize>
 
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column titleKey="submission.paper">
@@ -122,7 +122,7 @@
 
 	<security:authorize access="hasRole('REVIEWER')">
 
-		<display:column>
+		<display:column titleKey="report.create">
 			<a href="report/reviewer/create.do?subId=${row.id}"> <spring:message
 					code="report.create" />
 			</a>
@@ -132,21 +132,20 @@
 	</security:authorize>
 
 
-<security:authorize access="hasRole('ADMIN')">
+	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.assign">
-
-			<a href="submission/administrator/assign.do?submissionId=${row.id}"> <spring:message
-					code="submission.assign" />
+			<a href="submission/administrator/assign.do?submissionId=${row.id}">
+				<spring:message code="submission.assign" />
 			</a>
 		</display:column>
-</security:authorize>
+	</security:authorize>
 
 
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-		
+
 		<button type="button"
 			onclick="javascript: relativeRedir('submission/administrator/assignReviewers.do')">
 			<spring:message code="submission.assignAuto" />

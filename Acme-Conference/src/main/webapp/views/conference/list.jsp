@@ -92,6 +92,8 @@
 		sortable="false" />
 	<display:column property="venue" titleKey="conference.venue"
 		sortable="false" />
+	<display:column property="summary" titleKey="conference.summary"
+		sortable="false" />
 	<display:column property="submissionDeadline"
 		titleKey="conference.submissionDeadline" sortable="false"
 		format="{0,date,dd/MM/yyyy HH:mm}" />
@@ -113,14 +115,14 @@
 		<display:column property="draftMode" titleKey="conference.draftMode"
 			sortable="false" />
 
-	
 
-	<display:column titleKey = "conference.activities">
-		
-		<a href="activity/administrator/list.do?conferenceId=${row.id}"> <spring:message
-			code="conference.activities" />
-		</a>
-	</display:column>
+
+		<display:column titleKey="conference.activities">
+
+			<a href="activity/administrator/list.do?conferenceId=${row.id}">
+				<spring:message code="conference.activities" />
+			</a>
+		</display:column>
 	</security:authorize>
 </display:table>
 <security:authorize access="hasRole('ADMIN')">

@@ -61,33 +61,12 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 		if (binding.hasErrors())
 			//result = this.createEditModelAndView(configurationParameters);
-			result.addObject("errors", binding.getFieldErrors());
+			result = this.createEditModelAndView(configuration);
 		else
 			try {
 				this.configurationService.save(configuration);
 				result = new ModelAndView("redirect:show.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(configuration, "configuration.commit.error");
-			}
-
-		return result;
-
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "notify")
-	public ModelAndView reBrand(@Valid final Configuration configuration, final BindingResult binding) {
-		ModelAndView result;
-
-		if (binding.hasErrors()) {
-			//result = this.createEditModelAndView(configurationParameters);
-			System.out.println(binding.getAllErrors());
-			result = this.createEditModelAndView(configuration);
-		} else
-			try {
-				this.configurationService.save(configuration);
-				result = new ModelAndView("redirect:/welcome/index.do");
-			} catch (final Throwable oops) {
-				System.out.println(oops);
 				result = this.createEditModelAndView(configuration, "configuration.commit.error");
 			}
 

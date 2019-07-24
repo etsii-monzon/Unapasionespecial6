@@ -56,10 +56,12 @@ public class MessageActorController extends AbstractController {
 	public ModelAndView send() {
 		ModelAndView result;
 		Message m;
-		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		m = this.messageService.create();
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
+
 		result = this.createEditModelAndView(m);
+		result.addObject("topics", this.configurationService.find().getTopics());
 		result.addObject("languaje", languaje);
 
 		return result;
@@ -77,12 +79,15 @@ public class MessageActorController extends AbstractController {
 		final ModelAndView result;
 		final Collection<Actor> recipients = this.actorService.findAll();
 		recipients.remove(this.actorService.findByPrincipal());
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("message/create");
 		result.addObject("recipients", recipients);
 		result.addObject("m", m);
 		result.addObject("topics", this.configurationService.find().getTopics());
 		result.addObject("message", messageCode);
+		result.addObject("languaje", languaje);
+
 		result.addObject("requestURI", "message/actor/send.do");
 
 		return result;

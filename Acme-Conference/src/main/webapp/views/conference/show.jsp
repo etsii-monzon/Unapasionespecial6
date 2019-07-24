@@ -12,50 +12,54 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-	<p>
-		<b><spring:message code="conference.title" />: </b>
-		<jstl:out value="${conference.title }" />
-	</p>
-	
-	<p>
-		<b><spring:message code="conference.acronym" />: </b>
-		<jstl:out value="${conference.acronym }" />
-	</p>
-	<p>
-		<b><spring:message code="conference.venue" />: </b>
-		<jstl:out value="${conference.venue }" />
-	</p>
-	<p>
-		<b><spring:message code="conference.submissionDeadline" />: </b>
-		<jstl:out value="${conference.submissionDeadline }" />
-	</p>
-	<p>
-		<b><spring:message code="conference.notificationDeadline" />: </b>
-		<jstl:out value="${conference.notificationDeadline }" />
-	</p>
-	<p>
-		<b><spring:message code="conference.cameraDeadline" />: </b>
-		<jstl:out value="${conference.cameraDeadline }" />
-	</p>
-	<p>
-		<b><spring:message code="conference.startDate" />: </b>
-		<jstl:out value="${conference.startDate }" />
-	</p>
-	<p>
-		<b><spring:message code="conference.endDate" />: </b>
-		<jstl:out value="${conference.endDate }" />
-	</p>
-	<p>
-		<b><spring:message code="conference.fee" />: </b>
-		<jstl:out value="${conference.fee }" />
-	</p>
-	
-	
-	
-	
+<p>
+	<b><spring:message code="conference.title" />: </b>
+	<jstl:out value="${conference.title }" />
+</p>
+
+<p>
+	<b><spring:message code="conference.acronym" />: </b>
+	<jstl:out value="${conference.acronym }" />
+</p>
+<p>
+	<b><spring:message code="conference.venue" />: </b>
+	<jstl:out value="${conference.venue }" />
+</p>
+<p>
+	<b><spring:message code="conference.summary" />: </b>
+	<jstl:out value="${conference.summary }" />
+</p>
+<p>
+	<b><spring:message code="conference.submissionDeadline" />: </b>
+	<jstl:out value="${conference.submissionDeadline }" />
+</p>
+<p>
+	<b><spring:message code="conference.notificationDeadline" />: </b>
+	<jstl:out value="${conference.notificationDeadline }" />
+</p>
+<p>
+	<b><spring:message code="conference.cameraDeadline" />: </b>
+	<jstl:out value="${conference.cameraDeadline }" />
+</p>
+<p>
+	<b><spring:message code="conference.startDate" />: </b>
+	<jstl:out value="${conference.startDate }" />
+</p>
+<p>
+	<b><spring:message code="conference.endDate" />: </b>
+	<jstl:out value="${conference.endDate }" />
+</p>
+<p>
+	<b><spring:message code="conference.fee" />: </b>
+	<jstl:out value="${conference.fee }" />
+</p>
 
 
-	
+
+
+
+
+
 
 <br />
 

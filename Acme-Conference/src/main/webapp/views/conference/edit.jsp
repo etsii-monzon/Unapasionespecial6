@@ -12,7 +12,8 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="conference/administrator/edit.do" modelAttribute="conference">
+<form:form action="conference/administrator/edit.do"
+	modelAttribute="conference">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -22,18 +23,21 @@
 	<acme:textbox code="conference.title" path="title" />
 	<acme:textbox code="conference.acronym" path="acronym" />
 	<acme:textbox code="conference.venue" path="venue" />
+	<acme:textbox code="conference.summary" path="summary" />
 
 
-		<acme:moment code="conference.submissionDeadline" path="submissionDeadline" />
-		<acme:moment code="conference.notificationDeadline" path="notificationDeadline" />
-		<acme:moment code="conference.cameraDeadline" path="cameraDeadline" />
-		<acme:moment code="conference.startDate" path="startDate" />
-		<acme:moment code="conference.endDate" path="endDate" />
+	<acme:moment code="conference.submissionDeadline"
+		path="submissionDeadline" />
+	<acme:moment code="conference.notificationDeadline"
+		path="notificationDeadline" />
+	<acme:moment code="conference.cameraDeadline" path="cameraDeadline" />
+	<acme:moment code="conference.startDate" path="startDate" />
+	<acme:moment code="conference.endDate" path="endDate" />
 
-	
-	
-		<acme:number code="conference.fee" path="fee" min="0" max="9999" />
-	
+
+
+	<acme:number code="conference.fee" path="fee" min="0" max="9999" />
+
 
 	<form:label path="draftMode">
 		<spring:message code="conference.draftMode" />:
@@ -55,7 +59,8 @@
 		<acme:submit name="delete" code="conference.delete" />
 
 	</jstl:if>
-	<acme:cancel url="conference/administrator/list.do" code="conference.cancel" />
+	<acme:cancel url="conference/administrator/list.do"
+		code="conference.cancel" />
 	<br />
 
 
