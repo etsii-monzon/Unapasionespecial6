@@ -132,15 +132,24 @@ public class ConferenceAdministratorController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int conferenceId) {
 		ModelAndView result;
 		final Conference conference;
-
 		conference = this.conferenceService.findOne(conferenceId);
-		Assert.notNull(conference);
 
-		result = this.createEditModelAndView(conference);
+		try {
+			Assert.notNull(conference);
+			Assert.isTrue(conference.isDraftMode(), "final mode");
+
+			result = this.createEditModelAndView(conference);
+
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("final mode"))
+				result = new ModelAndView("misc/403");
+			else
+				return new ModelAndView("redirect:/");
+		}
 
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndView(final Conference conference) {
 		ModelAndView result;
 
@@ -163,6 +172,7 @@ public class ConferenceAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Conference conference, final BindingResult binding) {
 		ModelAndView result;
+		System.out.println(conference.getCameraDeadline());
 		if (binding.hasErrors()) {
 			System.out.print(binding);
 			result = this.createEditModelAndView(conference);
@@ -194,11 +204,16 @@ public class ConferenceAdministratorController extends AbstractController {
 	public ModelAndView delete(final Conference conference, final BindingResult binding) {
 		ModelAndView result;
 		try {
+			Assert.isTrue(conference.isDraftMode(), "final mode");
+
 			this.conferenceService.delete(conference);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			System.out.println(oops);
-			result = this.createEditModelAndView(conference, "conference.commit.error");
+			if (oops.getMessage().equals("final mode"))
+				result = this.createEditModelAndView(conference, "conference.delete.error");
+			else
+				result = this.createEditModelAndView(conference, "conference.commit.error");
 		}
 		return result;
 	}
