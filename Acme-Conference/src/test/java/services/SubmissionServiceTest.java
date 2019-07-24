@@ -27,6 +27,7 @@ import utilities.AbstractTest;
 import domain.Author;
 import domain.Conference;
 import domain.Paper;
+import domain.Reviewer;
 import domain.Submission;
 
 @ContextConfiguration(locations = {
@@ -48,6 +49,8 @@ public class SubmissionServiceTest extends AbstractTest {
 	private ConferenceService	conferenceService;
 	@Autowired
 	private PaperService		paperService;
+	@Autowired
+	private ReviewerService		revService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -109,4 +112,49 @@ public class SubmissionServiceTest extends AbstractTest {
 
 	}
 
+	@Test
+	public void testUploadCameraReadyVersion() {
+		super.authenticate("author1");
+
+		final int id = super.getEntityId("submission2");
+
+		final Submission subm = this.submissionService.findOne(id);
+
+		//SOLO HAY QUE REVISAR LOS DATOS Y VER SI HAY ALGO A CAMBIAR.
+		subm.getPaper().setSummary("Summary ymmary summar");
+		final Submission res = this.submissionService.save(subm);
+		Assert.isTrue(res.isCameraReady(), "No se pone la camera ready version");
+		super.unauthenticate();
+	}
+
+	@Test
+	public void testAssignReviewersManually() {
+		super.authenticate("admin");
+
+		final int id = super.getEntityId("submission1");
+		final int revId = super.getEntityId("reviewer1");
+
+		final Reviewer rev = this.revService.findOne(revId);
+		final Submission subm = this.submissionService.findOne(id);
+		subm.getReviewers().add(rev);
+		final Submission res = this.submissionService.save(subm);
+		Assert.isTrue(!res.getReviewers().isEmpty(), "No tiene reviewers asignados");
+
+		super.unauthenticate();
+	}
+
+	@Test
+	public void testAssignReviewersAutomatically() {
+		super.authenticate("admin");
+		Boolean aux = false;
+
+		final Collection<Submission> subms = this.submissionService.findAll();
+		this.submissionService.assignReviewers();
+
+		for (final Submission s : subms)
+			if (!s.getReviewers().isEmpty())
+				aux = true;
+		//En el PopulateDatabase.xml, hay reviewers con keywords coincidentes con algunas submissions existentes.
+		Assert.isTrue(aux);
+	}
 }

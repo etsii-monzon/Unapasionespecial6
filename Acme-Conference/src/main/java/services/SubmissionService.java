@@ -13,8 +13,8 @@ import org.springframework.util.Assert;
 
 import repositories.SubmissionRepository;
 import domain.Author;
-import domain.Paper;
 import domain.Conference;
+import domain.Paper;
 import domain.Report;
 import domain.Reviewer;
 import domain.Submission;
@@ -61,7 +61,7 @@ public class SubmissionService {
 		sub.setMoment(actualMoment);
 		sub.setStatus("UNDER-REVIEW");
 		sub.setPaper(paper);
-
+		sub.setCameraReady(false);
 		return sub;
 	}
 	public Collection<Submission> findAll() {
@@ -87,8 +87,9 @@ public class SubmissionService {
 		if (b != null) {
 			final Collection<Submission> f = b.getSubmissions();
 			System.out.println(a.getPaper().getAuthors());
-			if (a.getStatus() == "ACCEPTED")
-				a.setCameraReady(false);
+
+			if (a.getStatus() == "ACCEPTED" && a.getId() != 0 && !a.isCameraReady())
+				a.setCameraReady(true);
 			res = this.submissionRepository.save(a);
 			if (!f.contains(res))
 				f.add(res);
