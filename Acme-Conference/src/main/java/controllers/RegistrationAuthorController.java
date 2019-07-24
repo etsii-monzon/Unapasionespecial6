@@ -136,14 +136,24 @@ public class RegistrationAuthorController extends AbstractController {
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int registrationId) {
-		final ModelAndView result;
+		ModelAndView result;
 		final Registration registration;
 
-		registration = this.registrationService.findOne(registrationId);
+		try {
+			registration = this.registrationService.findOne(registrationId);
+			Assert.isTrue(this.authorService.findByPrincipal().getRegistrations().contains(registration), "hacking");
 
-		result = new ModelAndView("registration/show");
-		result.addObject("requestURI", "registration/author/show.do");
-		result.addObject("registration", registration);
+			result = new ModelAndView("registration/show");
+			result.addObject("requestURI", "registration/author/show.do");
+			result.addObject("registration", registration);
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
+
 		return result;
 	}
 

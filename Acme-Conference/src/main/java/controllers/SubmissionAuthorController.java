@@ -149,6 +149,7 @@ public class SubmissionAuthorController extends AbstractController {
 		try {
 			submission = this.submissionService.findOne(submissionId);
 			Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
+
 			result = new ModelAndView("submission/show");
 			result.addObject("requestURI", "submission/author/show.do");
 			result.addObject("submission", submission);
