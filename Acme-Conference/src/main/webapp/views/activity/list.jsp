@@ -183,6 +183,7 @@
 </display:table>
 
 <!--CREAR PRESENTATION  -->
+<jstl:if test="${allowed }">
 <security:authorize access="hasRole('ADMIN')">
 	<div>
 		
@@ -192,3 +193,4 @@
 		</button>
 	</div>
 </security:authorize>
+</jstl:if>

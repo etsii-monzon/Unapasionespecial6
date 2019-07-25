@@ -29,7 +29,7 @@
 	<acme:submit name="save" code="tutorial.save" />
 
 
-	<acme:cancel url="activity/administrator/list.do?conferenceId=${panel.conference.id }" code="tutorial.cancel" />
+	<acme:cancel url="activity/administrator/list.do?conferenceId=${tutorial.conference.id }" code="tutorial.cancel" />
 	<br />
 
 

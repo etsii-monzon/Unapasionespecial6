@@ -93,9 +93,11 @@ public class SubmissionService {
 			res = this.submissionRepository.save(a);
 			if (!f.contains(res))
 				f.add(res);
-		} else
+		} else {
+			Assert.isTrue(!a.getReviewers().isEmpty(), "no revs");
+			Assert.notNull(a.getReviewers(), "no revs");
 			res = this.submissionRepository.save(a);
-
+		}
 		return res;
 	}
 
@@ -168,7 +170,11 @@ public class SubmissionService {
 	}
 
 	public void assignReviewers() {
-		final Collection<Submission> submissions = this.findAll();
+		final Collection<Submission> submissions = new ArrayList<Submission>();
+
+		for (final Submission sub : this.findAll())
+			if (sub.getStatus().equals("UNDER-REVIEW"))
+				submissions.add(sub);
 
 		for (final Submission s : submissions) {
 			final Collection<Reviewer> reviewers = this.revService.findAll();

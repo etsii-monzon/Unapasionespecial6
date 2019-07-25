@@ -135,7 +135,7 @@ public class SubmissionAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Submission submission, final BindingResult binding) {
+	public ModelAndView save(@Valid final Submission submission, final BindingResult binding) throws NullPointerException {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.print(binding);
@@ -145,13 +145,17 @@ public class SubmissionAdministratorController extends AbstractController {
 			try {
 				System.out.print("Entra");
 				Assert.isTrue(submission.getReviewers().size() <= 3);
+
 				final Submission sub = this.submissionService.save(submission);
-				Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(sub.getConference()), "hacking");
+				//Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(sub.getConference()), "hacking");
+
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				System.out.print(oops);
-				if (oops.getMessage().equals("hacking"))
+				if (oops.getMessage() == "hacking")
 					result = new ModelAndView("misc/403");
+				else if (oops.getMessage() == "no revs" || oops.getClass().equals(java.lang.NullPointerException.class))
+					result = this.createAssignModelAndView(submission, "submission.reviewers.error");
 				else
 					result = this.createAssignModelAndView(submission, "submission.commit.error");
 			}

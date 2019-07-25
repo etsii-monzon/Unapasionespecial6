@@ -57,11 +57,15 @@ public class ActivityAdministratorController extends AbstractController {
 		final Collection<Presentation> presents = this.presentationService.findAllPresentationsByConference(conf);
 		ModelAndView result;
 
+		final Collection<Submission> subms = this.submissionService.findAllCameraReadyVersion(conferenceId);
+		final Boolean allowed = !subms.isEmpty();
+
 		result = new ModelAndView("activity/list");
 		result.addObject("conferenceId", conferenceId);
 		result.addObject("tutorials", tutorials);
 		result.addObject("panels", panels);
 		result.addObject("presentations", presents);
+		result.addObject("allowed", allowed);
 
 		return result;
 
@@ -144,12 +148,16 @@ public class ActivityAdministratorController extends AbstractController {
 		try {
 			System.out.print("Entra");
 			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(tutorial.getConference()), "hacking");
+			Assert.isTrue(
+				!tutorial.getEndMoment().equals(null) && !tutorial.getRoom().equals(null) && !tutorial.getSpeakers().isEmpty() && !tutorial.getStartMoment().equals(null) && !tutorial.getSummary().equals(null) && !tutorial.getTitle().equals(null), "vacio");
 			final Tutorial tut = this.tutorialService.save(tutorial);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + tut.getConference().getId());
 		} catch (final Throwable oops) {
 			System.out.print(oops);
-			if (oops.getMessage().equals("hacking"))
+			if (oops.getMessage() == "hacking")
 				result = new ModelAndView("misc/403");
+			else if (oops.getMessage() == "vacio")
+				result = this.createEditTutModelAndView(tutorial, "activity.empty.error");
 			else
 				result = this.createEditTutModelAndView(tutorial, "tutorial.commit.error");
 		}
@@ -233,13 +241,15 @@ public class ActivityAdministratorController extends AbstractController {
 		}
 		try {
 			System.out.print("Entra");
-
+			Assert.isTrue(!panel.getEndMoment().equals(null) && !panel.getRoom().equals(null) && !panel.getSpeakers().isEmpty() && !panel.getStartMoment().equals(null) && !panel.getSummary().equals(null) && !panel.getTitle().equals(null), "vacio");
 			final Panel pa = this.panelService.save(panel);
 			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pa.getConference()), "hacking");
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + pa.getConference().getId());
 		} catch (final Throwable oops) {
-			if (oops.getMessage().equals("hacking"))
+			if (oops.getMessage() == "hacking")
 				result = new ModelAndView("misc/403");
+			else if (oops.getMessage() == "vacio")
+				result = this.createEditPaModelAndView(panel, "activity.empty.error");
 			else
 				result = this.createEditPaModelAndView(panel, "panel.commit.error");
 		}
@@ -325,13 +335,17 @@ public class ActivityAdministratorController extends AbstractController {
 		}
 		try {
 			System.out.print("Entra");
+			Assert.isTrue(!pres.getEndMoment().equals(null) && !pres.getRoom().equals(null) && !pres.getSpeakers().isEmpty() && !pres.getStartMoment().equals(null) && !pres.getSummary().equals(null) && !pres.getTitle().equals(null)
+				&& !pres.getSubmission().equals(null), "vacio");
 			final Presentation pre = this.presentationService.save(pres);
 			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pres.getConference()), "hacking");
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + pre.getConference().getId());
 		} catch (final Throwable oops) {
 			System.out.print(oops);
-			if (oops.getMessage().equals("hacking"))
+			if (oops.getMessage() == "hacking")
 				result = new ModelAndView("misc/403");
+			else if (oops.getMessage() == "vacio")
+				result = this.createEditPrModelAndView(pres, "activity.empty.error");
 			else
 				result = this.createEditPrModelAndView(pres, "presentation.commit.error");
 		}

@@ -262,6 +262,12 @@
 		<property name="conference" ref="conference7" />
 		<property name="cameraPaper" value="" />
 		<property name="cameraReady" value="false" />
+		<property name="reviewers">
+			<list>
+				<ref bean="reviewer2"/>
+			</list>
+		
+		</property>
 	</bean>
 
 	<bean id="submission3" class="domain.Submission">
@@ -272,6 +278,12 @@
 		<property name="conference" ref="conference7" />
 		<property name="cameraPaper" value="" />
 		<property name="cameraReady" value="true" />
+		<property name="reviewers">
+			<list>
+				<ref bean="reviewer2"/>
+			</list>
+		
+		</property>
 	</bean>
 	<bean id="paper3" class="domain.Paper">
 		<property name="title" value="MOM-8K6L" />

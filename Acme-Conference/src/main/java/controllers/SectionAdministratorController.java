@@ -102,13 +102,16 @@ public class SectionAdministratorController {
 		}
 		try {
 			System.out.print("Entra");
-
+			Assert.isTrue(section.getTitle() != "" && section.getSummary() != "", "vacio");
 			final Section sect = this.secService.save(section);
 			result = new ModelAndView("redirect:list.do?tutorialId=" + sect.getTutorial().getId());
 		} catch (final Throwable oops) {
 			System.out.print(oops);
 
-			result = this.createEditModelAndView(section, "section.commit.error");
+			if (oops.getMessage() == "vacio")
+				result = this.createEditModelAndView(section, "section.empty.error");
+			else
+				result = this.createEditModelAndView(section, "section.commit.error");
 		}
 		return result;
 	}

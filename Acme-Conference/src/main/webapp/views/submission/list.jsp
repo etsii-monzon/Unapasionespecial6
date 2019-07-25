@@ -103,6 +103,7 @@
 
 		</display:column>
 	</security:authorize>
+	</br>
 
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column titleKey="submission.paper">
@@ -119,6 +120,7 @@
 			</a>
 		</display:column>
 	</security:authorize>
+	</br>
 
 	<security:authorize access="hasRole('REVIEWER')">
 
@@ -131,12 +133,15 @@
 
 	</security:authorize>
 
+	</br>
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.assign">
+		<jstl:if test="${row.status == 'UNDER-REVIEW' }">
 			<a href="submission/administrator/assign.do?submissionId=${row.id}">
 				<spring:message code="submission.assign" />
 			</a>
+		</jstl:if>
 		</display:column>
 	</security:authorize>
 

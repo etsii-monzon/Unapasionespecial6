@@ -12,23 +12,33 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="section/administrator/edit.do" modelAttribute="section">
-
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="tutorial" />
+<form:form action="${requestURI }">
 
 
 
-		<acme:textbox code="section.title" path="title" />
-		<acme:textbox code="section.summary" path="summary"/>
-		<acme:textbox code="section.optionalPictures" path="optionalPictures"/>
-	<br />
+	<%-- Topic --%>
+	<spring:message code="configuration.topic" />
+	<jstl:if test="${topic != '' }">
+		<input name="topic" value="${topic }">
+	</jstl:if>
 
-	<acme:submit name="save" code="section.save" />
-	<acme:cancel url="activity/administrator/list.do?conferenceId=${section.tutorial.conference.id }" code="section.cancel" />
-	<br />
+	<jstl:if test="${topic == '' }">
+		<input name="topic" />
+	</jstl:if>
+
+
+	<br>
+	<br>
 
 
 
+	<input type="submit" name="save"
+		value="<spring:message code="configuration.save" />" />&nbsp; 
+	
+	<input type="button" name="cancel"
+		value="<spring:message code="configuration.cancel" />"
+		onclick="javascript:  window.location.replace('configuration/administrator/topic/list.do');" />
+	<br>
 </form:form>
+<br>
+<div></div>
