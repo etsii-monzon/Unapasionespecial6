@@ -72,6 +72,10 @@
 
 
 </display:table>
+<br />
+<input type="button" name="cancel"
+	value="<spring:message code="message.return" />"
+	onClick="javascript: window.location.replace('welcome/index.do');" />
 
 
 

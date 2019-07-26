@@ -36,9 +36,11 @@
 
 <p>
 	<b><spring:message code="submission.reviewers" /> :</b>
-</p>
-<td><jstl:out value="${submission.reviewers}" /></td>
 
+	<jstl:forEach items="${submission.reviewers }" var="actor">
+		<jstl:out value="${actor.name},"></jstl:out>
+	</jstl:forEach>
+</p>
 
 
 <br />

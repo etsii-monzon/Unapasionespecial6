@@ -30,12 +30,12 @@
 
 
 	<!-- Action links -->
-	
-	
+
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="panel.show">
-			<a href="activity/administrator/panel/edit.do?panelId=${row.id}"> <spring:message
-					code="panel.show" />
+			<a href="activity/administrator/panel/edit.do?panelId=${row.id}">
+				<spring:message code="panel.show" />
 			</a>
 		</display:column>
 	</security:authorize>
@@ -43,8 +43,8 @@
 	<!-- Attributes -->
 
 
-	<display:column property="title"
-		titleKey="activity.title" sortable="false" />
+	<display:column property="title" titleKey="activity.title"
+		sortable="false" />
 	<display:column property="startMoment" titleKey="activity.startMoment"
 		sortable="false" />
 	<display:column property="endMoment" titleKey="activity.endMoment"
@@ -54,8 +54,8 @@
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
 	<display:column>
-		<a href="activity/administrator/panel/delete.do?panelId=${row.id}"> <spring:message
-				code="panel.delete" />
+		<a href="activity/administrator/panel/delete.do?panelId=${row.id}">
+			<spring:message code="panel.delete" />
 		</a>
 	</display:column>
 
@@ -65,7 +65,7 @@
 <!--CREAR PANEL  -->
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-		
+
 		<button type="button"
 			onclick="javascript: relativeRedir('activity/administrator/panel/create.do?conferenceId=${conferenceId}')">
 			<spring:message code="panel.create" />
@@ -79,12 +79,13 @@
 
 
 	<!-- Action links -->
-	
-	
+
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="tutorial.show">
-			<a href="activity/administrator/tutorial/edit.do?tutorialId=${row.id}"> <spring:message
-					code="tutorial.show" />
+			<a
+				href="activity/administrator/tutorial/edit.do?tutorialId=${row.id}">
+				<spring:message code="tutorial.show" />
 			</a>
 		</display:column>
 	</security:authorize>
@@ -92,8 +93,8 @@
 	<!-- Attributes -->
 
 
-	<display:column property="title"
-		titleKey="activity.title" sortable="false" />
+	<display:column property="title" titleKey="activity.title"
+		sortable="false" />
 	<display:column property="startMoment" titleKey="activity.startMoment"
 		sortable="false" />
 	<display:column property="endMoment" titleKey="activity.endMoment"
@@ -105,25 +106,26 @@
 	<display:column titleKey="tutorial.sections">
 		<jstl:if test="${tutorial.section != null }">
 			<a href="section/administrator/list.do?tutorialId=${row.id}"> <spring:message
-				code="tutorial.sections" />
+					code="tutorial.sections" />
 			</a>
 		</jstl:if>
 		<jstl:if test="${tutorial.section == null }">
 			<a href="section/administrator/create.do?tutorialId=${row.id}"> <spring:message
-				code="tutorial.section" />
+					code="tutorial.section" />
 			</a>
 		</jstl:if>
-	
+
 	</display:column>
-		
+
 	<display:column>
 		<a href="section/administrator/list.do?tutorialId=${row.id}"> <spring:message
 				code="tutorial.sections" />
 		</a>
 	</display:column>
 	<display:column>
-		<a href="activity/administrator/tutorial/delete.do?tutorialId=${row.id}"> <spring:message
-				code="tutorial.delete" />
+		<a
+			href="activity/administrator/tutorial/delete.do?tutorialId=${row.id}">
+			<spring:message code="tutorial.delete" />
 		</a>
 	</display:column>
 
@@ -132,7 +134,7 @@
 <!--CREAR TUTORIAL  -->
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-		
+
 		<button type="button"
 			onclick="javascript: relativeRedir('activity/administrator/tutorial/create.do?conferenceId=${conferenceId}')">
 			<spring:message code="tutorial.create" />
@@ -146,12 +148,13 @@
 
 
 	<!-- Action links -->
-	
-	
+
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="presentation.show">
-			<a href="activity/administrator/presentation/edit.do?presentationId=${row.id}"> <spring:message
-					code="presentation.show" />
+			<a
+				href="activity/administrator/presentation/edit.do?presentationId=${row.id}">
+				<spring:message code="presentation.show" />
 			</a>
 		</display:column>
 	</security:authorize>
@@ -159,8 +162,8 @@
 	<!-- Attributes -->
 
 
-	<display:column property="title"
-		titleKey="activity.title" sortable="false" />
+	<display:column property="title" titleKey="activity.title"
+		sortable="false" />
 	<display:column property="startMoment" titleKey="activity.startMoment"
 		sortable="false" />
 	<display:column property="endMoment" titleKey="activity.endMoment"
@@ -169,28 +172,40 @@
 		sortable="true" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
-	
+
 	<display:column titleKey="presentation.submission">
-			<a href="submission/administrator/show.do?submissionId=${row.submission.id}"> <spring:message
-					code="presentation.subm" />
-			</a>
+		<a
+			href="submission/administrator/show.do?submissionId=${row.submission.id}">
+			<spring:message code="presentation.subm" />
+		</a>
 	</display:column>
 	<display:column>
-		<a href="activity/administrator/presentation/delete.do?presentationId=${row.id}"> <spring:message
-				code="presentation.delete" />
+		<a
+			href="activity/administrator/presentation/delete.do?presentationId=${row.id}">
+			<spring:message code="presentation.delete" />
 		</a>
 	</display:column>
 </display:table>
 
 <!--CREAR PRESENTATION  -->
 <jstl:if test="${allowed }">
+	<security:authorize access="hasRole('ADMIN')">
+		<div>
+
+			<button type="button"
+				onclick="javascript: relativeRedir('activity/administrator/presentation/create.do?conferenceId=${conferenceId}')">
+				<spring:message code="presentation.create" />
+			</button>
+		</div>
+	</security:authorize>
+</jstl:if>
+
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-		
+
 		<button type="button"
-			onclick="javascript: relativeRedir('activity/administrator/presentation/create.do?conferenceId=${conferenceId}')">
-			<spring:message code="presentation.create" />
+			onclick="javascript: relativeRedir('conference/administrator/list.do')">
+			<spring:message code="activity.return" />
 		</button>
 	</div>
 </security:authorize>
-</jstl:if>

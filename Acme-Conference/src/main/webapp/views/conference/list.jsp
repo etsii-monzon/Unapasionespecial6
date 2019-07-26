@@ -137,8 +137,13 @@
 
 
 <jstl:if test="${requestURI=='conference/searchList.do' }">
-
 	<input type="button" name="cancel"
 		value="<spring:message code="conference.return" />"
 		onClick="javascript: window.location.replace('conference/search.do');" />
+</jstl:if>
+
+<jstl:if test="${requestURI!='conference/searchList.do' }">
+	<input type="button" name="cancel"
+		value="<spring:message code="conference.return" />"
+		onClick="javascript: window.location.replace('welcome/index.do');" />
 </jstl:if>

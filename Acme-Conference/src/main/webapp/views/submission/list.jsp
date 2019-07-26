@@ -80,15 +80,17 @@
 		</display:column>
 	</security:authorize>
 
-	<jstl:if test="${row.status != 'UNDER-REVIEW' }">
-		<security:authorize access="hasRole('AUTHOR')">
-			<display:column titleKey="submission.reports">
+	<security:authorize access="hasRole('AUTHOR')">
+		<display:column titleKey="submission.reports">
+			<jstl:if test="${row.status != 'UNDER-REVIEW' }">
 				<a href="report/author/list.do?submissionId=${row.id}"> <spring:message
 						code="reports.show" />
 				</a>
-			</display:column>
-		</security:authorize>
-	</jstl:if>
+			</jstl:if>
+
+		</display:column>
+	</security:authorize>
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.decission">
 			<jstl:if test="${row.status == 'UNDER-REVIEW' }">
@@ -137,11 +139,11 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.assign">
-		<jstl:if test="${row.status == 'UNDER-REVIEW' }">
-			<a href="submission/administrator/assign.do?submissionId=${row.id}">
-				<spring:message code="submission.assign" />
-			</a>
-		</jstl:if>
+			<jstl:if test="${row.status == 'UNDER-REVIEW' }">
+				<a href="submission/administrator/assign.do?submissionId=${row.id}">
+					<spring:message code="submission.assign" />
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 
@@ -167,3 +169,7 @@
 		</button>
 	</div>
 </security:authorize>
+<br />
+<input type="button" name="cancel"
+	value="<spring:message code="submission.return" />"
+	onClick="javascript: window.location.replace('welcome/index.do');" />

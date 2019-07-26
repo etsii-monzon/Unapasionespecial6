@@ -55,5 +55,11 @@
 			onclick="javascript: relativeRedir('registration/author/create.do')">
 			<spring:message code="registration.create" />
 		</button>
+
+
+		<button type="button"
+			onclick="javascript: relativeRedir('welcome/index.do')">
+			<spring:message code="registration.return" />
+		</button>
 	</div>
 </security:authorize>

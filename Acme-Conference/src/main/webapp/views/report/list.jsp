@@ -19,15 +19,12 @@
 
 <!-- Hay que a�adir el Search -->
 
-
-
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="reports" requestURI="${requestURI}" id="row">
 
 
-
 	<!-- Action links -->
-	
+
 	<!-- Attributes -->
 
 
@@ -40,17 +37,38 @@
 		sortable="false" />
 
 
-	<display:column property="readability" titleKey="report.readability" sortable="false" />
+	<display:column property="readability" titleKey="report.readability"
+		sortable="false" />
 
-	<display:column property="decision" titleKey="report.decision" sortable="false" />
+	<display:column property="decision" titleKey="report.decision"
+		sortable="false" />
 
-	<display:column property="comment" titleKey="report.comment" sortable="false" />
-
-
-
-	
-
+	<display:column property="comment" titleKey="report.comment"
+		sortable="false" />
 
 
 
 </display:table>
+<jstl:if test="${requestURI=='report/administrator/list.do' }">
+	<security:authorize access="hasRole('ADMIN')">
+		<div>
+
+			<button type="button"
+				onclick="javascript: relativeRedir('submission/administrator/list.do')">
+				<spring:message code="report.return" />
+			</button>
+		</div>
+	</security:authorize>
+</jstl:if>
+
+
+<jstl:if test="${requestURI=='report/author/list.do' }">
+	<security:authorize access="hasRole('AUTHOR')">
+		<div>
+			<button type="button"
+				onclick="javascript: relativeRedir('submission/author/list.do')">
+				<spring:message code="report.return" />
+			</button>
+		</div>
+	</security:authorize>
+</jstl:if>
