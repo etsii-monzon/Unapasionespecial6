@@ -45,6 +45,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		Configuration configuration;
 
 		configuration = (Configuration) this.configurationService.findAll().toArray()[0];
+		System.out.println(configuration.getTopics());
 
 		result = this.createEditModelAndView(configuration);
 
@@ -58,12 +59,15 @@ public class ConfigurationAdministratorController extends AbstractController {
 	public ModelAndView save(@Valid final Configuration configuration, final BindingResult binding) {
 
 		ModelAndView result = new ModelAndView("configuration/edit");
+		System.out.println(configuration.getTopics());
+		System.out.println(configuration.getMakes());
 
 		if (binding.hasErrors())
 			//result = this.createEditModelAndView(configurationParameters);
 			result = this.createEditModelAndView(configuration);
 		else
 			try {
+				System.out.println("ENTRA");
 				this.configurationService.save(configuration);
 				result = new ModelAndView("redirect:show.do");
 			} catch (final Throwable oops) {
