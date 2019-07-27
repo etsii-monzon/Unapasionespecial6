@@ -27,7 +27,6 @@ public class Submission extends DomainEntity {
 	private String				status;
 	private Paper				paper;
 	private Conference			conference;
-	private String				cameraPaper;
 	public boolean				cameraReady;
 	public Collection<Reviewer>	reviewers;
 
@@ -79,14 +78,6 @@ public class Submission extends DomainEntity {
 
 	public void setConference(final Conference conference) {
 		this.conference = conference;
-	}
-
-	public String getCameraPaper() {
-		return this.cameraPaper;
-	}
-
-	public void setCameraPaper(final String cameraPaper) {
-		this.cameraPaper = cameraPaper;
 	}
 
 	@ManyToMany

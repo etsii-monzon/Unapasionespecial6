@@ -69,8 +69,7 @@
 		sortable="false" />
 	<display:column property="status" titleKey="submission.status"
 		sortable="true" />
-	<display:column property="cameraPaper" titleKey="submission.camera"
-		sortable="false" />
+
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.reports">

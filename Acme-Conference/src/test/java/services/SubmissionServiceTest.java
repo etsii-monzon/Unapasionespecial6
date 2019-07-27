@@ -94,7 +94,6 @@ public class SubmissionServiceTest extends AbstractTest {
 		paper.setAuthors(authors);
 
 		res.setConference(conference);
-		res.setCameraPaper("cameraPaper");
 		res.setCameraReady(false);
 		res.setMoment(new Date());
 		res.setPaper(paper);

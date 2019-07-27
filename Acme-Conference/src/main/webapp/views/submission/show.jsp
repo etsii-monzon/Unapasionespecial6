@@ -23,10 +23,6 @@
 
 
 
-<p>
-	<b><spring:message code="submission.cameraPaper" />: </b>
-	<jstl:out value="${submission.cameraPaper }" />
-</p>
 
 <p>
 	<b><spring:message code="submission.status" />: </b>

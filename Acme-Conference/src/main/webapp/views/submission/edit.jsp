@@ -25,7 +25,6 @@
 
 	<acme:select code="submission.conference" path="conference"
 		items="${conferences}" itemLabel="title" />
-	<acme:textbox code="submission.cameraPaper" path="cameraPaper" />
 	<br />
 	<br />
 

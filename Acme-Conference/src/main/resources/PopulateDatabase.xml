@@ -220,6 +220,40 @@
 
 
 	</bean>
+
+	<bean id="conference8" class="domain.Conference">
+
+		<property name="title" value="Metadatos" />
+		<property name="acronym" value="MD" />
+		<property name="venue" value="ETSII" />
+		<property name="summary" value="summary" />
+		<property name="submissionDeadline" value="12/12/2018 14:04" />
+		<property name="notificationDeadline" value="10/01/2019 00:00" />
+		<property name="cameraDeadline" value="10/20/2019 00:00" />
+		<property name="startDate" value="11/01/2020 16:00" />
+		<property name="endDate" value="11/10/2020 20:00" />
+		<property name="fee" value="150.0" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
+
+	<bean id="conference9" class="domain.Conference">
+
+		<property name="title" value="Learn Angular3" />
+		<property name="acronym" value="LA3" />
+		<property name="venue" value="ETSII" />
+		<property name="summary" value="summary" />
+		<property name="submissionDeadline" value="12/12/2018 14:04" />
+		<property name="notificationDeadline" value="10/01/2019 00:00" />
+		<property name="cameraDeadline" value="10/20/2019 00:00" />
+		<property name="startDate" value="11/01/2020 16:00" />
+		<property name="endDate" value="11/10/2020 20:00" />
+		<property name="fee" value="250.0" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
 	<!-- AUTHOR 1 -->
 
 
@@ -259,14 +293,13 @@
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper1" />
-		<property name="conference" ref="conference7" />
-		<property name="cameraPaper" value="" />
+		<property name="conference" ref="conference8" />
 		<property name="cameraReady" value="false" />
 		<property name="reviewers">
 			<list>
-				<ref bean="reviewer2"/>
+				<ref bean="reviewer2" />
 			</list>
-		
+
 		</property>
 	</bean>
 
@@ -275,14 +308,13 @@
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper1" />
-		<property name="conference" ref="conference7" />
-		<property name="cameraPaper" value="" />
+		<property name="conference" ref="conference9" />
 		<property name="cameraReady" value="true" />
 		<property name="reviewers">
 			<list>
-				<ref bean="reviewer2"/>
+				<ref bean="reviewer2" />
 			</list>
-		
+
 		</property>
 	</bean>
 	<bean id="paper3" class="domain.Paper">
@@ -303,8 +335,13 @@
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="paper" ref="paper1" />
 		<property name="conference" ref="conference7" />
-		<property name="cameraPaper" value="" />
 		<property name="cameraReady" value="false" />
+		<property name="reviewers">
+			<list>
+				<ref bean="reviewer1" />
+			</list>
+
+		</property>
 	</bean>
 	<bean id="paper1" class="domain.Paper">
 		<property name="title" value="MSA-8K6L" />
