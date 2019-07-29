@@ -30,7 +30,10 @@
 
 
 	<!-- Action links -->
+	<display:column titleKey="panel.show">
 
+		<jstl:out value="${row }"></jstl:out>
+	</display:column>
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="panel.show">
@@ -77,9 +80,11 @@
 	name="tutorials" requestURI="${requestURI}" id="row">
 
 
+	<display:column titleKey="panel.show">
 
+		<jstl:out value="${row }"></jstl:out>
+	</display:column>
 	<!-- Action links -->
-
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="tutorial.show">

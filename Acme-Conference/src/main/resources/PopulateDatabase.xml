@@ -468,6 +468,8 @@
 		<property name="reports">
 			<list>
 				<ref bean="report1" />
+				<ref bean="report4" />
+
 			</list>
 		</property>
 
@@ -549,6 +551,17 @@
 		<property name="decision" value="ACCEPT" />
 		<property name="comment" value="No comments." />
 		<property name="submission" ref="submission3" />
+
+
+	</bean>
+
+	<bean id="report4" class="domain.Report">
+		<property name="originality" value="7" />
+		<property name="quality" value="10" />
+		<property name="readability" value="7" />
+		<property name="decision" value="ACCEPT" />
+		<property name="comment" value="No comments." />
+		<property name="submission" ref="submission10" />
 
 
 	</bean>

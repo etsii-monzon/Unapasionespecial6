@@ -258,4 +258,7 @@ public class SubmissionService {
 			return ticker;
 
 	}
+	public Collection<Submission> findSubmissionsOfReviewer(final Reviewer r) {
+		return this.submissionRepository.findSubmissionsOfReviewer(r);
+	}
 }

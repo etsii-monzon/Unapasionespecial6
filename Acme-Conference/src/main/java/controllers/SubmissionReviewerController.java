@@ -15,6 +15,7 @@ import services.ReportService;
 import services.ReviewerService;
 import services.SubmissionService;
 import domain.Report;
+import domain.Reviewer;
 import domain.Submission;
 
 @Controller
@@ -35,17 +36,15 @@ public class SubmissionReviewerController extends AbstractController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
-		ModelAndView result;
+		final ModelAndView result;
 		final Collection<Submission> submissions;
+		final Reviewer actor = this.reviewerService.findByPrincipal();
 
-		submissions = this.submissionService.findAll();
+		submissions = this.submissionService.findSubmissionsOfReviewer(actor);
 
-		final Collection<Report> reps = this.reviewerService.findByPrincipal().getReports();
-
-		for (final Report r : reps)
+		for (final Report r : actor.getReports())
 			if (submissions.contains(r.getSubmission()))
 				submissions.remove(r.getSubmission());
-		System.out.println(submissions);
 
 		result = new ModelAndView("submission/list");
 
