@@ -60,6 +60,8 @@ public class ActivityAdministratorController extends AbstractController {
 		final Collection<Submission> subms = this.submissionService.findAllCameraReadyVersion(conferenceId);
 		final Boolean allowed = !subms.isEmpty();
 
+		System.out.println(panels);
+
 		result = new ModelAndView("activity/list");
 		result.addObject("conferenceId", conferenceId);
 		result.addObject("tutorials", tutorials);
@@ -319,8 +321,11 @@ public class ActivityAdministratorController extends AbstractController {
 	protected ModelAndView createEditPrModelAndView(final Presentation pr, final String messageCode) {
 		final ModelAndView result;
 
+		final Collection<Submission> subms = this.submissionService.findAllCameraReadyVersion(pr.getConference().getId());
+
 		result = new ModelAndView("presentation/edit");
 		result.addObject("presentation", pr);
+		result.addObject("submissions", subms);
 
 		result.addObject("message", messageCode);
 
