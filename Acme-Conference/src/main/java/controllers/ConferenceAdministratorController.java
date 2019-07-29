@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.validation.Valid;
 
@@ -36,11 +37,14 @@ public class ConferenceAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Conference> conferences;
+		final Date fecha = new GregorianCalendar().getTime();
 
 		conferences = this.conferenceService.findAll();
 
 		result = new ModelAndView("conference/list");
 		result.addObject("conferences", conferences);
+		result.addObject("fecha", fecha);
+
 		result.addObject("requestURI", "conference/administrator/list.do");
 
 		return result;

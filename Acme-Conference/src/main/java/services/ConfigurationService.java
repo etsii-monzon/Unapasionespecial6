@@ -75,6 +75,9 @@ public class ConfigurationService {
 	public String findWelcomeEN() {
 		return this.configurationRepository.findWelcomeEN();
 	}
+	public String findSystemName() {
+		return this.configurationRepository.findSystemName();
+	}
 
 	public Configuration find() {
 		Configuration result;
