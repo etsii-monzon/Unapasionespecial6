@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
 	* * The use of this project is hereby constrained to the conditions of the 
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
@@ -93,6 +93,8 @@
 				<ref bean="conference5" />
 				<ref bean="conference6" />
 				<ref bean="conference7" />
+				<ref bean="conference10" />
+
 
 
 
@@ -254,6 +256,23 @@
 
 
 	</bean>
+
+	<bean id="conference10" class="domain.Conference">
+
+		<property name="title" value="Criptografia" />
+		<property name="acronym" value="Cr" />
+		<property name="venue" value="ETSII" />
+		<property name="summary" value="summary" />
+		<property name="submissionDeadline" value="12/12/2017 14:04" />
+		<property name="notificationDeadline" value="10/01/2018 00:00" />
+		<property name="cameraDeadline" value="10/20/2018 00:00" />
+		<property name="startDate" value="01/01/2019 16:00" />
+		<property name="endDate" value="01/02/2019 20:00" />
+		<property name="fee" value="80.0" />
+		<property name="draftMode" value="false" />
+
+
+	</bean>
 	<!-- AUTHOR 1 -->
 
 
@@ -364,7 +383,30 @@
 		<property name="summary" value="Summary" />
 		<property name="document" value="Document" />
 	</bean>
+<bean id="submission10" class="domain.Submission">
+		<property name="ticker" value="CXA-213L" />
+		<property name="moment" value="01/06/2019 00:00" />
+		<property name="status" value="ACCEPTED" />
+		<property name="paper" ref="paper10" />
+		<property name="conference" ref="conference10" />
+		<property name="cameraReady" value="true" />
+		<property name="reviewers">
+			<list>
+				<ref bean="reviewer1" />
+			</list>
 
+		</property>
+	</bean>
+	<bean id="paper10" class="domain.Paper">
+		<property name="title" value="paper10" />
+		<property name="authors">
+			<list>
+				<ref bean="author2" />
+			</list>
+		</property>
+		<property name="summary" value="Summary" />
+		<property name="document" value="Document" />
+	</bean>
 	<bean id="registration1" class="domain.Registration">
 		<property name="creditCard" ref="creditCard1" />
 		<property name="conference" ref="conference1" />
@@ -402,6 +444,8 @@
 		</property>
 		<property name="submissions">
 			<list>
+							<ref bean="submission10" />
+			
 			</list>
 		</property>
 	</bean>
