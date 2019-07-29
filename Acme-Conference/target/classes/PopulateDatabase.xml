@@ -79,7 +79,7 @@
 		<property name="surname" value="Marín Mateos" />
 		<property name="middleName" value="Marín Mateos" />
 
-		<property name="email" value="admin@hotmail.com" />
+		<property name="email" value="admin@" />
 		<property name="phoneNumber" value="+34 675359045" />
 		<property name="address" value="Monzón 28" />
 		<property name="optionalPhoto" value="" />
