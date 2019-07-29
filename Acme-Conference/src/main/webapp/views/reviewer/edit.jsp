@@ -125,7 +125,7 @@
 	<form:label path="phoneNumber">
 		<spring:message code="reviewer.phoneNumber" />
 	</form:label>
-	<form:input path="phoneNumber" pattern="[0-9+()\s]+"/>
+	<form:input path="phoneNumber" pattern="[0-9+()\s]+" />
 	<form:errors class="error" path="phoneNumber" />
 	<br>
 	<br>
@@ -148,12 +148,12 @@
 	<br>
 	<br>
 
-	<%-- Experiences --%>
-	<form:label path="experience">
-		<spring:message code="reviewer.experiences" />
+	<%-- Keywords --%>
+	<form:label path="keywords">
+		<spring:message code="reviewer.keywords" />
 	</form:label>
-	<form:input path="experience" />
-	<form:errors class="error" path="experience" />
+	<form:input path="keywords" />
+	<form:errors class="error" path="keywords" />
 	<br>
 	<br>
 

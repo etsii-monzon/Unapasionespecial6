@@ -38,13 +38,13 @@
 		</display:column>
 	</security:authorize>
 
-	<%-- <security:authorize access="hasRole('ADMIN')">
+	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.show">
 			<a href="submission/administrator/show.do?submissionId=${row.id}">
 				<spring:message code="submission.show" />
 			</a>
 		</display:column>
-	</security:authorize> --%>
+	</security:authorize>
 	<security:authorize access="hasRole('AUTHOR')">
 		<display:column titleKey="submission.edit">
 

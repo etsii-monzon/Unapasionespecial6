@@ -9,23 +9,15 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Reviewer extends Actor {
 
 	private Collection<Report>	reports;
-	private Collection<String>	experience;
 	private Collection<String>	keywords;
 
-
-	@ElementCollection
-	public Collection<String> getExperience() {
-		return this.experience;
-	}
-
-	public void setExperience(final Collection<String> experience) {
-		this.experience = experience;
-	}
 
 	@OneToMany
 	public Collection<Report> getReports() {
@@ -37,6 +29,7 @@ public class Reviewer extends Actor {
 	}
 
 	@ElementCollection
+	@NotEmpty
 	public Collection<String> getKeywords() {
 		return this.keywords;
 	}

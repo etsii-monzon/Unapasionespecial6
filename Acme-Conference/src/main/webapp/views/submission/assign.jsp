@@ -20,7 +20,6 @@
 	<form:hidden path="cameraReady"/>
 	<form:hidden path="status"/>
 	<form:hidden path="conference"/>
-	<form:hidden path="cameraPaper"/>
 	<form:hidden path="paper"/>
 	
 	<security:authorize access="hasRole('ADMIN')">
