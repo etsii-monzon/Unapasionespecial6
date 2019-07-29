@@ -88,7 +88,7 @@ public class SubmissionService {
 			final Collection<Submission> f = b.getSubmissions();
 			System.out.println(a.getPaper().getAuthors());
 
-			if (a.getStatus() == "ACCEPTED" && a.getId() != 0 && !a.isCameraReady())
+			if (a.getStatus().equals("ACCEPTED") && a.getId() != 0)
 				a.setCameraReady(true);
 			res = this.submissionRepository.save(a);
 			if (!f.contains(res))

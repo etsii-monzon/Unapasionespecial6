@@ -49,12 +49,17 @@
 		<display:column titleKey="submission.edit">
 
 			<jstl:if test="${row.status=='ACCEPTED'}">
-				<jstl:if test="${row.conference.cameraDeadline < fecha }">
+				<jstl:if test="${row.conference.cameraDeadline > fecha }">
+				<jstl:if test="${!row.cameraReady }">	
 					<a href="submission/author/upload.do?submissionId=${row.id}"> <spring:message
 							code="submission.upload" />
 					</a>
 				</jstl:if>
+				</jstl:if>
 			</jstl:if>
+			<jstl:if test="${row.cameraReady}">
+				<p><spring:message code="submission.uploaded"/></p>
+			</jstl:if> 
 		</display:column>
 	</security:authorize>
 

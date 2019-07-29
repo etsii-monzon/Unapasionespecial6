@@ -22,10 +22,14 @@
 	<form:hidden path="moment" />
 
 
-
+	<jstl:if test="${submission.id==0 }">
 	<acme:select code="submission.conference" path="conference"
 		items="${conferences}" itemLabel="title" />
 	<br />
+	</jstl:if>
+	<jstl:if test="${submission.id!=0 }">
+	<form:hidden path="conference"/>
+	</jstl:if>
 	<br />
 
 	<fieldset>

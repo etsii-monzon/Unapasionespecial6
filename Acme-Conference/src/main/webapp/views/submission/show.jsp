@@ -37,6 +37,7 @@
 		<jstl:out value="${actor.name},"></jstl:out>
 	</jstl:forEach>
 </p>
+<p><jstl:out value="${submission.cameraReady }"/></p>
 
 
 <br />
