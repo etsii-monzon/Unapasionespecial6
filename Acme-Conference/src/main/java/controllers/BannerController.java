@@ -19,4 +19,9 @@ public class BannerController {
 		final String banner = this.configurationService.find().getBannerURL();
 		return banner;
 	}
+	@ModelAttribute("systemName")
+	public String populateUser2() {
+		final String systemName = this.configurationService.findSystemName();
+		return systemName;
+	}
 }

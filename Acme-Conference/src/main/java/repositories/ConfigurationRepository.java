@@ -15,4 +15,7 @@ public interface ConfigurationRepository extends JpaRepository<Configuration, In
 
 	@Query("select c.welcomeEN from Configuration c")
 	String findWelcomeEN();
+
+	@Query("select c.sistemName from Configuration c")
+	String findSystemName();
 }

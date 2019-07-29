@@ -55,6 +55,7 @@ public class WelcomeController extends AbstractController {
 		SimpleDateFormat formatter;
 		String moment;
 		String mensaje = new String();
+
 		final String name = "";
 		final Boolean notify = true;
 		//	final Actor actor;
@@ -76,6 +77,7 @@ public class WelcomeController extends AbstractController {
 		result.addObject("moment", moment);
 		//	result.addObject("actor", actor);
 		result.addObject("mensaje", mensaje);
+
 		return result;
 
 	}
