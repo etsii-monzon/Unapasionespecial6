@@ -81,6 +81,8 @@ public class ActorService {
 
 		if (!email.contains("@"))
 			res = false;
+		else if (!email.contains("."))
+			res = false;
 		else if (email.contains("<") && email.contains(">")) {
 			pattern = email.split("\\<");
 			final String alias = pattern[0];
@@ -96,40 +98,46 @@ public class ActorService {
 			final String mail = pattern[1].substring(0, pattern[1].length() - 1);
 			identifiers = mail.split("\\@");
 			final String identifier = identifiers[0];
-			final String domain = identifiers[1];
-			//Checking that identifier is alpha-numeric
-			if (!identifier.matches("[A-Za-z0-9]+"))
+			if (identifiers.length <= 1)
 				res = false;
 			else {
-				domains = domain.split("\\.");
-				//Creating a list to know a size to end the for.
-				final Collection<String> aux2 = new ArrayList<String>();
-				for (final String s : domains)
-					aux2.add(s);
-				for (i = 0; i < aux2.size(); i++)
-					if (!domains[i].matches("[A-Za-z0-9]+"))
+				final String domain = identifiers[1];
+				//Checking that identifier is alpha-numeric
+				if (!identifier.matches("[A-Za-z0-9]+"))
+					res = false;
+				else {
+					domains = domain.split("\\.");
+					//Creating a list to know a size to end the for.
+					final Collection<String> aux2 = new ArrayList<String>();
+					for (final String s : domains)
+						aux2.add(s);
+					if (domains.length != 2)
 						res = false;
+					for (i = 0; i < aux2.size(); i++)
+						if (!domains[i].matches("[A-Za-z0-9]+"))
+							res = false;
+				}
 			}
+
 		} else {
 			//Comprobamos la forma "identifier@domain" 
 			identifiers = email.split("\\@");
 			final String identifier = identifiers[0];
 			if (!identifier.matches("[A-Za-z0-9]+"))
 				res = false;
+			else if (identifiers.length <= 1)
+				res = false;
 			else {
 				final String domain = identifiers[1];
 				domains = domain.split("\\.");
-				if (domains.length <= 1)
+				final Collection<String> aux3 = new ArrayList<String>();
+				for (final String s : domains)
+					aux3.add(s);
+				if (domains.length != 2)
 					res = false;
-				else {
-
-					final Collection<String> aux3 = new ArrayList<String>();
-					for (final String s : domains)
-						aux3.add(s);
-					for (i = 0; i < aux3.size(); i++)
-						if (!domains[i].matches("[A-Za-z0-9]+"))
-							res = false;
-				}
+				for (i = 0; i < aux3.size(); i++)
+					if (!domains[i].matches("[A-Za-z0-9]+"))
+						res = false;
 			}
 		}
 		return res;

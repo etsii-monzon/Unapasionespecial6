@@ -148,6 +148,9 @@ public class AdministratorService {
 
 			//Comprobamos el identifier@domain de dentro de los < >
 			identifier = pattern[1].substring(0, pattern[1].length() - 1);
+			final String[] aux = identifier.split("\\@");
+			if (aux.length > 1)
+				res = false;
 			if (!identifier.contains("@"))
 				res = false;
 
@@ -157,6 +160,8 @@ public class AdministratorService {
 				res = false;
 
 		} else if (!email.contains("@"))
+			res = false;
+		else if (email.contains("."))
 			res = false;
 		else if (email.contains("@")) {
 

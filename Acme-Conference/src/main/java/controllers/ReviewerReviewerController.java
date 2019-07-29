@@ -65,7 +65,7 @@ public class ReviewerReviewerController extends AbstractController {
 				result = this.createEditModelAndView(reviewer, "reviewer.username.error");
 			} catch (final Throwable oops) {
 				System.out.println(oops);
-				if (oops.getMessage().equals("email error"))
+				if (oops.getMessage() == "email error")
 					result = this.createEditModelAndView(reviewer, "reviewer.email.error");
 				else
 					result = this.createEditModelAndView(reviewer, "reviewer.commit.error");
