@@ -21,6 +21,12 @@
 		return confirm("<spring:message code="submission.confirm"/>");
 
 	}
+
+	function confirmAssign() {
+
+		return confirm("<spring:message code="submission.assign.conf"/>");
+
+	}
 </script>
 
 
@@ -50,16 +56,18 @@
 
 			<jstl:if test="${row.status=='ACCEPTED'}">
 				<jstl:if test="${row.conference.cameraDeadline > fecha }">
-				<jstl:if test="${!row.cameraReady }">	
-					<a href="submission/author/upload.do?submissionId=${row.id}"> <spring:message
-							code="submission.upload" />
-					</a>
-				</jstl:if>
+					<jstl:if test="${!row.cameraReady }">
+						<a href="submission/author/upload.do?submissionId=${row.id}">
+							<spring:message code="submission.upload" />
+						</a>
+					</jstl:if>
 				</jstl:if>
 			</jstl:if>
 			<jstl:if test="${row.cameraReady}">
-				<p><spring:message code="submission.uploaded"/></p>
-			</jstl:if> 
+				<p>
+					<spring:message code="submission.uploaded" />
+				</p>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 
@@ -158,7 +166,7 @@
 	<div>
 
 		<button type="button"
-			onclick="javascript: relativeRedir('submission/administrator/assignReviewers.do')">
+			onclick="javascript: relativeRedir('submission/administrator/assignReviewers.do');return confirmAssign();">
 			<spring:message code="submission.assignAuto" />
 		</button>
 	</div>
@@ -176,4 +184,4 @@
 <br />
 <input type="button" name="cancel"
 	value="<spring:message code="submission.return" />"
-	onClick="javascript: window.location.replace('welcome/index.do');" />
+	onClick="javascript: window.location.replace('welcome/index.do')" />

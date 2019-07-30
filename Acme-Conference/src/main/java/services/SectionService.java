@@ -27,6 +27,9 @@ public class SectionService {
 	@Autowired
 	private TutorialService			tutorialService;
 
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	public Section create(final int tutorialId) {
 		Assert.isTrue(this.adminService.checkPrincipal());
@@ -42,12 +45,15 @@ public class SectionService {
 
 	public Section save(final Section s) {
 		Assert.isTrue(this.adminService.checkPrincipal());
+		Assert.notNull(s);
+		if (!s.getOptionalPictures().isEmpty())
+			for (final String url : s.getOptionalPictures())
+				Assert.isTrue(ConfigurationService.urlValidator(url), "url");
 		final Section res;
 		res = this.sectionRepository.save(s);
 
 		return res;
 	}
-
 	public void delete(final Section s) {
 		Assert.notNull(s);
 		this.sectionRepository.delete(s);

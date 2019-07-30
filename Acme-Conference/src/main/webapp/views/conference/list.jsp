@@ -91,7 +91,7 @@
 	<display:column property="acronym" titleKey="conference.acronym"
 		sortable="false" />
 	<display:column property="venue" titleKey="conference.venue"
-		sortable="false" />
+		sortable="true" />
 	<display:column property="summary" titleKey="conference.summary"
 		sortable="false" />
 	<display:column property="submissionDeadline"

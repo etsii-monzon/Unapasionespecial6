@@ -42,7 +42,12 @@ public class PresentationService {
 
 	public Presentation save(final Presentation s) {
 		Assert.isTrue(this.adminService.checkPrincipal());
+		Assert.notNull(s);
 		final Presentation res;
+
+		if (!s.getOptionalAttachments().isEmpty())
+			for (final String url : s.getOptionalAttachments())
+				Assert.isTrue(ConfigurationService.urlValidator(url), "url");
 
 		res = this.presentRepository.save(s);
 		return res;

@@ -1,6 +1,9 @@
 
 package services;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -101,6 +104,18 @@ public class ConfigurationService {
 		}
 
 		return resultado;
+	}
+
+	public static boolean urlValidator(String url) {
+		/* validación de url */
+		try {
+			new URL(url).toURI();
+			return true;
+		} catch (URISyntaxException exception) {
+			return false;
+		} catch (MalformedURLException exception) {
+			return false;
+		}
 	}
 
 }

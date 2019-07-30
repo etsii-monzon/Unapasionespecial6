@@ -47,7 +47,12 @@ public class TutorialService {
 
 	public Tutorial save(final Tutorial s) {
 		Assert.isTrue(this.adminService.checkPrincipal());
+		Assert.notNull(s);
 		final Tutorial res;
+
+		if (!s.getOptionalAttachments().isEmpty())
+			for (final String url : s.getOptionalAttachments())
+				Assert.isTrue(ConfigurationService.urlValidator(url), "url");
 
 		res = this.tutorialRepository.save(s);
 		this.tutorialRepository.flush();

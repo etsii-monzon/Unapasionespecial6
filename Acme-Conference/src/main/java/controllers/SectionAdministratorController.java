@@ -99,20 +99,22 @@ public class SectionAdministratorController {
 			System.out.print(binding);
 			result = this.createEditModelAndView(section);
 
-		}
-		try {
-			System.out.print("Entra");
-			Assert.isTrue(section.getTitle() != "" && section.getSummary() != "", "vacio");
-			final Section sect = this.secService.save(section);
-			result = new ModelAndView("redirect:list.do?tutorialId=" + sect.getTutorial().getId());
-		} catch (final Throwable oops) {
-			System.out.print(oops);
+		} else
+			try {
+				System.out.print("Entra");
+				Assert.isTrue(section.getTitle() != "" && section.getSummary() != "", "vacio");
+				final Section sect = this.secService.save(section);
+				result = new ModelAndView("redirect:list.do?tutorialId=" + sect.getTutorial().getId());
+			} catch (final Throwable oops) {
+				System.out.print(oops);
 
-			if (oops.getMessage() == "vacio")
-				result = this.createEditModelAndView(section, "section.empty.error");
-			else
-				result = this.createEditModelAndView(section, "section.commit.error");
-		}
+				if (oops.getMessage() == "vacio")
+					result = this.createEditModelAndView(section, "section.empty.error");
+				else if (oops.getMessage() == "url")
+					result = this.createEditModelAndView(section, "section.url.error");
+				else
+					result = this.createEditModelAndView(section, "section.commit.error");
+			}
 		return result;
 	}
 

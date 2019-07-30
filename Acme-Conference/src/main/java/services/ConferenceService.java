@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
+import domain.Activity;
 import domain.Administrator;
 import domain.Conference;
 import domain.Registration;
@@ -35,6 +36,9 @@ public class ConferenceService {
 	private AuthorService			authorService;
 	@Autowired
 	private SubmissionService		submissionService;
+
+	@Autowired
+	private ActivityService			activityService;
 
 
 	// SIMPLE CRUD METHODS
@@ -83,6 +87,10 @@ public class ConferenceService {
 
 		final Administrator adm = this.administratorService.findByPrincipal();
 		adm.getConferences().remove(a);
+
+		for (final Activity act : this.activityService.findAllActivitiesByConference(a))
+			this.activityService.delete(act);
+
 		this.conferenceRepository.delete(a);
 
 	}

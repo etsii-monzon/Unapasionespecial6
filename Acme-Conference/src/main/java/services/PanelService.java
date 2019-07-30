@@ -27,6 +27,9 @@ public class PanelService {
 	@Autowired
 	private ConferenceService		confService;
 
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	public Panel create(final int conferenceId) {
 		Assert.isTrue(this.adminService.checkPrincipal());
@@ -62,12 +65,16 @@ public class PanelService {
 		Assert.isTrue(p.getStartMoment().getYear() == p.getEndMoment().getYear());
 
 		Assert.isTrue((p.getStartMoment().getHours() < p.getEndMoment().getHours()) || (p.getStartMoment().getMinutes() < p.getEndMoment().getMinutes()));
+
+		if (!p.getOptionalAttachments().isEmpty())
+			for (final String url : p.getOptionalAttachments())
+				Assert.isTrue(ConfigurationService.urlValidator(url), "url");
+
 		res = this.panelRepository.save(p);
 
 		return res;
 
 	}
-
 	public void delete(final Panel p) {
 		Assert.isTrue(this.adminService.checkPrincipal());
 		Assert.notNull(p);

@@ -164,6 +164,8 @@ public class ActivityAdministratorController extends AbstractController {
 					result = new ModelAndView("misc/403");
 				else if (oops.getMessage() == "vacio")
 					result = this.createEditTutModelAndView(tutorial, "activity.empty.error");
+				else if (oops.getMessage() == "url")
+					result = this.createEditTutModelAndView(tutorial, "activity.url.error");
 				else
 					result = this.createEditTutModelAndView(tutorial, "tutorial.commit.error");
 			}
@@ -260,6 +262,8 @@ public class ActivityAdministratorController extends AbstractController {
 					result = new ModelAndView("misc/403");
 				else if (oops.getMessage() == "vacio")
 					result = this.createEditPaModelAndView(panel, "activity.empty.error");
+				else if (oops.getMessage() == "url")
+					result = this.createEditPaModelAndView(panel, "activity.url.error");
 				else
 					result = this.createEditPaModelAndView(panel, "panel.commit.error");
 			}
@@ -363,6 +367,8 @@ public class ActivityAdministratorController extends AbstractController {
 					result = new ModelAndView("misc/403");
 				else if (oops.getMessage() == "vacio")
 					result = this.createEditPrModelAndView(pres, "activity.empty.error");
+				else if (oops.getMessage() == "url")
+					result = this.createEditPrModelAndView(pres, "activity.url.error");
 				else
 					result = this.createEditPrModelAndView(pres, "presentation.commit.error");
 			}
