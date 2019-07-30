@@ -15,13 +15,6 @@
 
 <!-- Listing grid -->
 
-<script type="text/javascript">
-	function confirmNotify() {
-
-		return confirm("<spring:message code="submission.confirm"/>");
-
-	}
-</script>
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
