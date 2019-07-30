@@ -20,7 +20,7 @@
 	<form:hidden path="status" />
 	<form:hidden path="ticker" />
 	<form:hidden path="moment" />
-
+	<form:hidden path="reviewers" />
 
 	<jstl:if test="${submission.id==0 }">
 	<acme:select code="submission.conference" path="conference"

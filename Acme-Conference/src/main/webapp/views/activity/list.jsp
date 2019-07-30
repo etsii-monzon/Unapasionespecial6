@@ -49,6 +49,8 @@
 		sortable="true" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
+	<display:column property="optionalAttachments" titleKey="activity.optionalAttachments"
+		sortable="false" />
 	<display:column>
 		<a href="activity/administrator/panel/delete.do?panelId=${row.id}">
 			<spring:message code="panel.delete" />
@@ -100,6 +102,8 @@
 	<display:column property="room" titleKey="activity.room"
 		sortable="true" />
 	<display:column property="summary" titleKey="activity.summary"
+		sortable="false" />
+	<display:column property="optionalAttachments" titleKey="activity.optionalAttachments"
 		sortable="false" />
 	<display:column titleKey="tutorial.sections">
 		<jstl:if test="${tutorial.section != null }">
@@ -169,6 +173,8 @@
 	<display:column property="room" titleKey="activity.room"
 		sortable="true" />
 	<display:column property="summary" titleKey="activity.summary"
+		sortable="false" />
+	<display:column property="optionalAttachments" titleKey="activity.optionalAttachments"
 		sortable="false" />
 
 	<display:column titleKey="presentation.submission">

@@ -37,7 +37,12 @@
 		<jstl:out value="${actor.name},"></jstl:out>
 	</jstl:forEach>
 </p>
-<p><jstl:out value="${submission.cameraReady }"/></p>
+
+<br />
+<jstl:if test="${submission.cameraReady }">
+	<p><spring:message code="submission.ready"/></p>
+</jstl:if>
+
 
 
 <br />
