@@ -375,4 +375,25 @@ public class ActivityAdministratorController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "submission/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int submissionId) {
+		ModelAndView result;
+		final Submission submission;
+		try {
+			submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(submission.getConference()), "hacking");
+			result = new ModelAndView("submission/show");
+			result.addObject("requestURI", "activity/administrator/submission/show.do");
+			result.addObject("submission", submission);
+			result.addObject("conferenceId", submission.getConference().getId());
+
+		} catch (final Throwable oops) {
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
+		}
+		return result;
+	}
+
 }

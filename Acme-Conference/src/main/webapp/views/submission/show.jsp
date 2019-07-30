@@ -10,7 +10,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-
+<jstl:out value="${requestURI }"></jstl:out>
 <p>
 	<b><spring:message code="submission.ticker" />: </b>
 	<jstl:out value="${submission.ticker }" />
@@ -40,7 +40,9 @@
 
 <br />
 <jstl:if test="${submission.cameraReady }">
-	<p><spring:message code="submission.ready"/></p>
+	<p>
+		<spring:message code="submission.ready" />
+	</p>
 </jstl:if>
 
 
@@ -50,11 +52,21 @@
 <security:authorize access="hasRole('AUTHOR')">
 	<acme:cancel url="submission/author/list.do" code="submission.cancel" />
 </security:authorize>
+<jstl:if test="${requestURI == 'submission/administrator/show.do' }">
+	<security:authorize access="hasRole('ADMIN')">
+		<acme:cancel url="submission/administrator/list.do"
+			code="submission.return" />
+	</security:authorize>
+</jstl:if>
 
-<security:authorize access="hasRole('ADMIN')">
-	<acme:cancel url="submission/administrator/list.do"
-		code="submission.cancel" />
-</security:authorize>
+<jstl:if
+	test="${requestURI == 'activity/administrator/submission/show.do' }">
+	<security:authorize access="hasRole('ADMIN')">
+		<acme:cancel
+			url="activity/administrator/list.do?conferenceId=${conferenceId}"
+			code="submission.return" />
+	</security:authorize>
+</jstl:if>
 
 
 <br />

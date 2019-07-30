@@ -16,21 +16,17 @@
 <!-- Listing grid -->
 
 
-
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="panels" requestURI="${requestURI}" id="row">
+	name="panels" requestURI="${requestURI}" id="row1">
 
 
 
 	<!-- Action links -->
-	<display:column titleKey="panel.show">
 
-		<jstl:out value="${row }"></jstl:out>
-	</display:column>
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="panel.show">
-			<a href="activity/administrator/panel/edit.do?panelId=${row.id}">
+			<a href="activity/administrator/panel/edit.do?panelId=${row1.id}">
 				<spring:message code="panel.show" />
 			</a>
 		</display:column>
@@ -49,10 +45,10 @@
 		sortable="true" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
-	<display:column property="optionalAttachments" titleKey="activity.optionalAttachments"
-		sortable="false" />
+	<display:column property="optionalAttachments"
+		titleKey="activity.optionalAttachments" sortable="false" />
 	<display:column>
-		<a href="activity/administrator/panel/delete.do?panelId=${row.id}">
+		<a href="activity/administrator/panel/delete.do?panelId=${row1.id}">
 			<spring:message code="panel.delete" />
 		</a>
 	</display:column>
@@ -70,21 +66,16 @@
 		</button>
 	</div>
 </security:authorize>
-
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="tutorials" requestURI="${requestURI}" id="row">
+	name="tutorials" requestURI="${requestURI}" id="row2">
 
 
-	<display:column titleKey="panel.show">
-
-		<jstl:out value="${row }"></jstl:out>
-	</display:column>
 	<!-- Action links -->
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="tutorial.show">
 			<a
-				href="activity/administrator/tutorial/edit.do?tutorialId=${row.id}">
+				href="activity/administrator/tutorial/edit.do?tutorialId=${row2.id}">
 				<spring:message code="tutorial.show" />
 			</a>
 		</display:column>
@@ -103,30 +94,30 @@
 		sortable="true" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
-	<display:column property="optionalAttachments" titleKey="activity.optionalAttachments"
-		sortable="false" />
+	<display:column property="optionalAttachments"
+		titleKey="activity.optionalAttachments" sortable="false" />
 	<display:column titleKey="tutorial.sections">
 		<jstl:if test="${tutorial.section != null }">
-			<a href="section/administrator/list.do?tutorialId=${row.id}"> <spring:message
+			<a href="section/administrator/list.do?tutorialId=${row2.id}"> <spring:message
 					code="tutorial.sections" />
 			</a>
 		</jstl:if>
 		<jstl:if test="${tutorial.section == null }">
-			<a href="section/administrator/create.do?tutorialId=${row.id}"> <spring:message
-					code="tutorial.section" />
+			<a href="section/administrator/create.do?tutorialId=${row2.id}">
+				<spring:message code="tutorial.section" />
 			</a>
 		</jstl:if>
 
 	</display:column>
 
 	<display:column>
-		<a href="section/administrator/list.do?tutorialId=${row.id}"> <spring:message
+		<a href="section/administrator/list.do?tutorialId=${row2.id}"> <spring:message
 				code="tutorial.sections" />
 		</a>
 	</display:column>
 	<display:column>
 		<a
-			href="activity/administrator/tutorial/delete.do?tutorialId=${row.id}">
+			href="activity/administrator/tutorial/delete.do?tutorialId=${row2.id}">
 			<spring:message code="tutorial.delete" />
 		</a>
 	</display:column>
@@ -145,7 +136,7 @@
 </security:authorize>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="presentations" requestURI="${requestURI}" id="row">
+	name="presentations" requestURI="${requestURI}" id="row3">
 
 
 
@@ -155,7 +146,7 @@
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="presentation.show">
 			<a
-				href="activity/administrator/presentation/edit.do?presentationId=${row.id}">
+				href="activity/administrator/presentation/edit.do?presentationId=${row3.id}">
 				<spring:message code="presentation.show" />
 			</a>
 		</display:column>
@@ -174,18 +165,18 @@
 		sortable="true" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
-	<display:column property="optionalAttachments" titleKey="activity.optionalAttachments"
-		sortable="false" />
+	<display:column property="optionalAttachments"
+		titleKey="activity.optionalAttachments" sortable="false" />
 
 	<display:column titleKey="presentation.submission">
 		<a
-			href="submission/administrator/show.do?submissionId=${row.submission.id}">
+			href="activity/administrator/submission/show.do?submissionId=${row3.submission.id}">
 			<spring:message code="presentation.subm" />
 		</a>
 	</display:column>
 	<display:column>
 		<a
-			href="activity/administrator/presentation/delete.do?presentationId=${row.id}">
+			href="activity/administrator/presentation/delete.do?presentationId=${row3.id}">
 			<spring:message code="presentation.delete" />
 		</a>
 	</display:column>
