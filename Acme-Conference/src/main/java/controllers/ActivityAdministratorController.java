@@ -146,8 +146,10 @@ public class ActivityAdministratorController extends AbstractController {
 		if (binding.hasErrors()) {
 			System.out.print(binding);
 			result = this.createEditTutModelAndView(tutorial);
-
-		} else
+		} else if (tutorial.getConference().getStartDate().after(tutorial.getStartMoment()) || tutorial.getStartMoment().after(tutorial.getConference().getEndDate()) || tutorial.getEndMoment().after(tutorial.getConference().getEndDate())
+			|| tutorial.getEndMoment().before(tutorial.getConference().getStartDate()) || tutorial.getStartMoment().after(tutorial.getEndMoment()))
+			result = this.createEditTutModelAndView(tutorial, "paneldate.commit.error");
+		else
 			try {
 				System.out.print("Entra");
 				Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(tutorial.getConference()), "hacking");
@@ -242,7 +244,11 @@ public class ActivityAdministratorController extends AbstractController {
 			System.out.print(binding);
 			result = this.createEditPaModelAndView(panel);
 
-		} else
+		} else if (panel.getConference().getStartDate().after(panel.getStartMoment()) || panel.getStartMoment().after(panel.getConference().getEndDate()) || panel.getEndMoment().after(panel.getConference().getEndDate())
+			|| panel.getEndMoment().before(panel.getConference().getStartDate()) || panel.getStartMoment().after(panel.getEndMoment()))
+			result = this.createEditPaModelAndView(panel, "paneldate.commit.error");
+
+		else
 			try {
 				System.out.print("Entra");
 				Assert.isTrue(!panel.getEndMoment().equals(null) && !panel.getRoom().equals(null) && !panel.getSpeakers().isEmpty() && !panel.getStartMoment().equals(null) && !panel.getSummary().equals(null) && !panel.getTitle().equals(null), "vacio");
@@ -339,7 +345,11 @@ public class ActivityAdministratorController extends AbstractController {
 			System.out.print(binding);
 			result = this.createEditPrModelAndView(pres);
 
-		} else
+		} else if (pres.getConference().getStartDate().after(pres.getStartMoment()) || pres.getStartMoment().after(pres.getConference().getEndDate()) || pres.getEndMoment().after(pres.getConference().getEndDate())
+			|| pres.getEndMoment().before(pres.getConference().getStartDate()) || pres.getStartMoment().after(pres.getEndMoment()))
+			result = this.createEditPrModelAndView(pres, "paneldate.commit.error");
+
+		else
 			try {
 				System.out.print("Entra");
 				Assert.isTrue(!pres.getEndMoment().equals(null) && !pres.getRoom().equals(null) && !pres.getSpeakers().isEmpty() && !pres.getStartMoment().equals(null) && !pres.getSummary().equals(null) && !pres.getTitle().equals(null)
