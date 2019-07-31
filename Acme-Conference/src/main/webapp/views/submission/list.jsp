@@ -166,7 +166,7 @@
 	<div>
 
 		<button type="button"
-			onclick="javascript: relativeRedir('submission/administrator/assignReviewers.do');return confirmAssign();">
+			onclick="return confirmAssign();javascript: relativeRedir('submission/administrator/assignReviewers.do');">
 			<spring:message code="submission.assignAuto" />
 		</button>
 	</div>
