@@ -19,8 +19,8 @@
 
 <!-- Hay que a�adir el Search -->
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="reports" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="reports"
+	requestURI="${requestURI}" id="row">
 
 
 	<!-- Action links -->

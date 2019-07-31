@@ -58,8 +58,8 @@
 
 
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="conferences" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="conferences"
+	requestURI="${requestURI}" id="row">
 
 
 
@@ -82,7 +82,7 @@
 			</a>
 		</display:column>
 	</security:authorize>
-	
+
 	<!-- Attributes -->
 
 

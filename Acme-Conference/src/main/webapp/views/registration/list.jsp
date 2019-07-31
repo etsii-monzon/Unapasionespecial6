@@ -18,8 +18,8 @@
 
 
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="registrations" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="registrations"
+	requestURI="${requestURI}" id="row">
 
 
 

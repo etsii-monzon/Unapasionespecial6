@@ -17,8 +17,8 @@
 
 
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="brandNames" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="brandNames"
+	requestURI="${requestURI}" id="row">
 	<!-- Action links -->
 
 
@@ -32,7 +32,8 @@
 
 
 	<display:column titleKey="configuration.delete">
-		<a href="configuration/administrator/brandName/delete.do?brandName=${row}">
+		<a
+			href="configuration/administrator/brandName/delete.do?brandName=${row}">
 			<spring:message code="configuration.delete" />
 		</a>
 	</display:column>

@@ -16,8 +16,8 @@
 <!-- Listing grid -->
 
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="sections" requestURI="${requestURI}" id="row4">
+<display:table pagesize="5" class="displaytag" name="sections"
+	requestURI="${requestURI}" id="row4">
 
 	<!-- Action links -->
 

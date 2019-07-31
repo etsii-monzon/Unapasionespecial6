@@ -175,7 +175,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 			try {
 				System.out.print("Entra");
 				this.topicService.save(topic);
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:/configuration/administrator/topic/list.do");
 
 			} catch (final Throwable oops) {
 				System.out.print(oops);
@@ -191,7 +191,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		try {
 			final Topic topic = this.topicService.findOne(topicId);
 			this.topicService.delete(topic);
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:/configuration/administrator/topic/list.do");
 			return result;
 		} catch (final IllegalArgumentException e) {
 			// TODO: handle exception

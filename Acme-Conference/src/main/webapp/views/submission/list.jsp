@@ -33,8 +33,8 @@
 </script>
 
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="submissions" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="submissions"
+	requestURI="${requestURI}" id="row">
 
 
 

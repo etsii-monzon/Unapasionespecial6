@@ -16,8 +16,8 @@
 <!-- Listing grid -->
 
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="panels" requestURI="${requestURI}" id="row1">
+<display:table pagesize="5" class="displaytag" name="panels"
+	requestURI="${requestURI}" id="row1">
 
 
 
@@ -66,8 +66,8 @@
 		</button>
 	</div>
 </security:authorize>
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="tutorials" requestURI="${requestURI}" id="row2">
+<display:table pagesize="5" class="displaytag" name="tutorials"
+	requestURI="${requestURI}" id="row2">
 
 
 	<!-- Action links -->
@@ -135,8 +135,8 @@
 	</div>
 </security:authorize>
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="presentations" requestURI="${requestURI}" id="row3">
+<display:table pagesize="5" class="displaytag" name="presentations"
+	requestURI="${requestURI}" id="row3">
 
 
 
