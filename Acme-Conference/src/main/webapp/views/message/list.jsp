@@ -34,9 +34,10 @@
 	<!-- Attributes -->
 
 	<!-- Email -->
-	<display:column property="sender.email" titleKey="message.sender"
-		sortable="true" />
-
+	<display:column titleKey="message.sender" sortable="true">
+		<jstl:out value="${row.sender.email}"></jstl:out>
+	</display:column>
+	
 	<!-- Subject -->
 	<display:column property="subject" titleKey="message.subject" />
 

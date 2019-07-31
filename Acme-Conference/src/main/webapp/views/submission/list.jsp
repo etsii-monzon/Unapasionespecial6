@@ -24,7 +24,10 @@
 
 	function confirmAssign() {
 
-		return confirm("<spring:message code="submission.assign.conf"/>");
+		res = confirm("<spring:message code="submission.assign.conf"/>");
+		if (res == true) {
+			javascript: relativeRedir('submission/administrator/assignReviewers.do')
+		}
 
 	}
 </script>
@@ -165,8 +168,7 @@
 <security:authorize access="hasRole('ADMIN')">
 	<div>
 
-		<button type="button"
-			onclick="return confirmAssign();javascript: relativeRedir('submission/administrator/assignReviewers.do');">
+		<button type="button" onclick="return confirmAssign();">
 			<spring:message code="submission.assignAuto" />
 		</button>
 	</div>

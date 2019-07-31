@@ -98,13 +98,21 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView assignManually(@RequestParam final int submissionId) {
 		ModelAndView result;
 
-		final Submission sub = this.submissionService.findOne(submissionId);
+		try {
 
-		result = this.createAssignModelAndView(sub);
+			final Submission sub = this.submissionService.findOne(submissionId);
+			Assert.isTrue(sub.getStatus().equals("UNDER-REVIEW"), "status error");
+
+			result = this.createAssignModelAndView(sub);
+		} catch (final Throwable oops) {
+			if (oops.getMessage().equals("status error"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
+		}
 
 		return result;
 	}
-
 	protected ModelAndView createAssignModelAndView(final Submission submission) {
 		ModelAndView result;
 
@@ -167,13 +175,19 @@ public class SubmissionAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		try {
-			this.submissionService.submissionStatus(submissionId);
+
 			final Submission submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(submission.getStatus().equals("UNDER-REVIEW"), "status error");
 			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(submission.getConference()), "hacking");
+
+			this.submissionService.submissionStatus(submissionId);
+
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 
 			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("status error"))
 				result = new ModelAndView("misc/403");
 			else
 				result = new ModelAndView("redirect:/");
