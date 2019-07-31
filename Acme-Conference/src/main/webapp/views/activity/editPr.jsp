@@ -19,8 +19,8 @@
 
 		<acme:textbox code="activity.title" path="title" />
 		<acme:textbox code="activity.speakers" path="speakers"/>
-		<acme:moment code="activity.startMoment" path="startMoment"/>
-		<acme:moment code="activity.endMoment" path="endMoment"/>
+		<acme:moment code="activity.startMomentED" path="startMoment"/>
+		<acme:moment code="activity.endMomentED" path="endMoment"/>
 		<acme:textbox code="activity.room" path="room" />
 		<acme:textbox code="activity.summary" path="summary"/>
 		<acme:textbox code="activity.optionalAttachments" path="optionalAttachments"/>

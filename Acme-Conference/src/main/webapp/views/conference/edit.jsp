@@ -26,13 +26,13 @@
 	<acme:textbox code="conference.summary" path="summary" />
 
 
-	<acme:moment code="conference.submissionDeadline"
+	<acme:moment code="conference.submissionDeadlineED"
 		path="submissionDeadline" />
-	<acme:moment code="conference.notificationDeadline"
+	<acme:moment code="conference.notificationDeadlineED"
 		path="notificationDeadline" />
-	<acme:moment code="conference.cameraDeadline" path="cameraDeadline" />
-	<acme:moment code="conference.startDate" path="startDate" />
-	<acme:moment code="conference.endDate" path="endDate" />
+	<acme:moment code="conference.cameraDeadlineED" path="cameraDeadline" />
+	<acme:moment code="conference.startDateED" path="startDate" />
+	<acme:moment code="conference.endDateED" path="endDate" />
 
 
 

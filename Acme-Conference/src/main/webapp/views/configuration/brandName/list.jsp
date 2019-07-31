@@ -15,12 +15,7 @@
 
 <!-- Listing grid -->
 
-<div>
-	<button type="button"
-		onclick="javascript: relativeRedir('configuration/administrator/brandName/create.do')">
-		<spring:message code="configuration.create.brandName" />
-	</button>
-</div>
+
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="brandNames" requestURI="${requestURI}" id="row">
@@ -43,6 +38,12 @@
 	</display:column>
 
 </display:table>
+<div>
+	<button type="button"
+		onclick="javascript: relativeRedir('configuration/administrator/brandName/create.do')">
+		<spring:message code="configuration.create.brandName" />
+	</button>
+</div>
 
 <div>
 	<button type="button"

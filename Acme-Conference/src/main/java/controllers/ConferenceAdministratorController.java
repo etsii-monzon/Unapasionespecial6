@@ -181,13 +181,13 @@ public class ConferenceAdministratorController extends AbstractController {
 			System.out.print(binding);
 			result = this.createEditModelAndView(conference);
 
-		} else if (conference.getSubmissionDeadline().after(conference.getNotificationDeadline()))
+		} else if (conference.getSubmissionDeadline().after(conference.getNotificationDeadline()) || conference.getSubmissionDeadline().equals(conference.getNotificationDeadline()))
 			result = this.createEditModelAndView(conference, "conferencesub.commit.error");
-		else if (conference.getNotificationDeadline().after(conference.getCameraDeadline()))
+		else if (conference.getNotificationDeadline().after(conference.getCameraDeadline()) || conference.getNotificationDeadline().equals(conference.getCameraDeadline()))
 			result = this.createEditModelAndView(conference, "conferencenot.commit.error");
-		else if (conference.getCameraDeadline().after(conference.getStartDate()))
+		else if (conference.getCameraDeadline().after(conference.getStartDate()) || conference.getCameraDeadline().equals(conference.getStartDate()))
 			result = this.createEditModelAndView(conference, "conferencecam.commit.error");
-		else if (conference.getStartDate().after(conference.getEndDate()))
+		else if (conference.getStartDate().after(conference.getEndDate()) || conference.getStartDate().equals(conference.getEndDate()))
 			result = this.createEditModelAndView(conference, "conferencest.commit.error");
 		else
 			try {
