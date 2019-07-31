@@ -147,7 +147,7 @@ public class ActivityAdministratorController extends AbstractController {
 			System.out.print(binding);
 			result = this.createEditTutModelAndView(tutorial);
 		} else if (tutorial.getConference().getStartDate().after(tutorial.getStartMoment()) || tutorial.getStartMoment().after(tutorial.getConference().getEndDate()) || tutorial.getEndMoment().after(tutorial.getConference().getEndDate())
-			|| tutorial.getEndMoment().before(tutorial.getConference().getStartDate()) || tutorial.getStartMoment().after(tutorial.getEndMoment()))
+			|| tutorial.getEndMoment().before(tutorial.getConference().getStartDate()) || tutorial.getStartMoment().after(tutorial.getEndMoment()) || tutorial.getStartMoment().equals((tutorial.getEndMoment())))
 			result = this.createEditTutModelAndView(tutorial, "paneldate.commit.error");
 		else
 			try {
@@ -247,7 +247,7 @@ public class ActivityAdministratorController extends AbstractController {
 			result = this.createEditPaModelAndView(panel);
 
 		} else if (panel.getConference().getStartDate().after(panel.getStartMoment()) || panel.getStartMoment().after(panel.getConference().getEndDate()) || panel.getEndMoment().after(panel.getConference().getEndDate())
-			|| panel.getEndMoment().before(panel.getConference().getStartDate()) || panel.getStartMoment().after(panel.getEndMoment()))
+			|| panel.getEndMoment().before(panel.getConference().getStartDate()) || panel.getStartMoment().after(panel.getEndMoment()) || panel.getStartMoment().equals((panel.getEndMoment())))
 			result = this.createEditPaModelAndView(panel, "paneldate.commit.error");
 
 		else
@@ -350,7 +350,7 @@ public class ActivityAdministratorController extends AbstractController {
 			result = this.createEditPrModelAndView(pres);
 
 		} else if (pres.getConference().getStartDate().after(pres.getStartMoment()) || pres.getStartMoment().after(pres.getConference().getEndDate()) || pres.getEndMoment().after(pres.getConference().getEndDate())
-			|| pres.getEndMoment().before(pres.getConference().getStartDate()) || pres.getStartMoment().after(pres.getEndMoment()))
+			|| pres.getEndMoment().before(pres.getConference().getStartDate()) || pres.getStartMoment().after(pres.getEndMoment()) || pres.getStartMoment().equals((pres.getEndMoment())))
 			result = this.createEditPrModelAndView(pres, "paneldate.commit.error");
 
 		else
