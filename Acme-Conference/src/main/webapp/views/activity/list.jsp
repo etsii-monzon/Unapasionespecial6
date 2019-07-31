@@ -42,7 +42,7 @@
 	<display:column property="endMoment" titleKey="activity.endMoment"
 		sortable="false" />
 	<display:column property="room" titleKey="activity.room"
-		sortable="true" />
+		sortable="false" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
 	<display:column property="optionalAttachments"
@@ -91,7 +91,7 @@
 	<display:column property="endMoment" titleKey="activity.endMoment"
 		sortable="false" />
 	<display:column property="room" titleKey="activity.room"
-		sortable="true" />
+		sortable="false" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
 	<display:column property="optionalAttachments"
@@ -162,7 +162,7 @@
 	<display:column property="endMoment" titleKey="activity.endMoment"
 		sortable="false" />
 	<display:column property="room" titleKey="activity.room"
-		sortable="true" />
+		sortable="false" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
 	<display:column property="optionalAttachments"

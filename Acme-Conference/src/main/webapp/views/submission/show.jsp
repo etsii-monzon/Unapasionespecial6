@@ -10,7 +10,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-<jstl:out value="${requestURI }"></jstl:out>
 <p>
 	<b><spring:message code="submission.ticker" />: </b>
 	<jstl:out value="${submission.ticker }" />
