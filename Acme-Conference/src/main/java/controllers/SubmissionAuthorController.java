@@ -56,15 +56,28 @@ public class SubmissionAuthorController extends AbstractController {
 	public ModelAndView upload(@RequestParam final int submissionId) {
 		ModelAndView result;
 		Submission submission;
+		final Date hoy = new Date();
+		try {
+			submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(submission.getStatus().equals("ACCEPTED"), "status upload");
+			Assert.isTrue(hoy.before(submission.getConference().getCameraDeadline()), "fecha pasada");
+			Assert.isTrue(submission.isCameraReady() == false, "ya se ha subido");
 
-		submission = this.submissionService.findOne(submissionId);
+			result = this.createEditModelAndView(submission);
+			result.addObject("submission", submission);
 
-		result = this.createEditModelAndView(submission);
-		result.addObject("submission", submission);
-
+		} catch (final Throwable oops) {
+			if (oops.getMessage().equals("status upload"))
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("fecha pasada"))
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("ya se ha subido"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
+		}
 		return result;
 	}
-
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;

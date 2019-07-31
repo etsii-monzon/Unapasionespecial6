@@ -13,7 +13,7 @@ import domain.Conference;
 @Repository
 public interface ConferenceRepository extends JpaRepository<Conference, Integer> {
 
-	@Query("select c from Conference c  where (c.title like concat('%',?1,'%') or c.venue like concat('%',?1,'%'))")
+	@Query("select c from Conference c  where (c.title like concat('%',?1,'%') or c.venue like concat('%',?1,'%')or c.summary like concat('%',?1,'%'))")
 	Collection<Conference> searchConferenceByKeyword(String keyword);
 
 	@Query("select avg(c.fee) from Conference c")

@@ -39,17 +39,23 @@ public class ReportAuthorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Submission s = this.submissionService.findOne(submissionId);
-			Assert.isTrue(this.authorService.findByPrincipal().getSubmissions().contains(s));
+			Assert.isTrue(!s.getStatus().equals("UNDER-REVIEW"), "status error");
+
+			Assert.isTrue(this.authorService.findByPrincipal().getSubmissions().contains(s), "hacking");
 
 			final Collection<Report> reports = this.reportService.findReportsOfSubmission(s);
 
 			result = new ModelAndView("report/list");
 			result.addObject("reports", reports);
 			result.addObject("requestURI", "report/author/list.do");
-		} catch (final IllegalArgumentException e) {
+		} catch (final Throwable oops) {
 			// TODO: handle exception
-
-			result = new ModelAndView("misc/403");
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("status error"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}

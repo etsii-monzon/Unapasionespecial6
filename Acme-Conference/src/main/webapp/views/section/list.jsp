@@ -15,26 +15,16 @@
 
 <!-- Listing grid -->
 
-<script type="text/javascript">
-	function confirmNotify() {
-
-		return confirm("<spring:message code="submission.confirm"/>");
-
-	}
-</script>
-
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="sections" requestURI="${requestURI}" id="row">
-
-
+	name="sections" requestURI="${requestURI}" id="row4">
 
 	<!-- Action links -->
-	
-	
+
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="section.edit">
-			<a href="section/administrator/edit.do?sectionId=${row.id}"> <spring:message
+			<a href="section/administrator/edit.do?sectionId=${row4.id}"> <spring:message
 					code="section.edit" />
 			</a>
 		</display:column>
@@ -43,19 +33,19 @@
 	<!-- Attributes -->
 
 
-	<display:column property="title"
-		titleKey="section.title" sortable="false" />
+	<display:column property="title" titleKey="section.title"
+		sortable="false" />
 	<display:column property="summary" titleKey="section.summary"
 		sortable="false" />
-	<display:column property="optionalPictures" titleKey="section.optionalPictures"
-		sortable="false" />
+	<display:column property="optionalPictures"
+		titleKey="section.optionalPictures" sortable="false" />
 
 </display:table>
 
 <!--CREAR PANEL  -->
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-		
+
 		<button type="button"
 			onclick="javascript: relativeRedir('activity/administrator/list.do?conferenceId=${conferenceId}')">
 			<spring:message code="section.return" />
