@@ -65,14 +65,7 @@
 
 	<!-- Action links -->
 	<security:authorize access="hasRole('ADMIN')">
-		<display:column titleKey="conference.show">
-			<a href="conference/administrator/show.do?conferenceId=${row.id}">
-				<spring:message code="conference.show" />
-			</a>
-		</display:column>
-	</security:authorize>
-	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
+		<display:column titleKey="conference.edit">
 			<jstl:if test="${row.draftMode=='true'}">
 
 
@@ -82,6 +75,14 @@
 			</jstl:if>
 		</display:column>
 	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column titleKey="conference.show">
+			<a href="conference/administrator/show.do?conferenceId=${row.id}">
+				<spring:message code="conference.show" />
+			</a>
+		</display:column>
+	</security:authorize>
+	
 	<!-- Attributes -->
 
 
