@@ -65,7 +65,7 @@ public class TutorialService {
 	}
 
 	public Collection<Tutorial> findAll() {
-		Assert.isTrue(this.adminService.checkPrincipal());
+		//		Assert.isTrue(this.adminService.checkPrincipal());
 		return this.tutorialRepository.findAll();
 	}
 

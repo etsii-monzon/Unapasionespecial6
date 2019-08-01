@@ -15,7 +15,9 @@
 
 <!-- Listing grid -->
 
-<h2><spring:message code="activity.listPanel"/></h2>
+<h2>
+	<spring:message code="activity.listPanel" />
+</h2>
 
 <display:table pagesize="5" class="displaytag" name="panels"
 	requestURI="${requestURI}" id="row1">
@@ -48,8 +50,8 @@
 		sortable="false" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
-	<display:column property="conference.title" titleKey="activity.conference"
-		sortable="false" />
+	<display:column property="conference.title"
+		titleKey="activity.conference" sortable="false" />
 	<display:column property="optionalAttachments"
 		titleKey="activity.optionalAttachments" sortable="false" />
 	<display:column>
@@ -64,16 +66,18 @@
 <!--CREAR PANEL  -->
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-	<jstl:if test="${conference.startDate > fecha }">
-		<button type="button"
-			onclick="javascript: relativeRedir('activity/administrator/panel/create.do?conferenceId=${conferenceId}')">
-			<spring:message code="panel.create" />
-		</button>
-	</jstl:if>
+		<jstl:if test="${conference.startDate > fecha }">
+			<button type="button"
+				onclick="javascript: relativeRedir('activity/administrator/panel/create.do?conferenceId=${conferenceId}')">
+				<spring:message code="panel.create" />
+			</button>
+		</jstl:if>
 	</div>
 </security:authorize>
 
-<h2><spring:message code="activity.listTutorial"/></h2>
+<h2>
+	<spring:message code="activity.listTutorial" />
+</h2>
 
 <display:table pagesize="5" class="displaytag" name="tutorials"
 	requestURI="${requestURI}" id="row2">
@@ -105,11 +109,11 @@
 		sortable="false" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
-	<display:column property="conference.title" titleKey="activity.conference"
-		sortable="false" />
+	<display:column property="conference.title"
+		titleKey="activity.conference" sortable="false" />
 	<display:column property="optionalAttachments"
 		titleKey="activity.optionalAttachments" sortable="false" />
-		
+
 	<display:column titleKey="tutorial.sections">
 		<a href="section/administrator/list.do?tutorialId=${row2.id}"> <spring:message
 				code="tutorial.sections" />
@@ -127,16 +131,18 @@
 <!--CREAR TUTORIAL  -->
 <security:authorize access="hasRole('ADMIN')">
 	<div>
-	<jstl:if test="${conference.startDate > fecha }">
-		<button type="button"
-			onclick="javascript: relativeRedir('activity/administrator/tutorial/create.do?conferenceId=${conferenceId}')">
-			<spring:message code="tutorial.create" />
-		</button>
-	</jstl:if>
+		<jstl:if test="${conference.startDate > fecha }">
+			<button type="button"
+				onclick="javascript: relativeRedir('activity/administrator/tutorial/create.do?conferenceId=${conferenceId}')">
+				<spring:message code="tutorial.create" />
+			</button>
+		</jstl:if>
 	</div>
 </security:authorize>
 
-<h2><spring:message code="activity.listPresentation"/></h2>
+<h2>
+	<spring:message code="activity.listPresentation" />
+</h2>
 
 
 <display:table pagesize="5" class="displaytag" name="presentations"
@@ -171,8 +177,8 @@
 		sortable="false" />
 	<display:column property="summary" titleKey="activity.summary"
 		sortable="false" />
-	<display:column property="conference.title" titleKey="activity.conference"
-		sortable="false" />
+	<display:column property="conference.title"
+		titleKey="activity.conference" sortable="false" />
 	<display:column property="optionalAttachments"
 		titleKey="activity.optionalAttachments" sortable="false" />
 
@@ -194,12 +200,12 @@
 <jstl:if test="${allowed }">
 	<security:authorize access="hasRole('ADMIN')">
 		<div>
-		<jstl:if test="${conference.startDate > fecha }">
-			<button type="button"
-				onclick="javascript: relativeRedir('activity/administrator/presentation/create.do?conferenceId=${conferenceId}')">
-				<spring:message code="presentation.create" />
-			</button>
-		</jstl:if>
+			<jstl:if test="${conference.startDate > fecha }">
+				<button type="button"
+					onclick="javascript: relativeRedir('activity/administrator/presentation/create.do?conferenceId=${conferenceId}')">
+					<spring:message code="presentation.create" />
+				</button>
+			</jstl:if>
 		</div>
 	</security:authorize>
 </jstl:if>
@@ -213,3 +219,5 @@
 		</button>
 	</div>
 </security:authorize>
+
+

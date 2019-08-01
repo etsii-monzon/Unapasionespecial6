@@ -250,6 +250,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 	}
 	@RequestMapping(value = "/brandName/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveB(@ModelAttribute("brandName") final String brandName, final BindingResult binding) {
+
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			System.out.print(binding);
@@ -257,6 +258,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 		} else
 			try {
+				Assert.isTrue(!brandName.isEmpty(), "vacio");
 				System.out.print("Entra");
 
 				this.configurationService.find().getMakes().add(brandName);
@@ -265,12 +267,14 @@ public class ConfigurationAdministratorController extends AbstractController {
 
 			} catch (final Throwable oops) {
 				System.out.print(oops);
-
-				result = this.createEditModelAndViewB(brandName, "message.commit.error");
+				if (oops.getMessage().equals("vacio"))
+					result = this.createEditModelAndViewB(brandName, "brandName.commit.error");
+				else
+					result = this.createEditModelAndViewB(brandName, "message.commit.error");
 			}
+
 		return result;
 	}
-
 	@RequestMapping(value = "/brandName/delete", method = RequestMethod.GET)
 	public ModelAndView deleteB(@RequestParam final String brandName) {
 		ModelAndView result;

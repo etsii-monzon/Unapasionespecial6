@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AuthorService;
 import services.ConferenceService;
 import services.ConfigurationService;
+import services.CreditCardService;
 import services.RegistrationService;
 import domain.Conference;
 import domain.Registration;
@@ -34,6 +35,8 @@ public class RegistrationAuthorController extends AbstractController {
 	ConferenceService		conferenceService;
 	@Autowired
 	ConfigurationService	configurationService;
+	@Autowired
+	CreditCardService		creditCardService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -106,7 +109,9 @@ public class RegistrationAuthorController extends AbstractController {
 			System.out.print(binding);
 			result = this.createEditModelAndView(registration);
 
-		} else
+		} else if (this.creditCardService.checkCreditCard(registration.getCreditCard()) == false)
+			result = this.createEditModelAndView(registration, "registration.creditCard.error");
+		else
 			try {
 				System.out.print("Entra");
 

@@ -116,15 +116,22 @@
 		<display:column property="draftMode" titleKey="conference.draftMode"
 			sortable="false" />
 
+		<display:column titleKey="conference.activities">
 
+			<a href="activity/administrator/list.do?conferenceId=${row.id}">
+				<spring:message code="conference.activities" />
+			</a>
+
+		</display:column>
+	</security:authorize>
+
+	<security:authorize access="!hasRole('ADMIN')">
 
 		<display:column titleKey="conference.activities">
-			
 
-
-				<a href="activity/administrator/list.do?conferenceId=${row.id}">
-					<spring:message code="conference.activities" />
-				</a>
+			<a href="activity/list.do?conferenceId=${row.id}"> <spring:message
+					code="conference.activities" />
+			</a>
 
 		</display:column>
 	</security:authorize>

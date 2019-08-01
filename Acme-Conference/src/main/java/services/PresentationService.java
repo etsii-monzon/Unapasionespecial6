@@ -59,7 +59,6 @@ public class PresentationService {
 	}
 
 	public Collection<Presentation> findAll() {
-		Assert.isTrue(this.adminService.checkPrincipal());
 		return this.presentRepository.findAll();
 	}
 

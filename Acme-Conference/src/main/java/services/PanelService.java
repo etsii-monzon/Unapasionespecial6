@@ -51,7 +51,7 @@ public class PanelService {
 	}
 
 	public Collection<Panel> findAll() {
-		Assert.isTrue(this.adminService.checkPrincipal());
+		//		Assert.isTrue(this.adminService.checkPrincipal());
 		return this.panelRepository.findAll();
 	}
 

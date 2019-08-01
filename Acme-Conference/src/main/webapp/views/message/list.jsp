@@ -22,8 +22,8 @@
 
 </div>
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="messages" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="messages"
+	requestURI="${requestURI}" id="row">
 
 
 
@@ -37,7 +37,7 @@
 	<display:column titleKey="message.sender" sortable="true">
 		<jstl:out value="${row.sender.email}"></jstl:out>
 	</display:column>
-	
+
 	<!-- Subject -->
 	<display:column property="subject" titleKey="message.subject" />
 
