@@ -38,7 +38,11 @@
 	<display:column property="summary" titleKey="section.summary"
 		sortable="false" />
 	<display:column property="optionalPictures"
-		titleKey="section.optionalPictures" sortable="false" />
+		titleKey="section.optionalPictures" sortable="false">
+		<jstl:forEach items="${row4.optionalPictures}" var="x">
+			<jstl:out value="${x}"></jstl:out>
+		</jstl:forEach>
+	</display:column>
 
 </display:table>
 
