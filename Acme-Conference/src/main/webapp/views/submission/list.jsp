@@ -67,9 +67,7 @@
 				</jstl:if>
 			</jstl:if>
 			<jstl:if test="${row.cameraReady}">
-				<p>
 					<spring:message code="submission.uploaded" />
-				</p>
 			</jstl:if>
 		</display:column>
 	</security:authorize>
@@ -79,6 +77,10 @@
 
 	<display:column property="conference.title"
 		titleKey="submission.conference" sortable="false" />
+	<security:authorize access="hasRole('REVIEWER')">
+		<display:column property="conference.summary"
+		titleKey="submission.conference.summary" sortable="false" />
+	</security:authorize>
 	<display:column property="ticker" titleKey="submission.ticker"
 		sortable="false" />
 	<display:column property="moment" titleKey="submission.moment"

@@ -55,16 +55,9 @@ public class PanelService {
 		return this.panelRepository.findAll();
 	}
 
-	@SuppressWarnings("deprecation")
 	public Panel save(final Panel p) {
 		Assert.isTrue(this.adminService.checkPrincipal());
 		Panel res;
-
-		Assert.isTrue(p.getStartMoment().getDate() == p.getEndMoment().getDate());
-		Assert.isTrue(p.getStartMoment().getMonth() == p.getEndMoment().getMonth());
-		Assert.isTrue(p.getStartMoment().getYear() == p.getEndMoment().getYear());
-
-		Assert.isTrue((p.getStartMoment().getHours() < p.getEndMoment().getHours()) || (p.getStartMoment().getMinutes() < p.getEndMoment().getMinutes()));
 
 		if (!p.getOptionalAttachments().isEmpty())
 			for (final String url : p.getOptionalAttachments())

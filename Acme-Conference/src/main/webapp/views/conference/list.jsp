@@ -119,14 +119,13 @@
 
 
 		<display:column titleKey="conference.activities">
-			<jstl:if test="${row.startDate > fecha }">
+			
 
 
 				<a href="activity/administrator/list.do?conferenceId=${row.id}">
 					<spring:message code="conference.activities" />
 				</a>
 
-			</jstl:if>
 		</display:column>
 	</security:authorize>
 </display:table>

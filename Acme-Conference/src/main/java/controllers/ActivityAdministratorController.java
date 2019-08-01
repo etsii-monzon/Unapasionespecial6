@@ -2,6 +2,8 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.validation.Valid;
 
@@ -55,6 +57,7 @@ public class ActivityAdministratorController extends AbstractController {
 		final Collection<Tutorial> tutorials = this.tutorialService.findAllTutorialsByConference(conf);
 		final Collection<Panel> panels = this.panelService.findAllPanelsByConference(conf);
 		final Collection<Presentation> presents = this.presentationService.findAllPresentationsByConference(conf);
+		final Date fecha = new GregorianCalendar().getTime();
 		ModelAndView result;
 
 		final Collection<Submission> subms = this.submissionService.findAllCameraReadyVersion(conferenceId);
@@ -63,11 +66,13 @@ public class ActivityAdministratorController extends AbstractController {
 		System.out.println(panels);
 
 		result = new ModelAndView("activity/list");
+		result.addObject("conference", conf);
 		result.addObject("conferenceId", conferenceId);
 		result.addObject("tutorials", tutorials);
 		result.addObject("panels", panels);
 		result.addObject("presentations", presents);
 		result.addObject("allowed", allowed);
+		result.addObject("fecha", fecha);
 		result.addObject("requestURI", "activity/administrator/list.do");
 
 		return result;

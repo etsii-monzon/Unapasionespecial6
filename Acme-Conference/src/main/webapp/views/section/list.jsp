@@ -45,6 +45,10 @@
 <!--CREAR PANEL  -->
 <security:authorize access="hasRole('ADMIN')">
 	<div>
+		<button type="button"
+			onclick="javascript: relativeRedir('section/administrator/create.do?tutorialId=${tutorialId}')">
+			<spring:message code="section.create" />
+		</button>
 
 		<button type="button"
 			onclick="javascript: relativeRedir('activity/administrator/list.do?conferenceId=${conferenceId}')">
