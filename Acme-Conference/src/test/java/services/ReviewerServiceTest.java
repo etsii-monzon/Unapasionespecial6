@@ -10,6 +10,9 @@
 
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -58,6 +61,10 @@ public class ReviewerServiceTest extends AbstractTest {
 		res.setEmail("jose145@gmail.com");
 		res.setAddress("Paseo de la Conferencia");
 		res.setPhoneNumber("659865342");
+		final Collection<String> keywords = new ArrayList<>();
+		keywords.add("Hacking");
+		keywords.add("Java");
+		res.setKeywords(keywords);
 
 		final Reviewer result = this.reviewerService.save(res);
 		Assert.isTrue(this.reviewerService.findAll().contains(result));
