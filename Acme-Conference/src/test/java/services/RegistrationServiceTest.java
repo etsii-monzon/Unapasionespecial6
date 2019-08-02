@@ -76,7 +76,7 @@ public class RegistrationServiceTest extends AbstractTest {
 
 		final Registration res = this.registrationService.create();
 		Assert.notNull(res);
-		final Conference conference = this.conferenceService.findOne(37);
+		final Conference conference = this.conferenceService.findOne(this.getEntityId("conference1"));
 		final CreditCard creditCard = new CreditCard();
 		creditCard.setBrandName("VISA");
 		creditCard.setCvv(123);

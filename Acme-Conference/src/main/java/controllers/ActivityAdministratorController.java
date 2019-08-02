@@ -154,6 +154,7 @@ public class ActivityAdministratorController extends AbstractController {
 		} else if (tutorial.getConference().getStartDate().after(tutorial.getStartMoment()) || tutorial.getStartMoment().after(tutorial.getConference().getEndDate()) || tutorial.getEndMoment().after(tutorial.getConference().getEndDate())
 			|| tutorial.getEndMoment().before(tutorial.getConference().getStartDate()) || tutorial.getStartMoment().after(tutorial.getEndMoment()) || tutorial.getStartMoment().equals((tutorial.getEndMoment())))
 			result = this.createEditTutModelAndView(tutorial, "paneldate.commit.error");
+
 		else
 			try {
 				System.out.print("Entra");

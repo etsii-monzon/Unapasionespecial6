@@ -84,7 +84,7 @@ public class SubmissionServiceTest extends AbstractTest {
 
 		final Submission res = this.submissionService.create();
 		Assert.notNull(res);
-		final Conference conference = this.conferenceService.findOne(37);
+		final Conference conference = this.conferenceService.findOne(this.getEntityId("conference1"));
 		final Paper paper = this.paperService.create();
 		paper.setDocument("document");
 		paper.setSummary("summary");
@@ -156,4 +156,10 @@ public class SubmissionServiceTest extends AbstractTest {
 		//En el PopulateDatabase.xml, hay reviewers con keywords coincidentes con algunas submissions existentes.
 		Assert.isTrue(aux);
 	}
+
+	//	@Test
+	//	public void testDecisionMaking() {
+	//		super.authenticate("admin");
+	//		
+	//	}
 }
