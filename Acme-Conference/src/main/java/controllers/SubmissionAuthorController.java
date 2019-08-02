@@ -62,6 +62,7 @@ public class SubmissionAuthorController extends AbstractController {
 			Assert.isTrue(submission.getStatus().equals("ACCEPTED"), "status upload");
 			Assert.isTrue(hoy.before(submission.getConference().getCameraDeadline()), "fecha pasada");
 			Assert.isTrue(submission.isCameraReady() == false, "ya se ha subido");
+			Assert.isTrue(this.authorService.findByPrincipal().getSubmissions().contains(submission), "hacking");
 
 			result = this.createEditModelAndView(submission);
 			result.addObject("submission", submission);
@@ -72,6 +73,8 @@ public class SubmissionAuthorController extends AbstractController {
 			else if (oops.getMessage().equals("fecha pasada"))
 				result = new ModelAndView("misc/403");
 			else if (oops.getMessage().equals("ya se ha subido"))
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("hacking"))
 				result = new ModelAndView("misc/403");
 			else
 				result = new ModelAndView("redirect:/");
@@ -133,44 +136,6 @@ public class SubmissionAuthorController extends AbstractController {
 
 					result = this.createEditModelAndView(submission, "submission.commit.error");
 			}
-		return result;
-	}
-	//delete
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Submission submission, final BindingResult binding) {
-		ModelAndView result;
-		try {
-			this.submissionService.delete(submission);
-			Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			System.out.println(oops);
-			if (oops.getMessage().equals("Actor logueado debe ser autor del paper"))
-				result = new ModelAndView("misc/403");
-			result = this.createEditModelAndView(submission, "submission.commit.error");
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam final int submissionId) {
-		ModelAndView result;
-		final Submission submission;
-		try {
-			submission = this.submissionService.findOne(submissionId);
-			Assert.isTrue(submission.getPaper().getAuthors().contains(this.authorService.findByPrincipal()), "Actor logueado debe ser autor del paper");
-
-			result = new ModelAndView("submission/show");
-			result.addObject("requestURI", "submission/author/show.do");
-			result.addObject("submission", submission);
-		} catch (final Throwable oops) {
-			if (oops.getMessage().equals("Actor logueado debe ser autor del paper"))
-				result = new ModelAndView("misc/403");
-			else
-				result = new ModelAndView("submission/list");
-		}
-
 		return result;
 	}
 

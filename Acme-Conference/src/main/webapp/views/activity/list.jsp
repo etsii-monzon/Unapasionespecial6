@@ -57,16 +57,19 @@
 	<display:column property="conference.title"
 		titleKey="activity.conference" sortable="false" />
 	<display:column property="optionalAttachments"
-		titleKey="activity.optionalAttachments" sortable="false">  
+		titleKey="activity.optionalAttachments" sortable="false">
 		<jstl:forEach items="${row1.optionalAttachments}" var="x">
 			<jstl:out value="${x}"></jstl:out>
-		</jstl:forEach>	
+		</jstl:forEach>
 	</display:column>
-	<display:column>
-		<a href="activity/administrator/panel/delete.do?panelId=${row1.id}">
-			<spring:message code="panel.delete" />
-		</a>
-	</display:column>
+	<security:authorize access="hasRole('ADMIN')">
+
+		<display:column>
+			<a href="activity/administrator/panel/delete.do?panelId=${row1.id}">
+				<spring:message code="panel.delete" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 
 </display:table>
@@ -127,21 +130,22 @@
 		titleKey="activity.optionalAttachments" sortable="false">
 		<jstl:forEach items="${row2.optionalAttachments}" var="x">
 			<jstl:out value="${x}"></jstl:out>
-		</jstl:forEach>	
+		</jstl:forEach>
 	</display:column>
-		
+
 	<display:column titleKey="tutorial.sections">
 		<a href="section/administrator/list.do?tutorialId=${row2.id}"> <spring:message
 				code="tutorial.sections" />
 		</a>
 	</display:column>
-	<display:column>
-		<a
-			href="activity/administrator/tutorial/delete.do?tutorialId=${row2.id}">
-			<spring:message code="tutorial.delete" />
-		</a>
-	</display:column>
-
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a
+				href="activity/administrator/tutorial/delete.do?tutorialId=${row2.id}">
+				<spring:message code="tutorial.delete" />
+			</a>
+		</display:column>
+	</security:authorize>
 </display:table>
 
 <!--CREAR TUTORIAL  -->
@@ -187,7 +191,7 @@
 		sortable="false">
 		<jstl:forEach items="${row3.speakers}" var="y">
 			<jstl:out value="${y}"></jstl:out>
-		</jstl:forEach>	
+		</jstl:forEach>
 	</display:column>
 	<display:column property="startMoment" titleKey="activity.startMoment"
 		sortable="false" />
@@ -203,21 +207,26 @@
 		titleKey="activity.optionalAttachments" sortable="false">
 		<jstl:forEach items="${row3.optionalAttachments}" var="x">
 			<jstl:out value="${x}"></jstl:out>
-		</jstl:forEach>	
+		</jstl:forEach>
 	</display:column>
+	
+	<security:authorize access="hasRole('ADMIN')">
 
-	<display:column titleKey="presentation.submission">
-		<a
-			href="activity/administrator/submission/show.do?submissionId=${row3.submission.id}">
-			<spring:message code="presentation.subm" />
-		</a>
-	</display:column>
-	<display:column>
-		<a
-			href="activity/administrator/presentation/delete.do?presentationId=${row3.id}">
-			<spring:message code="presentation.delete" />
-		</a>
-	</display:column>
+
+		<display:column titleKey="presentation.submission">
+			<a
+				href="activity/administrator/submission/show.do?submissionId=${row3.submission.id}">
+				<spring:message code="presentation.subm" />
+			</a>
+		</display:column>
+
+		<display:column>
+			<a
+				href="activity/administrator/presentation/delete.do?presentationId=${row3.id}">
+				<spring:message code="presentation.delete" />
+			</a>
+		</display:column>
+	</security:authorize>
 </display:table>
 
 <!--CREAR PRESENTATION  -->

@@ -5,7 +5,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,21 +35,6 @@ public class ReportReviewerController extends AbstractController {
 		Report report;
 
 		report = this.reportService.create(subId);
-		result = this.createEditModelAndView(report);
-
-		return result;
-	}
-
-	//Edit
-
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int hola) {
-		ModelAndView result;
-		final Report report;
-
-		report = this.reportService.findOne(hola);
-		Assert.notNull(report);
-
 		result = this.createEditModelAndView(report);
 
 		return result;
@@ -93,33 +77,6 @@ public class ReportReviewerController extends AbstractController {
 
 				result = this.createEditModelAndView(report, "report.commit.error");
 			}
-		return result;
-	}
-	//delete
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Report report, final BindingResult binding) {
-		ModelAndView result;
-		try {
-			this.reportService.delete(report);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			System.out.println(oops);
-			result = this.createEditModelAndView(report, "report.commit.error");
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam final int reportId) {
-		final ModelAndView result;
-		final Report report;
-
-		report = this.reportService.findOne(reportId);
-
-		result = new ModelAndView("report/show");
-		result.addObject("requestURI", "report/reviewer/show.do");
-		result.addObject("report", report);
 		return result;
 	}
 

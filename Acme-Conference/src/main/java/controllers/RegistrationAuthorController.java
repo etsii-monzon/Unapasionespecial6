@@ -64,21 +64,6 @@ public class RegistrationAuthorController extends AbstractController {
 		return result;
 	}
 
-	//Edit
-
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int registrationId) {
-		ModelAndView result;
-		final Registration registration;
-
-		registration = this.registrationService.findOne(registrationId);
-		Assert.notNull(registration);
-
-		result = this.createEditModelAndView(registration);
-
-		return result;
-	}
-
 	protected ModelAndView createEditModelAndView(final Registration registration) {
 		ModelAndView result;
 
@@ -122,20 +107,6 @@ public class RegistrationAuthorController extends AbstractController {
 
 				result = this.createEditModelAndView(registration, "registration.commit.error");
 			}
-		return result;
-	}
-	//delete
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Registration registration, final BindingResult binding) {
-		ModelAndView result;
-		try {
-			this.registrationService.delete(registration);
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			System.out.println(oops);
-			result = this.createEditModelAndView(registration, "registration.commit.error");
-		}
 		return result;
 	}
 

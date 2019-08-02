@@ -8,13 +8,15 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:useBean id="date" class="java.util.Date" />
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> <p>${systemName}</p>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" />
+	<p>${systemName} Co., Inc.</p>
 </b>

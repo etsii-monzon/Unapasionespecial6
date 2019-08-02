@@ -72,6 +72,7 @@
 	</bean>
 
 
+
 	<!-- Other domain beans come here -->
 
 	<bean id="admin1" class="domain.Administrator">
@@ -108,6 +109,8 @@
 			</list>
 		</property>
 	</bean>
+
+
 
 	<bean id="conference1" class="domain.Conference">
 
@@ -367,8 +370,8 @@
 		<property name="title" value="PAPER" />
 		<property name="authors">
 			<list>
-							<ref bean="author1" />
-			
+				<ref bean="author1" />
+
 				<ref bean="author2" />
 
 			</list>
