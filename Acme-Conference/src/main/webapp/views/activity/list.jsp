@@ -210,11 +210,22 @@
 	</security:authorize>
 </jstl:if>
 
+<br />
+<br />
 <security:authorize access="hasRole('ADMIN')">
 	<div>
 
 		<button type="button"
 			onclick="javascript: relativeRedir('conference/administrator/list.do')">
+			<spring:message code="activity.return" />
+		</button>
+	</div>
+</security:authorize>
+
+<security:authorize access="!hasRole('ADMIN')">
+	<div>
+
+		<button type="button" onclick="javascript: history.back()">
 			<spring:message code="activity.return" />
 		</button>
 	</div>
