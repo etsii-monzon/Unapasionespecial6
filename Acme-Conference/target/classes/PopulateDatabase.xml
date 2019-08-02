@@ -302,7 +302,7 @@
 		<property name="ticker" value="QQE-8K6L" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
-		<property name="paper" ref="paper1" />
+		<property name="paper" ref="paper2" />
 		<property name="conference" ref="conference8" />
 		<property name="cameraReady" value="false" />
 		<property name="reviewers">
@@ -317,7 +317,7 @@
 		<property name="ticker" value="MOM-8K6L" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
-		<property name="paper" ref="paper1" />
+		<property name="paper" ref="paper3" />
 		<property name="conference" ref="conference9" />
 		<property name="cameraReady" value="true" />
 		<property name="reviewers">
@@ -328,7 +328,7 @@
 		</property>
 	</bean>
 	<bean id="paper3" class="domain.Paper">
-		<property name="title" value="MOM-8K6L" />
+		<property name="title" value="paper title" />
 		<property name="authors">
 			<list>
 				<ref bean="author1" />
@@ -354,7 +354,7 @@
 		</property>
 	</bean>
 	<bean id="paper1" class="domain.Paper">
-		<property name="title" value="MSA-8K6L" />
+		<property name="title" value="paper1" />
 		<property name="authors">
 			<list>
 				<ref bean="author1" />
@@ -367,6 +367,8 @@
 		<property name="title" value="PAPER" />
 		<property name="authors">
 			<list>
+							<ref bean="author1" />
+			
 				<ref bean="author2" />
 
 			</list>

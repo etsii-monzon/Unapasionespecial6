@@ -1,5 +1,5 @@
 #./src/main/resources/Entities.map
-#Thu Aug 01 15:58:43 CEST 2019
+#Fri Aug 02 16:36:38 CEST 2019
 creditCard1=68
 message1=76
 submission10=65
@@ -35,8 +35,8 @@ conference2=49
 paper3=62
 submission1=63
 conference1=48
-paper2=64
-paper1=60
+paper2=60
+paper1=64
 configuration=82
 admin1=47
 author2=69
