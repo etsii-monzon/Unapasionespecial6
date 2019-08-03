@@ -15,19 +15,19 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-	<definition name="room/edit" extends="master.page">
-		<put-attribute name="title" value="Habitación" />
-		<put-attribute name="body" value="/views/room/edit.jsp" />
+<definition name="registration/edit" extends="master.page">
+		<put-attribute name="title" value="Registro" />
+		<put-attribute name="body" value="/views/registration/edit.jsp" />
 	</definition>
 
-	<definition name="room/list" extends="master.page">
-		<put-attribute name="title" value="Lista de habitaciones" />
-		<put-attribute name="body" value="/views/room/list.jsp" />
+	<definition name="registration/list" extends="master.page">
+		<put-attribute name="title" value="Lista de Registros" />
+		<put-attribute name="body" value="/views/registration/list.jsp" />
 	</definition>
 
-	<definition name="room/show" extends="master.page">
-		<put-attribute name="title" value="Mostrar una habitación" />
-		<put-attribute name="body" value="/views/room/show.jsp" />
+	<definition name="registration/show" extends="master.page">
+		<put-attribute name="title" value="La conferencia del registro" />
+		<put-attribute name="body" value="/views/registration/show.jsp" />
 	</definition>
 
 </tiles-definitions>
