@@ -15,19 +15,10 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-	<definition name="room/edit" extends="master.page">
-		<put-attribute name="title" value="Habitación" />
-		<put-attribute name="body" value="/views/room/edit.jsp" />
-	</definition>
-
-	<definition name="room/list" extends="master.page">
-		<put-attribute name="title" value="Lista de habitaciones" />
-		<put-attribute name="body" value="/views/room/list.jsp" />
-	</definition>
-
-	<definition name="room/show" extends="master.page">
-		<put-attribute name="title" value="Mostrar una habitación" />
-		<put-attribute name="body" value="/views/room/show.jsp" />
+	
+	<definition name="paper/showp" extends="master.page">
+		<put-attribute name="title" value="Papel a revisar" />
+		<put-attribute name="body" value="/views/paper/show.jsp" />
 	</definition>
 
 </tiles-definitions>
