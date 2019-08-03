@@ -134,7 +134,7 @@
 	</display:column>
 
 	<display:column titleKey="tutorial.sections">
-		<a href="section/administrator/list.do?tutorialId=${row2.id}"> <spring:message
+		<a href="section/list.do?tutorialId=${row2.id}"> <spring:message
 				code="tutorial.sections" />
 		</a>
 	</display:column>

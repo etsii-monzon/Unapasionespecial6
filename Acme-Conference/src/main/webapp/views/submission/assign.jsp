@@ -27,8 +27,7 @@
 	<form:label path="reviewers">
 			<spring:message code="submission.reviewers" />
 		</form:label>	
-		<form:select multiple="true" id="reviewers" path="reviewers">
-			<form:option value="0" label="----" />		
+		<form:select multiple="true" id="reviewers" path="reviewers">	
 			<form:options items="${reviewers}" itemValue="id" itemLabel="name" />
 		</form:select>
 		<form:errors path="reviewers" cssClass="error" />

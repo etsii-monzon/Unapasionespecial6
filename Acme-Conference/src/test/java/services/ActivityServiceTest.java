@@ -68,6 +68,8 @@ public class ActivityServiceTest extends AbstractTest {
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
 		speakers.add("migue");
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 
 		final int id = this.getEntityId("conference7");
 		final Panel pa = this.panelService.create(id);
@@ -77,6 +79,7 @@ public class ActivityServiceTest extends AbstractTest {
 		pa.setSpeakers(speakers);
 		pa.setSummary("summa");
 		pa.setTitle("title");
+		pa.setOptionalAttachments(attachs);
 
 		final Panel res = this.panelService.save(pa);
 		Assert.notNull(res);
@@ -92,6 +95,8 @@ public class ActivityServiceTest extends AbstractTest {
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
 		speakers.add("migue");
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 
 		final int id = this.getEntityId("conference7");
 		final Panel pa = this.panelService.create(id);
@@ -101,6 +106,7 @@ public class ActivityServiceTest extends AbstractTest {
 		pa.setSpeakers(speakers);
 		pa.setSummary("summa");
 		pa.setTitle("title");
+		pa.setOptionalAttachments(attachs);
 
 		final Panel res = this.panelService.save(pa);
 		Assert.notNull(res);
@@ -120,6 +126,8 @@ public class ActivityServiceTest extends AbstractTest {
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
 		speakers.add("migue");
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 
 		final int id = this.getEntityId("conference7");
 		final Panel pa = this.panelService.create(id);
@@ -129,6 +137,7 @@ public class ActivityServiceTest extends AbstractTest {
 		pa.setSpeakers(speakers);
 		pa.setSummary("summa");
 		pa.setTitle("title");
+		pa.setOptionalAttachments(attachs);
 
 		final Panel res = this.panelService.save(pa);
 		Assert.notNull(res);
@@ -147,6 +156,8 @@ public class ActivityServiceTest extends AbstractTest {
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
 		speakers.add("migue");
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 
 		final int id = this.getEntityId("conference7");
 		final Tutorial tu = this.tutorialService.create(id);
@@ -156,14 +167,18 @@ public class ActivityServiceTest extends AbstractTest {
 		tu.setSpeakers(speakers);
 		tu.setSummary("summa");
 		tu.setTitle("title");
+		tu.setOptionalAttachments(attachs);
 
 		final Tutorial res = this.tutorialService.save(tu);
 		Assert.notNull(res);
 
 		final Section sec = this.secService.create(res.getId());
+		final Collection<String> pictures = new ArrayList<String>();
+		pictures.add("https://www.github.com/dodp.jpg");
 
 		sec.setTitle("title");
 		sec.setSummary("summardd");
+		sec.setOptionalPictures(pictures);
 		final Section aux = this.secService.save(sec);
 
 		Assert.notNull(aux);
@@ -179,6 +194,8 @@ public class ActivityServiceTest extends AbstractTest {
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
 		speakers.add("migue");
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 
 		final int id = this.getEntityId("conference7");
 		final Tutorial tu = this.tutorialService.create(id);
@@ -188,14 +205,18 @@ public class ActivityServiceTest extends AbstractTest {
 		tu.setSpeakers(speakers);
 		tu.setSummary("summa");
 		tu.setTitle("title");
+		tu.setOptionalAttachments(attachs);
 
 		final Tutorial res = this.tutorialService.save(tu);
 		Assert.notNull(res);
 
 		final Section sec = this.secService.create(res.getId());
+		final Collection<String> pictures = new ArrayList<String>();
+		pictures.add("https://www.github.com/dodp.jpg");
 
 		sec.setTitle("title");
 		sec.setSummary("summardd");
+		sec.setOptionalPictures(pictures);
 		final Section aux = this.secService.save(sec);
 
 		Assert.notNull(aux);
@@ -214,6 +235,8 @@ public class ActivityServiceTest extends AbstractTest {
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
 		speakers.add("migue");
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 
 		final int id = this.getEntityId("conference7");
 		final Tutorial tu = this.tutorialService.create(id);
@@ -223,14 +246,17 @@ public class ActivityServiceTest extends AbstractTest {
 		tu.setSpeakers(speakers);
 		tu.setSummary("summa");
 		tu.setTitle("title");
+		tu.setOptionalAttachments(attachs);
 
 		final Tutorial res = this.tutorialService.save(tu);
 		Assert.notNull(res);
 
 		final Section sec = this.secService.create(res.getId());
-
+		final Collection<String> pictures = new ArrayList<String>();
+		pictures.add("https://www.github.com/dodp.jpg");
 		sec.setTitle("title");
 		sec.setSummary("summardd");
+		sec.setOptionalPictures(pictures);
 		final Section aux = this.secService.save(sec);
 
 		Assert.notNull(aux);
@@ -257,6 +283,8 @@ public class ActivityServiceTest extends AbstractTest {
 		final Date end = new Date();
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 		speakers.add("migue");
 
 		final int id = this.getEntityId("conference7");
@@ -268,6 +296,7 @@ public class ActivityServiceTest extends AbstractTest {
 		pr.setSummary("summa");
 		pr.setTitle("title");
 		pr.setSubmission(aux);
+		pr.setOptionalAttachments(attachs);
 
 		final Presentation res = this.presentationService.save(pr);
 		Assert.notNull(res);
@@ -287,6 +316,7 @@ public class ActivityServiceTest extends AbstractTest {
 		final Date end = new Date();
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
+		final Collection<String> attachs = new ArrayList<String>();
 		speakers.add("migue");
 
 		final int id = this.getEntityId("conference7");
@@ -298,6 +328,7 @@ public class ActivityServiceTest extends AbstractTest {
 		pr.setSummary("summa");
 		pr.setTitle("title");
 		pr.setSubmission(aux);
+		pr.setOptionalAttachments(attachs);
 
 		final Presentation res = this.presentationService.save(pr);
 		Assert.notNull(res);
@@ -321,6 +352,8 @@ public class ActivityServiceTest extends AbstractTest {
 		end.setHours(21);
 		final Collection<String> speakers = new ArrayList<String>();
 		speakers.add("migue");
+		final Collection<String> attachs = new ArrayList<String>();
+		attachs.add("https://www.github.com/");
 
 		final int id = this.getEntityId("conference7");
 		final Presentation pr = this.presentationService.create(id);
@@ -331,6 +364,7 @@ public class ActivityServiceTest extends AbstractTest {
 		pr.setSummary("summa");
 		pr.setTitle("title");
 		pr.setSubmission(aux);
+		pr.setOptionalAttachments(attachs);
 
 		final Presentation res = this.presentationService.save(pr);
 		Assert.notNull(res);

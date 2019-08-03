@@ -53,11 +53,12 @@
 			onclick="javascript: relativeRedir('section/administrator/create.do?tutorialId=${tutorialId}')">
 			<spring:message code="section.create" />
 		</button>
-
-		<button type="button"
-			onclick="javascript: relativeRedir('activity/administrator/list.do?conferenceId=${conferenceId}')">
-			<spring:message code="section.return" />
-		</button>
 	</div>
 </security:authorize>
+
+<button type="button"
+			onclick="javascript: relativeRedir('activity/list.do?conferenceId=${conferenceId}')">
+			<spring:message code="section.return" />
+</button>
+
 
