@@ -99,16 +99,19 @@ public class SubmissionAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		try {
-
 			final Submission sub = this.submissionService.findOne(submissionId);
 			Assert.isTrue(sub.getStatus().equals("UNDER-REVIEW"), "status error");
+			Assert.isTrue(sub.getReviewers().isEmpty(), "status error");
+			//Assert.isTrue(this.adminService.findByPrincipal().getConferences().equals(sub.getConference()), "hacking");
 
 			result = this.createAssignModelAndView(sub);
 		} catch (final Throwable oops) {
-			if (oops.getMessage().equals("status error"))
+			if (oops.getMessage() == "status error")
 				result = new ModelAndView("misc/403");
-			else
+			else {
+				System.out.println(oops.getMessage() + " " + oops.getCause());
 				result = new ModelAndView("redirect:/");
+			}
 		}
 
 		return result;
@@ -123,19 +126,13 @@ public class SubmissionAdministratorController extends AbstractController {
 
 	protected ModelAndView createAssignModelAndView(final Submission submission, final String messageCode) {
 		final ModelAndView result;
-		final Collection<Reviewer> reviewers = this.revService.findAll();
-		//		final Collection<Reviewer> existentes = submission.getReviewers();
-
-		//		for (final Reviewer r : submission.getReviewers()) {
-		//			reviewers.remove(r);
-		//			existentes.add(r);
-		//		}
+		final Collection<Reviewer> reviewers = this.submissionService.findAllReviewersNotSubmission(submission.getId());
+		//final Collection<Reviewer> reviewers = this.revService.findAll();
 
 		result = new ModelAndView("submission/assign");
-
+		Assert.isTrue(!reviewers.isEmpty(), "error reviewers");
 		result.addObject("submission", submission);
 		result.addObject("reviewers", reviewers);
-		//		result.addObject("existentes", existentes);
 
 		result.addObject("message", messageCode);
 
@@ -152,7 +149,6 @@ public class SubmissionAdministratorController extends AbstractController {
 		} else
 			try {
 				System.out.print("Entra");
-				Assert.isTrue(submission.getReviewers().size() <= 3);
 
 				final Submission sub = this.submissionService.save(submission);
 				//Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(sub.getConference()), "hacking");
@@ -164,8 +160,10 @@ public class SubmissionAdministratorController extends AbstractController {
 					result = new ModelAndView("misc/403");
 				else if (oops.getMessage() == "no revs" || oops.getClass().equals(java.lang.NullPointerException.class))
 					result = this.createAssignModelAndView(submission, "submission.reviewers.error");
-				else
+				else {
+					System.out.println("" + oops.getMessage());
 					result = this.createAssignModelAndView(submission, "submission.commit.error");
+				}
 			}
 		return result;
 	}

@@ -169,6 +169,20 @@ public class SubmissionService {
 
 	}
 
+	public Collection<Reviewer> findAllReviewersNotSubmission(final int submissionId) {
+		final Collection<Reviewer> total = this.revService.findAll();
+		final Submission sub = this.findOne(submissionId);
+
+		for (final Reviewer rev : sub.getReviewers()) {
+			final Collection<Report> repots = rev.getReports();
+
+			for (final Report rep : repots)
+				if (rep.getSubmission().equals(sub))
+					total.remove(rev);
+		}
+
+		return total;
+	}
 	public void assignReviewers() {
 		final Collection<Submission> submissions = new ArrayList<Submission>();
 

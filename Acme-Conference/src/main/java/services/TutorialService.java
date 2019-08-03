@@ -60,7 +60,7 @@ public class TutorialService {
 	}
 
 	public Tutorial findOne(final int tutorialId) {
-		Assert.isTrue(this.adminService.checkPrincipal());
+		//		Assert.isTrue(this.adminService.checkPrincipal());
 		return this.tutorialRepository.findOne(tutorialId);
 	}
 

@@ -157,9 +157,11 @@
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.assign">
 			<jstl:if test="${row.status == 'UNDER-REVIEW' }">
-				<a href="submission/administrator/assign.do?submissionId=${row.id}">
-					<spring:message code="submission.assign" />
-				</a>
+				<jstl:if test="${row.reviewers.isEmpty()}">
+					<a href="submission/administrator/assign.do?submissionId=${row.id}">
+						<spring:message code="submission.assign" />
+					</a>
+					</jstl:if>
 			</jstl:if>
 		</display:column>
 	</security:authorize>
