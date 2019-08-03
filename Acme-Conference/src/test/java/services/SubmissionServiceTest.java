@@ -157,9 +157,15 @@ public class SubmissionServiceTest extends AbstractTest {
 		Assert.isTrue(aux);
 	}
 
-	//	@Test
-	//	public void testDecisionMaking() {
-	//		super.authenticate("admin");
-	//		
-	//	}
+	@Test
+	public void testDecisionMaking() {
+		super.authenticate("admin");
+
+		final Submission sub = this.submissionService.findOne(this.getEntityId("submission1"));
+		Assert.isTrue(sub.getStatus().equals("UNDER-REVIEW"));
+		this.submissionService.submissionStatus(sub.getId());
+		Assert.isTrue(sub.getStatus().equals("ACCEPTED"));
+		super.unauthenticate();
+
+	}
 }
