@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
@@ -52,6 +53,7 @@ public class Configuration extends DomainEntity {
 	public void setSistemName(final String sistemName) {
 		this.sistemName = sistemName;
 	}
+	@NotBlank
 	public String getWelcomeEN() {
 		return this.welcomeEN;
 	}
@@ -59,6 +61,7 @@ public class Configuration extends DomainEntity {
 	public void setWelcomeEN(final String welcomeEN) {
 		this.welcomeEN = welcomeEN;
 	}
+	@NotBlank
 	public String getWelcomeSP() {
 		return this.welcomeSP;
 	}
@@ -77,6 +80,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@ElementCollection
+	@NotEmpty
 	public Collection<String> getMakes() {
 		return this.makes;
 	}
