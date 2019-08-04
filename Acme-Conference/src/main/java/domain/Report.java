@@ -24,7 +24,7 @@ public class Report extends DomainEntity {
 
 
 	@NotNull
-	@Range(min = 1, max = 10)
+	@Range(min = 0, max = 10)
 	public Integer getOriginality() {
 		return this.originality;
 	}
@@ -33,7 +33,7 @@ public class Report extends DomainEntity {
 		this.originality = originality;
 	}
 	@NotNull
-	@Range(min = 1, max = 10)
+	@Range(min = 0, max = 10)
 	public Integer getQuality() {
 		return this.quality;
 	}
@@ -42,7 +42,7 @@ public class Report extends DomainEntity {
 		this.quality = quality;
 	}
 	@NotNull
-	@Range(min = 1, max = 10)
+	@Range(min = 0, max = 10)
 	public Integer getReadability() {
 		return this.readability;
 	}
@@ -50,6 +50,7 @@ public class Report extends DomainEntity {
 	public void setReadability(final Integer readability) {
 		this.readability = readability;
 	}
+	@NotNull
 	@Pattern(regexp = "^(REJECT)|(BORDER-LINE)|(ACCEPT)$")
 	public String getDecision() {
 		return this.decision;
