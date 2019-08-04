@@ -81,6 +81,7 @@ public class Submission extends DomainEntity {
 	}
 
 	@ManyToMany
+	@Valid
 	public Collection<Reviewer> getReviewers() {
 		return this.reviewers;
 	}

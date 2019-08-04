@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,6 +21,7 @@ public class Reviewer extends Actor {
 
 
 	@OneToMany
+	@Valid
 	public Collection<Report> getReports() {
 		return this.reports;
 	}

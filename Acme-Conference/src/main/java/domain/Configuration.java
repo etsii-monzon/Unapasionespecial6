@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
@@ -71,6 +72,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@OneToMany
+	@Valid
 	public Collection<Topic> getTopics() {
 		return this.topics;
 	}

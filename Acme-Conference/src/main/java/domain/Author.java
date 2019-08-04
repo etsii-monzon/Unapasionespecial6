@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -17,6 +18,7 @@ public class Author extends Actor {
 
 
 	@OneToMany
+	@Valid
 	public Collection<Registration> getRegistrations() {
 		return this.registrations;
 	}
@@ -26,6 +28,7 @@ public class Author extends Actor {
 	}
 
 	@OneToMany
+	@Valid
 	public Collection<Submission> getSubmissions() {
 		return this.submissions;
 	}

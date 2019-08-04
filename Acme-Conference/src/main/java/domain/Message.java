@@ -69,6 +69,7 @@ public class Message extends DomainEntity {
 
 	@ManyToMany
 	@NotEmpty
+	@Valid
 	public Collection<Actor> getRecipients() {
 		return this.recipients;
 	}
