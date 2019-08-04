@@ -91,6 +91,7 @@ public abstract class Actor extends DomainEntity {
 	public void setAddress(final String address) {
 		this.address = address;
 	}
+	@Valid
 	@ManyToMany
 	public Collection<Message> getMessages() {
 		return this.messages;
