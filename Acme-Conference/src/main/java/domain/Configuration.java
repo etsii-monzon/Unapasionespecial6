@@ -7,9 +7,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
@@ -70,7 +70,7 @@ public class Configuration extends DomainEntity {
 		this.welcomeSP = welcomeSP;
 	}
 
-	@ElementCollection
+	@OneToMany
 	public Collection<Topic> getTopics() {
 		return this.topics;
 	}
@@ -80,7 +80,6 @@ public class Configuration extends DomainEntity {
 	}
 
 	@ElementCollection
-	@NotEmpty
 	public Collection<String> getMakes() {
 		return this.makes;
 	}
