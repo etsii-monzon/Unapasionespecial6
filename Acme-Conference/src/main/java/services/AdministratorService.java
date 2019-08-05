@@ -31,7 +31,7 @@ public class AdministratorService {
 	private ConfigurationService	configurationService;
 
 	@Autowired
-	private ActorService			actorService;
+	private FinderService			finderService;
 
 
 	// SIMPLE CRUD METHODS
@@ -47,12 +47,13 @@ public class AdministratorService {
 		a = new Administrator();
 		userAccount = new UserAccount();
 		auth = new Authority();
-		finder = new Finder();
+		finder = this.finderService.create();
+		final Finder res = this.finderService.save(finder);
 
 		auth.setAuthority("ADMIN");
 		userAccount.addAuthority(auth);
 		a.setUserAccount(userAccount);
-		a.setFinder(finder);
+		a.setFinder(res);
 
 		//Relationships
 

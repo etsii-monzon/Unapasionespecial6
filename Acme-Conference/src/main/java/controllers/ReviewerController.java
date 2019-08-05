@@ -4,7 +4,6 @@ package controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,12 +54,13 @@ public class ReviewerController extends AbstractController {
 			try {
 				this.reviewerService.save(reviewer);
 				result = new ModelAndView("redirect:/welcome/index.do");
-			} catch (final DataIntegrityViolationException oops) {
-				result = this.createEditModelAndView(reviewer, "reviewer.username.error");
+
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 				if (oops.getMessage().equals("email error"))
 					result = this.createEditModelAndView(reviewer, "reviewer.email.error");
+				else if (oops.getMessage().equals("username error"))
+					result = this.createEditModelAndView(reviewer, "reviewer.username.error");
 				else
 					result = this.createEditModelAndView(reviewer, "reviewer.commit.error");
 			}

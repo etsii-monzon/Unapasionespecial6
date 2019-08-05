@@ -36,6 +36,9 @@ public class AuthorService {
 	@Autowired
 	private ConfigurationService	configurationService;
 
+	@Autowired
+	private FinderService			finderService;
+
 
 	// SIMPLE CRUD METHODS
 
@@ -49,12 +52,13 @@ public class AuthorService {
 		author = new Author();
 		userAccount = new UserAccount();
 		auth = new Authority();
-		finder = new Finder();
+		finder = this.finderService.create();
+		final Finder res = this.finderService.save(finder);
 
 		auth.setAuthority("AUTHOR");
 		userAccount.addAuthority(auth);
 		author.setUserAccount(userAccount);
-		author.setFinder(finder);
+		author.setFinder(res);
 
 		//Relationships
 
@@ -88,6 +92,7 @@ public class AuthorService {
 		Assert.isTrue(this.actorService.checkUserEmail(d.getEmail()), "email error");
 
 		if (d.getId() == 0) {
+			Assert.isTrue(this.actorService.usernameExits(d.getUserAccount().getUsername()), "username error");
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String hash = encoder.encodePassword(d.getUserAccount().getPassword(), null);
 			d.getUserAccount().setPassword(hash);

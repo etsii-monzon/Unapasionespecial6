@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -28,6 +29,10 @@ public class FinderService {
 		Finder res;
 
 		res = new Finder();
+
+		final Collection<Conference> conferences = new ArrayList<>();
+
+		res.setConferences(conferences);
 
 		return res;
 	}

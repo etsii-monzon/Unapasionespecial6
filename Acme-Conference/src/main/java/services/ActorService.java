@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountRepository;
 import domain.Actor;
 
 @Service
@@ -21,10 +22,13 @@ public class ActorService {
 
 	//Managed repository
 	@Autowired
-	private ActorRepository	actorRepository;
-
+	private ActorRepository			actorRepository;
 
 	//Supporting services
+
+	@Autowired
+	private UserAccountRepository	userAccountRepository;
+
 
 	// SIMPLE CRUD METHODS
 
@@ -167,4 +171,13 @@ public class ActorService {
 	//		return res;
 	//	}
 
+	public boolean usernameExits(final String username) {
+		System.out.println(this.userAccountRepository.findByUsername(username));
+		if (this.userAccountRepository.findByUsername(username) == null)
+
+			return true;
+		else
+			return false;
+
+	}
 }
