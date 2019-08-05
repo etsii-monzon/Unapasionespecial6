@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Category;
 import domain.Conference;
 
 @Repository
@@ -33,4 +34,17 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 
 	@Query("select c.startDate from Conference c")
 	Collection<Date> findStartDateFromConferencs();
+
+	@Query("select c from Conference c  where c.category = ?1")
+	Collection<Conference> getConferencesByCategory(Category category);
+
+	@Query("select c from Conference c  where c.draftMode = false")
+	Collection<Conference> getFinalConferences();
+
+	@Query("select c from Conference c  where (c.title like concat('%',?1,'%') or c.venue like concat('%',?1,'%')or c.summary like concat('%',?1,'%')or c.acronym like concat('%',?1,'%'))")
+	Collection<Conference> searchConferenceByKeyword2(String keyword);
+
+	@Query("select c from Conference c  where c.fee < ?1")
+	Collection<Conference> searchConferenceByMaxFee(double fee);
+
 }

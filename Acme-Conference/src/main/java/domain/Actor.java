@@ -31,6 +31,8 @@ public abstract class Actor extends DomainEntity {
 	private Collection<Message>	messages;
 	private UserAccount			userAccount;
 
+	private Finder				finder;
+
 
 	@NotBlank
 	public String getName() {
@@ -110,6 +112,16 @@ public abstract class Actor extends DomainEntity {
 
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
+	}
+
+	@OneToOne(optional = false)
+	@Valid
+	public Finder getFinder() {
+		return this.finder;
+	}
+
+	public void setFinder(final Finder finder) {
+		this.finder = finder;
 	}
 
 }

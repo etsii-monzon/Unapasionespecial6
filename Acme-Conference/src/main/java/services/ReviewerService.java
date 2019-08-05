@@ -15,6 +15,7 @@ import repositories.ReviewerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Finder;
 import domain.Message;
 import domain.Report;
 import domain.Reviewer;
@@ -45,15 +46,18 @@ public class ReviewerService {
 		Reviewer reviewer;
 		UserAccount userAccount;
 		Authority auth;
+		Finder finder;
 
 		//Authority
 		reviewer = new Reviewer();
 		userAccount = new UserAccount();
 		auth = new Authority();
+		finder = new Finder();
 
 		auth.setAuthority("REVIEWER");
 		userAccount.addAuthority(auth);
 		reviewer.setUserAccount(userAccount);
+		reviewer.setFinder(finder);
 
 		//Relationships
 		final Collection<Report> reports = new ArrayList<Report>();

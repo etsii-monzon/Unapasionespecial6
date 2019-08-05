@@ -6,7 +6,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
@@ -17,9 +17,9 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Category extends DomainEntity {
 
 	private String					englishTitle;
-	private String					spanishName;
+	private String					spanishTitle;
 
-	private Collection<Category>	parents;
+	private Category				parent;
 	private Collection<Category>	children;
 
 
@@ -32,12 +32,12 @@ public class Category extends DomainEntity {
 		this.englishTitle = englishTitle;
 	}
 	@NotBlank
-	public String getSpanishName() {
-		return this.spanishName;
+	public String getSpanishTitle() {
+		return this.spanishTitle;
 	}
 
-	public void setSpanishName(final String spanishName) {
-		this.spanishName = spanishName;
+	public void setSpanishTitle(final String spanishTitle) {
+		this.spanishTitle = spanishTitle;
 	}
 
 	@OneToMany
@@ -50,14 +50,13 @@ public class Category extends DomainEntity {
 		this.children = children;
 	}
 
-	@ManyToMany
-	@Valid
-	public Collection<Category> getParents() {
-		return this.parents;
+	@ManyToOne
+	public Category getParent() {
+		return this.parent;
 	}
 
-	public void setParents(final Collection<Category> parents) {
-		this.parents = parents;
+	public void setParent(final Category parent) {
+		this.parent = parent;
 	}
 
 }

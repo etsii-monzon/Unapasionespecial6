@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -15,17 +16,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Conference extends DomainEntity {
 
-	private String	title;
-	private String	acronym;
-	private String	venue;
-	private String	summary;
-	private Date	submissionDeadline;
-	private Date	notificationDeadline;
-	private Date	cameraDeadline;
-	private Date	startDate;
-	private Date	endDate;
-	private Double	fee;
-	private boolean	draftMode;
+	private String		title;
+	private String		acronym;
+	private String		venue;
+	private String		summary;
+	private Date		submissionDeadline;
+	private Date		notificationDeadline;
+	private Date		cameraDeadline;
+	private Date		startDate;
+	private Date		endDate;
+	private Double		fee;
+	private boolean		draftMode;
+	private Category	category;
 
 
 	@NotBlank
@@ -124,6 +126,16 @@ public class Conference extends DomainEntity {
 
 	public void setDraftMode(final boolean draftMode) {
 		this.draftMode = draftMode;
+	}
+
+	@NotNull
+	@ManyToOne
+	public Category getCategory() {
+		return this.category;
+	}
+
+	public void setCategory(final Category category) {
+		this.category = category;
 	}
 
 }

@@ -36,6 +36,8 @@
 		<value>/views/section/messages</value>
 
 		<value>/views/topic/messages</value>
+		<value>/views/category/messages</value>
+		<value>/views/finder/messages</value>
 
 
 

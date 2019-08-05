@@ -55,6 +55,8 @@
 	<form:hidden path="messages" />
 	<form:hidden path="registrations" />
 	<form:hidden path="submissions" />
+		<form:hidden path="finder" />
+	
 
 	<jstl:if test="${author.id != 0}">
 		<form:hidden path="userAccount.username" />
