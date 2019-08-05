@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 import repositories.ConferenceRepository;
 import domain.Activity;
 import domain.Administrator;
+import domain.Category;
 import domain.Conference;
 import domain.Registration;
 import domain.Submission;
@@ -233,4 +234,36 @@ public class ConferenceService {
 	public Double stdConferenceFees() {
 		return this.conferenceRepository.stdDevFeesPerConference();
 	}
+	public Collection<Conference> getConferencesByCategory(final Category category) {
+		return this.conferenceRepository.getConferencesByCategory(category);
+	}
+	public Collection<Conference> getFinalConferences() {
+		return this.conferenceRepository.getFinalConferences();
+	}
+	public Collection<Conference> searchConferenceByMaxFee(final double fee) {
+		return this.conferenceRepository.searchConferenceByMaxFee(fee);
+	}
+	public Collection<Conference> searchConferenceByKeyword2(final String keyword) {
+		return this.searchConferenceByKeyword(keyword);
+	}
+	public Collection<Conference> filterConferenceByStartDate(final Date date) {
+		final Collection<Conference> conferences = this.getFinalConferences();
+		final Collection<Conference> toReturn = new ArrayList<>();
+
+		for (final Conference c : conferences)
+			if (c.getStartDate().after(date))
+				toReturn.add(c);
+		return toReturn;
+	}
+
+	public Collection<Conference> filterConferenceByEndDate(final Date date) {
+		final Collection<Conference> conferences = this.getFinalConferences();
+		final Collection<Conference> toReturn = new ArrayList<>();
+
+		for (final Conference c : conferences)
+			if (c.getEndDate().before(date))
+				toReturn.add(c);
+		return toReturn;
+	}
+
 }

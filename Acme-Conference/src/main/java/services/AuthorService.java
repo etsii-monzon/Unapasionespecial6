@@ -16,6 +16,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Author;
+import domain.Finder;
 import domain.Message;
 import domain.Registration;
 import domain.Submission;
@@ -42,15 +43,18 @@ public class AuthorService {
 		Author author;
 		UserAccount userAccount;
 		Authority auth;
+		Finder finder;
 
 		//Authority
 		author = new Author();
 		userAccount = new UserAccount();
 		auth = new Authority();
+		finder = new Finder();
 
 		auth.setAuthority("AUTHOR");
 		userAccount.addAuthority(auth);
 		author.setUserAccount(userAccount);
+		author.setFinder(finder);
 
 		//Relationships
 

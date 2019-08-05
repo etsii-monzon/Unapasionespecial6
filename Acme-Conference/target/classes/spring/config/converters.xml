@@ -26,6 +26,8 @@
 		<bean class="converters.PaperToStringConverter" />
 		<bean class="converters.TutorialToStringConverter" />
 		<bean class="converters.TopicToStringConverter" />
+		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.FinderToStringConverter" />
 
 
 		<bean class="converters.StringToTutorialConverter" />
@@ -43,6 +45,8 @@
 		<bean class="converters.StringToAdministratorConverter" />
 		<bean class="converters.StringToPaperConverter" />
 		<bean class="converters.StringToTopicConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+		<bean class="converters.StringToFinderConverter" />
 
 
 	</util:list>

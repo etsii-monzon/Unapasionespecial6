@@ -33,8 +33,11 @@
 								code="master.page.conference.list" /></a></li>
 					<li><a href="submission/administrator/list.do"><spring:message
 								code="master.page.submissionad.list" /></a></li>
+					<li><a href="category/administrator/list.do"><spring:message
+								code="master.page.categories" /></a></li>
 					<li><a href="administrator/administrator/list.do"><spring:message
 								code="master.page.dashboard" /></a></li>
+
 					<%-- 	<li><a href="conference/administrator/listst.do"><spring:message
 								code="master.page.conferencest.list" /></a></li>
 					<li><a href="conference/administrator/listnot.do"><spring:message
@@ -140,6 +143,11 @@
 
 
 				</ul></li>
+		</security:authorize>
+
+		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv" href="finder/actor/edit.do"><spring:message
+						code="master.page.finder" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">

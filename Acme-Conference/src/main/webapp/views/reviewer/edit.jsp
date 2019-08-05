@@ -55,6 +55,8 @@
 	<form:hidden path="userAccount.Authorities" />
 	<form:hidden path="messages" />
 	<form:hidden path="reports" />
+	<form:hidden path="finder" />
+
 
 	<jstl:if test="${reviewer.id != 0}">
 		<form:hidden path="userAccount.username" />

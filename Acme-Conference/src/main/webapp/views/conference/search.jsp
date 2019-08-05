@@ -21,11 +21,39 @@
 	</label>
 	<input type="search" name="keyword" id="keyword" size="35"
 		placeholder="Search by TITLE, VENUE or SUMMARY" />
-	<br>
-	<acme:submit name="search" code="conference.search" />
-	<input type="button" name="cancel"
-		value="<spring:message code="conference.return" />"
-		onClick="javascript: window.location.replace('welcome/index.do');" />
 
+	<acme:submit name="search" code="conference.search" />
 
 </form:form>
+
+
+<!-- BROWSE BY CATEGORY -->
+<security:authorize access="isAuthenticated()">
+	<form:form action="conference/actor/listByCategory.do" method="GET">
+
+		<label for="category"> <spring:message
+				code="conference.category" />
+		</label>
+		<select name="categoryId" id="categoryId">
+			<jstl:if test="${languaje == 'en' }">
+				<option value="0">--Select Category--</option>
+				<jstl:forEach items="${categories }" var="x">
+					<option value="${x.id }">${x.englishTitle }</option>
+				</jstl:forEach>
+			</jstl:if>
+			<jstl:if test="${languaje == 'es' }">
+				<option value="0">--Seleccionar Categoría--</option>
+				<jstl:forEach items="${categories }" var="x">
+					<option value="${x.id }">${x.spanishTitle }</option>
+				</jstl:forEach>
+			</jstl:if>
+		</select>
+
+		<acme:submit name="save" code="conference.search" />
+
+	</form:form>
+</security:authorize>
+<input type="button" name="cancel"
+	value="<spring:message code="conference.return" />"
+	onClick="javascript: window.location.replace('welcome/index.do');" />
+
