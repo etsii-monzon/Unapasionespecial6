@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdministratorService;
 import services.CategoryService;
 import domain.Category;
 
@@ -25,16 +24,11 @@ import domain.Category;
 public class CategoryAdministratorController extends AbstractController {
 
 	@Autowired
-	private CategoryService			categoryService;
-
-	@Autowired
-	private AdministratorService	administratorService;
+	private CategoryService	categoryService;
 
 
 	//To open the view to edit-----------------
-
 	//Categories
-
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;

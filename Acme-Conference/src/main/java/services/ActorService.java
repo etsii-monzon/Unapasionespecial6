@@ -172,7 +172,6 @@ public class ActorService {
 	//	}
 
 	public boolean usernameExits(final String username) {
-		System.out.println(this.userAccountRepository.findByUsername(username));
 		if (this.userAccountRepository.findByUsername(username) == null)
 
 			return true;

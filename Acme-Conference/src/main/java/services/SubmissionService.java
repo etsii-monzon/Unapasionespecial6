@@ -86,7 +86,6 @@ public class SubmissionService {
 		final Author b = this.authorService.findByPrincipal();
 		if (b != null) {
 			final Collection<Submission> f = b.getSubmissions();
-			System.out.println(a.getPaper().getAuthors());
 
 			if (a.getStatus().equals("ACCEPTED") && a.getId() != 0)
 				a.setCameraReady(true);
@@ -117,17 +116,6 @@ public class SubmissionService {
 		this.submissionRepository.delete(a);
 
 	}
-	//	public Collection<Submission> submissionByExperience() {
-	//
-	//		final Collection<Submission> subs = new ArrayList<>();
-	//		final Collection<String> experience = this.reviewerService.findByPrincipal().getExperience();
-	//
-	//		for (final Submission s : this.findAll())
-	//			if (experience.contains(s.getConference().getTitle()))
-	//				subs.add(s);
-	//		return subs;
-	//
-	//	}
 
 	public void submissionStatus(final int submissionId) {
 		final Submission res;
@@ -161,11 +149,11 @@ public class SubmissionService {
 		//Notificaci�n Decisi�n
 		this.messageService.notificationDecision(res);
 
-		System.out.println("reportsAll" + reportsAll.size());
-		System.out.println("reports" + reports.size());
-
-		System.out.println("acepted" + reportsAc.size());
-		System.out.println("rejected" + reportsRe.size());
+		//		System.out.println("reportsAll" + reportsAll.size());
+		//		System.out.println("reports" + reports.size());
+		//
+		//		System.out.println("acepted" + reportsAc.size());
+		//		System.out.println("rejected" + reportsRe.size());
 
 	}
 
@@ -201,16 +189,12 @@ public class SubmissionService {
 				if (s.getReviewers().size() == 3)
 					break;
 
-				System.out.println("PASA POR AQUI");
-				for (final String key : r.getKeywords()) {
-					System.out.println("ILLO QUE");
+				for (final String key : r.getKeywords())
 					if (p.contains(key)) {
 						s.getReviewers().add(r);
-						System.out.println("POR QUE NO FUNCIONAS PERRO");
 						this.submissionRepository.save(s);
 						break;
 					}
-				}
 
 			}
 
@@ -274,5 +258,9 @@ public class SubmissionService {
 	}
 	public Collection<Submission> findSubmissionsOfReviewer(final Reviewer r) {
 		return this.submissionRepository.findSubmissionsOfReviewer(r);
+	}
+
+	public Collection<Submission> getSubmissionGroupedByStatus() {
+		return this.submissionRepository.getSubmissionGroupedByStatus();
 	}
 }

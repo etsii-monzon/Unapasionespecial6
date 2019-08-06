@@ -35,8 +35,6 @@ public class ConferenceService {
 	private AdministratorService	administratorService;
 	@Autowired
 	private AuthorService			authorService;
-	@Autowired
-	private SubmissionService		submissionService;
 
 	@Autowired
 	private ActivityService			activityService;

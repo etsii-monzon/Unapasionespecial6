@@ -27,9 +27,6 @@ public class PanelService {
 	@Autowired
 	private ConferenceService		confService;
 
-	@Autowired
-	private ConfigurationService	configurationService;
-
 
 	public Panel create(final int conferenceId) {
 		Assert.isTrue(this.adminService.checkPrincipal());

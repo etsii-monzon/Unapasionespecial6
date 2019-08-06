@@ -74,16 +74,16 @@ public class AuthorService {
 	}
 
 	public Collection<Author> findAll() {
-		Collection<Author> directors;
-		directors = this.authorRepository.findAll();
-		Assert.notNull(directors);
-		return directors;
+		Collection<Author> authors;
+		authors = this.authorRepository.findAll();
+		Assert.notNull(authors);
+		return authors;
 
 	}
-	public Author findOne(final int directorId) {
-		Assert.notNull(directorId);
+	public Author findOne(final int authorId) {
+		Assert.notNull(authorId);
 		Author d;
-		d = this.authorRepository.findOne(directorId);
+		d = this.authorRepository.findOne(authorId);
 		return d;
 	}
 	public Author save(final Author d) {
@@ -105,20 +105,7 @@ public class AuthorService {
 		res = this.authorRepository.save(d);
 		return res;
 	}
-	//	public void delete(final Director d) {
-	//		Assert.notNull(d);
-	//		Assert.isTrue(d.getId() != 0);
-	//		Assert.notNull(this.authorRepository.findOne(d.getId()));
-	//
-	//		//Eliminamos la creditCard asociada
-	//		this.creditCardService.delete(d.getCreditCard());
-	//
-	//		//Eliminamos MessageBoxes
-	//		for (final MessageBox mB : d.getMessageBoxes())
-	//			this.messageBoxService.deleteGDPR(mB);
-	//
-	//		this.authorRepository.delete(d);
-	//	}
+
 	public Author findByUserAccountId(final int userAccountId) {
 		Assert.isTrue(userAccountId != 0);
 		final Author res = this.authorRepository.findByUserAccountId(userAccountId);

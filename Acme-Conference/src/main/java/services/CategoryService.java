@@ -58,10 +58,8 @@ public class CategoryService {
 		Category res;
 
 		if (category.getId() != 0)
-			if (category.getParent() != this.categoryRepository.findOne(category.getId())) {
-				System.out.println(category.getId());
+			if (category.getParent() != this.categoryRepository.findOne(category.getId()))
 				this.categoryRepository.findOne(category.getId()).getParent().getChildren().remove(category);
-			}
 
 		res = this.categoryRepository.save(category);
 
