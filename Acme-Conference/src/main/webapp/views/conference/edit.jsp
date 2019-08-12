@@ -37,20 +37,6 @@
 
 
 	<acme:number code="conference.fee" path="fee" min="0" max="9999" />
-	<%-- Category --%>
-	<spring:message code="conference.category" />
-	<form:select path="category" itemValue="id">
-		<jstl:if test="${languaje == 'en' }">
-			<form:options items="${categories}" itemLabel="englishTitle"
-				itemValue="id" />
-		</jstl:if>
-		<jstl:if test="${languaje == 'es' }">
-			<form:options items="${categories}" itemLabel="spanishTitle"
-				itemValue="id" />
-		</jstl:if>
-	</form:select>
-	<form:errors class="error" path="category" />
-	<br />
 
 
 	<form:label path="draftMode">

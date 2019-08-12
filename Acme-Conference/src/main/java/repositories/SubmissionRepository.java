@@ -30,7 +30,4 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 
 	@Query("select s from Submission s join s.reviewers rw where rw = ?1")
 	Collection<Submission> findSubmissionsOfReviewer(Reviewer r);
-
-	@Query("select s from Submission s order by s.status")
-	Collection<Submission> getSubmissionGroupedByStatus();
 }

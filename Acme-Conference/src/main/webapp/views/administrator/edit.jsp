@@ -49,7 +49,6 @@
 	<form:hidden path="userAccount.Authorities" />
 	<form:hidden path="messages" />
 	<form:hidden path="conferences" />
-	<form:hidden path="finder" />
 
 	<form:hidden path="userAccount.username" />
 	<form:hidden path="userAccount.password" />
@@ -124,7 +123,7 @@
 	<input type="submit" name="save"
 		value="<spring:message code="administrator.save"/>" />
 
-	<input type="button" name="cancel"
+	<input type="button" name="cancel" 
 		value="<spring:message code="administrator.cancel" />"
 		onClick="javascript: window.location.replace('welcome/index.do');" />
 </form:form>

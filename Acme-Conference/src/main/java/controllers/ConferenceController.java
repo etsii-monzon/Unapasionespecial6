@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
-import services.CategoryService;
 import services.ConferenceService;
 import domain.Conference;
 
@@ -27,9 +25,6 @@ public class ConferenceController extends AbstractController {
 
 	@Autowired
 	AdministratorService	administratorService;
-
-	@Autowired
-	CategoryService			categoryService;
 
 
 	@RequestMapping(value = "/listProx", method = RequestMethod.GET)
@@ -45,8 +40,6 @@ public class ConferenceController extends AbstractController {
 
 		result = new ModelAndView("conference/listProx");
 		result.addObject("conferences", conferences);
-		final String languaje = LocaleContextHolder.getLocale().getLanguage();
-		result.addObject("languaje", languaje);
 		result.addObject("requestURI", "conference/listProx.do");
 
 		return result;
@@ -65,8 +58,6 @@ public class ConferenceController extends AbstractController {
 
 		result = new ModelAndView("conference/listPast");
 		result.addObject("conferences", conferences);
-		final String languaje = LocaleContextHolder.getLocale().getLanguage();
-		result.addObject("languaje", languaje);
 		result.addObject("requestURI", "conference/listPast.do");
 
 		return result;
@@ -85,8 +76,6 @@ public class ConferenceController extends AbstractController {
 
 		result = new ModelAndView("conference/listEjec");
 		result.addObject("conferences", conferences);
-		final String languaje = LocaleContextHolder.getLocale().getLanguage();
-		result.addObject("languaje", languaje);
 		result.addObject("requestURI", "conference/listEjec.do");
 
 		return result;
@@ -96,10 +85,6 @@ public class ConferenceController extends AbstractController {
 	public ModelAndView search() {
 		ModelAndView res;
 		res = new ModelAndView("conference/search");
-
-		res.addObject("categories", this.categoryService.findAll());
-		final String languaje = LocaleContextHolder.getLocale().getLanguage();
-		res.addObject("languaje", languaje);
 
 		return res;
 	}
@@ -112,9 +97,6 @@ public class ConferenceController extends AbstractController {
 
 		result = new ModelAndView("conference/list");
 		result.addObject("conferences", conferences);
-		final String languaje = LocaleContextHolder.getLocale().getLanguage();
-		result.addObject("languaje", languaje);
-
 		result.addObject("requestURI", "conference/searchList.do");
 
 		return result;

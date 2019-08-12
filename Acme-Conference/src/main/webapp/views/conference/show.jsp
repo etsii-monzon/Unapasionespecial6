@@ -54,17 +54,6 @@
 	<jstl:out value="${conference.fee }" />
 </p>
 
-<p>
-	<b><spring:message code="conference.category" />: </b>
-	<jstl:if test="${languaje == 'en' }">
-		<jstl:out value="${conference.category.englishTitle }" />
-	</jstl:if>
-
-	<jstl:if test="${languaje == 'es' }">
-		<jstl:out value="${conference.category.spanishTitle }" />
-	</jstl:if>
-</p>
-
 
 
 

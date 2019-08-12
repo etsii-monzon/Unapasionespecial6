@@ -62,6 +62,13 @@
 			<jstl:out value="${x}"></jstl:out>
 		</jstl:forEach>
 	</display:column>
+	<display:column titleKey="conference.comemnts">
+
+		<a href="activity/comment/list.do?activityId=${row1.id}"> <spring:message
+			code="activity.comments" />
+		</a>
+
+	</display:column>
 	<security:authorize access="hasRole('ADMIN')">
 
 		<display:column>
@@ -137,6 +144,13 @@
 		<a href="section/list.do?tutorialId=${row2.id}"> <spring:message
 				code="tutorial.sections" />
 		</a>
+	</display:column>
+	<display:column titleKey="conference.comemnts">
+
+		<a href="activity/comment/list.do?activityId=${row2.id}"> <spring:message
+			code="activity.comments" />
+		</a>
+
 	</display:column>
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
@@ -219,7 +233,13 @@
 				<spring:message code="presentation.subm" />
 			</a>
 		</display:column>
+	<display:column titleKey="conference.comemnts">
 
+		<a href="activity/comment/list.do?activityId=${row3.id}"> <spring:message
+			code="activity.comments" />
+		</a>
+
+	</display:column>
 		<display:column>
 			<a
 				href="activity/administrator/presentation/delete.do?presentationId=${row3.id}">

@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.AuthorService;
+import services.ConferenceService;
+import services.ReportService;
+import services.ReviewerService;
 import services.SubmissionService;
 import domain.Reviewer;
 import domain.Submission;
@@ -30,12 +34,21 @@ public class SubmissionAdministratorController extends AbstractController {
 	@Autowired
 	private AdministratorService	adminService;
 
+	@Autowired
+	private AuthorService			authorService;
+	@Autowired
+	private ConferenceService		conferenceService;
+	@Autowired
+	private ReportService			reportService;
+	@Autowired
+	private ReviewerService			revService;
+
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> submissions;
-		submissions = this.submissionService.getSubmissionGroupedByStatus();
+		submissions = this.submissionService.findAll();
 
 		boolean allowed = false;
 		for (final Submission s : submissions)
@@ -137,7 +150,7 @@ public class SubmissionAdministratorController extends AbstractController {
 			try {
 				System.out.print("Entra");
 
-				this.submissionService.save(submission);
+				final Submission sub = this.submissionService.save(submission);
 				//Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(sub.getConference()), "hacking");
 
 				result = new ModelAndView("redirect:list.do");

@@ -23,7 +23,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Category;
 import domain.Conference;
 
 @ContextConfiguration(locations = {
@@ -39,9 +38,6 @@ public class ConferenceServiceTest extends AbstractTest {
 	private ConferenceService		conferenceService;
 	@Autowired
 	private AdministratorService	adminService;
-
-	@Autowired
-	private CategoryService			categoryService;
 
 
 	// Tests ------------------------------------------------------------------
@@ -90,7 +86,6 @@ public class ConferenceServiceTest extends AbstractTest {
 		res.setSummary("sum");
 		res.setTitle("hola");
 		res.setVenue("hola");
-		res.setCategory(this.categoryService.findOne(super.getEntityId("category1")));
 
 		final Conference result = this.conferenceService.save(res);
 
@@ -113,23 +108,6 @@ public class ConferenceServiceTest extends AbstractTest {
 		final Collection<Conference> res = this.adminService.findByPrincipal().getConferences();
 
 		Assert.notNull(res);
-
-		super.unauthenticate();
-
-	}
-
-	/*
-	 * Test comprobación listar conferences por categoría por usuario autenticado
-	 * Req Funcional: 23.1
-	 */
-	@Test
-	public void testListConferenceByCategory() {
-		super.authenticate("admin");
-
-		final Category c = this.categoryService.findOne(super.getEntityId("category2"));
-
-		final Collection<Conference> conferences = this.conferenceService.getConferencesByCategory(c);
-		Assert.notNull(conferences);
 
 		super.unauthenticate();
 

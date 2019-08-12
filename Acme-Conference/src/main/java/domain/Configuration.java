@@ -7,8 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
@@ -54,7 +52,6 @@ public class Configuration extends DomainEntity {
 	public void setSistemName(final String sistemName) {
 		this.sistemName = sistemName;
 	}
-	@NotBlank
 	public String getWelcomeEN() {
 		return this.welcomeEN;
 	}
@@ -62,7 +59,6 @@ public class Configuration extends DomainEntity {
 	public void setWelcomeEN(final String welcomeEN) {
 		this.welcomeEN = welcomeEN;
 	}
-	@NotBlank
 	public String getWelcomeSP() {
 		return this.welcomeSP;
 	}
@@ -71,8 +67,7 @@ public class Configuration extends DomainEntity {
 		this.welcomeSP = welcomeSP;
 	}
 
-	@OneToMany
-	@Valid
+	@ElementCollection
 	public Collection<Topic> getTopics() {
 		return this.topics;
 	}

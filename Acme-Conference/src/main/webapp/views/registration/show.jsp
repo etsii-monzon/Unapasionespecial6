@@ -52,12 +52,6 @@
 </p>
 
 
-<p>
-	<b><spring:message code="registration.creditCard" />: </b>
-	<jstl:out value="**** **** **** ${creditCard }" />
-</p>
-
-
 
 
 

@@ -16,7 +16,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Author;
-import domain.Finder;
 import domain.Message;
 import domain.Registration;
 import domain.Submission;
@@ -36,9 +35,6 @@ public class AuthorService {
 	@Autowired
 	private ConfigurationService	configurationService;
 
-	@Autowired
-	private FinderService			finderService;
-
 
 	// SIMPLE CRUD METHODS
 
@@ -46,19 +42,15 @@ public class AuthorService {
 		Author author;
 		UserAccount userAccount;
 		Authority auth;
-		Finder finder;
 
 		//Authority
 		author = new Author();
 		userAccount = new UserAccount();
 		auth = new Authority();
-		finder = this.finderService.create();
-		final Finder res = this.finderService.save(finder);
 
 		auth.setAuthority("AUTHOR");
 		userAccount.addAuthority(auth);
 		author.setUserAccount(userAccount);
-		author.setFinder(res);
 
 		//Relationships
 
@@ -74,16 +66,16 @@ public class AuthorService {
 	}
 
 	public Collection<Author> findAll() {
-		Collection<Author> authors;
-		authors = this.authorRepository.findAll();
-		Assert.notNull(authors);
-		return authors;
+		Collection<Author> directors;
+		directors = this.authorRepository.findAll();
+		Assert.notNull(directors);
+		return directors;
 
 	}
-	public Author findOne(final int authorId) {
-		Assert.notNull(authorId);
+	public Author findOne(final int directorId) {
+		Assert.notNull(directorId);
 		Author d;
-		d = this.authorRepository.findOne(authorId);
+		d = this.authorRepository.findOne(directorId);
 		return d;
 	}
 	public Author save(final Author d) {
@@ -92,7 +84,6 @@ public class AuthorService {
 		Assert.isTrue(this.actorService.checkUserEmail(d.getEmail()), "email error");
 
 		if (d.getId() == 0) {
-			Assert.isTrue(this.actorService.usernameExits(d.getUserAccount().getUsername()), "username error");
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String hash = encoder.encodePassword(d.getUserAccount().getPassword(), null);
 			d.getUserAccount().setPassword(hash);
@@ -105,7 +96,20 @@ public class AuthorService {
 		res = this.authorRepository.save(d);
 		return res;
 	}
-
+	//	public void delete(final Director d) {
+	//		Assert.notNull(d);
+	//		Assert.isTrue(d.getId() != 0);
+	//		Assert.notNull(this.authorRepository.findOne(d.getId()));
+	//
+	//		//Eliminamos la creditCard asociada
+	//		this.creditCardService.delete(d.getCreditCard());
+	//
+	//		//Eliminamos MessageBoxes
+	//		for (final MessageBox mB : d.getMessageBoxes())
+	//			this.messageBoxService.deleteGDPR(mB);
+	//
+	//		this.authorRepository.delete(d);
+	//	}
 	public Author findByUserAccountId(final int userAccountId) {
 		Assert.isTrue(userAccountId != 0);
 		final Author res = this.authorRepository.findByUserAccountId(userAccountId);

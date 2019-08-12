@@ -15,7 +15,6 @@ import repositories.ReviewerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Finder;
 import domain.Message;
 import domain.Report;
 import domain.Reviewer;
@@ -38,9 +37,6 @@ public class ReviewerService {
 	@Autowired
 	private ActorService			actorService;
 
-	@Autowired
-	private FinderService			finderService;
-
 
 	//	// SIMPLE CRUD METHODS
 
@@ -49,19 +45,15 @@ public class ReviewerService {
 		Reviewer reviewer;
 		UserAccount userAccount;
 		Authority auth;
-		Finder finder;
 
 		//Authority
 		reviewer = new Reviewer();
 		userAccount = new UserAccount();
 		auth = new Authority();
-		finder = this.finderService.create();
-		final Finder res = this.finderService.save(finder);
 
 		auth.setAuthority("REVIEWER");
 		userAccount.addAuthority(auth);
 		reviewer.setUserAccount(userAccount);
-		reviewer.setFinder(res);
 
 		//Relationships
 		final Collection<Report> reports = new ArrayList<Report>();
@@ -72,6 +64,7 @@ public class ReviewerService {
 
 		return reviewer;
 	}
+
 	public Collection<Reviewer> findAll() {
 		Collection<Reviewer> reviewers;
 		reviewers = this.reviewerRepository.findAll();
@@ -94,8 +87,6 @@ public class ReviewerService {
 		Assert.isTrue(this.actorService.checkUserEmail(e.getEmail()), "email error");
 
 		if (e.getId() == 0) {
-			Assert.isTrue(this.actorService.usernameExits(e.getUserAccount().getUsername()), "username error");
-
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String hash = encoder.encodePassword(e.getUserAccount().getPassword(), null);
 			e.getUserAccount().setPassword(hash);

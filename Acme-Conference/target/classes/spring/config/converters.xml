@@ -26,9 +26,10 @@
 		<bean class="converters.PaperToStringConverter" />
 		<bean class="converters.TutorialToStringConverter" />
 		<bean class="converters.TopicToStringConverter" />
-		<bean class="converters.CategoryToStringConverter" />
-		<bean class="converters.FinderToStringConverter" />
-
+		<bean class="converters.CommentToStringConverter" />
+		<bean class="converters.ActivityToStringConverter" />
+		<bean class="converters.ActivityCommentToStringConverter" />
+		<bean class="converters.ConferenceCommentToStringConverter" />
 
 		<bean class="converters.StringToTutorialConverter" />
 		<bean class="converters.StringToPaperConverter" />
@@ -45,9 +46,10 @@
 		<bean class="converters.StringToAdministratorConverter" />
 		<bean class="converters.StringToPaperConverter" />
 		<bean class="converters.StringToTopicConverter" />
-		<bean class="converters.StringToCategoryConverter" />
-		<bean class="converters.StringToFinderConverter" />
-
+		<bean class="converters.StringToCommentConverter" />
+		<bean class="converters.StringToActivityConverter" />
+		<bean class="converters.StringToActivityCommentConverter" />
+		<bean class="converters.StringToConferenceCommentConverter" />
 
 	</util:list>
 

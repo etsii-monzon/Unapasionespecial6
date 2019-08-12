@@ -122,8 +122,6 @@ public class RegistrationAuthorController extends AbstractController {
 			result = new ModelAndView("registration/show");
 			result.addObject("requestURI", "registration/author/show.do");
 			result.addObject("registration", registration);
-			result.addObject("creditCard", registration.getCreditCard().getNumber().substring(12));
-
 		} catch (final Throwable oops) {
 			// TODO: handle exception
 			if (oops.getMessage().equals("hacking"))

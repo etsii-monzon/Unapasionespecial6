@@ -42,7 +42,7 @@ public class ActivityService {
 	}
 
 	public Activity findOne(final int activityId) {
-		Assert.isTrue(this.adminService.checkPrincipal());
+		//Assert.isTrue(this.adminService.checkPrincipal());
 		Activity activity;
 		activity = this.activityRepository.findOne(activityId);
 		return activity;
