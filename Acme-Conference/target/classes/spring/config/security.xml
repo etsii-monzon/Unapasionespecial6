@@ -151,8 +151,15 @@
 		<security:intercept-url pattern="/conference/comment/**"
 			access="permitAll" />
  
-		<security:intercept-url pattern="/activity/comment/**"
+		<security:intercept-url pattern="/tutorial/comment/**"
 			access="permitAll" />
+			
+		<security:intercept-url pattern="/panel/comment/**"
+			access="permitAll" />
+		
+		<security:intercept-url pattern="/presentation/comment/**"
+			access="permitAll" />
+		
 
 			
 		<security:intercept-url pattern="/**"

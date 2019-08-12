@@ -7,6 +7,9 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -143,6 +146,21 @@ public class ActorService {
 		return res;
 	}
 
+	public boolean isAnonymous() {
+		final UserAccount result;
+		SecurityContext context;
+		Authentication authentication;
+		final Object principal;
+		Boolean res = false;
+
+		context = SecurityContextHolder.getContext();
+		Assert.notNull(context);
+		authentication = context.getAuthentication();
+		principal = authentication.getPrincipal();
+		if (principal == null)
+			res = true;
+		return res;
+	}
 	//	public boolean checkPrincipal() {
 	//		boolean res = false;
 	//

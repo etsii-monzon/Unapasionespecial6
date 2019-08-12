@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -54,12 +53,4 @@ public class CommentService {
 
 	}
 
-	public Collection<Comment> findCommentsOfConference(final int conferenceId) {
-		//Assert.notNull(this.confService.findOne(conferenceId));
-		return this.commentRepository.findCommentsOfConference(conferenceId);
-	}
-	public Collection<Comment> findCommentsOfActivity(final int activityId) {
-		//Assert.notNull(this.actService.findOne(activityId));
-		return this.commentRepository.findCommentsOfActivity(activityId);
-	}
 }

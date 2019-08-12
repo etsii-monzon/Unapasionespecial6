@@ -13,30 +13,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.ConferenceCommentRepository;
-import domain.Conference;
-import domain.ConferenceComment;
+import repositories.TutorialCommentRepository;
+import domain.TutorialComment;
 
 @Service
 @Transactional
-public class ConferenceCommentService {
+public class TutorialCommentService {
 
 	@Autowired
-	private ConferenceCommentRepository	conferenceCommentRepository;
+	private TutorialCommentRepository	activityCommentRepository;
 
 	@Autowired
 	private ActorService				actorService;
 
 	@Autowired
-	private ConferenceService			conferenceService;
+	private AuthorService				authorService;
+
+	@Autowired
+	private ReviewerService				revService;
+
+	@Autowired
+	private AdministratorService		adminService;
+
+	@Autowired
+	private TutorialService				tutorialService;
 
 
-	public ConferenceComment create(final int conferenceId) {
-		ConferenceComment com;
-		final Conference conf;
+	public TutorialComment create(final int activityId) {
+		TutorialComment com;
 
-		com = new ConferenceComment();
-		conf = this.conferenceService.findOne(conferenceId);
+		System.out.println(activityId);
+		com = new TutorialComment();
+
+		if (this.tutorialService.findOne(activityId).getId() == activityId) {
+			System.out.println(this.tutorialService.findOne(activityId));
+			com.setTutorial(this.tutorialService.findOne(activityId));
+		}
 		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof AnonymousAuthenticationToken)
 			com.setAuthor("anonymous");
@@ -45,23 +57,23 @@ public class ConferenceCommentService {
 
 		final Date fecha = new GregorianCalendar().getTime();
 
-		com.setConference(conf);
 		com.setMoment(fecha);
 		return com;
 
 	}
 
-	public ConferenceComment save(final ConferenceComment com) {
-		final ConferenceComment res;
+	public TutorialComment save(final TutorialComment com) {
+		final TutorialComment res;
 
-		res = this.conferenceCommentRepository.save(com);
-		Assert.notNull(com.getConference(), "comment sin clase");
+		res = this.activityCommentRepository.save(com);
+		Assert.notNull(res.getTutorial(), "comment sin clase");
 		return res;
 
 	}
 
-	public Collection<ConferenceComment> findCommentsOfConference(final int conferenceId) {
+	public Collection<TutorialComment> findCommentsOfTutorial(final int activityId) {
 		//Assert.notNull(this.actService.findOne(activityId));
-		return this.conferenceCommentRepository.findCommentsOfConference(conferenceId);
+		return this.activityCommentRepository.findCommentsOfTutorial(activityId);
 	}
+
 }

@@ -62,9 +62,9 @@
 			<jstl:out value="${x}"></jstl:out>
 		</jstl:forEach>
 	</display:column>
-	<display:column titleKey="conference.comemnts">
+	<display:column titleKey="activity.comments">
 
-		<a href="activity/comment/list.do?activityId=${row1.id}"> <spring:message
+		<a href="panel/comment/list.do?activityId=${row1.id}"> <spring:message
 			code="activity.comments" />
 		</a>
 
@@ -145,9 +145,9 @@
 				code="tutorial.sections" />
 		</a>
 	</display:column>
-	<display:column titleKey="conference.comemnts">
+	<display:column titleKey="activity.comments">
 
-		<a href="activity/comment/list.do?activityId=${row2.id}"> <spring:message
+		<a href="tutorial/comment/list.do?activityId=${row2.id}"> <spring:message
 			code="activity.comments" />
 		</a>
 
@@ -233,9 +233,9 @@
 				<spring:message code="presentation.subm" />
 			</a>
 		</display:column>
-	<display:column titleKey="conference.comemnts">
+	<display:column titleKey="activity.comments">
 
-		<a href="activity/comment/list.do?activityId=${row3.id}"> <spring:message
+		<a href="presentation/comment/list.do?activityId=${row3.id}"> <spring:message
 			code="activity.comments" />
 		</a>
 

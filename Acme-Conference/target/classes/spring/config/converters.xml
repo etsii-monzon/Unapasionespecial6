@@ -28,11 +28,13 @@
 		<bean class="converters.TopicToStringConverter" />
 		<bean class="converters.CommentToStringConverter" />
 		<bean class="converters.ActivityToStringConverter" />
-		<bean class="converters.ActivityCommentToStringConverter" />
+		<bean class="converters.PanelToStringConverter" />
+		<bean class="converters.PresentationToStringConverter" />
 		<bean class="converters.ConferenceCommentToStringConverter" />
 
 		<bean class="converters.StringToTutorialConverter" />
 		<bean class="converters.StringToPaperConverter" />
+		<bean class="converters.StringToPresentationConverter" />
 		<bean class="converters.StringToConferenceConverter" />
 		<bean class="converters.StringToSubmissionConverter" />
 		<bean class="converters.StringToReportConverter" />
@@ -48,9 +50,8 @@
 		<bean class="converters.StringToTopicConverter" />
 		<bean class="converters.StringToCommentConverter" />
 		<bean class="converters.StringToActivityConverter" />
-		<bean class="converters.StringToActivityCommentConverter" />
 		<bean class="converters.StringToConferenceCommentConverter" />
-
+		<bean class="converters.StringToPanelConverter" />
 	</util:list>
 
 </beans>

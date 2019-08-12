@@ -18,29 +18,39 @@
 	<jstl:if test="${requestURI =='conference/comment/create.do' }">
 	<form:hidden path="conference" />
 	</jstl:if> 
-	<jstl:if test="${requestURI =='activity/comment/create.do' }">
-		<form:hidden path="activity"/>
-	</jstl:if> 
+	<jstl:if test="${requestURI =='panel/comment/create.do' }">
+		<form:hidden path="panel"/>
+	</jstl:if>
+	<jstl:if test="${requestURI =='tutorial/comment/create.do' }">
+		<form:hidden path="tutorial"/>
+	</jstl:if>
+	<jstl:if test="${requestURI =='presentation/comment/create.do' }">
+		<form:hidden path="presentation"/>
+	</jstl:if>
 	<form:hidden path="moment"/>
-	
-	<security:authorize access="!hasRole('NONE')">
-		<form:hidden path="author"/>
-	</security:authorize>
 
-	
+
+		<acme:textbox code="comment.author" path="author" />	
 		<acme:textbox code="comment.title" path="title" />
 		<acme:textbox code="comment.text" path="text"/>
-		<security:authorize access="hasRole('NONE')">
-			<acme:textbox code="comment.author" path="author" />
-		</security:authorize>
+
+
 
 	<br />
 
 
 
-	<jstl:if test="${requestURI == 'activity/comment/create.do' }">
+	<jstl:if test="${requestURI == 'presentation/comment/create.do' }">
 		<acme:submit name="save" code="comment.save" />
-		<acme:cancel url="comment/activity/list.do?activityId=${comment.activity.id }" code="comment.cancel" />
+		<acme:cancel url="presentation/comment/list.do?activityId=${comment.presentation.id }" code="comment.cancel" />
+	</jstl:if> 
+	<jstl:if test="${requestURI == 'panel/comment/create.do' }">
+		<acme:submit name="save" code="comment.save" />
+		<acme:cancel url="panel/comment/panel/list.do?activityId=${comment.panel.id }" code="comment.cancel" />
+	</jstl:if> 
+	<jstl:if test="${requestURI == 'tutorial/comment/create.do' }">
+		<acme:submit name="save" code="comment.save" />
+		<acme:cancel url="tutorial/comment/list.do?activityId=${comment.tutorial.id }" code="comment.cancel" />
 	</jstl:if> 
 	<jstl:if test="${requestURI == 'conference/comment/create.do' }">
 		<acme:submit name="save" code="comment.save" />

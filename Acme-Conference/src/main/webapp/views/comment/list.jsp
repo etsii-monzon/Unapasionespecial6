@@ -66,9 +66,9 @@
 		</jstl:if>
 
 
-			<jstl:if test="${creat == 'act' }">
+			<jstl:if test="${creat == 'pan' }">
 				<button type="button"
-					onclick="javascript: relativeRedir('activity/comment/create.do?activityId='+${id})">
+					onclick="javascript: relativeRedir('panel/comment/create.do?activityId='+${id})">
 					<spring:message code="comment.create" />
 				</button>
 				<security:authorize access="!hasRole('ADMIN')">
@@ -85,4 +85,41 @@
 				</security:authorize>
 		</jstl:if>
 
+	<jstl:if test="${creat == 'tut' }">
+				<button type="button"
+					onclick="javascript: relativeRedir('tutorial/comment/create.do?activityId='+${id})">
+					<spring:message code="comment.create" />
+				</button>
+				<security:authorize access="!hasRole('ADMIN')">
+					<button type="button"
+						onclick="javascript: relativeRedir('activity/list.do?conferenceId='+${conferenceId})">
+						<spring:message code="comment.return" />
+					</button>
+				</security:authorize>
+				<security:authorize access="hasRole('ADMIN')">
+					<button type="button"
+						onclick="javascript: relativeRedir('activity/administrator/list.do?conferenceId='+${conferenceId})">
+						<spring:message code="comment.return" />
+					</button>
+				</security:authorize>
+		</jstl:if>
+	<jstl:if test="${creat == 'pres' }">
+				<button type="button"
+					onclick="javascript: relativeRedir('presentation/comment/create.do?activityId='+${id})">
+					<spring:message code="comment.create" />
+				</button>
+				<security:authorize access="!hasRole('ADMIN')">
+					<button type="button"
+						onclick="javascript: relativeRedir('activity/list.do?conferenceId='+${conferenceId})">
+						<spring:message code="comment.return" />
+					</button>
+				</security:authorize>
+				<security:authorize access="hasRole('ADMIN')">
+					<button type="button"
+						onclick="javascript: relativeRedir('activity/administrator/list.do?conferenceId='+${conferenceId})">
+						<spring:message code="comment.return" />
+					</button>
+				</security:authorize>
+		</jstl:if>
+	
 	</div>
