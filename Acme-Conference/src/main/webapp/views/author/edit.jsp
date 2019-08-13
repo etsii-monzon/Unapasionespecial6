@@ -55,6 +55,10 @@
 	<form:hidden path="messages" />
 	<form:hidden path="registrations" />
 	<form:hidden path="submissions" />
+	<form:hidden path="finder" />
+	<form:hidden path="finder.id" />
+	<form:hidden path="finder.version" />
+
 
 	<jstl:if test="${author.id != 0}">
 		<form:hidden path="userAccount.username" />
@@ -125,7 +129,7 @@
 	<form:label path="phoneNumber">
 		<spring:message code="author.phoneNumber" />
 	</form:label>
-	<form:input path="phoneNumber" pattern="[0-9+()\s]+"/>
+	<form:input path="phoneNumber" pattern="[0-9+()\s]+" />
 	<form:errors class="error" path="phoneNumber" />
 	<br>
 	<br>

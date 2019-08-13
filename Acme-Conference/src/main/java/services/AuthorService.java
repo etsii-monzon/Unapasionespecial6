@@ -16,6 +16,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Author;
+import domain.Finder;
 import domain.Message;
 import domain.Registration;
 import domain.Submission;
@@ -34,6 +35,7 @@ public class AuthorService {
 	private ActorService			actorService;
 	@Autowired
 	private ConfigurationService	configurationService;
+	private FinderService			finderService;
 
 
 	// SIMPLE CRUD METHODS
@@ -42,15 +44,19 @@ public class AuthorService {
 		Author author;
 		UserAccount userAccount;
 		Authority auth;
+		Finder finder;
 
 		//Authority
 		author = new Author();
 		userAccount = new UserAccount();
 		auth = new Authority();
+		finder = this.finderService.create();
+		final Finder res = this.finderService.save(finder);
 
 		auth.setAuthority("AUTHOR");
 		userAccount.addAuthority(auth);
 		author.setUserAccount(userAccount);
+		author.setFinder(res);
 
 		//Relationships
 
@@ -96,20 +102,7 @@ public class AuthorService {
 		res = this.authorRepository.save(d);
 		return res;
 	}
-	//	public void delete(final Director d) {
-	//		Assert.notNull(d);
-	//		Assert.isTrue(d.getId() != 0);
-	//		Assert.notNull(this.authorRepository.findOne(d.getId()));
-	//
-	//		//Eliminamos la creditCard asociada
-	//		this.creditCardService.delete(d.getCreditCard());
-	//
-	//		//Eliminamos MessageBoxes
-	//		for (final MessageBox mB : d.getMessageBoxes())
-	//			this.messageBoxService.deleteGDPR(mB);
-	//
-	//		this.authorRepository.delete(d);
-	//	}
+
 	public Author findByUserAccountId(final int userAccountId) {
 		Assert.isTrue(userAccountId != 0);
 		final Author res = this.authorRepository.findByUserAccountId(userAccountId);

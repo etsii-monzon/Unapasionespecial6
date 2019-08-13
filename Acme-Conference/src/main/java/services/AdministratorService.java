@@ -15,6 +15,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.Finder;
 
 @Service
 @Transactional
@@ -30,7 +31,7 @@ public class AdministratorService {
 	private ConfigurationService	configurationService;
 
 	@Autowired
-	private ActorService			actorService;
+	private FinderService			finderService;
 
 
 	// SIMPLE CRUD METHODS
@@ -40,15 +41,19 @@ public class AdministratorService {
 		Administrator a;
 		UserAccount userAccount;
 		Authority auth;
+		Finder finder;
 
 		//Authority
 		a = new Administrator();
 		userAccount = new UserAccount();
 		auth = new Authority();
+		finder = this.finderService.create();
+		final Finder res = this.finderService.save(finder);
 
 		auth.setAuthority("ADMIN");
 		userAccount.addAuthority(auth);
 		a.setUserAccount(userAccount);
+		a.setFinder(res);
 
 		//Relationships
 

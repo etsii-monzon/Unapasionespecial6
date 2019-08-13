@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -30,6 +31,7 @@ public class Paper extends DomainEntity {
 		this.title = title;
 	}
 	@ManyToMany
+	@Valid
 	@NotEmpty
 	public Collection<Author> getAuthors() {
 		return this.authors;

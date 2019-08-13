@@ -7,15 +7,13 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountRepository;
 import domain.Actor;
 
 @Service
@@ -24,7 +22,10 @@ public class ActorService {
 
 	//Managed repository
 	@Autowired
-	private ActorRepository	actorRepository;
+	private ActorRepository			actorRepository;
+
+	@Autowired
+	private UserAccountRepository	userAccountRepository;
 
 
 	//Supporting services
@@ -67,9 +68,9 @@ public class ActorService {
 		Actor res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		//		Assert.notNull(userAccount);
+		Assert.notNull(userAccount);
 		res = this.findActorByUserAccountId(userAccount.getId());
-		//		Assert.notNull(res);
+		Assert.notNull(res);
 		return res;
 	}
 
@@ -146,20 +147,13 @@ public class ActorService {
 		return res;
 	}
 
-	public boolean isAnonymous() {
-		final UserAccount result;
-		SecurityContext context;
-		Authentication authentication;
-		final Object principal;
-		Boolean res = false;
+	public boolean usernameExits(final String username) {
+		if (this.userAccountRepository.findByUsername(username) == null)
 
-		context = SecurityContextHolder.getContext();
-		Assert.notNull(context);
-		authentication = context.getAuthentication();
-		principal = authentication.getPrincipal();
-		if (principal == null)
-			res = true;
-		return res;
+			return true;
+		else
+			return false;
+
 	}
 	//	public boolean checkPrincipal() {
 	//		boolean res = false;

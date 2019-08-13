@@ -15,6 +15,7 @@ import repositories.ReviewerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Finder;
 import domain.Message;
 import domain.Report;
 import domain.Reviewer;
@@ -37,6 +38,9 @@ public class ReviewerService {
 	@Autowired
 	private ActorService			actorService;
 
+	@Autowired
+	private FinderService			finderService;
+
 
 	//	// SIMPLE CRUD METHODS
 
@@ -45,15 +49,19 @@ public class ReviewerService {
 		Reviewer reviewer;
 		UserAccount userAccount;
 		Authority auth;
+		Finder finder;
 
 		//Authority
 		reviewer = new Reviewer();
 		userAccount = new UserAccount();
 		auth = new Authority();
+		finder = this.finderService.create();
+		final Finder res = this.finderService.save(finder);
 
 		auth.setAuthority("REVIEWER");
 		userAccount.addAuthority(auth);
 		reviewer.setUserAccount(userAccount);
+		reviewer.setFinder(res);
 
 		//Relationships
 		final Collection<Report> reports = new ArrayList<Report>();

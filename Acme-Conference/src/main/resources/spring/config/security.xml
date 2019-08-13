@@ -132,6 +132,10 @@
 
 		<security:intercept-url pattern="/administrator/administrator/**"
 			access="hasRole('ADMIN')" />
+			
+			
+		<security:intercept-url pattern="/category/administrator/**"
+			access="hasRole('ADMIN')" />
 
 		<!-- Listado Conferences -->
 

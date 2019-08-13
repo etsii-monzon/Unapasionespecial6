@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.CategoryService;
 import services.ConferenceService;
 import domain.Conference;
 
@@ -32,6 +34,9 @@ public class ConferenceAdministratorController extends AbstractController {
 	@Autowired
 	AdministratorService	administratorService;
 
+	@Autowired
+	CategoryService			categoryService;
+
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -44,6 +49,8 @@ public class ConferenceAdministratorController extends AbstractController {
 		result = new ModelAndView("conference/list");
 		result.addObject("conferences", conferences);
 		result.addObject("fecha", fecha);
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
+		result.addObject("languaje", languaje);
 
 		result.addObject("requestURI", "conference/administrator/list.do");
 
@@ -62,6 +69,8 @@ public class ConferenceAdministratorController extends AbstractController {
 				conferences.add(c);
 
 		result = new ModelAndView("conference/listst");
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
+		result.addObject("languaje", languaje);
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/administrator/listst.do");
 
@@ -79,6 +88,8 @@ public class ConferenceAdministratorController extends AbstractController {
 				conferences.add(c);
 
 		result = new ModelAndView("conference/listnot");
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
+		result.addObject("languaje", languaje);
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/administrator/listnot.do");
 
@@ -96,6 +107,8 @@ public class ConferenceAdministratorController extends AbstractController {
 				conferences.add(c);
 
 		result = new ModelAndView("conference/listcam");
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
+		result.addObject("languaje", languaje);
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/administrator/listcam.do");
 
@@ -113,6 +126,8 @@ public class ConferenceAdministratorController extends AbstractController {
 				conferences.add(c);
 
 		result = new ModelAndView("conference/listsub");
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
+		result.addObject("languaje", languaje);
 		result.addObject("conferences", conferences);
 		result.addObject("requestURI", "conference/administrator/listsub.do");
 
@@ -164,9 +179,12 @@ public class ConferenceAdministratorController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Conference conference, final String messageCode) {
 		final ModelAndView result;
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		result = new ModelAndView("conference/edit");
 		result.addObject("conference", conference);
+		result.addObject("categories", this.categoryService.findAll());
+		result.addObject("languaje", languaje);
 
 		result.addObject("message", messageCode);
 

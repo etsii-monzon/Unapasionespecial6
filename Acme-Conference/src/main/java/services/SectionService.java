@@ -27,9 +27,6 @@ public class SectionService {
 	@Autowired
 	private TutorialService			tutorialService;
 
-	@Autowired
-	private ConfigurationService	configurationService;
-
 
 	public Section create(final int tutorialId) {
 		Assert.isTrue(this.adminService.checkPrincipal());

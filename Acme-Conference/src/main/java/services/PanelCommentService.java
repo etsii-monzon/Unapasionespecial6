@@ -27,21 +27,7 @@ public class PanelCommentService {
 	private ActorService			actorService;
 
 	@Autowired
-	private AuthorService			authorService;
-	@Autowired
-	private ReviewerService			revService;
-
-	@Autowired
-	private AdministratorService	adminService;
-
-	@Autowired
 	private PanelService			panelService;
-
-	@Autowired
-	private TutorialService			tutorialService;
-
-	@Autowired
-	private PresentationService		presebtationService;
 
 
 	public PanelComment create(final int activityId) {

@@ -166,3 +166,9 @@
 		value="<spring:message code="conference.return" />"
 		onClick="javascript: window.location.replace('welcome/index.do');" />
 </jstl:if>
+
+<jstl:if test="${requestURI=='finder/actor/list.do'}">
+	<input type="button" name="cancel"
+		value="<spring:message code="conference.return" />"
+		onClick="javascript: window.location.replace('finder/actor/edit.do');" />
+</jstl:if>

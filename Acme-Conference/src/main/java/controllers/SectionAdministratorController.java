@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.SectionService;
-import services.TutorialService;
 import domain.Section;
 
 @Controller
@@ -22,9 +21,6 @@ public class SectionAdministratorController extends AbstractController {
 
 	@Autowired
 	private SectionService	secService;
-
-	@Autowired
-	private TutorialService	tutService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
