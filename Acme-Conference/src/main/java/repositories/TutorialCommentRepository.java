@@ -15,4 +15,16 @@ public interface TutorialCommentRepository extends JpaRepository<TutorialComment
 	@Query("select c from TutorialComment c where c.tutorial.id=?1")
 	Collection<TutorialComment> findCommentsOfTutorial(int activityId);
 
+	@Query("select avg(1.0*(select count(tc) from TutorialComment tc where tc.tutorial.id=t.id)) from Tutorial t")
+	Double avgCommentsPerTutorial();
+
+	@Query("select max(1.0*(select count(tc) from TutorialComment tc where tc.tutorial.id=t.id)) from Tutorial t")
+	Integer maxCommentsPerTutorial();
+
+	@Query("select min(1.0*(select count(tc) from TutorialComment tc where tc.tutorial.id=t.id)) from Tutorial t")
+	Integer minCommentsPerTutorial();
+
+	@Query("select 1.0*(select count(tc) from TutorialComment tc where tc.tutorial.id=t.id) from Tutorial t")
+	Collection<Double> getCommentsPerTutorial();
+
 }

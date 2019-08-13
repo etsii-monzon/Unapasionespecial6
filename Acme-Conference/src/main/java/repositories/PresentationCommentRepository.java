@@ -14,4 +14,16 @@ public interface PresentationCommentRepository extends JpaRepository<Presentatio
 
 	@Query("select c from PresentationComment c where c.presentation.id=?1")
 	Collection<PresentationComment> findCommentsOfPresentation(int activityId);
+
+	@Query("select avg(1.0*(select count(pc) from PresentationComment pc where pc.presentation.id=p.id)) from Presentation p")
+	Double avgCommentsPerPresentation();
+
+	@Query("select max(1.0*(select count(pc) from PresentationComment pc where pc.presentation.id=p.id)) from Presentation p")
+	Integer maxCommentsPerPresentation();
+
+	@Query("select min(1.0*(select count(pc) from PresentationComment pc where pc.presentation.id=p.id)) from Presentation p")
+	Integer minCommentsPerPresentation();
+
+	@Query("select 1.0*(select count(pc) from PresentationComment pc where pc.presentation.id=p.id) from Presentation p")
+	Collection<Double> getCommentsPerPresentation();
 }

@@ -15,19 +15,15 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-<definition name="registration/edit" extends="master.page">
-		<put-attribute name="title" value="Registro" />
-		<put-attribute name="body" value="/views/registration/edit.jsp" />
+	<definition name="comment/create" extends="master.page">
+		<put-attribute name="title" value="Escribir un Comentario" />
+		<put-attribute name="body" value="/views/comment/create.jsp" />
 	</definition>
 
-	<definition name="registration/list" extends="master.page">
-		<put-attribute name="title" value="Lista de Registros" />
-		<put-attribute name="body" value="/views/registration/list.jsp" />
+	<definition name="comment/list" extends="master.page">
+		<put-attribute name="title" value="Lista de comentarios" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
 	</definition>
 
-	<definition name="registration/show" extends="master.page">
-		<put-attribute name="title" value="La conferencia del registro" />
-		<put-attribute name="body" value="/views/registration/show.jsp" />
-	</definition>
 
 </tiles-definitions>

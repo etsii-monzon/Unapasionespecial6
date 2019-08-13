@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.CategoryService;
+import services.CommentService;
+import services.ConferenceCommentService;
 import services.ConferenceService;
 import services.RegistrationService;
 import services.SubmissionService;
@@ -33,16 +36,25 @@ public class AdministratorAdministratorController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private AdministratorService	administratorService;
+	private AdministratorService		administratorService;
 
 	@Autowired
-	private ConferenceService		confService;
+	private ConferenceService			confService;
 
 	@Autowired
-	private SubmissionService		submService;
+	private SubmissionService			submService;
 
 	@Autowired
-	private RegistrationService		regService;
+	private RegistrationService			regService;
+
+	@Autowired
+	private ConferenceCommentService	confComService;
+
+	@Autowired
+	private CategoryService				catService;
+
+	@Autowired
+	private CommentService				commentService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -125,6 +137,21 @@ public class AdministratorAdministratorController extends AbstractController {
 		final Double maxFees = this.confService.maxConferenceFees();
 		final Double stdFees = this.confService.stdConferenceFees();
 
+		final Double avgConCom = this.confComService.avgCommentsPerConference();
+		final Double stdConCom = this.confComService.stdDevCommentsPerConference();
+		final Integer minConCom = this.confComService.minCommentsPerConference();
+		final Integer maxConCom = this.confComService.maxCommentsPerConference();
+
+		final Double avgActCom = this.commentService.avgCommentsPerActivity();
+		final Integer minActCom = this.commentService.minCommentsPerActivity();
+		final Integer maxActCom = this.commentService.maxCommentsPerActivity();
+		final Double stdActCom = this.commentService.stdDevCommentsPerActivity();
+
+		final Double avgConCat = this.catService.avgConferencesPerCategory();
+		final Integer minConCat = this.catService.minConferencesPerCategory();
+		final Integer maxConCat = this.catService.maxConferencesPerCategory();
+		final Double stdConCat = this.catService.stdDevConferencesPerCategory();
+
 		result = new ModelAndView("administrator/list");
 		result.addObject("avgDays", avgDays);
 		result.addObject("minDays", minDays);
@@ -142,8 +169,19 @@ public class AdministratorAdministratorController extends AbstractController {
 		result.addObject("minFees", minFees);
 		result.addObject("maxFees", maxFees);
 		result.addObject("stdFees", stdFees);
+		result.addObject("avgConCom", avgConCom);
+		result.addObject("minConCom", minConCom);
+		result.addObject("maxConCom", maxConCom);
+		result.addObject("stdConCom", stdConCom);
+		result.addObject("avgActCom", avgActCom);
+		result.addObject("minActCom", minActCom);
+		result.addObject("maxActCom", maxActCom);
+		result.addObject("stdActCom", stdActCom);
+		result.addObject("avgConCat", avgConCat);
+		result.addObject("minConCat", minConCat);
+		result.addObject("maxConCat", maxConCat);
+		result.addObject("stdConCat", stdConCat);
 
 		return result;
 	}
-
 }

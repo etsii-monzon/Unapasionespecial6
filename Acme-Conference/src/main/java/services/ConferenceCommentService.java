@@ -64,4 +64,20 @@ public class ConferenceCommentService {
 		//Assert.notNull(this.actService.findOne(activityId));
 		return this.conferenceCommentRepository.findCommentsOfConference(conferenceId);
 	}
+
+	public Double avgCommentsPerConference() {
+		return this.conferenceCommentRepository.avgCommentsPerConference();
+	}
+
+	public Double stdDevCommentsPerConference() {
+		return this.conferenceCommentRepository.stdDevCommentsPerConference();
+	}
+
+	public Integer maxCommentsPerConference() {
+		return this.conferenceCommentRepository.maxCommentsPerConference();
+	}
+
+	public Integer minCommentsPerConference() {
+		return this.conferenceCommentRepository.minCommentsPerConference();
+	}
 }

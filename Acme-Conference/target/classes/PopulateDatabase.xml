@@ -866,6 +866,22 @@
 		<property name="conference" ref="conference10" />
 
 	</bean>
+	<bean id="presentation1" class="domain.Presentation">
+		<property name="title" value="Presentation" />
+		<property name="speakers">
+			<list>
+				<value>José Luis</value>
+				<value>María José</value>
+
+			</list>
+		</property>
+		<property name="startMoment" value="01/01/2019 16:05" />
+		<property name="endMoment" value="01/01/2019 16:30" />
+		<property name="room" value="room1" />
+		<property name="summary" value="summary1" />
+		<property name="conference" ref="conference8" />
+		<property name="submission" ref="submission3" />
+	</bean>
 
 	<bean id="tutorial1" class="domain.Tutorial">
 		<property name="title" value="tutorial1" />
