@@ -14,6 +14,8 @@
 
 
 <!-- Listing grid -->
+
+
 <div>
 	<security:authorize access="hasRole('ADMIN')">
 
@@ -95,6 +97,14 @@
 		sortable="false" />
 	<display:column property="summary" titleKey="conference.summary"
 		sortable="false" />
+	<jstl:if test="${languaje == 'en' }">
+		<display:column property="category.englishTitle"
+			titleKey="conference.category" sortable="true" />
+	</jstl:if>
+	<jstl:if test="${languaje == 'es' }">
+		<display:column property="category.spanishTitle"
+			titleKey="conference.category" sortable="true" />
+	</jstl:if>
 	<display:column property="submissionDeadline"
 		titleKey="conference.submissionDeadline" sortable="false"
 		format="{0,date,dd/MM/yyyy HH:mm}" />
@@ -132,17 +142,7 @@
 			</a>
 
 		</display:column>
-		
-		
 	</security:authorize>
-	
-		<display:column titleKey="conference.comments">
-
-			<a href="conference/comment/list.do?conferenceId=${row.id}"> <spring:message
-					code="conference.comments" />
-			</a>
-
-		</display:column>
 </display:table>
 <security:authorize access="hasRole('ADMIN')">
 	<div>
@@ -155,13 +155,17 @@
 </security:authorize>
 
 
-<jstl:if test="${requestURI=='conference/searchList.do' }">
+
+
+<jstl:if
+	test="${requestURI=='conference/searchList.do' || requestURI == 'conference/actor/listByCategory.do'}">
 	<input type="button" name="cancel"
 		value="<spring:message code="conference.return" />"
 		onClick="javascript: window.location.replace('conference/search.do');" />
 </jstl:if>
 
-<jstl:if test="${requestURI!='conference/searchList.do' }">
+<jstl:if
+	test="${requestURI!='conference/searchList.do' && requestURI != 'conference/actor/listByCategory.do'&& requestURI!='finder/actor/list.do'}">
 	<input type="button" name="cancel"
 		value="<spring:message code="conference.return" />"
 		onClick="javascript: window.location.replace('welcome/index.do');" />

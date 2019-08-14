@@ -33,7 +33,6 @@ public class ConferenceAdministratorController extends AbstractController {
 
 	@Autowired
 	AdministratorService	administratorService;
-
 	@Autowired
 	CategoryService			categoryService;
 
@@ -244,12 +243,15 @@ public class ConferenceAdministratorController extends AbstractController {
 	public ModelAndView show(@RequestParam final int conferenceId) {
 		final ModelAndView result;
 		final Conference conference;
+		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 
 		conference = this.conferenceService.findOne(conferenceId);
 
 		result = new ModelAndView("conference/show");
 		result.addObject("requestURI", "conference/administrator/show.do");
 		result.addObject("conference", conference);
+		result.addObject("languaje", languaje);
+
 		return result;
 	}
 

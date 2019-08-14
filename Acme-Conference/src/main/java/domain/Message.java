@@ -58,6 +58,7 @@ public class Message extends DomainEntity {
 	}
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@NotNull
 	public Date getDate() {
 		return this.date;
 	}
@@ -67,8 +68,8 @@ public class Message extends DomainEntity {
 	}
 
 	@ManyToMany
-	@Valid
 	@NotEmpty
+	@Valid
 	public Collection<Actor> getRecipients() {
 		return this.recipients;
 	}

@@ -24,11 +24,11 @@ public class ActorService {
 	@Autowired
 	private ActorRepository			actorRepository;
 
+	//Supporting services
+
 	@Autowired
 	private UserAccountRepository	userAccountRepository;
 
-
-	//Supporting services
 
 	// SIMPLE CRUD METHODS
 
@@ -147,14 +147,6 @@ public class ActorService {
 		return res;
 	}
 
-	public boolean usernameExits(final String username) {
-		if (this.userAccountRepository.findByUsername(username) == null)
-
-			return true;
-		else
-			return false;
-
-	}
 	//	public boolean checkPrincipal() {
 	//		boolean res = false;
 	//
@@ -179,4 +171,12 @@ public class ActorService {
 	//		return res;
 	//	}
 
+	public boolean usernameExits(final String username) {
+		if (this.userAccountRepository.findByUsername(username) == null)
+
+			return true;
+		else
+			return false;
+
+	}
 }

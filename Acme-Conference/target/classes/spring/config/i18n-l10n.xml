@@ -34,8 +34,6 @@
 
 		<value>/views/activity/messages</value>
 		<value>/views/section/messages</value>
-		
-		<value>/views/comment/messages</value>
 
 		<value>/views/topic/messages</value>
 		<value>/views/category/messages</value>

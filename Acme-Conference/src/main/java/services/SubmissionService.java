@@ -189,16 +189,12 @@ public class SubmissionService {
 				if (s.getReviewers().size() == 3)
 					break;
 
-				System.out.println("PASA POR AQUI");
-				for (final String key : r.getKeywords()) {
-					System.out.println("ILLO QUE");
+				for (final String key : r.getKeywords())
 					if (p.contains(key)) {
 						s.getReviewers().add(r);
-						System.out.println("POR QUE NO FUNCIONAS PERRO");
 						this.submissionRepository.save(s);
 						break;
 					}
-				}
 
 			}
 
@@ -263,6 +259,7 @@ public class SubmissionService {
 	public Collection<Submission> findSubmissionsOfReviewer(final Reviewer r) {
 		return this.submissionRepository.findSubmissionsOfReviewer(r);
 	}
+
 	public Collection<Submission> getSubmissionGroupedByStatus() {
 		return this.submissionRepository.getSubmissionGroupedByStatus();
 	}

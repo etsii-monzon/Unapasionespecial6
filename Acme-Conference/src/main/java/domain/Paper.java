@@ -31,8 +31,8 @@ public class Paper extends DomainEntity {
 		this.title = title;
 	}
 	@ManyToMany
-	@Valid
 	@NotEmpty
+	@Valid
 	public Collection<Author> getAuthors() {
 		return this.authors;
 	}

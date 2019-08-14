@@ -54,6 +54,7 @@ public class AuthorController extends AbstractController {
 			try {
 				this.authorService.save(author);
 				result = new ModelAndView("redirect:/welcome/index.do");
+
 			} catch (final Throwable oops) {
 
 				if (oops.getMessage().equals("email error"))

@@ -96,6 +96,7 @@ public class ConferenceController extends AbstractController {
 	public ModelAndView search() {
 		ModelAndView res;
 		res = new ModelAndView("conference/search");
+
 		res.addObject("categories", this.categoryService.findAll());
 		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 		res.addObject("languaje", languaje);
@@ -113,6 +114,7 @@ public class ConferenceController extends AbstractController {
 		result.addObject("conferences", conferences);
 		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 		result.addObject("languaje", languaje);
+
 		result.addObject("requestURI", "conference/searchList.do");
 
 		return result;

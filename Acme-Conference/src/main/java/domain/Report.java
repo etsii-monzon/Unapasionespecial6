@@ -50,6 +50,7 @@ public class Report extends DomainEntity {
 	public void setReadability(final Integer readability) {
 		this.readability = readability;
 	}
+	@NotNull
 	@Pattern(regexp = "^(REJECT)|(BORDER-LINE)|(ACCEPT)$")
 	public String getDecision() {
 		return this.decision;

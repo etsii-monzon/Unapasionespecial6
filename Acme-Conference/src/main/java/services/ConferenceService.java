@@ -33,7 +33,6 @@ public class ConferenceService {
 
 	@Autowired
 	private AdministratorService	administratorService;
-
 	@Autowired
 	private AuthorService			authorService;
 
@@ -233,7 +232,6 @@ public class ConferenceService {
 	public Double stdConferenceFees() {
 		return this.conferenceRepository.stdDevFeesPerConference();
 	}
-
 	public Collection<Conference> getConferencesByCategory(final Category category) {
 		return this.conferenceRepository.getConferencesByCategory(category);
 	}

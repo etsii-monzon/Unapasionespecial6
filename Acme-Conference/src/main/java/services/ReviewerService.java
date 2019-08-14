@@ -72,7 +72,6 @@ public class ReviewerService {
 
 		return reviewer;
 	}
-
 	public Collection<Reviewer> findAll() {
 		Collection<Reviewer> reviewers;
 		reviewers = this.reviewerRepository.findAll();
@@ -95,6 +94,8 @@ public class ReviewerService {
 		Assert.isTrue(this.actorService.checkUserEmail(e.getEmail()), "email error");
 
 		if (e.getId() == 0) {
+			Assert.isTrue(this.actorService.usernameExits(e.getUserAccount().getUsername()), "username error");
+
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String hash = encoder.encodePassword(e.getUserAccount().getPassword(), null);
 			e.getUserAccount().setPassword(hash);

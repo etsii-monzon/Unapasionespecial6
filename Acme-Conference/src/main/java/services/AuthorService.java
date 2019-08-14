@@ -35,6 +35,8 @@ public class AuthorService {
 	private ActorService			actorService;
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
 	private FinderService			finderService;
 
 
@@ -72,16 +74,16 @@ public class AuthorService {
 	}
 
 	public Collection<Author> findAll() {
-		Collection<Author> directors;
-		directors = this.authorRepository.findAll();
-		Assert.notNull(directors);
-		return directors;
+		Collection<Author> authors;
+		authors = this.authorRepository.findAll();
+		Assert.notNull(authors);
+		return authors;
 
 	}
-	public Author findOne(final int directorId) {
-		Assert.notNull(directorId);
+	public Author findOne(final int authorId) {
+		Assert.notNull(authorId);
 		Author d;
-		d = this.authorRepository.findOne(directorId);
+		d = this.authorRepository.findOne(authorId);
 		return d;
 	}
 	public Author save(final Author d) {
@@ -90,6 +92,7 @@ public class AuthorService {
 		Assert.isTrue(this.actorService.checkUserEmail(d.getEmail()), "email error");
 
 		if (d.getId() == 0) {
+			Assert.isTrue(this.actorService.usernameExits(d.getUserAccount().getUsername()), "username error");
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			final String hash = encoder.encodePassword(d.getUserAccount().getPassword(), null);
 			d.getUserAccount().setPassword(hash);

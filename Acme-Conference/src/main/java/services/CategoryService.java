@@ -99,20 +99,4 @@ public class CategoryService {
 		return tree;
 	}
 
-	public Double avgConferencesPerCategory() {
-		return this.categoryRepository.avgNumberConferencesPerCategory();
-	}
-
-	public Double stdDevConferencesPerCategory() {
-		return this.categoryRepository.stdDevNumberConferencesPerCategory();
-	}
-
-	public Integer maxConferencesPerCategory() {
-		return this.categoryRepository.maxNumberConferencesPerCategory();
-	}
-
-	public Integer minConferencesPerCategory() {
-		return this.categoryRepository.minNumberConferencesPerCategory();
-	}
-
 }

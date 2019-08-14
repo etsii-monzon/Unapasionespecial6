@@ -54,7 +54,7 @@ public class PresentationService {
 	}
 
 	public Presentation findOne(final int presentationId) {
-		//Assert.isTrue(this.adminService.checkPrincipal());
+		Assert.isTrue(this.adminService.checkPrincipal());
 		return this.presentRepository.findOne(presentationId);
 	}
 

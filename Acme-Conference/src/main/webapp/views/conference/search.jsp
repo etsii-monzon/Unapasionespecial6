@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -54,4 +55,5 @@
 </security:authorize>
 <input type="button" name="cancel"
 	value="<spring:message code="conference.return" />"
-onClick="javascript: window.location.replace('welcome/index.do');" />
+	onClick="javascript: window.location.replace('welcome/index.do');" />
+

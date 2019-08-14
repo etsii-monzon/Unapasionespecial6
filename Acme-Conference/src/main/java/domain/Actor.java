@@ -30,6 +30,7 @@ public abstract class Actor extends DomainEntity {
 	private String				address;
 	private Collection<Message>	messages;
 	private UserAccount			userAccount;
+
 	private Finder				finder;
 
 
@@ -92,8 +93,8 @@ public abstract class Actor extends DomainEntity {
 	public void setAddress(final String address) {
 		this.address = address;
 	}
-	@ManyToMany
 	@Valid
+	@ManyToMany
 	public Collection<Message> getMessages() {
 		return this.messages;
 	}
