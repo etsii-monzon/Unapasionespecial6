@@ -11,24 +11,30 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="activity/administrator/panel/edit.do" modelAttribute="panel">
+<form:form action="activity/administrator/panel/edit.do"
+	modelAttribute="panel">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="conference" />
+	<form:hidden path="comments" />
 
-		<acme:textbox code="activity.title" path="title" />
-		<acme:textbox code="activity.speakers" path="speakers"/>
-		<acme:moment code="activity.startMomentED" path="startMoment"/>
-		<acme:moment code="activity.endMomentED" path="endMoment"/>
-		<acme:textbox code="activity.room" path="room" />
-		<acme:textbox code="activity.summary" path="summary"/>
-		<acme:textbox code="activity.optionalAttachments" path="optionalAttachments"/>
+
+	<acme:textbox code="activity.title" path="title" />
+	<acme:textbox code="activity.speakers" path="speakers" />
+	<acme:moment code="activity.startMomentED" path="startMoment" />
+	<acme:moment code="activity.endMomentED" path="endMoment" />
+	<acme:textbox code="activity.room" path="room" />
+	<acme:textbox code="activity.summary" path="summary" />
+	<acme:textbox code="activity.optionalAttachments"
+		path="optionalAttachments" />
 	<br />
 
- 	<acme:submit name="savepanel" code="panel.save" />
+	<acme:submit name="savepanel" code="panel.save" />
 
-	<acme:cancel url="activity/administrator/list.do?conferenceId=${panel.conference.id }" code="panel.cancel" />
+	<acme:cancel
+		url="activity/administrator/list.do?conferenceId=${panel.conference.id }"
+		code="panel.cancel" />
 	<br />
 
 

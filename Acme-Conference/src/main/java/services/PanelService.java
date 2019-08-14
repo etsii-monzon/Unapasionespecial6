@@ -41,7 +41,7 @@ public class PanelService {
 	}
 
 	public Panel findOne(final int panelId) {
-		Assert.isTrue(this.adminService.checkPrincipal());
+		//		Assert.isTrue(this.adminService.checkPrincipal());
 		Panel panel;
 		panel = this.panelRepository.findOne(panelId);
 		return panel;

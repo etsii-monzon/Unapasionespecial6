@@ -62,6 +62,13 @@
 			<jstl:out value="${x}"></jstl:out>
 		</jstl:forEach>
 	</display:column>
+	<display:column titleKey="panel.comments">
+
+		<a href="comment/panel/list.do?panelId=${row1.id}"> <spring:message
+				code="panel.comments" />
+		</a>
+
+	</display:column>
 	<security:authorize access="hasRole('ADMIN')">
 
 		<display:column>
@@ -138,6 +145,13 @@
 				code="tutorial.sections" />
 		</a>
 	</display:column>
+	<display:column titleKey="panel.comments">
+
+		<a href="comment/tutorial/list.do?tutorialId=${row2.id}"> <spring:message
+				code="panel.comments" />
+		</a>
+
+	</display:column>
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
 			<a
@@ -209,7 +223,14 @@
 			<jstl:out value="${x}"></jstl:out>
 		</jstl:forEach>
 	</display:column>
-	
+	<display:column titleKey="panel.comments">
+
+		<a href="comment/presentation/list.do?presentationId=${row3.id}">
+			<spring:message code="panel.comments" />
+		</a>
+
+	</display:column>
+
 	<security:authorize access="hasRole('ADMIN')">
 
 
