@@ -41,7 +41,7 @@ public class CommentController extends AbstractController {
 
 
 	@RequestMapping(value = "/conference/list", method = RequestMethod.GET)
-	public ModelAndView listConference(@RequestParam final int conferenceId) {
+	public ModelAndView listConference(@RequestParam final int conferenceId, @RequestParam final String type) {
 		ModelAndView result;
 		Collection<Comment> comments;
 
@@ -52,12 +52,13 @@ public class CommentController extends AbstractController {
 
 		result.addObject("requestURI", "comment/conference/list.do");
 		result.addObject("commentEntityId", conferenceId);
+		result.addObject("type", type);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/panel/list", method = RequestMethod.GET)
-	public ModelAndView listActivity(@RequestParam final int panelId) {
+	public ModelAndView listActivity(@RequestParam final int panelId, @RequestParam final String type) {
 		ModelAndView result;
 		Collection<Comment> comments;
 		try {
@@ -71,6 +72,8 @@ public class CommentController extends AbstractController {
 			result.addObject("requestURI", "comment/panel/list.do");
 			result.addObject("commentEntityId", panelId);
 			result.addObject("conferenceId", this.panelService.findOne(panelId).getConference().getId());
+			result.addObject("type", type);
+
 		} catch (final Throwable oops) {
 			// TODO: handle exception
 			if (oops.getMessage().equals("no existe"))
@@ -83,7 +86,7 @@ public class CommentController extends AbstractController {
 		return result;
 	}
 	@RequestMapping(value = "/presentation/list", method = RequestMethod.GET)
-	public ModelAndView listPresentation(@RequestParam final int presentationId) {
+	public ModelAndView listPresentation(@RequestParam final int presentationId, @RequestParam final String type) {
 		ModelAndView result;
 		Collection<Comment> comments;
 		try {
@@ -97,6 +100,7 @@ public class CommentController extends AbstractController {
 			result.addObject("requestURI", "comment/presentation/list.do");
 			result.addObject("commentEntityId", presentationId);
 			result.addObject("conferenceId", this.presentationService.findOne(presentationId).getConference().getId());
+			result.addObject("type", type);
 
 		} catch (final Throwable oops) {
 			// TODO: handle exception
@@ -109,7 +113,7 @@ public class CommentController extends AbstractController {
 		return result;
 	}
 	@RequestMapping(value = "/tutorial/list", method = RequestMethod.GET)
-	public ModelAndView listTutorial(@RequestParam final int tutorialId) {
+	public ModelAndView listTutorial(@RequestParam final int tutorialId, @RequestParam final String type) {
 		ModelAndView result;
 		Collection<Comment> comments;
 		try {
@@ -123,6 +127,7 @@ public class CommentController extends AbstractController {
 			result.addObject("requestURI", "comment/tutorial/list.do");
 			result.addObject("commentEntityId", tutorialId);
 			result.addObject("conferenceId", this.tutorialService.findOne(tutorialId).getConference().getId());
+			result.addObject("type", type);
 
 		} catch (final Throwable oops) {
 			// TODO: handle exception
@@ -136,16 +141,19 @@ public class CommentController extends AbstractController {
 		return result;
 	}
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int commentEntityId) {
+	public ModelAndView create(@RequestParam final int commentEntityId, @RequestParam(required = false) final String type) {
 		ModelAndView result;
 		Comment comment;
 		try {
 			Assert.isTrue(this.commentService.checkCommentEntity(commentEntityId), "no existe");
 			comment = this.commentService.create();
+			System.out.println(type);
 
-			result = this.createEditModelAndView(comment, commentEntityId);
+			result = this.createEditModelAndView(comment, commentEntityId, type);
 
 			result.addObject("commentEntityId", commentEntityId);
+			result.addObject("type", type);
+
 		} catch (final Throwable oops) {
 			// TODO: handle exception
 			if (oops.getMessage().equals("no existe"))
@@ -160,12 +168,13 @@ public class CommentController extends AbstractController {
 		ModelAndView result;
 
 		final int id = Integer.parseInt(req.getParameter("commentEntityId"));
+		final String type = req.getParameter("type");
 
 		System.out.println(id);
 
 		if (binding.hasErrors()) {
 			System.out.println(binding);
-			result = this.createEditModelAndView(comment, id);
+			result = this.createEditModelAndView(comment, id, type);
 		} else
 			try {
 				final Comment res = this.commentService.save(comment);
@@ -173,43 +182,43 @@ public class CommentController extends AbstractController {
 				if (this.conferenceService.findOne(id) != null) {
 					this.conferenceService.findOne(id).getComments().add(res);
 					System.out.println(this.conferenceService.findOne(id).getComments());
-					result = new ModelAndView("redirect:/comment/conference/list.do?conferenceId=" + id);
+					result = new ModelAndView("redirect:/comment/conference/list.do?conferenceId=" + id + "&&type=" + type);
 
 				} else if (this.panelService.findOne(id) != null) {
 					this.panelService.findOne(id).getComments().add(res);
 					System.out.println(this.panelService.findOne(id).getComments());
-					result = new ModelAndView("redirect:/comment/panel/list.do?panelId=" + id);
+					result = new ModelAndView("redirect:/comment/panel/list.do?panelId=" + id + "&&type=" + type);
 
 				} else if (this.presentationService.findOne(id) != null) {
 					this.presentationService.findOne(id).getComments().add(res);
 					System.out.println(this.presentationService.findOne(id).getComments());
-					result = new ModelAndView("redirect:/comment/presentation/list.do?presentationId=" + id);
+					result = new ModelAndView("redirect:/comment/presentation/list.do?presentationId=" + id + "&&type=" + type);
 
 				} else if (this.tutorialService.findOne(id) != null) {
 					this.tutorialService.findOne(id).getComments().add(res);
 					System.out.println(this.tutorialService.findOne(id).getComments());
-					result = new ModelAndView("redirect:/comment/tutorial/list.do?tutorialId=" + id);
+					result = new ModelAndView("redirect:/comment/tutorial/list.do?tutorialId=" + id + "&&type=" + type);
 
 				} else
-					result = this.createEditModelAndView(comment, "comment.commit.error", id);
+					result = this.createEditModelAndView(comment, "comment.commit.error", id, type);
 
 			} catch (final Throwable oops) {
 				System.out.println(oops.getMessage());
-				result = this.createEditModelAndView(comment, "comment.commit.error", id);
+				result = this.createEditModelAndView(comment, "comment.commit.error", id, type);
 			}
 		return result;
 	}
-	protected ModelAndView createEditModelAndView(final Comment comment, final int commentEntityId) {
+	protected ModelAndView createEditModelAndView(final Comment comment, final int commentEntityId, final String type) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(comment, null, commentEntityId);
+		result = this.createEditModelAndView(comment, null, commentEntityId, type);
 
 		result.addObject("commentEntityId", commentEntityId);
+		result.addObject("type", type);
 
 		return result;
 	}
-
-	protected ModelAndView createEditModelAndView(final Comment comment, final String messageCode, final int commentEntityId) {
+	protected ModelAndView createEditModelAndView(final Comment comment, final String messageCode, final int commentEntityId, final String type) {
 		final ModelAndView result;
 
 		result = new ModelAndView("comment/edit");
@@ -227,6 +236,7 @@ public class CommentController extends AbstractController {
 			result.addObject("requestURI", "comment/edit.do");
 
 		result.addObject("commentEntityId", commentEntityId);
+		result.addObject("type", type);
 
 		return result;
 	}

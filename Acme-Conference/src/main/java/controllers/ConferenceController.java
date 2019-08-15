@@ -48,6 +48,7 @@ public class ConferenceController extends AbstractController {
 		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 		result.addObject("languaje", languaje);
 		result.addObject("requestURI", "conference/listProx.do");
+		result.addObject("type", "prox");
 
 		return result;
 	}
@@ -68,6 +69,7 @@ public class ConferenceController extends AbstractController {
 		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 		result.addObject("languaje", languaje);
 		result.addObject("requestURI", "conference/listPast.do");
+		result.addObject("type", "past");
 
 		return result;
 	}
@@ -88,6 +90,7 @@ public class ConferenceController extends AbstractController {
 		final String languaje = LocaleContextHolder.getLocale().getLanguage();
 		result.addObject("languaje", languaje);
 		result.addObject("requestURI", "conference/listEjec.do");
+		result.addObject("type", "ejec");
 
 		return result;
 	}

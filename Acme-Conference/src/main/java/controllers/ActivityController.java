@@ -44,7 +44,7 @@ public class ActivityController extends AbstractController {
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam final int conferenceId) {
+	public ModelAndView list(@RequestParam final int conferenceId, @RequestParam final String type) {
 		final Conference conf = this.confService.findOne(conferenceId);
 		final Collection<Tutorial> tutorials = this.tutorialService.findAllTutorialsByConference(conf);
 		final Collection<Panel> panels = this.panelService.findAllPanelsByConference(conf);
@@ -66,6 +66,7 @@ public class ActivityController extends AbstractController {
 		result.addObject("allowed", allowed);
 		result.addObject("fecha", fecha);
 		result.addObject("requestURI", "activity/list.do");
+		result.addObject("type", type);
 
 		return result;
 

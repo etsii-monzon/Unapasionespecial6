@@ -14,8 +14,6 @@
 
 
 <!-- Listing grid -->
-
-
 <div>
 	<security:authorize access="hasRole('ADMIN')">
 
@@ -136,18 +134,19 @@
 	<security:authorize access="!hasRole('ADMIN')">
 
 		<display:column titleKey="conference.activities">
-
-			<a href="activity/list.do?conferenceId=${row.id}"> <spring:message
-					code="conference.activities" />
+			<a href="activity/list.do?conferenceId=${row.id}&&type=${type}">
+				<spring:message code="conference.activities" />
 			</a>
+
 
 		</display:column>
 	</security:authorize>
 
 	<display:column titleKey="conference.comments">
 
-		<a href="comment/conference/list.do?conferenceId=${row.id}"> <spring:message
-				code="conference.comments" />
+		<a
+			href="comment/conference/list.do?conferenceId=${row.id}&&type=${type}">
+			<spring:message code="conference.comments" />
 		</a>
 
 	</display:column>
