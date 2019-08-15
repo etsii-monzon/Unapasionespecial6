@@ -10,7 +10,7 @@ import domain.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-	@Query("select c from Category c where c.englishTitle = 'CATEGORY' and c.parent = null")
+	@Query("select c from Category c where c.englishTitle = 'CONFERENCE' and c.parent = null")
 	Category getRoot();
 
 }

@@ -71,6 +71,30 @@
 		</property>
 	</bean>
 
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="administrator1" />
+		<property name="password" value="d5cee333abe432891a0de57d0ee38713" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="administrator2" />
+		<property name="password" value="82954495ff7e2a735ed2192c35b2cd00" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
 
 
 	<!-- Other domain beans come here -->
@@ -99,8 +123,6 @@
 				<ref bean="conference10" />
 
 
-
-
 			</list>
 		</property>
 		<property name="messages">
@@ -109,6 +131,50 @@
 			</list>
 		</property>
 		<property name="finder" ref="finder1" />
+
+	</bean>
+
+
+	<bean id="admin2" class="domain.Administrator">
+		<property name="name" value="José" />
+		<property name="surname" value="Marquez" />
+		<property name="middleName" value="María" />
+
+		<property name="email" value="admin2@" />
+		<property name="phoneNumber" value="+34 675359045" />
+		<property name="address" value="Monzón 29" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="conferences">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="finder" ref="finder6" />
+
+	</bean>
+
+	<bean id="admin3" class="domain.Administrator">
+		<property name="name" value="Manola" />
+		<property name="surname" value="Del Pino Fuentes" />
+		<property name="middleName" value="" />
+		<property name="email" value="admin3@" />
+		<property name="phoneNumber" value="+34 675359045" />
+		<property name="address" value="Monzón 29" />
+		<property name="optionalPhoto" value="" />
+		<property name="userAccount" ref="userAccount7" />
+		<property name="conferences">
+			<list>
+			</list>
+		</property>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+		<property name="finder" ref="finder7" />
 
 	</bean>
 
@@ -277,7 +343,13 @@
 		<property name="fee" value="80.0" />
 		<property name="draftMode" value="false" />
 		<property name="category" ref="category13" />
+		<property name="comments">
+			<list>
+				<ref bean="comment1" />
+				<ref bean="comment2" />
 
+			</list>
+		</property>
 
 
 
@@ -356,7 +428,8 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
+		<property name="document"
+			value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 
 	<bean id="submission1" class="domain.Submission">
@@ -381,7 +454,8 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
+		<property name="document"
+			value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 	<bean id="paper2" class="domain.Paper">
 		<property name="title" value="PAPER" />
@@ -394,7 +468,8 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
+		<property name="document"
+			value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 	<bean id="submission10" class="domain.Submission">
 		<property name="ticker" value="CXA-213L" />
@@ -418,7 +493,8 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
+		<property name="document"
+			value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 	<bean id="registration1" class="domain.Registration">
 		<property name="creditCard" ref="creditCard1" />
@@ -624,9 +700,24 @@
 		<property name="spanishName" value="OTRO" />
 	</bean>
 
+	<bean id="comment1" class="domain.Comment">
+		<property name="title" value="Good Conference!" />
+		<property name="moment" value="02/02/2019 20:00" />
+		<property name="author" value="Anonymous" />
+		<property name="text" value="Muy buena conferencía,recomendable." />
+
+	</bean>
+
+	<bean id="comment2" class="domain.Comment">
+		<property name="title" value="Recomendado 100%" />
+		<property name="moment" value="02/02/2019 20:00" />
+		<property name="author" value="Anonymous" />
+		<property name="text" value="Muy buena conferencía." />
+	</bean>
+
 	<bean id="category1" class="domain.Category">
-		<property name="englishTitle" value="CATEGORY" />
-		<property name="spanishTitle" value="CATEGORÍA" />
+		<property name="englishTitle" value="CONFERENCE" />
+		<property name="spanishTitle" value="CONFERENCIA" />
 
 		<property name="children">
 			<list>
@@ -885,6 +976,40 @@
 
 	</bean>
 
+	<bean id="presentation1" class="domain.Presentation">
+		<property name="title" value="presentation1" />
+		<property name="speakers">
+			<list>
+				<value>José Vicente</value>
+				<value>María Luisa</value>
+				<value>Omar Montes</value>
+
+			</list>
+		</property>
+
+		<property name="optionalAttachments">
+			<list>
+				<value>http://attachment1.com</value>
+				<value>http://attachment2.com</value>
+				<value>http://attachment3.com</value>
+
+			</list>
+		</property>
+		<property name="startMoment" value="01/01/2019 16:45" />
+		<property name="endMoment" value="01/01/2019 17:00" />
+		<property name="room" value="room1" />
+		<property name="summary" value="summary conference" />
+		<property name="conference" ref="conference10" />
+		<property name="submission" ref="submission10" />
+
+	</bean>
+	<bean id="section1" class="domain.Section">
+		<property name="title" value="section1" />
+		<property name="summary" value="summary1" />
+		<property name="tutorial" ref="tutorial1" />
+
+	</bean>
+
 
 	<bean id="configuration" class="domain.Configuration">
 		<property name="sistemName" value="Acme Conference" />
@@ -928,6 +1053,13 @@
 
 	</bean>
 	<bean id="finder5" class="domain.Finder">
+
+	</bean>
+
+	<bean id="finder6" class="domain.Finder">
+
+	</bean>
+	<bean id="finder7" class="domain.Finder">
 
 	</bean>
 
