@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,14 +60,25 @@ public class CommentController extends AbstractController {
 	public ModelAndView listActivity(@RequestParam final int panelId) {
 		ModelAndView result;
 		Collection<Comment> comments;
+		try {
+			Assert.isTrue(this.panelService.findOne(panelId) != null, "no existe");
 
-		comments = this.panelService.findOne(panelId).getComments();
+			comments = this.panelService.findOne(panelId).getComments();
 
-		result = new ModelAndView("comment/list");
-		result.addObject("comments", comments);
+			result = new ModelAndView("comment/list");
+			result.addObject("comments", comments);
 
-		result.addObject("requestURI", "comment/panel/list.do");
-		result.addObject("commentEntityId", panelId);
+			result.addObject("requestURI", "comment/panel/list.do");
+			result.addObject("commentEntityId", panelId);
+			result.addObject("conferenceId", this.panelService.findOne(panelId).getConference().getId());
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("no existe"))
+				result = new ModelAndView("redirect:/welcome/index.do");
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}
@@ -74,29 +86,52 @@ public class CommentController extends AbstractController {
 	public ModelAndView listPresentation(@RequestParam final int presentationId) {
 		ModelAndView result;
 		Collection<Comment> comments;
+		try {
+			Assert.isTrue(this.presentationService.findOne(presentationId) != null, "no existe");
 
-		comments = this.presentationService.findOne(presentationId).getComments();
+			comments = this.presentationService.findOne(presentationId).getComments();
 
-		result = new ModelAndView("comment/list");
-		result.addObject("comments", comments);
+			result = new ModelAndView("comment/list");
+			result.addObject("comments", comments);
 
-		result.addObject("requestURI", "comment/presentation/list.do");
-		result.addObject("commentEntityId", presentationId);
+			result.addObject("requestURI", "comment/presentation/list.do");
+			result.addObject("commentEntityId", presentationId);
+			result.addObject("conferenceId", this.presentationService.findOne(presentationId).getConference().getId());
 
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("no existe"))
+				result = new ModelAndView("redirect:/welcome/index.do");
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 		return result;
 	}
 	@RequestMapping(value = "/tutorial/list", method = RequestMethod.GET)
 	public ModelAndView listTutorial(@RequestParam final int tutorialId) {
 		ModelAndView result;
 		Collection<Comment> comments;
+		try {
+			Assert.isTrue(this.tutorialService.findOne(tutorialId) != null, "no existe");
 
-		comments = this.tutorialService.findOne(tutorialId).getComments();
+			comments = this.tutorialService.findOne(tutorialId).getComments();
 
-		result = new ModelAndView("comment/list");
-		result.addObject("comments", comments);
+			result = new ModelAndView("comment/list");
+			result.addObject("comments", comments);
 
-		result.addObject("requestURI", "comment/tutorial/list.do");
-		result.addObject("commentEntityId", tutorialId);
+			result.addObject("requestURI", "comment/tutorial/list.do");
+			result.addObject("commentEntityId", tutorialId);
+			result.addObject("conferenceId", this.tutorialService.findOne(tutorialId).getConference().getId());
+
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("no existe"))
+				result = new ModelAndView("redirect:/welcome/index.do");
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}
@@ -104,16 +139,22 @@ public class CommentController extends AbstractController {
 	public ModelAndView create(@RequestParam final int commentEntityId) {
 		ModelAndView result;
 		Comment comment;
+		try {
+			Assert.isTrue(this.commentService.checkCommentEntity(commentEntityId), "no existe");
+			comment = this.commentService.create();
 
-		comment = this.commentService.create();
+			result = this.createEditModelAndView(comment, commentEntityId);
 
-		result = this.createEditModelAndView(comment, commentEntityId);
-
-		result.addObject("commentEntityId", commentEntityId);
-
+			result.addObject("commentEntityId", commentEntityId);
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("no existe"))
+				result = new ModelAndView("redirect:/welcome/index.do");
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ModelAndView save(@Valid final Comment comment, final BindingResult binding, final HttpServletRequest req) {
 		ModelAndView result;
@@ -132,18 +173,25 @@ public class CommentController extends AbstractController {
 				if (this.conferenceService.findOne(id) != null) {
 					this.conferenceService.findOne(id).getComments().add(res);
 					System.out.println(this.conferenceService.findOne(id).getComments());
+					result = new ModelAndView("redirect:/comment/conference/list.do?conferenceId=" + id);
+
 				} else if (this.panelService.findOne(id) != null) {
 					this.panelService.findOne(id).getComments().add(res);
 					System.out.println(this.panelService.findOne(id).getComments());
+					result = new ModelAndView("redirect:/comment/panel/list.do?panelId=" + id);
+
 				} else if (this.presentationService.findOne(id) != null) {
 					this.presentationService.findOne(id).getComments().add(res);
 					System.out.println(this.presentationService.findOne(id).getComments());
+					result = new ModelAndView("redirect:/comment/presentation/list.do?presentationId=" + id);
+
 				} else if (this.tutorialService.findOne(id) != null) {
 					this.tutorialService.findOne(id).getComments().add(res);
 					System.out.println(this.tutorialService.findOne(id).getComments());
-				}
+					result = new ModelAndView("redirect:/comment/tutorial/list.do?tutorialId=" + id);
 
-				result = new ModelAndView("redirect:/");
+				} else
+					result = this.createEditModelAndView(comment, "comment.commit.error", id);
 
 			} catch (final Throwable oops) {
 				System.out.println(oops.getMessage());
@@ -167,8 +215,16 @@ public class CommentController extends AbstractController {
 		result = new ModelAndView("comment/edit");
 		result.addObject("comment", comment);
 		result.addObject("message", messageCode);
-
-		result.addObject("requestURI", "comment/edit.do");
+		if (this.conferenceService.findOne(commentEntityId) != null)
+			result.addObject("requestURI", "comment/conference/edit.do");
+		else if (this.panelService.findOne(commentEntityId) != null)
+			result.addObject("requestURI", "comment/panel/edit.do");
+		else if (this.presentationService.findOne(commentEntityId) != null)
+			result.addObject("requestURI", "comment/presentation/edit.do");
+		else if (this.tutorialService.findOne(commentEntityId) != null)
+			result.addObject("requestURI", "comment/tutorial/edit.do");
+		else
+			result.addObject("requestURI", "comment/edit.do");
 
 		result.addObject("commentEntityId", commentEntityId);
 

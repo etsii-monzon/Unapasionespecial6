@@ -279,7 +279,8 @@
 <security:authorize access="!hasRole('ADMIN')">
 	<div>
 
-		<button type="button" onclick="javascript: history.back()">
+		<button type="button"
+			onclick="javascript: relativeRedir('welcome/index.do')">
 			<spring:message code="activity.return" />
 		</button>
 	</div>

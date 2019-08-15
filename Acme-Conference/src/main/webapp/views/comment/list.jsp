@@ -21,7 +21,7 @@
 	</button>
 
 </div>
-<display:table pagesize="20" class="displaytag" name="comments"
+<display:table pagesize="5" class="displaytag" name="comments"
 	requestURI="${requestURI}" id="row">
 
 
@@ -45,9 +45,18 @@
 
 
 </display:table>
+<br />
 
-<div>
-	<button type="button" onclick="javascript: history.back()">
-		<spring:message code="comment.return" />
-	</button>
-</div>
+<jstl:if test="${requestURI=='comment/conference/list.do' }">
+	<input type="button" name="cancel"
+		value="<spring:message code="comment.return" />"
+		onClick="javascript: window.location.replace('welcome/index.do')" />
+
+</jstl:if>
+<jstl:if test="${requestURI!='comment/conference/list.do'  }">
+
+	<input type="button" name="cancel"
+		value="<spring:message code="comment.return" />"
+		onClick="javascript: window.location.replace('activity/list.do?conferenceId=${conferenceId}')" />
+
+</jstl:if>

@@ -356,7 +356,7 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="Document" />
+		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 
 	<bean id="submission1" class="domain.Submission">
@@ -381,7 +381,7 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="Document" />
+		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 	<bean id="paper2" class="domain.Paper">
 		<property name="title" value="PAPER" />
@@ -394,7 +394,7 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="Document" />
+		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 	<bean id="submission10" class="domain.Submission">
 		<property name="ticker" value="CXA-213L" />
@@ -418,7 +418,7 @@
 			</list>
 		</property>
 		<property name="summary" value="Summary" />
-		<property name="document" value="Document" />
+		<property name="document" value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 	<bean id="registration1" class="domain.Registration">
 		<property name="creditCard" ref="creditCard1" />

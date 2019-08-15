@@ -5,8 +5,10 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -15,7 +17,8 @@ public abstract class CommentEntity extends DomainEntity {
 	private Collection<Comment>	comments;
 
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
+	@Valid
 	public Collection<Comment> getComments() {
 		return this.comments;
 	}

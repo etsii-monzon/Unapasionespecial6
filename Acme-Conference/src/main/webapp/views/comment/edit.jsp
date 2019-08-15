@@ -14,7 +14,7 @@
 
 
 
-<form:form action="${requestURI}" modelAttribute="comment">
+<form:form action="comment/edit.do" modelAttribute="comment">
 	<%-- Hidden properties from category--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -51,7 +51,7 @@
 	<form:label path="text">
 		<spring:message code="comment.text" />
 	</form:label>
-	<form:input path="text" />
+	<form:textarea path="text" />
 	<form:errors class="error" path="text" />
 	<br>
 	<br>
@@ -63,13 +63,33 @@
 	<input type="submit" name="save"
 		value="<spring:message code="comment.save"/>" />
 
-	<input type="button" name="cancel"
-		value="<spring:message code="comment.cancel" />"
-		onClick="javascript: window.location.replace('conference/comment/list.do?conferenceId=${conferenceId}')" />
+	<jstl:if test="${requestURI=='comment/conference/edit.do' }">
+		<input type="button" name="cancel"
+			value="<spring:message code="comment.cancel" />"
+			onClick="javascript: window.location.replace('comment/conference/list.do?conferenceId=${commentEntityId}')" />
 
+	</jstl:if>
+	<jstl:if test="${requestURI=='comment/tutorial/edit.do' }">
+		<input type="button" name="cancel"
+			value="<spring:message code="comment.cancel" />"
+			onClick="javascript: window.location.replace('comment/tutorial/list.do?tutorialId=${commentEntityId}')" />
 
+	</jstl:if>
+	<jstl:if test="${requestURI=='comment/presenation/edit.do' }">
+		<input type="button" name="cancel"
+			value="<spring:message code="comment.cancel" />"
+			onClick="javascript: window.location.replace('comment/presentation/list.do?presenationId=${commentEntityId}')" />
+
+	</jstl:if>
+	<jstl:if test="${requestURI=='comment/panel/edit.do' }">
+		<input type="button" name="cancel"
+			value="<spring:message code="comment.cancel" />"
+			onClick="javascript: window.location.replace('comment/panel/list.do?panelId=${commentEntityId}')" />
+
+	</jstl:if>
+
+	<div></div>
 	<br>
 	<br>
-
 
 </form:form>

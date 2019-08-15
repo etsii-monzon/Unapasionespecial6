@@ -20,6 +20,15 @@ public class CommentService {
 	@Autowired
 	private CommentRepository	commentRepository;
 
+	@Autowired
+	ConferenceService			conferenceService;
+	@Autowired
+	PanelService				panelService;
+	@Autowired
+	PresentationService			presentationService;
+	@Autowired
+	TutorialService				tutorialService;
+
 
 	public Comment create() {
 		Comment comment;
@@ -55,6 +64,19 @@ public class CommentService {
 
 		this.commentRepository.delete(comment);
 
+	}
+
+	public boolean checkCommentEntity(final int id) {
+		if (this.conferenceService.findOne(id) != null)
+			return true;
+		else if (this.panelService.findOne(id) != null)
+			return true;
+		else if (this.presentationService.findOne(id) != null)
+			return true;
+		else if (this.tutorialService.findOne(id) != null)
+			return true;
+		else
+			return false;
 	}
 
 }
