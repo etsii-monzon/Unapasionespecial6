@@ -15,19 +15,25 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-	<definition name="room/edit" extends="master.page">
-		<put-attribute name="title" value="Habitación" />
-		<put-attribute name="body" value="/views/room/edit.jsp" />
+	<definition name="submission/edit" extends="master.page">
+		<put-attribute name="title" value="Entrega" />
+		<put-attribute name="body" value="/views/submission/edit.jsp" />
 	</definition>
 
-	<definition name="room/list" extends="master.page">
-		<put-attribute name="title" value="Lista de habitaciones" />
-		<put-attribute name="body" value="/views/room/list.jsp" />
+	<definition name="submission/list" extends="master.page">
+		<put-attribute name="title" value="Lista de entregas" />
+		<put-attribute name="body" value="/views/submission/list.jsp" />
 	</definition>
 
-	<definition name="room/show" extends="master.page">
-		<put-attribute name="title" value="Mostrar una habitación" />
-		<put-attribute name="body" value="/views/room/show.jsp" />
+	<definition name="submission/show" extends="master.page">
+		<put-attribute name="title" value="Mostrar entrega" />
+		<put-attribute name="body" value="/views/submission/show.jsp" />
 	</definition>
+	
+	<definition name="submission/assign" extends="master.page">
+		<put-attribute name="title" value="Asignar entrega" />
+		<put-attribute name="body" value="/views/submission/assign.jsp" />
+	</definition>
+
 
 </tiles-definitions>
