@@ -138,5 +138,28 @@ public class SubmissionAuthorController extends AbstractController {
 			}
 		return result;
 	}
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int submissionId) {
+		ModelAndView result;
+		final Submission submission;
+
+		try {
+			submission = this.submissionService.findOne(submissionId);
+			Assert.isTrue(this.authorService.findByPrincipal().getSubmissions().contains(submission), "hacking");
+
+			result = new ModelAndView("submission/show");
+			result.addObject("requestURI", "submission/author/show.do");
+			result.addObject("submission", submission);
+
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/welcome/index.do");
+		}
+
+		return result;
+	}
 
 }
