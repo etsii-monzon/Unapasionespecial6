@@ -84,17 +84,13 @@ public class ActivityAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Tutorial tut = this.tutorialService.findOne(tutorialId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(tut.getConference()), "hacking");
 			final int id = tut.getConference().getId();
 			this.tutorialService.delete(tut);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + id);
 			return result;
 		} catch (final Throwable oops) {
 			// TODO: handle exception
-			if (oops.getMessage().equals("hacking"))
-				result = new ModelAndView("misc/403");
-			else
-				result = new ModelAndView("redirect:/");
+			result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
@@ -158,7 +154,6 @@ public class ActivityAdministratorController extends AbstractController {
 		else
 			try {
 				System.out.print("Entra");
-				Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(tutorial.getConference()), "hacking");
 				Assert.isTrue(
 					!tutorial.getEndMoment().equals(null) && !tutorial.getRoom().equals(null) && !tutorial.getSpeakers().isEmpty() && !tutorial.getStartMoment().equals(null) && !tutorial.getSummary().equals(null) && !tutorial.getTitle().equals(null),
 					"vacio");
@@ -166,9 +161,7 @@ public class ActivityAdministratorController extends AbstractController {
 				result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + tut.getConference().getId());
 			} catch (final Throwable oops) {
 				System.out.print(oops);
-				if (oops.getMessage() == "hacking")
-					result = new ModelAndView("misc/403");
-				else if (oops.getMessage() == "vacio")
+				if (oops.getMessage() == "vacio")
 					result = this.createEditTutModelAndView(tutorial, "activity.empty.error");
 				else if (oops.getMessage() == "url")
 					result = this.createEditTutModelAndView(tutorial, "activity.url.error");
@@ -183,17 +176,14 @@ public class ActivityAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Panel pa = this.panelService.findOne(panelId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pa.getConference()), "hacking");
 			final int id = pa.getConference().getId();
 			this.panelService.delete(pa);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + id);
 			return result;
 		} catch (final Throwable oops) {
 			// TODO: handle exception
-			if (oops.getMessage().equals("hacking"))
-				result = new ModelAndView("misc/403");
-			else
-				result = new ModelAndView("redirect:/");
+
+			result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
@@ -261,12 +251,9 @@ public class ActivityAdministratorController extends AbstractController {
 				System.out.print("Entra");
 				Assert.isTrue(!panel.getEndMoment().equals(null) && !panel.getRoom().equals(null) && !panel.getSpeakers().isEmpty() && !panel.getStartMoment().equals(null) && !panel.getSummary().equals(null) && !panel.getTitle().equals(null), "vacio");
 				final Panel pa = this.panelService.save(panel);
-				Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pa.getConference()), "hacking");
 				result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + pa.getConference().getId());
 			} catch (final Throwable oops) {
-				if (oops.getMessage() == "hacking")
-					result = new ModelAndView("misc/403");
-				else if (oops.getMessage() == "vacio")
+				if (oops.getMessage() == "vacio")
 					result = this.createEditPaModelAndView(panel, "activity.empty.error");
 				else if (oops.getMessage() == "url")
 					result = this.createEditPaModelAndView(panel, "activity.url.error");
@@ -281,17 +268,14 @@ public class ActivityAdministratorController extends AbstractController {
 		ModelAndView result;
 		try {
 			final Presentation pr = this.presentationService.findOne(presentationId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pr.getConference()), "hacking");
 			final int id = pr.getConference().getId();
 			this.presentationService.delete(pr);
 			result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + id);
 			return result;
 		} catch (final Throwable oops) {
 			// TODO: handle exception
-			if (oops.getMessage().equals("hacking"))
-				result = new ModelAndView("misc/403");
-			else
-				result = new ModelAndView("redirect:/");
+
+			result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
@@ -365,13 +349,10 @@ public class ActivityAdministratorController extends AbstractController {
 				Assert.isTrue(!pres.getEndMoment().equals(null) && !pres.getRoom().equals(null) && !pres.getSpeakers().isEmpty() && !pres.getStartMoment().equals(null) && !pres.getSummary().equals(null) && !pres.getTitle().equals(null)
 					&& !pres.getSubmission().equals(null), "vacio");
 				final Presentation pre = this.presentationService.save(pres);
-				Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(pres.getConference()), "hacking");
 				result = new ModelAndView("redirect:/activity/administrator/list.do?conferenceId=" + pre.getConference().getId());
 			} catch (final Throwable oops) {
 				System.out.print(oops);
-				if (oops.getMessage() == "hacking")
-					result = new ModelAndView("misc/403");
-				else if (oops.getMessage() == "vacio")
+				if (oops.getMessage() == "vacio")
 					result = this.createEditPrModelAndView(pres, "activity.empty.error");
 				else if (oops.getMessage() == "url")
 					result = this.createEditPrModelAndView(pres, "activity.url.error");
@@ -387,17 +368,14 @@ public class ActivityAdministratorController extends AbstractController {
 		final Submission submission;
 		try {
 			submission = this.submissionService.findOne(submissionId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(submission.getConference()), "hacking");
 			result = new ModelAndView("submission/show");
 			result.addObject("requestURI", "activity/administrator/submission/show.do");
 			result.addObject("submission", submission);
 			result.addObject("conferenceId", submission.getConference().getId());
 
 		} catch (final Throwable oops) {
-			if (oops.getMessage().equals("hacking"))
-				result = new ModelAndView("misc/403");
-			else
-				result = new ModelAndView("redirect:/");
+
+			result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}

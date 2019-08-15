@@ -12,7 +12,23 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-
+<jstl:if test="${requestURI=='message/administrator/broadcast.do' }">
+	*<spring:message code="message.broadcast" />
+</jstl:if>
+<jstl:if
+	test="${requestURI=='message/administrator/messageAuthors.do' }">
+	*<spring:message code="message.authors" />
+</jstl:if>
+<jstl:if
+	test="${requestURI=='message/administrator/messageAuthorsSub.do' }">
+	*<spring:message code="message.authorsSub" />
+</jstl:if>
+<jstl:if
+	test="${requestURI=='message/administrator/messageAuthorsRegistration.do' }">
+	*<spring:message code="message.authorsRegistrations" />
+</jstl:if>
+<br />
+<br />
 
 <form:form action="${requestURI}" modelAttribute="m">
 	<%-- Hidden properties from message--%>
