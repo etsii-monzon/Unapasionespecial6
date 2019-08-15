@@ -139,6 +139,7 @@ public class ConferenceAdministratorController extends AbstractController {
 		Conference conference;
 
 		conference = this.conferenceService.create();
+
 		result = this.createEditModelAndView(conference);
 
 		return result;

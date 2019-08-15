@@ -28,6 +28,7 @@
 		<bean class="converters.TopicToStringConverter" />
 		<bean class="converters.CategoryToStringConverter" />
 		<bean class="converters.FinderToStringConverter" />
+		<bean class="converters.CommentToStringConverter" />
 
 
 		<bean class="converters.StringToTutorialConverter" />
@@ -47,6 +48,7 @@
 		<bean class="converters.StringToTopicConverter" />
 		<bean class="converters.StringToCategoryConverter" />
 		<bean class="converters.StringToFinderConverter" />
+		<bean class="converters.StringToCommentConverter" />
 
 
 	</util:list>

@@ -143,6 +143,14 @@
 
 		</display:column>
 	</security:authorize>
+
+	<display:column titleKey="conference.comments">
+
+		<a href="comment/conference/list.do?conferenceId=${row.id}"> <spring:message
+				code="conference.comments" />
+		</a>
+
+	</display:column>
 </display:table>
 <security:authorize access="hasRole('ADMIN')">
 	<div>
