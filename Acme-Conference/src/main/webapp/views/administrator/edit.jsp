@@ -28,10 +28,12 @@
 		//? puede ser 0 o 1,esdecir,puede aparecer el +CC o el +CC (AC)
 		//{4,} mï¿½nimo 4 dï¿½gitos
 		var regex = /^(([+]\d{1,3})\s(([(]\d{1,3}[)]\s)?))?\d{4,}$/;
-		if (regex.test(pN)) {
-			return true;
-		} else {
-			return confirm("<spring:message code="administrator.checkPhoneNumber"/>");
+		if (pN != '') {
+			if (regex.test(pN)) {
+				return true;
+			} else {
+				return confirm("<spring:message code="administrator.checkPhoneNumber"/>");
+			}
 		}
 	}
 </script>

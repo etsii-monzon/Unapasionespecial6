@@ -69,15 +69,12 @@ public class SubmissionAdministratorController extends AbstractController {
 		final Submission submission;
 		try {
 			submission = this.submissionService.findOne(submissionId);
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(submission.getConference()), "hacking");
 			result = new ModelAndView("submission/show");
 			result.addObject("requestURI", "submission/administrator/show.do");
 			result.addObject("submission", submission);
 		} catch (final Throwable oops) {
-			if (oops.getMessage().equals("hacking"))
-				result = new ModelAndView("misc/403");
-			else
-				result = new ModelAndView("redirect:/");
+
+			result = new ModelAndView("redirect:/");
 		}
 		return result;
 	}
@@ -143,9 +140,7 @@ public class SubmissionAdministratorController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				System.out.print(oops);
-				if (oops.getMessage() == "hacking")
-					result = new ModelAndView("misc/403");
-				else if (oops.getMessage() == "no revs" || oops.getClass().equals(java.lang.NullPointerException.class))
+				if (oops.getMessage() == "no revs" || oops.getClass().equals(java.lang.NullPointerException.class))
 					result = this.createAssignModelAndView(submission, "submission.reviewers.error");
 				else {
 					System.out.println("" + oops.getMessage());
@@ -163,16 +158,13 @@ public class SubmissionAdministratorController extends AbstractController {
 
 			final Submission submission = this.submissionService.findOne(submissionId);
 			Assert.isTrue(submission.getStatus().equals("UNDER-REVIEW"), "status error");
-			Assert.isTrue(this.adminService.findByPrincipal().getConferences().contains(submission.getConference()), "hacking");
 
 			this.submissionService.submissionStatus(submissionId);
 
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 
-			if (oops.getMessage().equals("hacking"))
-				result = new ModelAndView("misc/403");
-			else if (oops.getMessage().equals("status error"))
+			if (oops.getMessage().equals("status error"))
 				result = new ModelAndView("misc/403");
 			else
 				result = new ModelAndView("redirect:/");
