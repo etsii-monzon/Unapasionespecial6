@@ -64,8 +64,8 @@
 	</display:column>
 	<display:column titleKey="panel.comments">
 
-		<a href="comment/panel/list.do?panelId=${row1.id}"> <spring:message
-				code="panel.comments" />
+		<a href="comment/panel/list.do?panelId=${row1.id}&&type=${type}">
+			<spring:message code="panel.comments" />
 		</a>
 
 	</display:column>
@@ -147,8 +147,8 @@
 	</display:column>
 	<display:column titleKey="panel.comments">
 
-		<a href="comment/tutorial/list.do?tutorialId=${row2.id}"> <spring:message
-				code="panel.comments" />
+		<a href="comment/tutorial/list.do?tutorialId=${row2.id}&&type=${type}">
+			<spring:message code="panel.comments" />
 		</a>
 
 	</display:column>
@@ -225,7 +225,8 @@
 	</display:column>
 	<display:column titleKey="panel.comments">
 
-		<a href="comment/presentation/list.do?presentationId=${row3.id}">
+		<a
+			href="comment/presentation/list.do?presentationId=${row3.id}&&type=${type}">
 			<spring:message code="panel.comments" />
 		</a>
 
@@ -278,12 +279,26 @@
 
 <security:authorize access="!hasRole('ADMIN')">
 	<div>
-
-		<button type="button"
-			onclick="javascript: relativeRedir('welcome/index.do')">
-			<spring:message code="activity.return" />
-		</button>
+		<jstl:if test="${type=='past' }">
+			<button type="button"
+				onclick="javascript: relativeRedir('conference/listPast.do')">
+				<spring:message code="activity.return" />
+			</button>
+		</jstl:if>
+		<jstl:if test="${type=='ejec' }">
+			<button type="button"
+				onclick="javascript: relativeRedir('conference/listEjec.do')">
+				<spring:message code="activity.return" />
+			</button>
+		</jstl:if>
+		<jstl:if test="${type=='prox' }">
+			<button type="button"
+				onclick="javascript: relativeRedir('conference/listProx.do')">
+				<spring:message code="activity.return" />
+			</button>
+		</jstl:if>
 	</div>
+
 </security:authorize>
 
 
