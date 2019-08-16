@@ -263,5 +263,26 @@ public class ConferenceService {
 				toReturn.add(c);
 		return toReturn;
 	}
-
+	public String checkType(final int conferenceId) {
+		final Conference res = this.findOne(conferenceId);
+		final Date hoy = new Date();
+		if (res.getEndDate().before(hoy))
+			return "PAST";
+		else if (res.getStartDate().after(hoy))
+			return "FUTURE";
+		else
+			return "RUNNING";
+	}
+	public Double avgConferencePerCategory() {
+		return this.conferenceRepository.avgConferencePerCategory();
+	}
+	public Integer minConferencePerCategory() {
+		return this.conferenceRepository.minConferencePerCategory();
+	}
+	public Integer maxConferencePerCategory() {
+		return this.conferenceRepository.maxConferencePerCategory();
+	}
+	public Double stdDevConferencePerCategory() {
+		return this.conferenceRepository.stdDevConferencePerCategory();
+	}
 }

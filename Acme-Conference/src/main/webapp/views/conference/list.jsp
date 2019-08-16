@@ -134,7 +134,7 @@
 	<security:authorize access="!hasRole('ADMIN')">
 
 		<display:column titleKey="conference.activities">
-			<a href="activity/list.do?conferenceId=${row.id}&&type=${type}">
+			<a href="activity/list.do?conferenceId=${row.id}">
 				<spring:message code="conference.activities" />
 			</a>
 
@@ -145,7 +145,7 @@
 	<display:column titleKey="conference.comments">
 
 		<a
-			href="comment/conference/list.do?conferenceId=${row.id}&&type=${type}">
+			href="comment/conference/list.do?conferenceId=${row.id}">
 			<spring:message code="conference.comments" />
 		</a>
 

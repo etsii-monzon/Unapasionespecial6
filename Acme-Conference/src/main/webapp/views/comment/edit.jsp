@@ -22,7 +22,6 @@
 
 	<td><input type="hidden" name="commentEntityId"
 		value="${commentEntityId}"></td>
-	<td><input type="hidden" name="type" value="${type}"></td>
 
 
 
@@ -66,25 +65,25 @@
 	<jstl:if test="${requestURI=='comment/conference/edit.do' }">
 		<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"
-			onClick="javascript: window.location.replace('comment/conference/list.do?conferenceId=${commentEntityId}&&type=${type }')" />
+			onClick="javascript: window.location.replace('comment/conference/list.do?conferenceId=${commentEntityId}')" />
 
 	</jstl:if>
 	<jstl:if test="${requestURI=='comment/tutorial/edit.do' }">
 		<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"
-			onClick="javascript: window.location.replace('comment/tutorial/list.do?tutorialId=${commentEntityId}&&type=${type }')" />
+			onClick="javascript: window.location.replace('comment/tutorial/list.do?tutorialId=${commentEntityId}')" />
 
 	</jstl:if>
 	<jstl:if test="${requestURI=='comment/presentation/edit.do' }">
 		<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"
-			onClick="javascript: window.location.replace('comment/presentation/list.do?presentationId=${commentEntityId}&&type=${type }')" />
+			onClick="javascript: window.location.replace('comment/presentation/list.do?presentationId=${commentEntityId}')" />
 
 	</jstl:if>
 	<jstl:if test="${requestURI=='comment/panel/edit.do' }">
 		<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"
-			onClick="javascript: window.location.replace('comment/panel/list.do?panelId=${commentEntityId}&&type=${type }')" />
+			onClick="javascript: window.location.replace('comment/panel/list.do?panelId=${commentEntityId}')" />
 
 	</jstl:if>
 

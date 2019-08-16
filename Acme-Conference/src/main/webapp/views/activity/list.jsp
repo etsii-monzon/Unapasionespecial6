@@ -64,8 +64,8 @@
 	</display:column>
 	<display:column titleKey="panel.comments">
 
-		<a href="comment/panel/list.do?panelId=${row1.id}&&type=${type}">
-			<spring:message code="panel.comments" />
+		<a href="comment/panel/list.do?panelId=${row1.id}"> <spring:message
+				code="panel.comments" />
 		</a>
 
 	</display:column>
@@ -141,14 +141,24 @@
 	</display:column>
 
 	<display:column titleKey="tutorial.sections">
-		<a href="section/list.do?tutorialId=${row2.id}"> <spring:message
-				code="tutorial.sections" />
-		</a>
+		<security:authorize access="!hasRole('ADMIN')">
+
+			<a href="section/list.do?tutorialId=${row2.id}"> <spring:message
+					code="tutorial.sections" />
+			</a>
+		</security:authorize>
+		<security:authorize access="hasRole('ADMIN')">
+
+			<a href="section/administrator/list.do?tutorialId=${row2.id}"> <spring:message
+					code="tutorial.sections" />
+			</a>
+		</security:authorize>
 	</display:column>
+
 	<display:column titleKey="panel.comments">
 
-		<a href="comment/tutorial/list.do?tutorialId=${row2.id}&&type=${type}">
-			<spring:message code="panel.comments" />
+		<a href="comment/tutorial/list.do?tutorialId=${row2.id}"> <spring:message
+				code="panel.comments" />
 		</a>
 
 	</display:column>
@@ -225,8 +235,7 @@
 	</display:column>
 	<display:column titleKey="panel.comments">
 
-		<a
-			href="comment/presentation/list.do?presentationId=${row3.id}&&type=${type}">
+		<a href="comment/presentation/list.do?presentationId=${row3.id}">
 			<spring:message code="panel.comments" />
 		</a>
 
@@ -278,20 +287,23 @@
 </security:authorize>
 
 <security:authorize access="!hasRole('ADMIN')">
+
+
 	<div>
-		<jstl:if test="${type=='past' }">
+
+		<jstl:if test="${type=='PAST' }">
 			<button type="button"
 				onclick="javascript: relativeRedir('conference/listPast.do')">
 				<spring:message code="activity.return" />
 			</button>
 		</jstl:if>
-		<jstl:if test="${type=='ejec' }">
+		<jstl:if test="${type=='RUNNING' }">
 			<button type="button"
 				onclick="javascript: relativeRedir('conference/listEjec.do')">
 				<spring:message code="activity.return" />
 			</button>
 		</jstl:if>
-		<jstl:if test="${type=='prox' }">
+		<jstl:if test="${type=='FUTURE' }">
 			<button type="button"
 				onclick="javascript: relativeRedir('conference/listProx.do')">
 				<spring:message code="activity.return" />

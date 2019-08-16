@@ -47,4 +47,16 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select c from Conference c  where c.fee < ?1")
 	Collection<Conference> searchConferenceByMaxFee(double fee);
 
+	@Query("select avg(1.0*(select count(s) from Conference s where s.category.id=c.id)) from Category c")
+	Double avgConferencePerCategory();
+
+	@Query("select min(1.0*(select count(s) from Conference s where s.category.id=c.id)) from Category c")
+	Integer minConferencePerCategory();
+
+	@Query("select max(1.0*(select count(s) from Conference s where s.category.id=c.id)) from Category c")
+	Integer maxConferencePerCategory();
+
+	@Query("select stddev(1.0*(select count(s) from Conference s where s.category.id=c.id)) from Category c")
+	Double stdDevConferencePerCategory();
+
 }

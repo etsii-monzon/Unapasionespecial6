@@ -16,7 +16,7 @@
 <!-- Listing grid -->
 <div>
 	<button type="button"
-		onclick="javascript: relativeRedir('comment/create.do?commentEntityId=${commentEntityId}&&type=${type }')">
+		onclick="javascript: relativeRedir('comment/create.do?commentEntityId=${commentEntityId}')">
 		<spring:message code="comment.create" />
 	</button>
 
@@ -48,36 +48,41 @@
 <br />
 
 <jstl:if test="${requestURI=='comment/conference/list.do' }">
-	<jstl:if test="${type == 'past' }">
-		<input type="button" name="cancel"
-			value="<spring:message code="comment.return" />"
-			onClick="javascript: window.location.replace('conference/listPast.do')" />
-	</jstl:if>
-	<jstl:if test="${type == 'prox' }">
-		<input type="button" name="cancel"
-			value="<spring:message code="comment.return" />"
-			onClick="javascript: window.location.replace('conference/listProx.do')" />
-	</jstl:if>
-	<jstl:if test="${type == 'ejec' }">
-		<input type="button" name="cancel"
-			value="<spring:message code="comment.return" />"
-			onClick="javascript: window.location.replace('conference/listEjec.do')" />
-	</jstl:if>
-	<security:authorize access="hasRole('ADMIN')">
-
-		<jstl:if test="${type == '' }">
+	<security:authorize access="!hasRole('ADMIN')">
+		<jstl:if test="${type == 'PAST' }">
 			<input type="button" name="cancel"
 				value="<spring:message code="comment.return" />"
-				onClick="javascript: window.location.replace('conference/administrator/list.do')" />
+				onClick="javascript: window.location.replace('conference/listPast.do')" />
 		</jstl:if>
+		<jstl:if test="${type == 'FUTURE' }">
+			<input type="button" name="cancel"
+				value="<spring:message code="comment.return" />"
+				onClick="javascript: window.location.replace('conference/listProx.do')" />
+		</jstl:if>
+		<jstl:if test="${type == 'RUNNING' }">
+			<input type="button" name="cancel"
+				value="<spring:message code="comment.return" />"
+				onClick="javascript: window.location.replace('conference/listEjec.do')" />
+		</jstl:if>
+	</security:authorize>
+	<security:authorize access="hasRole('ADMIN')">
+		<input type="button" name="cancel"
+			value="<spring:message code="comment.return" />"
+			onClick="javascript: window.location.replace('conference/administrator/list.do')" />
 	</security:authorize>
 
 </jstl:if>
 <jstl:if test="${requestURI!='comment/conference/list.do'  }">
+	<security:authorize access="!hasRole('ADMIN')">
+		<input type="button" name="cancel"
+			value="<spring:message code="comment.return" />"
+			onClick="javascript: window.location.replace('activity/list.do?conferenceId=${conferenceId}')" />
+	</security:authorize>
 
-	<input type="button" name="cancel"
-		value="<spring:message code="comment.return" />"
-		onClick="javascript: window.location.replace('activity/list.do?conferenceId=${conferenceId}&&type=${type }')" />
-
+	<security:authorize access="hasRole('ADMIN')">
+		<input type="button" name="cancel"
+			value="<spring:message code="comment.return" />"
+			onClick="javascript: window.location.replace('activity/administrator/list.do?conferenceId=${conferenceId}')" />
+	</security:authorize>
 </jstl:if>
 

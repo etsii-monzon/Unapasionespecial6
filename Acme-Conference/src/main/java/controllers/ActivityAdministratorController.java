@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdministratorService;
 import services.ConferenceService;
 import services.PanelService;
 import services.PresentationService;
@@ -33,22 +32,19 @@ import domain.Tutorial;
 public class ActivityAdministratorController extends AbstractController {
 
 	@Autowired
-	private TutorialService			tutorialService;
+	private TutorialService		tutorialService;
 
 	@Autowired
-	private PanelService			panelService;
+	private PanelService		panelService;
 
 	@Autowired
-	private PresentationService		presentationService;
+	private PresentationService	presentationService;
 
 	@Autowired
-	private ConferenceService		confService;
+	private ConferenceService	confService;
 
 	@Autowired
-	private SubmissionService		submissionService;
-
-	@Autowired
-	private AdministratorService	adminService;
+	private SubmissionService	submissionService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
