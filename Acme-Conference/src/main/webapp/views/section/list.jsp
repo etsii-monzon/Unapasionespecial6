@@ -55,10 +55,17 @@
 		</button>
 	</div>
 </security:authorize>
-
-<button type="button"
-			onclick="javascript: relativeRedir('activity/list.do?conferenceId=${conferenceId}')">
-			<spring:message code="section.return" />
-</button>
+<security:authorize access="!hasRole('ADMIN')">
+	<button type="button"
+		onclick="javascript: relativeRedir('activity/list.do?conferenceId=${conferenceId}')">
+		<spring:message code="section.return" />
+	</button>
+</security:authorize>
+<security:authorize access="hasRole('ADMIN')">
+	<button type="button"
+		onclick="javascript: relativeRedir('activity/administrator/list.do?conferenceId=${conferenceId}')">
+		<spring:message code="section.return" />
+	</button>
+</security:authorize>
 
 

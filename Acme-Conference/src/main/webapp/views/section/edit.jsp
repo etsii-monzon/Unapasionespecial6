@@ -26,7 +26,7 @@
 	<br />
 
 	<acme:submit name="save" code="section.save" />
-	<acme:cancel url="activity/administrator/list.do?conferenceId=${section.tutorial.conference.id }" code="section.cancel" />
+	<acme:cancel url="section/administrator/list.do?tutorialId=${section.tutorial.id}" code="section.cancel" />
 	<br />
 
 

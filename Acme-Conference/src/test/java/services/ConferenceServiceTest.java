@@ -134,4 +134,5 @@ public class ConferenceServiceTest extends AbstractTest {
 		super.unauthenticate();
 
 	}
+
 }
