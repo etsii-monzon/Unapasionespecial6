@@ -153,11 +153,13 @@ public class SubmissionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/decisionMaking", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam final int submissionId) {
 		ModelAndView result;
+		final Date hoy = new Date();
 
 		try {
 
 			final Submission submission = this.submissionService.findOne(submissionId);
 			Assert.isTrue(submission.getStatus().equals("UNDER-REVIEW"), "status error");
+			Assert.isTrue(submission.getConference().getNotificationDeadline().after(hoy), "fecha pasada");
 
 			this.submissionService.submissionStatus(submissionId);
 
@@ -165,6 +167,8 @@ public class SubmissionAdministratorController extends AbstractController {
 		} catch (final Throwable oops) {
 
 			if (oops.getMessage().equals("status error"))
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("fecha pasada"))
 				result = new ModelAndView("misc/403");
 			else
 				result = new ModelAndView("redirect:/");
