@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.CommentService;
 import services.ConferenceService;
 import services.RegistrationService;
 import services.SubmissionService;
@@ -43,6 +44,9 @@ public class AdministratorAdministratorController extends AbstractController {
 
 	@Autowired
 	private RegistrationService		regService;
+
+	@Autowired
+	private CommentService			commentSevice;
 
 
 	// Constructors -----------------------------------------------------------
@@ -125,6 +129,21 @@ public class AdministratorAdministratorController extends AbstractController {
 		final Double maxFees = this.confService.maxConferenceFees();
 		final Double stdFees = this.confService.stdConferenceFees();
 
+		final Double avgCommentsConf = this.commentSevice.avgNumberCommentsPerConference();
+		final Double minCommentsConf = this.commentSevice.minNumberCommentsPerConference();
+		final Double maxCommentsConf = this.commentSevice.maxNumberCommentsPerConference();
+		final Double stdCommentConf = this.commentSevice.stdNumberCommentsPerConference();
+
+		final Double avgCommentsAct = this.commentSevice.avgNumberCommentsPerActivity();
+		final Double minCommentsAct = this.commentSevice.minNumberCommentsPerActivity();
+		final Double maxCommentsAct = this.commentSevice.maxNumberCommentsPerActivity();
+		final Double stdCommentsAct = this.commentSevice.stdNumberCommentsPerActivity();
+
+		final Double avgConferecePerCategory = this.confService.avgConferencePerCategory();
+		final Integer minConferecePerCategory = this.confService.minConferencePerCategory();
+		final Integer maxConferecePerCategory = this.confService.maxConferencePerCategory();
+		final Double stdConferecePerCategory = this.confService.stdDevConferencePerCategory();
+
 		result = new ModelAndView("administrator/list");
 		result.addObject("avgDays", avgDays);
 		result.addObject("minDays", minDays);
@@ -142,8 +161,19 @@ public class AdministratorAdministratorController extends AbstractController {
 		result.addObject("minFees", minFees);
 		result.addObject("maxFees", maxFees);
 		result.addObject("stdFees", stdFees);
+		result.addObject("avgCommentsConf", avgCommentsConf);
+		result.addObject("minCommentsConf", minCommentsConf);
+		result.addObject("maxCommentsConf", maxCommentsConf);
+		result.addObject("stdCommentConf", stdCommentConf);
+		result.addObject("avgCommentsAct", avgCommentsAct);
+		result.addObject("minCommentsAct", minCommentsAct);
+		result.addObject("maxCommentsAct", maxCommentsAct);
+		result.addObject("stdCommentsAct", stdCommentsAct);
+		result.addObject("avgConferecePerCategory", avgConferecePerCategory);
+		result.addObject("maxConferecePerCategory", maxConferecePerCategory);
+		result.addObject("minConferecePerCategory", minConferecePerCategory);
+		result.addObject("stdConferecePerCategory", stdConferecePerCategory);
 
 		return result;
 	}
-
 }

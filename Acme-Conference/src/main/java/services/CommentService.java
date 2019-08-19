@@ -78,5 +78,36 @@ public class CommentService {
 		else
 			return false;
 	}
+	public Double avgNumberCommentsPerConference() {
+		return this.commentRepository.avgNumberCommentsPerConference();
+	}
+
+	public Double stdNumberCommentsPerConference() {
+		return this.commentRepository.stdNumberCommentsPerConference();
+	}
+
+	public Double minNumberCommentsPerConference() {
+		return this.commentRepository.minNumberCommentsPerConference();
+	}
+
+	public Double maxNumberCommentsPerConference() {
+		return this.commentRepository.maxNumberCommentsPerConference();
+	}
+
+	public Double avgNumberCommentsPerActivity() {
+		return this.commentRepository.avgNumberCommentsPerActivity();
+	}
+
+	public Double stdNumberCommentsPerActivity() {
+		return this.commentRepository.stdNumberCommentsPerActivity();
+	}
+
+	public Double minNumberCommentsPerActivity() {
+		return this.commentRepository.minNumberCommentsPerActivity();
+	}
+
+	public Double maxNumberCommentsPerActivity() {
+		return this.commentRepository.maxNumberCommentsPerActivity();
+	}
 
 }

@@ -86,7 +86,7 @@ public class SubmissionServiceTest extends AbstractTest {
 		Assert.notNull(res);
 		final Conference conference = this.conferenceService.findOne(this.getEntityId("conference1"));
 		final Paper paper = this.paperService.create();
-		paper.setDocument("document");
+		paper.setDocument("http://document.com");
 		paper.setSummary("summary");
 		paper.setTitle("title");
 		final Collection<Author> authors = new ArrayList<>();

@@ -22,4 +22,16 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	@Query("select max(c.comments.size) from Conference c")
 	Double maxNumberCommentsPerConference();
 
+	@Query("select avg(c.comments.size) from Activity c")
+	Double avgNumberCommentsPerActivity();
+
+	@Query("select stddev(c.comments.size) from Activity c")
+	Double stdNumberCommentsPerActivity();
+
+	@Query("select min(c.comments.size) from Activity c")
+	Double minNumberCommentsPerActivity();
+
+	@Query("select max(c.comments.size) from Activity c")
+	Double maxNumberCommentsPerActivity();
+
 }
