@@ -38,9 +38,6 @@ public class CommentServiceTest extends AbstractTest {
 	private CommentService		commentService;
 
 	@Autowired
-	private AuthorService		authorService;
-
-	@Autowired
 	private ConferenceService	conferenceService;
 	@Autowired
 	private PanelService		panelService;

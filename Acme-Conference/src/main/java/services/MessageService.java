@@ -176,7 +176,7 @@ public class MessageService {
 		notificacion.setRecipients(recipients);
 		notificacion.setSubject("SUBMISSION IS:" + submission.getStatus());
 		notificacion.setBody("This message is a simple notification of the decision of your submission. You can consult the report.");
-		notificacion.setTopic("RESOLUTION");
+		notificacion.setTopic("OTHER");
 
 		this.save(notificacion);
 
