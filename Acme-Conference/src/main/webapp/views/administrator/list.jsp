@@ -124,6 +124,90 @@
 	<fmt:formatNumber value="${stdDevDays}" />
 </p>
 <br />
+
+<h3>
+	<spring:message code="administrator.conferencesPerCategory" />
+</h3>
+<p>
+	<spring:message code="administrator.avgConferecePerCategory" />
+	:
+	<fmt:formatNumber value="${avgConferecePerCategory}" />
+</p>
+
+<p>
+	<spring:message code="administrator.minConferecePerCategory" />
+	:
+	<fmt:formatNumber value="${minConferecePerCategory}" />
+</p>
+
+<p>
+	<spring:message code="administrator.maxConferecePerCategory" />
+	:
+	<fmt:formatNumber value="${maxConferecePerCategory}" />
+</p>
+
+<p>
+	<spring:message code="administrator.stdConferecePerCategory" />
+	:
+	<fmt:formatNumber value="${stdConferecePerCategory}" />
+</p>
+<br />
+
+<h3>
+	<spring:message code="administrator.commentsConferences" />
+</h3>
+<p>
+	<spring:message code="administrator.avgCommentsConf" />
+	:
+	<fmt:formatNumber value="${avgCommentsConf}" />
+</p>
+
+<p>
+	<spring:message code="administrator.minCommentsConf" />
+	:
+	<fmt:formatNumber value="${minCommentsConf}" />
+</p>
+
+<p>
+	<spring:message code="administrator.maxCommentsConf" />
+	:
+	<fmt:formatNumber value="${maxCommentsConf}" />
+</p>
+
+<p>
+	<spring:message code="administrator.stdCommentConf" />
+	:
+	<fmt:formatNumber value="${stdCommentConf}" />
+</p>
+<br />
+
+<h3>
+	<spring:message code="administrator.commentsAct" />
+</h3>
+<p>
+	<spring:message code="administrator.avgCommentsAct" />
+	:
+	<fmt:formatNumber value="${avgCommentsAct}" />
+</p>
+
+<p>
+	<spring:message code="administrator.minCommentsAct" />
+	:
+	<fmt:formatNumber value="${minCommentsAct}" />
+</p>
+
+<p>
+	<spring:message code="administrator.maxCommentsAct" />
+	:
+	<fmt:formatNumber value="${maxCommentsAct}" />
+</p>
+
+<p>
+	<spring:message code="administrator.stdCommentsAct" />
+	:
+	<fmt:formatNumber value="${stdCommentsAct}" />
+</p>
+<br />
 <input type="button" name="cancel"
 	value="<spring:message code="submission.return" />"
 	onClick="javascript: window.location.replace('welcome/index.do');" />

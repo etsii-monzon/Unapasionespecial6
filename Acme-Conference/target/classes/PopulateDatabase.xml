@@ -715,6 +715,21 @@
 		<property name="text" value="Muy buena conferencía." />
 	</bean>
 
+	<bean id="comment3" class="domain.Comment">
+		<property name="title" value="Good Presentation" />
+		<property name="moment" value="02/02/2019 20:00" />
+		<property name="author" value="Anonymous" />
+		<property name="text" value="Muy buena conferencía,recomendable." />
+
+	</bean>
+
+	<bean id="comment4" class="domain.Comment">
+		<property name="title" value="Recomendado 100%" />
+		<property name="moment" value="02/03/2019 20:00" />
+		<property name="author" value="Antonio" />
+		<property name="text" value="Muy buena conferencía." />
+	</bean>
+
 	<bean id="category1" class="domain.Category">
 		<property name="englishTitle" value="CONFERENCE" />
 		<property name="spanishTitle" value="CONFERENCIA" />
@@ -1001,6 +1016,14 @@
 		<property name="summary" value="summary conference" />
 		<property name="conference" ref="conference10" />
 		<property name="submission" ref="submission10" />
+
+		<property name="comments">
+			<list>
+				<ref bean="comment3" />
+				<ref bean="comment4" />
+
+			</list>
+		</property>
 
 	</bean>
 	<bean id="section1" class="domain.Section">
