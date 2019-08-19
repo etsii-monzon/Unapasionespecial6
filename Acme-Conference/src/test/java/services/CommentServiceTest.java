@@ -57,8 +57,8 @@ public class CommentServiceTest extends AbstractTest {
 	// it using JUnit.
 
 	/*
-	 * Test comprobación un author lista sus registrations.
-	 * Req Funcional:
+	 * Test comprobación un autor lista los comments de una conference.
+	 * Req Funcional: 22.1
 	 */
 	@Test
 	public void testListCommentsConfe() {
@@ -71,6 +71,10 @@ public class CommentServiceTest extends AbstractTest {
 		super.unauthenticate();
 
 	}
+	/*
+	 * Test comprobación un autor lista los comments de una activity panel.
+	 * Req Funcional: 22.1
+	 */
 	@Test
 	public void testListCommentsActPan() {
 		super.authenticate("author1");
@@ -82,6 +86,10 @@ public class CommentServiceTest extends AbstractTest {
 		super.unauthenticate();
 
 	}
+	/*
+	 * Test comprobación un autor lista los comments de una activity tutorial.
+	 * Req Funcional: 22.1
+	 */
 	@Test
 	public void testListCommentsActTut() {
 		super.authenticate("author1");
@@ -93,6 +101,10 @@ public class CommentServiceTest extends AbstractTest {
 		super.unauthenticate();
 
 	}
+	/*
+	 * Test comprobación un autor lista los comments de una activity presentation.
+	 * Req Funcional: 22.1
+	 */
 	@Test
 	public void testListCommentsActPres() {
 		super.authenticate("author1");
@@ -105,7 +117,7 @@ public class CommentServiceTest extends AbstractTest {
 
 	}
 	/*
-	 * Test comprobación un author crea una registration.
+	 * Test comprobación un author crea un comment.
 	 * Req Funcional:
 	 */
 	@Test

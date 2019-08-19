@@ -53,7 +53,7 @@ public class RegistrationServiceTest extends AbstractTest {
 
 	/*
 	 * Test comprobación un author lista sus registrations.
-	 * Req Funcional:
+	 * Req Funcional: 13.3
 	 */
 	@Test
 	public void testListRegistrations() {
@@ -68,7 +68,7 @@ public class RegistrationServiceTest extends AbstractTest {
 	}
 	/*
 	 * Test comprobación un author crea una registration.
-	 * Req Funcional:
+	 * Req Funcional: 13.3
 	 */
 	@Test
 	public void testCreateRegistration() {

@@ -70,7 +70,7 @@ public class ConferenceServiceTest extends AbstractTest {
 	}
 	/*
 	 * Test comprobación crear una conference.
-	 * Req Funcional:
+	 * Req Funcional: 14.2
 	 */
 	@Test
 	public void testCreateConference() {
@@ -104,7 +104,7 @@ public class ConferenceServiceTest extends AbstractTest {
 
 	/*
 	 * Test comprobación un admin lista sus conferences.
-	 * Req Funcional:
+	 * Req Funcional: 14.1
 	 */
 	@Test
 	public void testListConferences() {

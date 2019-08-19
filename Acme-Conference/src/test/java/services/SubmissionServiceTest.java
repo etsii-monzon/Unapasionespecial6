@@ -61,7 +61,7 @@ public class SubmissionServiceTest extends AbstractTest {
 
 	/*
 	 * Test comprobación un author lista sus submissions.
-	 * Req Funcional:
+	 * Req Funcional: 13.1
 	 */
 	@Test
 	public void testListSubmissions() {
@@ -76,7 +76,7 @@ public class SubmissionServiceTest extends AbstractTest {
 	}
 	/*
 	 * Test comprobación un author crea un submission.
-	 * Req Funcional:
+	 * Req Funcional: 13.1
 	 */
 	@Test
 	public void testCreateSubmission() {
@@ -156,6 +156,10 @@ public class SubmissionServiceTest extends AbstractTest {
 		//En el PopulateDatabase.xml, hay reviewers con keywords coincidentes con algunas submissions existentes.
 		Assert.isTrue(aux);
 	}
+	/*
+	 * Test comprobación un admin hace el procedure de la toma de decisión.
+	 * Req Funcional: 14.4
+	 */
 
 	@Test
 	public void testDecisionMaking() {
