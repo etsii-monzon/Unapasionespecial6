@@ -54,7 +54,8 @@
 
 
 	<!-- Date -->
-	<display:column property="date" titleKey="message.date" sortable="true" />
+	<display:column property="date" titleKey="message.date" sortable="true"
+		format="{0,date,dd/MM/yyyy HH:mm}" />
 
 	<display:column titleKey="message.show">
 		<a href="message/actor/show.do?messageId=${row.id}"> <spring:message

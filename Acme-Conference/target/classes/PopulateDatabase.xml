@@ -412,7 +412,7 @@
 
 
 	<bean id="submission2" class="domain.Submission">
-		<property name="ticker" value="QQE-8K6L" />
+		<property name="ticker" value="MAS-8K8Q" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper2" />
@@ -427,7 +427,7 @@
 	</bean>
 
 	<bean id="submission3" class="domain.Submission">
-		<property name="ticker" value="MOM-8K6L" />
+		<property name="ticker" value="MAS-5L2B" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper3" />
@@ -442,7 +442,7 @@
 	</bean>
 
 	<bean id="submission11" class="domain.Submission">
-		<property name="ticker" value="JLX-8K7L" />
+		<property name="ticker" value="JXL-8K7L" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="paper" ref="paper11" />
@@ -481,7 +481,7 @@
 	</bean>
 
 	<bean id="submission1" class="domain.Submission">
-		<property name="ticker" value="MSA-8K6L" />
+		<property name="ticker" value="MAS-8K6L" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="paper" ref="paper1" />
@@ -520,7 +520,7 @@
 			value="http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf" />
 	</bean>
 	<bean id="submission10" class="domain.Submission">
-		<property name="ticker" value="CXA-213L" />
+		<property name="ticker" value="JXL-213L" />
 		<property name="moment" value="01/06/2019 00:00" />
 		<property name="status" value="ACCEPTED" />
 		<property name="paper" ref="paper10" />

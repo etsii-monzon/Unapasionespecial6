@@ -35,6 +35,7 @@ public class SubmissionAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Submission> submissions;
+
 		submissions = this.submissionService.getSubmissionGroupedByStatus();
 
 		boolean allowed = false;
