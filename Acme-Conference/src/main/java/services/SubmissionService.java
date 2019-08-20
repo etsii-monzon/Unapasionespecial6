@@ -245,7 +245,7 @@ public class SubmissionService {
 		else
 			c = x.charAt(0);
 
-		final String ticker = a + "" + b + "" + c + "-" + this.configurationService.createTicker();
+		final String ticker = a + "" + c + "" + b + "-" + this.configurationService.createTicker();
 
 		//Comprobamos unicidad del ticker
 		//Si el Ticker ya existe,hacemos una llamada recursiva al m�todo para crear otro

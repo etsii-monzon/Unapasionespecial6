@@ -12,7 +12,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
+<jsp:useBean id="now" class="java.util.Date" />
 <!-- Listing grid -->
 
 <script type="text/javascript">
@@ -67,7 +67,7 @@
 				</jstl:if>
 			</jstl:if>
 			<jstl:if test="${row.cameraReady}">
-					<spring:message code="submission.uploaded" />
+				<spring:message code="submission.uploaded" />
 			</jstl:if>
 		</display:column>
 	</security:authorize>
@@ -79,12 +79,12 @@
 		titleKey="submission.conference" sortable="false" />
 	<security:authorize access="hasRole('REVIEWER')">
 		<display:column property="conference.summary"
-		titleKey="submission.conference.summary" sortable="false" />
+			titleKey="submission.conference.summary" sortable="false" />
 	</security:authorize>
 	<display:column property="ticker" titleKey="submission.ticker"
 		sortable="false" />
 	<display:column property="moment" titleKey="submission.moment"
-		sortable="false" />
+		sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" />
 	<display:column property="status" titleKey="submission.status"
 		sortable="true" />
 
@@ -110,8 +110,9 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.decission">
+			<%-- <jstl:out
+				value="${now<row.conference.submissionDeadline && row.conference.notificationDeadline>now}"></jstl:out> --%>
 			<jstl:if test="${row.status == 'UNDER-REVIEW' }">
-
 				<jstl:if test="${allowed }">
 					<a onclick="return confirmNotify()"
 						href="submission/administrator/decisionMaking.do?submissionId=${row.id}">
@@ -161,7 +162,7 @@
 					<a href="submission/administrator/assign.do?submissionId=${row.id}">
 						<spring:message code="submission.assign" />
 					</a>
-					</jstl:if>
+				</jstl:if>
 			</jstl:if>
 		</display:column>
 	</security:authorize>
