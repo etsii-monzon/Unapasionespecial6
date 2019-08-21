@@ -170,15 +170,16 @@
 
 </display:table>
 
-<security:authorize access="hasRole('ADMIN')">
-	<div>
+<jstl:if test="${not empty submissions }">
+	<security:authorize access="hasRole('ADMIN')">
+		<div>
 
-		<button type="button" onclick="return confirmAssign();">
-			<spring:message code="submission.assignAuto" />
-		</button>
-	</div>
-</security:authorize>
-
+			<button type="button" onclick="return confirmAssign();">
+				<spring:message code="submission.assignAuto" />
+			</button>
+		</div>
+	</security:authorize>
+</jstl:if>
 <security:authorize access="hasRole('AUTHOR')">
 	<div>
 

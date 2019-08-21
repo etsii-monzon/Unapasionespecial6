@@ -71,7 +71,7 @@
 	</display:column>
 	<security:authorize access="hasRole('ADMIN')">
 
-		<display:column>
+		<display:column titleKey="activity.delete">
 			<a href="activity/administrator/panel/delete.do?panelId=${row1.id}">
 				<spring:message code="panel.delete" />
 			</a>
@@ -163,7 +163,7 @@
 
 	</display:column>
 	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
+		<display:column titleKey="activity.delete">
 			<a
 				href="activity/administrator/tutorial/delete.do?tutorialId=${row2.id}">
 				<spring:message code="tutorial.delete" />
@@ -251,7 +251,7 @@
 			</a>
 		</display:column>
 
-		<display:column>
+		<display:column titleKey="activity.delete">
 			<a
 				href="activity/administrator/presentation/delete.do?presentationId=${row3.id}">
 				<spring:message code="presentation.delete" />

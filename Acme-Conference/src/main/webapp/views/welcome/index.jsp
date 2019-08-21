@@ -8,24 +8,25 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
+<p>
+	<spring:message code="welcome.greeting.prefix" />
+	${name}
+	<spring:message code="welcome.greeting.suffix" />
+</p>
 <p>${mensaje}</p>
 
-<p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+<p>
+	<spring:message code="welcome.greeting.current.time" />
+	${moment}
+</p>
 
-<security:authorize access="isAuthenticated()">
-	<p>
-		<b><spring:message code="welcome.breach" /></b>
-	</p>
-	<p style="border: ridge #000000 1px; color: grey">
-		<spring:message code="welcome.security" />
-	</p>
-</security:authorize>
