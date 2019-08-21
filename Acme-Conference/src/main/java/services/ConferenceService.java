@@ -210,7 +210,6 @@ public class ConferenceService {
 		final Double avg = this.avgDaysPerConference();
 		final Double count = (double) aux.size();
 		final Double avgPot = avg * avg;
-		System.out.println(count - avgPot);
 		if ((count == avgPot))
 			res = 0.0;
 		else {
