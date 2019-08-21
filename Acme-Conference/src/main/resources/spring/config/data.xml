@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * data.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
- 
+<!-- * data.xml * * Copyright (C) 2018 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -27,12 +21,21 @@
 
 	<!-- Data source -->
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/Acme-Conference" />
 		<property name="user" value="acme-user" />
 		<property name="password" value="ACME-Us3r-P@ssw0rd" />
 	</bean>
+
+	<!-- CLEVER -->
+
+	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+		destroy-method="close"> <property name="driverClass" value="com.mysql.jdbc.Driver" 
+		/> <property name="jdbcUrl" value="jdbc:mysql://bbwtfnijjb4szlbrze6a-mysql.services.clever-cloud.com:3306/bbwtfnijjb4szlbrze6a" 
+		/> <property name="user" value="ult1qtuqrmgpbckn" /> <property name="password" 
+		value="JgOuhQDA8XG599bEBaII" /> </bean> -->
 
 	<!-- JPA -->
 
@@ -46,10 +49,10 @@
 
 	<util:properties id="jpaProperties">
 		<prop key="hibernate.show_sql">false</prop>
-		<prop key="hibernate.format_sql">true</prop>		
+		<prop key="hibernate.format_sql">true</prop>
 		<!-- <prop key="hibernate.hbm2ddl.auto">verify</prop> -->
 		<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
-		<prop key="hibernate.ejb.entitymanager_factory_name">entity-manager</prop>		
+		<prop key="hibernate.ejb.entitymanager_factory_name">entity-manager</prop>
 	</util:properties>
 
 </beans>
