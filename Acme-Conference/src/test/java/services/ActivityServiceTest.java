@@ -50,6 +50,10 @@ public class ActivityServiceTest extends AbstractTest {
 	private SubmissionService	submissionService;
 
 
+	/*
+	 * Test comprobación un admin lista todas las activities de una conference.
+	 * Req Funcional: 14.6
+	 */
 	@Test
 	public void testListActivities() {
 		super.authenticate("admin");
@@ -60,6 +64,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin crea un panel para una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreatePanel() {
@@ -87,6 +95,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin borra un panel de una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testDeletePanel() {
@@ -118,6 +130,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin actualiza un panel de una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdatePanel() {
@@ -148,6 +164,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin crea un tutorial, y una section para él, para una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreateTutorialAndSection() {
@@ -186,6 +206,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin actualiza un tutorial para una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateTutorial() {
@@ -227,6 +251,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin borra un tutorial, y sus sections, de una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testDeleteTutorial() {
@@ -271,6 +299,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin crea una presentation para una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testCreatePresentation() {
@@ -304,6 +336,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin actualiza una presentation de una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdatePresentation() {
@@ -339,6 +375,10 @@ public class ActivityServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin borra una presentation para una conference.
+	 * Req Funcional: 14.6
+	 */
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testDeletePresentation() {

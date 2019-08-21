@@ -115,7 +115,7 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	/*
 	 * Test comprobación un author crea un comment.
-	 * Req Funcional:
+	 * Req Funcional 22.2:
 	 */
 	@Test
 	public void testCreateComment() {

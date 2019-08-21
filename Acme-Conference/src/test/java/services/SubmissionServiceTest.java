@@ -111,6 +111,11 @@ public class SubmissionServiceTest extends AbstractTest {
 
 	}
 
+	/*
+	 * Test comprobación un author sube la versión definitiva de su submission aceptada antes de que se acabe el plazo.
+	 * Req Funcional: 13.2
+	 */
+
 	@Test
 	public void testUploadCameraReadyVersion() {
 		super.authenticate("author1");
@@ -126,6 +131,10 @@ public class SubmissionServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin asigna manualmente reviewers a una submission concreta estando ésta UNDER-REVIEW.
+	 * Req Funcional: 14.3
+	 */
 	@Test
 	public void testAssignReviewersManually() {
 		super.authenticate("admin");
@@ -142,6 +151,10 @@ public class SubmissionServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
+	/*
+	 * Test comprobación un admin asigna automaticamente reviewers a todas las submissions que estén UNDER-REVIEW .
+	 * Req Funcional: 14.3
+	 */
 	@Test
 	public void testAssignReviewersAutomatically() {
 		super.authenticate("admin");

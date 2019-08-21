@@ -101,6 +101,10 @@ public class AdministratorServiceTest extends AbstractTest {
 
 	}
 
+	/*
+	 * Test comprobación un admin muestra su dashboard.
+	 * Req Funcional: 14.8
+	 */
 	@Test
 	public void testDashboard() {
 		super.authenticate("admin");
