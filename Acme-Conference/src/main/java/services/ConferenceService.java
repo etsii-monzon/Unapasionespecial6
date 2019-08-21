@@ -208,12 +208,16 @@ public class ConferenceService {
 		final Collection<Integer> aux = this.daysPerConference();
 		Integer sum = 0;
 		final Double avg = this.avgDaysPerConference();
-		final Integer count = aux.size();
+		final Double count = (double) aux.size();
 		final Double avgPot = avg * avg;
-
-		for (final Integer d : aux)
-			sum += d * d;
-		res = Math.sqrt(sum / count - avgPot);
+		System.out.println(count - avgPot);
+		if ((count == avgPot))
+			res = 0.0;
+		else {
+			for (final Integer d : aux)
+				sum += d * d;
+			res = Math.sqrt(sum / count - avgPot);
+		}
 		return res;
 	}
 
