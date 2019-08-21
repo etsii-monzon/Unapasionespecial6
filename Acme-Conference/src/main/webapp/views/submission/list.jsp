@@ -12,7 +12,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<jsp:useBean id="now" class="java.util.Date" />
+<%-- <jsp:useBean id="now" class="java.util.Date" />
+ --%>
 <!-- Listing grid -->
 
 <script type="text/javascript">
@@ -110,15 +111,13 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.decission">
-			<%-- <jstl:out
-				value="${now<row.conference.submissionDeadline && row.conference.notificationDeadline>now}"></jstl:out> --%>
-			<jstl:if test="${row.status == 'UNDER-REVIEW' }">
-				<jstl:if test="${allowed }">
-					<a onclick="return confirmNotify()"
-						href="submission/administrator/decisionMaking.do?submissionId=${row.id}">
-						<spring:message code="submission.decision" />
-					</a>
-				</jstl:if>
+			<jstl:if
+				test="${row.status == 'UNDER-REVIEW' && row.conference.submissionDeadline < now && row.conference.notificationDeadline > now}">
+				<a onclick="return confirmNotify()"
+					href="submission/administrator/decisionMaking.do?submissionId=${row.id}">
+					<spring:message code="submission.decision" />
+				</a>
+
 			</jstl:if>
 
 		</display:column>
@@ -157,7 +156,8 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column titleKey="submission.assign">
-			<jstl:if test="${row.status == 'UNDER-REVIEW' }">
+			<jstl:if
+				test="${row.status == 'UNDER-REVIEW' && row.conference.submissionDeadline < now && row.conference.notificationDeadline > now}">
 				<jstl:if test="${row.reviewers.isEmpty()}">
 					<a href="submission/administrator/assign.do?submissionId=${row.id}">
 						<spring:message code="submission.assign" />

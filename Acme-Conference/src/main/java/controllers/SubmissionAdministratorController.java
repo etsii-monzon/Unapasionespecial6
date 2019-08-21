@@ -3,6 +3,7 @@ package controllers;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.validation.Valid;
 
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdministratorService;
 import services.SubmissionService;
 import domain.Reviewer;
 import domain.Submission;
@@ -25,10 +25,7 @@ import domain.Submission;
 public class SubmissionAdministratorController extends AbstractController {
 
 	@Autowired
-	private SubmissionService		submissionService;
-
-	@Autowired
-	private AdministratorService	adminService;
+	private SubmissionService	submissionService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -38,15 +35,10 @@ public class SubmissionAdministratorController extends AbstractController {
 
 		submissions = this.submissionService.getSubmissionGroupedByStatus();
 
-		boolean allowed = false;
-		for (final Submission s : submissions)
-			if (s.getConference().getSubmissionDeadline().before(new Date()) && s.getConference().getNotificationDeadline().after(new Date()))
-				allowed = true;
-
 		result = new ModelAndView("submission/list");
 
 		result.addObject("submissions", submissions);
-		result.addObject("allowed", allowed);
+		result.addObject("now", new GregorianCalendar().getTime());
 
 		result.addObject("requestURI", "submission/administrator/list.do");
 
@@ -82,16 +74,21 @@ public class SubmissionAdministratorController extends AbstractController {
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
 	public ModelAndView assignManually(@RequestParam final int submissionId) {
 		ModelAndView result;
+		final Date hoy = new Date();
 
 		try {
 			final Submission sub = this.submissionService.findOne(submissionId);
 			Assert.isTrue(sub.getStatus().equals("UNDER-REVIEW"), "status error");
 			Assert.isTrue(sub.getReviewers().isEmpty(), "status error");
+			Assert.isTrue(sub.getConference().getNotificationDeadline().after(hoy), "fecha pasada");
+			Assert.isTrue(sub.getConference().getSubmissionDeadline().before(hoy), "fecha pasada");
 			//Assert.isTrue(this.adminService.findByPrincipal().getConferences().equals(sub.getConference()), "hacking");
 
 			result = this.createAssignModelAndView(sub);
 		} catch (final Throwable oops) {
 			if (oops.getMessage() == "status error")
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("fecha pasada"))
 				result = new ModelAndView("misc/403");
 			else {
 				System.out.println(oops.getMessage() + " " + oops.getCause());
@@ -161,6 +158,7 @@ public class SubmissionAdministratorController extends AbstractController {
 			final Submission submission = this.submissionService.findOne(submissionId);
 			Assert.isTrue(submission.getStatus().equals("UNDER-REVIEW"), "status error");
 			Assert.isTrue(submission.getConference().getNotificationDeadline().after(hoy), "fecha pasada");
+			Assert.isTrue(submission.getConference().getSubmissionDeadline().before(hoy), "fecha pasada");
 
 			this.submissionService.submissionStatus(submissionId);
 

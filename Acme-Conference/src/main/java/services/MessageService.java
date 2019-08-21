@@ -174,7 +174,7 @@ public class MessageService {
 		final Collection<Actor> recipients = new ArrayList<>();
 		recipients.add(recipient);
 		notificacion.setRecipients(recipients);
-		notificacion.setSubject("SUBMISSION IS:" + submission.getStatus());
+		notificacion.setSubject("SUBMISSION TO " + submission.getConference().getTitle() + " IS: " + submission.getStatus());
 		notificacion.setBody("This message is a simple notification of the decision of your submission. You can consult the report.");
 		notificacion.setTopic("OTHER");
 

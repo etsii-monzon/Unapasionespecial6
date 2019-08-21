@@ -29,7 +29,7 @@
 
 
 	<display:column property="originality" titleKey="report.originality"
-		sortable="true" />
+		sortable="false" />
 
 
 
