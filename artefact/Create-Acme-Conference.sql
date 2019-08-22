@@ -6,8 +6,6 @@ create database `Acme-Conference`;
 
 use `Acme-Conference`;
 
-
-
 grant select, insert, update, delete 
 	on `Acme-Conference`.* to 'acme-user'@'%';
 
@@ -34,26 +32,26 @@ grant select, insert, update, delete, create, drop, references, index, alter,
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `activity_optionalattachments`
+-- Table structure for table `activity_optional_attachments`
 --
 
-DROP TABLE IF EXISTS `activity_optionalattachments`;
+DROP TABLE IF EXISTS `activity_optional_attachments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `activity_optionalattachments` (
-  `Activity_id` int(11) NOT NULL,
-  `optionalAttachments` varchar(255) DEFAULT NULL
+CREATE TABLE `activity_optional_attachments` (
+  `activity` int(11) NOT NULL,
+  `optional_attachments` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `activity_optionalattachments`
+-- Dumping data for table `activity_optional_attachments`
 --
 
-LOCK TABLES `activity_optionalattachments` WRITE;
-/*!40000 ALTER TABLE `activity_optionalattachments` DISABLE KEYS */;
-INSERT INTO `activity_optionalattachments` VALUES (630,'http://attachment1.com'),(630,'http://attachment2.com'),(630,'http://attachment3.com');
-/*!40000 ALTER TABLE `activity_optionalattachments` ENABLE KEYS */;
+LOCK TABLES `activity_optional_attachments` WRITE;
+/*!40000 ALTER TABLE `activity_optional_attachments` DISABLE KEYS */;
+INSERT INTO `activity_optional_attachments` VALUES (630,'http://attachment1.com'),(630,'http://attachment2.com'),(630,'http://attachment3.com');
+/*!40000 ALTER TABLE `activity_optional_attachments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -64,7 +62,7 @@ DROP TABLE IF EXISTS `activity_speakers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `activity_speakers` (
-  `Activity_id` int(11) NOT NULL,
+  `activity` int(11) NOT NULL,
   `speakers` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -80,56 +78,28 @@ INSERT INTO `activity_speakers` VALUES (628,'José Luis'),(629,'José Vicente'),
 UNLOCK TABLES;
 
 --
--- Table structure for table `activitycomment`
+-- Table structure for table `actor_messages`
 --
 
-DROP TABLE IF EXISTS `activitycomment`;
+DROP TABLE IF EXISTS `actor_messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `activitycomment` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `author` varchar(255) DEFAULT NULL,
-  `moment` datetime DEFAULT NULL,
-  `text` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `activity_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `actor_messages` (
+  `actor` int(11) NOT NULL,
+  `messages` int(11) NOT NULL,
+  KEY `FK_b1336eo2tc3f26b38f2drhyk8` (`messages`),
+  CONSTRAINT `FK_b1336eo2tc3f26b38f2drhyk8` FOREIGN KEY (`messages`) REFERENCES `message` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `activitycomment`
+-- Dumping data for table `actor_messages`
 --
 
-LOCK TABLES `activitycomment` WRITE;
-/*!40000 ALTER TABLE `activitycomment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `activitycomment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `actor_message`
---
-
-DROP TABLE IF EXISTS `actor_message`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `actor_message` (
-  `Actor_id` int(11) NOT NULL,
-  `messages_id` int(11) NOT NULL,
-  KEY `FK_qwro2cfqr03juk8plid0aj8u1` (`messages_id`),
-  CONSTRAINT `FK_qwro2cfqr03juk8plid0aj8u1` FOREIGN KEY (`messages_id`) REFERENCES `message` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `actor_message`
---
-
-LOCK TABLES `actor_message` WRITE;
-/*!40000 ALTER TABLE `actor_message` DISABLE KEYS */;
-INSERT INTO `actor_message` VALUES (613,627),(621,627);
-/*!40000 ALTER TABLE `actor_message` ENABLE KEYS */;
+LOCK TABLES `actor_messages` WRITE;
+/*!40000 ALTER TABLE `actor_messages` DISABLE KEYS */;
+INSERT INTO `actor_messages` VALUES (613,627),(621,627);
+/*!40000 ALTER TABLE `actor_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -144,18 +114,18 @@ CREATE TABLE `administrator` (
   `version` int(11) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `middleName` varchar(255) DEFAULT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `optionalPhoto` varchar(255) DEFAULT NULL,
-  `phoneNumber` varchar(255) DEFAULT NULL,
+  `optional_photo` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
-  `finder_id` int(11) NOT NULL,
-  `userAccount_id` int(11) DEFAULT NULL,
+  `finder` int(11) NOT NULL,
+  `user_account` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_jf3y8x99xj20f87s88j70u82d` (`finder_id`),
-  KEY `FK_idt4b4u259p6vs4pyr9lax4eg` (`userAccount_id`),
-  CONSTRAINT `FK_idt4b4u259p6vs4pyr9lax4eg` FOREIGN KEY (`userAccount_id`) REFERENCES `useraccount` (`id`),
-  CONSTRAINT `FK_jf3y8x99xj20f87s88j70u82d` FOREIGN KEY (`finder_id`) REFERENCES `finder` (`id`)
+  UNIQUE KEY `UK_5yk18fb3vpgubbtu0jiroyqf0` (`finder`),
+  KEY `FK_7ohwsa2usmvu0yxb44je2lge` (`user_account`),
+  CONSTRAINT `FK_7ohwsa2usmvu0yxb44je2lge` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`),
+  CONSTRAINT `FK_5yk18fb3vpgubbtu0jiroyqf0` FOREIGN KEY (`finder`) REFERENCES `finder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -170,30 +140,30 @@ INSERT INTO `administrator` VALUES (599,0,'Monzón 28','admin@','Marín Mateos',
 UNLOCK TABLES;
 
 --
--- Table structure for table `administrator_conference`
+-- Table structure for table `administrator_conferences`
 --
 
-DROP TABLE IF EXISTS `administrator_conference`;
+DROP TABLE IF EXISTS `administrator_conferences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `administrator_conference` (
-  `Administrator_id` int(11) NOT NULL,
-  `conferences_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_fqeyr8n7xv7cq9ja1m0etsko7` (`conferences_id`),
-  KEY `FK_n08sswx5kaxcdg7cexc0bmofg` (`Administrator_id`),
-  CONSTRAINT `FK_n08sswx5kaxcdg7cexc0bmofg` FOREIGN KEY (`Administrator_id`) REFERENCES `administrator` (`id`),
-  CONSTRAINT `FK_fqeyr8n7xv7cq9ja1m0etsko7` FOREIGN KEY (`conferences_id`) REFERENCES `conference` (`id`)
+CREATE TABLE `administrator_conferences` (
+  `administrator` int(11) NOT NULL,
+  `conferences` int(11) NOT NULL,
+  UNIQUE KEY `UK_kfr3bekrhuxd2ohuob3fjheaf` (`conferences`),
+  KEY `FK_16ersqgmu3tr2twfl5d2qopwq` (`administrator`),
+  CONSTRAINT `FK_16ersqgmu3tr2twfl5d2qopwq` FOREIGN KEY (`administrator`) REFERENCES `administrator` (`id`),
+  CONSTRAINT `FK_kfr3bekrhuxd2ohuob3fjheaf` FOREIGN KEY (`conferences`) REFERENCES `conference` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `administrator_conference`
+-- Dumping data for table `administrator_conferences`
 --
 
-LOCK TABLES `administrator_conference` WRITE;
-/*!40000 ALTER TABLE `administrator_conference` DISABLE KEYS */;
-INSERT INTO `administrator_conference` VALUES (599,602),(599,603),(599,604),(599,605),(599,606),(599,607),(599,608),(599,609),(599,610),(599,611),(599,612);
-/*!40000 ALTER TABLE `administrator_conference` ENABLE KEYS */;
+LOCK TABLES `administrator_conferences` WRITE;
+/*!40000 ALTER TABLE `administrator_conferences` DISABLE KEYS */;
+INSERT INTO `administrator_conferences` VALUES (599,602),(599,603),(599,604),(599,605),(599,606),(599,607),(599,608),(599,609),(599,610),(599,611),(599,612);
+/*!40000 ALTER TABLE `administrator_conferences` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -208,18 +178,18 @@ CREATE TABLE `author` (
   `version` int(11) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `middleName` varchar(255) DEFAULT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `optionalPhoto` varchar(255) DEFAULT NULL,
-  `phoneNumber` varchar(255) DEFAULT NULL,
+  `optional_photo` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
-  `finder_id` int(11) NOT NULL,
-  `userAccount_id` int(11) DEFAULT NULL,
+  `finder` int(11) NOT NULL,
+  `user_account` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_e3vycrwvs7v6n3fweq3e6wmkb` (`finder_id`),
-  KEY `FK_g9r6idksespv276wsu4a9e6y9` (`userAccount_id`),
-  CONSTRAINT `FK_g9r6idksespv276wsu4a9e6y9` FOREIGN KEY (`userAccount_id`) REFERENCES `useraccount` (`id`),
-  CONSTRAINT `FK_e3vycrwvs7v6n3fweq3e6wmkb` FOREIGN KEY (`finder_id`) REFERENCES `finder` (`id`)
+  UNIQUE KEY `UK_ng8tt0uu0j791w837h00d4owq` (`finder`),
+  KEY `FK_rjptsoy3q9dcfysbnmy1g0g31` (`user_account`),
+  CONSTRAINT `FK_rjptsoy3q9dcfysbnmy1g0g31` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`),
+  CONSTRAINT `FK_ng8tt0uu0j791w837h00d4owq` FOREIGN KEY (`finder`) REFERENCES `finder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -234,57 +204,57 @@ INSERT INTO `author` VALUES (613,0,'Monzón 28','author1@hotmail.com','Ayacuch',
 UNLOCK TABLES;
 
 --
--- Table structure for table `author_registration`
+-- Table structure for table `author_registrations`
 --
 
-DROP TABLE IF EXISTS `author_registration`;
+DROP TABLE IF EXISTS `author_registrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `author_registration` (
-  `Author_id` int(11) NOT NULL,
-  `registrations_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_tr7t8srogtcya3ya67baaqynd` (`registrations_id`),
-  KEY `FK_7r1u51j5v207fbpkb18g0tdkb` (`Author_id`),
-  CONSTRAINT `FK_7r1u51j5v207fbpkb18g0tdkb` FOREIGN KEY (`Author_id`) REFERENCES `author` (`id`),
-  CONSTRAINT `FK_tr7t8srogtcya3ya67baaqynd` FOREIGN KEY (`registrations_id`) REFERENCES `registration` (`id`)
+CREATE TABLE `author_registrations` (
+  `author` int(11) NOT NULL,
+  `registrations` int(11) NOT NULL,
+  UNIQUE KEY `UK_c0vuhrx3s27xuoewhb3vmw4sb` (`registrations`),
+  KEY `FK_lstxi2foerupd6qx5y5a261fo` (`author`),
+  CONSTRAINT `FK_lstxi2foerupd6qx5y5a261fo` FOREIGN KEY (`author`) REFERENCES `author` (`id`),
+  CONSTRAINT `FK_c0vuhrx3s27xuoewhb3vmw4sb` FOREIGN KEY (`registrations`) REFERENCES `registration` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `author_registration`
+-- Dumping data for table `author_registrations`
 --
 
-LOCK TABLES `author_registration` WRITE;
-/*!40000 ALTER TABLE `author_registration` DISABLE KEYS */;
-INSERT INTO `author_registration` VALUES (613,619);
-/*!40000 ALTER TABLE `author_registration` ENABLE KEYS */;
+LOCK TABLES `author_registrations` WRITE;
+/*!40000 ALTER TABLE `author_registrations` DISABLE KEYS */;
+INSERT INTO `author_registrations` VALUES (613,619);
+/*!40000 ALTER TABLE `author_registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `author_submission`
+-- Table structure for table `author_submissions`
 --
 
-DROP TABLE IF EXISTS `author_submission`;
+DROP TABLE IF EXISTS `author_submissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `author_submission` (
-  `Author_id` int(11) NOT NULL,
-  `submissions_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_o4iodrx26lrurvbuu7apjwx16` (`submissions_id`),
-  KEY `FK_bdgyc9gidj18x46mbh8ef7vgm` (`Author_id`),
-  CONSTRAINT `FK_bdgyc9gidj18x46mbh8ef7vgm` FOREIGN KEY (`Author_id`) REFERENCES `author` (`id`),
-  CONSTRAINT `FK_o4iodrx26lrurvbuu7apjwx16` FOREIGN KEY (`submissions_id`) REFERENCES `submission` (`id`)
+CREATE TABLE `author_submissions` (
+  `author` int(11) NOT NULL,
+  `submissions` int(11) NOT NULL,
+  UNIQUE KEY `UK_grc9vgcyg4jjkwhl4dafxcmlj` (`submissions`),
+  KEY `FK_2xnw7y3dujt70ni7ykr27cyx5` (`author`),
+  CONSTRAINT `FK_2xnw7y3dujt70ni7ykr27cyx5` FOREIGN KEY (`author`) REFERENCES `author` (`id`),
+  CONSTRAINT `FK_grc9vgcyg4jjkwhl4dafxcmlj` FOREIGN KEY (`submissions`) REFERENCES `submission` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `author_submission`
+-- Dumping data for table `author_submissions`
 --
 
-LOCK TABLES `author_submission` WRITE;
-/*!40000 ALTER TABLE `author_submission` DISABLE KEYS */;
-INSERT INTO `author_submission` VALUES (613,614),(613,615),(613,617),(620,616),(620,618);
-/*!40000 ALTER TABLE `author_submission` ENABLE KEYS */;
+LOCK TABLES `author_submissions` WRITE;
+/*!40000 ALTER TABLE `author_submissions` DISABLE KEYS */;
+INSERT INTO `author_submissions` VALUES (613,614),(613,615),(613,617),(620,616),(620,618);
+/*!40000 ALTER TABLE `author_submissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -297,12 +267,12 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `englishTitle` varchar(255) DEFAULT NULL,
-  `spanishTitle` varchar(255) DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL,
+  `english_title` varchar(255) DEFAULT NULL,
+  `spanish_title` varchar(255) DEFAULT NULL,
+  `parent` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_p6elut499cl32in8b8j8sy2n4` (`parent_id`),
-  CONSTRAINT `FK_p6elut499cl32in8b8j8sy2n4` FOREIGN KEY (`parent_id`) REFERENCES `category` (`id`)
+  KEY `FK_d285hl23ejq8efmum8hbvqrt2` (`parent`),
+  CONSTRAINT `FK_d285hl23ejq8efmum8hbvqrt2` FOREIGN KEY (`parent`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -317,30 +287,30 @@ INSERT INTO `category` VALUES (572,0,'CONFERENCE','CONFERENCIA',NULL),(573,0,'Co
 UNLOCK TABLES;
 
 --
--- Table structure for table `category_category`
+-- Table structure for table `category_children`
 --
 
-DROP TABLE IF EXISTS `category_category`;
+DROP TABLE IF EXISTS `category_children`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `category_category` (
-  `Category_id` int(11) NOT NULL,
-  `children_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_hdiqhrmu52ndndxgg87iq6anb` (`children_id`),
-  KEY `FK_90tievw3x18jv9f0n4ma0ethu` (`Category_id`),
-  CONSTRAINT `FK_90tievw3x18jv9f0n4ma0ethu` FOREIGN KEY (`Category_id`) REFERENCES `category` (`id`),
-  CONSTRAINT `FK_hdiqhrmu52ndndxgg87iq6anb` FOREIGN KEY (`children_id`) REFERENCES `category` (`id`)
+CREATE TABLE `category_children` (
+  `category` int(11) NOT NULL,
+  `children` int(11) NOT NULL,
+  UNIQUE KEY `UK_f2qj9o6wv2lqhj7laybb4ugqd` (`children`),
+  KEY `FK_xmmu562pvrtdfgx52dok07o4` (`category`),
+  CONSTRAINT `FK_xmmu562pvrtdfgx52dok07o4` FOREIGN KEY (`category`) REFERENCES `category` (`id`),
+  CONSTRAINT `FK_f2qj9o6wv2lqhj7laybb4ugqd` FOREIGN KEY (`children`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `category_category`
+-- Dumping data for table `category_children`
 --
 
-LOCK TABLES `category_category` WRITE;
-/*!40000 ALTER TABLE `category_category` DISABLE KEYS */;
-INSERT INTO `category_category` VALUES (572,573),(572,574),(572,575),(573,576),(573,577),(574,585),(574,586),(574,587),(575,588),(575,589),(575,590),(576,578),(576,579),(576,580),(577,581),(577,582),(577,583),(577,584);
-/*!40000 ALTER TABLE `category_category` ENABLE KEYS */;
+LOCK TABLES `category_children` WRITE;
+/*!40000 ALTER TABLE `category_children` DISABLE KEYS */;
+INSERT INTO `category_children` VALUES (572,573),(572,574),(572,575),(573,576),(573,577),(574,585),(574,586),(574,587),(575,588),(575,589),(575,590),(576,578),(576,579),(576,580),(577,581),(577,582),(577,583),(577,584);
+/*!40000 ALTER TABLE `category_children` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -372,27 +342,28 @@ INSERT INTO `comment` VALUES (568,0,'Anonymous','2019-02-02 20:00:00','Muy buena
 UNLOCK TABLES;
 
 --
--- Table structure for table `commententity_comment`
+-- Table structure for table `comment_entity_comments`
 --
 
-DROP TABLE IF EXISTS `commententity_comment`;
+DROP TABLE IF EXISTS `comment_entity_comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `commententity_comment` (
-  `CommentEntity_id` int(11) NOT NULL,
-  `comments_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_pwmildirrhj1bkhenob4vguwb` (`comments_id`)
+CREATE TABLE `comment_entity_comments` (
+  `comment_entity` int(11) NOT NULL,
+  `comments` int(11) NOT NULL,
+  UNIQUE KEY `UK_cjlfuonansf2bhrjuqw1k50ox` (`comments`),
+  CONSTRAINT `FK_cjlfuonansf2bhrjuqw1k50ox` FOREIGN KEY (`comments`) REFERENCES `comment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `commententity_comment`
+-- Dumping data for table `comment_entity_comments`
 --
 
-LOCK TABLES `commententity_comment` WRITE;
-/*!40000 ALTER TABLE `commententity_comment` DISABLE KEYS */;
-INSERT INTO `commententity_comment` VALUES (611,568),(611,569),(630,570),(630,571);
-/*!40000 ALTER TABLE `commententity_comment` ENABLE KEYS */;
+LOCK TABLES `comment_entity_comments` WRITE;
+/*!40000 ALTER TABLE `comment_entity_comments` DISABLE KEYS */;
+INSERT INTO `comment_entity_comments` VALUES (611,568),(611,569),(630,570),(630,571);
+/*!40000 ALTER TABLE `comment_entity_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -406,20 +377,20 @@ CREATE TABLE `conference` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
   `acronym` varchar(255) DEFAULT NULL,
-  `cameraDeadline` datetime DEFAULT NULL,
-  `draftMode` bit(1) NOT NULL,
-  `endDate` datetime DEFAULT NULL,
+  `camera_deadline` datetime DEFAULT NULL,
+  `draft_mode` bit(1) NOT NULL,
+  `end_date` datetime DEFAULT NULL,
   `fee` double DEFAULT NULL,
-  `notificationDeadline` datetime DEFAULT NULL,
-  `startDate` datetime DEFAULT NULL,
-  `submissionDeadline` datetime DEFAULT NULL,
+  `notification_deadline` datetime DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `submission_deadline` datetime DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `venue` varchar(255) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_kprxk12nmyis1h3gnvk40sxwv` (`category_id`),
-  CONSTRAINT `FK_kprxk12nmyis1h3gnvk40sxwv` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+  KEY `FK_ldxxtwdsnf262yu1ctl1awe02` (`category`),
+  CONSTRAINT `FK_ldxxtwdsnf262yu1ctl1awe02` FOREIGN KEY (`category`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -443,11 +414,11 @@ DROP TABLE IF EXISTS `configuration`;
 CREATE TABLE `configuration` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `bannerURL` varchar(255) DEFAULT NULL,
-  `countryCode` varchar(255) DEFAULT NULL,
-  `sistemName` varchar(255) DEFAULT NULL,
-  `welcomeEN` varchar(255) DEFAULT NULL,
-  `welcomeSP` varchar(255) DEFAULT NULL,
+  `bannerurl` varchar(255) DEFAULT NULL,
+  `country_code` varchar(255) DEFAULT NULL,
+  `sistem_name` varchar(255) DEFAULT NULL,
+  `welcomeen` varchar(255) DEFAULT NULL,
+  `welcomesp` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -470,10 +441,10 @@ DROP TABLE IF EXISTS `configuration_makes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `configuration_makes` (
-  `Configuration_id` int(11) NOT NULL,
+  `configuration` int(11) NOT NULL,
   `makes` varchar(255) DEFAULT NULL,
-  KEY `FK_fqn39tfqgvfkwm46fuei6acvw` (`Configuration_id`),
-  CONSTRAINT `FK_fqn39tfqgvfkwm46fuei6acvw` FOREIGN KEY (`Configuration_id`) REFERENCES `configuration` (`id`)
+  KEY `FK_eanjwa8s4wiomnti3yklql7j` (`configuration`),
+  CONSTRAINT `FK_eanjwa8s4wiomnti3yklql7j` FOREIGN KEY (`configuration`) REFERENCES `configuration` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -488,60 +459,60 @@ INSERT INTO `configuration_makes` VALUES (591,'VISA'),(591,'MASTER'),(591,'DINNE
 UNLOCK TABLES;
 
 --
--- Table structure for table `configuration_topic`
+-- Table structure for table `configuration_topics`
 --
 
-DROP TABLE IF EXISTS `configuration_topic`;
+DROP TABLE IF EXISTS `configuration_topics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `configuration_topic` (
-  `Configuration_id` int(11) NOT NULL,
-  `topics_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_nq59c5cnuepm8mniea0xt9ffa` (`topics_id`),
-  KEY `FK_sm6vxchbkdy6rt9ccjeayv43c` (`Configuration_id`),
-  CONSTRAINT `FK_sm6vxchbkdy6rt9ccjeayv43c` FOREIGN KEY (`Configuration_id`) REFERENCES `configuration` (`id`),
-  CONSTRAINT `FK_nq59c5cnuepm8mniea0xt9ffa` FOREIGN KEY (`topics_id`) REFERENCES `topic` (`id`)
+CREATE TABLE `configuration_topics` (
+  `configuration` int(11) NOT NULL,
+  `topics` int(11) NOT NULL,
+  UNIQUE KEY `UK_15rwnumgy8c5gey29g7gp9gft` (`topics`),
+  KEY `FK_b14m7pu8cx4hl898wk8dj4txs` (`configuration`),
+  CONSTRAINT `FK_b14m7pu8cx4hl898wk8dj4txs` FOREIGN KEY (`configuration`) REFERENCES `configuration` (`id`),
+  CONSTRAINT `FK_15rwnumgy8c5gey29g7gp9gft` FOREIGN KEY (`topics`) REFERENCES `topic` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `configuration_topic`
+-- Dumping data for table `configuration_topics`
 --
 
-LOCK TABLES `configuration_topic` WRITE;
-/*!40000 ALTER TABLE `configuration_topic` DISABLE KEYS */;
-INSERT INTO `configuration_topic` VALUES (591,563),(591,564),(591,565),(591,566),(591,567);
-/*!40000 ALTER TABLE `configuration_topic` ENABLE KEYS */;
+LOCK TABLES `configuration_topics` WRITE;
+/*!40000 ALTER TABLE `configuration_topics` DISABLE KEYS */;
+INSERT INTO `configuration_topics` VALUES (591,563),(591,564),(591,565),(591,566),(591,567);
+/*!40000 ALTER TABLE `configuration_topics` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `creditcard`
+-- Table structure for table `credit_card`
 --
 
-DROP TABLE IF EXISTS `creditcard`;
+DROP TABLE IF EXISTS `credit_card`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `creditcard` (
+CREATE TABLE `credit_card` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `brandName` varchar(255) DEFAULT NULL,
+  `brand_name` varchar(255) DEFAULT NULL,
   `cvv` int(11) NOT NULL,
-  `expMonth` int(11) NOT NULL,
-  `expYear` int(11) NOT NULL,
-  `holderName` varchar(255) DEFAULT NULL,
+  `exp_month` int(11) NOT NULL,
+  `exp_year` int(11) NOT NULL,
+  `holder_name` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `creditcard`
+-- Dumping data for table `credit_card`
 --
 
-LOCK TABLES `creditcard` WRITE;
-/*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES (562,0,'VISA',123,10,22,'Manuel','4111111111111111');
-/*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
+LOCK TABLES `credit_card` WRITE;
+/*!40000 ALTER TABLE `credit_card` DISABLE KEYS */;
+INSERT INTO `credit_card` VALUES (562,0,'VISA',123,10,22,'Manuel','4111111111111111');
+/*!40000 ALTER TABLE `credit_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -554,14 +525,14 @@ DROP TABLE IF EXISTS `finder`;
 CREATE TABLE `finder` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `endDate` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
   `fee` double DEFAULT NULL,
   `keyword` varchar(255) DEFAULT NULL,
-  `startDate` datetime DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_aooiblceyn0pqnbn26i3ayghg` (`category_id`),
-  CONSTRAINT `FK_aooiblceyn0pqnbn26i3ayghg` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+  KEY `FK_n9t1ayk0x7h5vrsfuhygo043j` (`category`),
+  CONSTRAINT `FK_n9t1ayk0x7h5vrsfuhygo043j` FOREIGN KEY (`category`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -576,29 +547,29 @@ INSERT INTO `finder` VALUES (592,0,NULL,NULL,NULL,NULL,NULL),(593,0,NULL,NULL,NU
 UNLOCK TABLES;
 
 --
--- Table structure for table `finder_conference`
+-- Table structure for table `finder_conferences`
 --
 
-DROP TABLE IF EXISTS `finder_conference`;
+DROP TABLE IF EXISTS `finder_conferences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `finder_conference` (
-  `Finder_id` int(11) NOT NULL,
-  `conferences_id` int(11) NOT NULL,
-  KEY `FK_hhu15rhu69p33dc4qrq5g2qrh` (`conferences_id`),
-  KEY `FK_cypn39wi7x8bdt1m6pjqbg1ia` (`Finder_id`),
-  CONSTRAINT `FK_cypn39wi7x8bdt1m6pjqbg1ia` FOREIGN KEY (`Finder_id`) REFERENCES `finder` (`id`),
-  CONSTRAINT `FK_hhu15rhu69p33dc4qrq5g2qrh` FOREIGN KEY (`conferences_id`) REFERENCES `conference` (`id`)
+CREATE TABLE `finder_conferences` (
+  `finder` int(11) NOT NULL,
+  `conferences` int(11) NOT NULL,
+  KEY `FK_nfuvovuvbk05r9vbyg5mbstxx` (`conferences`),
+  KEY `FK_k666b9rxu2vqkol7uc9ostni9` (`finder`),
+  CONSTRAINT `FK_k666b9rxu2vqkol7uc9ostni9` FOREIGN KEY (`finder`) REFERENCES `finder` (`id`),
+  CONSTRAINT `FK_nfuvovuvbk05r9vbyg5mbstxx` FOREIGN KEY (`conferences`) REFERENCES `conference` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `finder_conference`
+-- Dumping data for table `finder_conferences`
 --
 
-LOCK TABLES `finder_conference` WRITE;
-/*!40000 ALTER TABLE `finder_conference` DISABLE KEYS */;
-/*!40000 ALTER TABLE `finder_conference` ENABLE KEYS */;
+LOCK TABLES `finder_conferences` WRITE;
+/*!40000 ALTER TABLE `finder_conferences` DISABLE KEYS */;
+/*!40000 ALTER TABLE `finder_conferences` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -620,7 +591,7 @@ CREATE TABLE `hibernate_sequences` (
 
 LOCK TABLES `hibernate_sequences` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequences` DISABLE KEYS */;
-INSERT INTO `hibernate_sequences` VALUES ('DomainEntity',1);
+INSERT INTO `hibernate_sequences` VALUES ('domain_entity',1);
 /*!40000 ALTER TABLE `hibernate_sequences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -638,7 +609,7 @@ CREATE TABLE `message` (
   `date` datetime DEFAULT NULL,
   `subject` varchar(255) DEFAULT NULL,
   `topic` varchar(255) DEFAULT NULL,
-  `sender_id` int(11) DEFAULT NULL,
+  `sender` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -654,28 +625,28 @@ INSERT INTO `message` VALUES (627,0,'TEST','2019-01-06 00:00:00','IMPORTANT','OT
 UNLOCK TABLES;
 
 --
--- Table structure for table `message_actor`
+-- Table structure for table `message_recipients`
 --
 
-DROP TABLE IF EXISTS `message_actor`;
+DROP TABLE IF EXISTS `message_recipients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `message_actor` (
-  `Message_id` int(11) NOT NULL,
-  `recipients_id` int(11) NOT NULL,
-  KEY `FK_2340xdahcha0b5cyr6bxhq6ji` (`Message_id`),
-  CONSTRAINT `FK_2340xdahcha0b5cyr6bxhq6ji` FOREIGN KEY (`Message_id`) REFERENCES `message` (`id`)
+CREATE TABLE `message_recipients` (
+  `message` int(11) NOT NULL,
+  `recipients` int(11) NOT NULL,
+  KEY `FK_1odmg2n3n487tvhuxx5oyyya2` (`message`),
+  CONSTRAINT `FK_1odmg2n3n487tvhuxx5oyyya2` FOREIGN KEY (`message`) REFERENCES `message` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `message_actor`
+-- Dumping data for table `message_recipients`
 --
 
-LOCK TABLES `message_actor` WRITE;
-/*!40000 ALTER TABLE `message_actor` DISABLE KEYS */;
-INSERT INTO `message_actor` VALUES (627,621);
-/*!40000 ALTER TABLE `message_actor` ENABLE KEYS */;
+LOCK TABLES `message_recipients` WRITE;
+/*!40000 ALTER TABLE `message_recipients` DISABLE KEYS */;
+INSERT INTO `message_recipients` VALUES (627,621);
+/*!40000 ALTER TABLE `message_recipients` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -688,15 +659,15 @@ DROP TABLE IF EXISTS `panel`;
 CREATE TABLE `panel` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `endMoment` datetime DEFAULT NULL,
+  `end_moment` datetime DEFAULT NULL,
   `room` varchar(255) DEFAULT NULL,
-  `startMoment` datetime DEFAULT NULL,
+  `start_moment` datetime DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `conference_id` int(11) DEFAULT NULL,
+  `conference` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_g91hilmjav0i3tecvqs0qu832` (`conference_id`),
-  CONSTRAINT `FK_g91hilmjav0i3tecvqs0qu832` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`)
+  KEY `FK_g9jn8oaylcvixfdbmtesav3c3` (`conference`),
+  CONSTRAINT `FK_g9jn8oaylcvixfdbmtesav3c3` FOREIGN KEY (`conference`) REFERENCES `conference` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -738,30 +709,30 @@ INSERT INTO `paper` VALUES (557,0,'http://bibing.us.es/proyectos/abreproy/11247/
 UNLOCK TABLES;
 
 --
--- Table structure for table `paper_author`
+-- Table structure for table `paper_authors`
 --
 
-DROP TABLE IF EXISTS `paper_author`;
+DROP TABLE IF EXISTS `paper_authors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `paper_author` (
-  `Paper_id` int(11) NOT NULL,
-  `authors_id` int(11) NOT NULL,
-  KEY `FK_99x0cn02pmhohqofpv5nyxksa` (`authors_id`),
-  KEY `FK_8svx5vves4cfnwk93mp7t6u7a` (`Paper_id`),
-  CONSTRAINT `FK_8svx5vves4cfnwk93mp7t6u7a` FOREIGN KEY (`Paper_id`) REFERENCES `paper` (`id`),
-  CONSTRAINT `FK_99x0cn02pmhohqofpv5nyxksa` FOREIGN KEY (`authors_id`) REFERENCES `author` (`id`)
+CREATE TABLE `paper_authors` (
+  `paper` int(11) NOT NULL,
+  `authors` int(11) NOT NULL,
+  KEY `FK_9h4r7lf49uxxsgsmf9tgh1m5k` (`authors`),
+  KEY `FK_ae9a28ln0ji506i8uoqhv563h` (`paper`),
+  CONSTRAINT `FK_ae9a28ln0ji506i8uoqhv563h` FOREIGN KEY (`paper`) REFERENCES `paper` (`id`),
+  CONSTRAINT `FK_9h4r7lf49uxxsgsmf9tgh1m5k` FOREIGN KEY (`authors`) REFERENCES `author` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `paper_author`
+-- Dumping data for table `paper_authors`
 --
 
-LOCK TABLES `paper_author` WRITE;
-/*!40000 ALTER TABLE `paper_author` DISABLE KEYS */;
-INSERT INTO `paper_author` VALUES (557,620),(558,613),(559,613),(560,613),(560,620),(561,620);
-/*!40000 ALTER TABLE `paper_author` ENABLE KEYS */;
+LOCK TABLES `paper_authors` WRITE;
+/*!40000 ALTER TABLE `paper_authors` DISABLE KEYS */;
+INSERT INTO `paper_authors` VALUES (557,620),(558,613),(559,613),(560,613),(560,620),(561,620);
+/*!40000 ALTER TABLE `paper_authors` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -774,18 +745,18 @@ DROP TABLE IF EXISTS `presentation`;
 CREATE TABLE `presentation` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `endMoment` datetime DEFAULT NULL,
+  `end_moment` datetime DEFAULT NULL,
   `room` varchar(255) DEFAULT NULL,
-  `startMoment` datetime DEFAULT NULL,
+  `start_moment` datetime DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `conference_id` int(11) DEFAULT NULL,
-  `submission_id` int(11) DEFAULT NULL,
+  `conference` int(11) DEFAULT NULL,
+  `submission` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_si9tawtpirx49j4o0jt0vvc41` (`submission_id`),
-  KEY `FK_1jrucw76t3f379ll4645ru9wr` (`conference_id`),
-  CONSTRAINT `FK_1jrucw76t3f379ll4645ru9wr` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`),
-  CONSTRAINT `FK_si9tawtpirx49j4o0jt0vvc41` FOREIGN KEY (`submission_id`) REFERENCES `submission` (`id`)
+  KEY `FK_e9qf4qdrd5q4paa06xkv4q1by` (`submission`),
+  KEY `FK_fu56gussuaw8r8865h3x4cvq0` (`conference`),
+  CONSTRAINT `FK_fu56gussuaw8r8865h3x4cvq0` FOREIGN KEY (`conference`) REFERENCES `conference` (`id`),
+  CONSTRAINT `FK_e9qf4qdrd5q4paa06xkv4q1by` FOREIGN KEY (`submission`) REFERENCES `submission` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -809,13 +780,13 @@ DROP TABLE IF EXISTS `registration`;
 CREATE TABLE `registration` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `conference_id` int(11) DEFAULT NULL,
-  `creditCard_id` int(11) DEFAULT NULL,
+  `conference` int(11) DEFAULT NULL,
+  `credit_card` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_i1fkxnsc98af7fa2o0c5qdppo` (`conference_id`),
-  KEY `FK_tftgl1o0det0h3kl1jr71kui9` (`creditCard_id`),
-  CONSTRAINT `FK_tftgl1o0det0h3kl1jr71kui9` FOREIGN KEY (`creditCard_id`) REFERENCES `creditcard` (`id`),
-  CONSTRAINT `FK_i1fkxnsc98af7fa2o0c5qdppo` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`)
+  KEY `FK_lc3odbpd5lgo7qc3w33ugwafj` (`conference`),
+  KEY `FK_o81sqbmy1blyga0cbtlhbho4d` (`credit_card`),
+  CONSTRAINT `FK_o81sqbmy1blyga0cbtlhbho4d` FOREIGN KEY (`credit_card`) REFERENCES `credit_card` (`id`),
+  CONSTRAINT `FK_lc3odbpd5lgo7qc3w33ugwafj` FOREIGN KEY (`conference`) REFERENCES `conference` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -844,10 +815,10 @@ CREATE TABLE `report` (
   `originality` int(11) DEFAULT NULL,
   `quality` int(11) DEFAULT NULL,
   `readability` int(11) DEFAULT NULL,
-  `submission_id` int(11) DEFAULT NULL,
+  `submission` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_3nrxtsjsgy56nwq9wu50hmu3l` (`submission_id`),
-  CONSTRAINT `FK_3nrxtsjsgy56nwq9wu50hmu3l` FOREIGN KEY (`submission_id`) REFERENCES `submission` (`id`)
+  KEY `FK_a0lt5jqh9b7s1gw3q77nywxxn` (`submission`),
+  CONSTRAINT `FK_a0lt5jqh9b7s1gw3q77nywxxn` FOREIGN KEY (`submission`) REFERENCES `submission` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -873,18 +844,18 @@ CREATE TABLE `reviewer` (
   `version` int(11) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `middleName` varchar(255) DEFAULT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `optionalPhoto` varchar(255) DEFAULT NULL,
-  `phoneNumber` varchar(255) DEFAULT NULL,
+  `optional_photo` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
   `surname` varchar(255) DEFAULT NULL,
-  `finder_id` int(11) NOT NULL,
-  `userAccount_id` int(11) DEFAULT NULL,
+  `finder` int(11) NOT NULL,
+  `user_account` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_d2986qcjbxy8easpe0e3ysl15` (`finder_id`),
-  KEY `FK_4f9r9kvay9mbl2b40kxrg29jj` (`userAccount_id`),
-  CONSTRAINT `FK_4f9r9kvay9mbl2b40kxrg29jj` FOREIGN KEY (`userAccount_id`) REFERENCES `useraccount` (`id`),
-  CONSTRAINT `FK_d2986qcjbxy8easpe0e3ysl15` FOREIGN KEY (`finder_id`) REFERENCES `finder` (`id`)
+  UNIQUE KEY `UK_1wsbx4vhaxhkixxv3ej7vrrr3` (`finder`),
+  KEY `FK_ite8gbxlfjyy7g7wqqiyjhkmn` (`user_account`),
+  CONSTRAINT `FK_ite8gbxlfjyy7g7wqqiyjhkmn` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`),
+  CONSTRAINT `FK_1wsbx4vhaxhkixxv3ej7vrrr3` FOREIGN KEY (`finder`) REFERENCES `finder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -906,10 +877,10 @@ DROP TABLE IF EXISTS `reviewer_keywords`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reviewer_keywords` (
-  `Reviewer_id` int(11) NOT NULL,
+  `reviewer` int(11) NOT NULL,
   `keywords` varchar(255) DEFAULT NULL,
-  KEY `FK_cce83gist8vjnlxsmrkfmc86c` (`Reviewer_id`),
-  CONSTRAINT `FK_cce83gist8vjnlxsmrkfmc86c` FOREIGN KEY (`Reviewer_id`) REFERENCES `reviewer` (`id`)
+  KEY `FK_d1mpqlt4vmfyn53hbyt5la0uv` (`reviewer`),
+  CONSTRAINT `FK_d1mpqlt4vmfyn53hbyt5la0uv` FOREIGN KEY (`reviewer`) REFERENCES `reviewer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -924,30 +895,30 @@ INSERT INTO `reviewer_keywords` VALUES (621,'submission1'),(621,'Learn'),(622,'P
 UNLOCK TABLES;
 
 --
--- Table structure for table `reviewer_report`
+-- Table structure for table `reviewer_reports`
 --
 
-DROP TABLE IF EXISTS `reviewer_report`;
+DROP TABLE IF EXISTS `reviewer_reports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `reviewer_report` (
-  `Reviewer_id` int(11) NOT NULL,
-  `reports_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_t598wurv4astccupmr2bm5lm9` (`reports_id`),
-  KEY `FK_8rfpu529b92vi5hmluvfgt7iw` (`Reviewer_id`),
-  CONSTRAINT `FK_8rfpu529b92vi5hmluvfgt7iw` FOREIGN KEY (`Reviewer_id`) REFERENCES `reviewer` (`id`),
-  CONSTRAINT `FK_t598wurv4astccupmr2bm5lm9` FOREIGN KEY (`reports_id`) REFERENCES `report` (`id`)
+CREATE TABLE `reviewer_reports` (
+  `reviewer` int(11) NOT NULL,
+  `reports` int(11) NOT NULL,
+  UNIQUE KEY `UK_r8qpqj6gasde6rksm6tbgcl2p` (`reports`),
+  KEY `FK_qor8s232mxdvee2o59fyro0gn` (`reviewer`),
+  CONSTRAINT `FK_qor8s232mxdvee2o59fyro0gn` FOREIGN KEY (`reviewer`) REFERENCES `reviewer` (`id`),
+  CONSTRAINT `FK_r8qpqj6gasde6rksm6tbgcl2p` FOREIGN KEY (`reports`) REFERENCES `report` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `reviewer_report`
+-- Dumping data for table `reviewer_reports`
 --
 
-LOCK TABLES `reviewer_report` WRITE;
-/*!40000 ALTER TABLE `reviewer_report` DISABLE KEYS */;
-INSERT INTO `reviewer_report` VALUES (621,623),(621,626),(622,624),(622,625);
-/*!40000 ALTER TABLE `reviewer_report` ENABLE KEYS */;
+LOCK TABLES `reviewer_reports` WRITE;
+/*!40000 ALTER TABLE `reviewer_reports` DISABLE KEYS */;
+INSERT INTO `reviewer_reports` VALUES (621,623),(621,626),(622,624),(622,625);
+/*!40000 ALTER TABLE `reviewer_reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -962,10 +933,10 @@ CREATE TABLE `section` (
   `version` int(11) NOT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `tutorial_id` int(11) DEFAULT NULL,
+  `tutorial` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_2xsbgo7ewa2p36m7q7svxi3cg` (`tutorial_id`),
-  CONSTRAINT `FK_2xsbgo7ewa2p36m7q7svxi3cg` FOREIGN KEY (`tutorial_id`) REFERENCES `tutorial` (`id`)
+  KEY `FK_6tcpk427cxiaiglbxvybc9fjh` (`tutorial`),
+  CONSTRAINT `FK_6tcpk427cxiaiglbxvybc9fjh` FOREIGN KEY (`tutorial`) REFERENCES `tutorial` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -980,27 +951,27 @@ INSERT INTO `section` VALUES (631,0,'summary1','section1',629);
 UNLOCK TABLES;
 
 --
--- Table structure for table `section_optionalpictures`
+-- Table structure for table `section_optional_pictures`
 --
 
-DROP TABLE IF EXISTS `section_optionalpictures`;
+DROP TABLE IF EXISTS `section_optional_pictures`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `section_optionalpictures` (
-  `Section_id` int(11) NOT NULL,
-  `optionalPictures` varchar(255) DEFAULT NULL,
-  KEY `FK_cffsfvyjy7ud56l43gjy2kuty` (`Section_id`),
-  CONSTRAINT `FK_cffsfvyjy7ud56l43gjy2kuty` FOREIGN KEY (`Section_id`) REFERENCES `section` (`id`)
+CREATE TABLE `section_optional_pictures` (
+  `section` int(11) NOT NULL,
+  `optional_pictures` varchar(255) DEFAULT NULL,
+  KEY `FK_tfmblg8pibi86yess3ndl868g` (`section`),
+  CONSTRAINT `FK_tfmblg8pibi86yess3ndl868g` FOREIGN KEY (`section`) REFERENCES `section` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `section_optionalpictures`
+-- Dumping data for table `section_optional_pictures`
 --
 
-LOCK TABLES `section_optionalpictures` WRITE;
-/*!40000 ALTER TABLE `section_optionalpictures` DISABLE KEYS */;
-/*!40000 ALTER TABLE `section_optionalpictures` ENABLE KEYS */;
+LOCK TABLES `section_optional_pictures` WRITE;
+/*!40000 ALTER TABLE `section_optional_pictures` DISABLE KEYS */;
+/*!40000 ALTER TABLE `section_optional_pictures` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1013,18 +984,18 @@ DROP TABLE IF EXISTS `submission`;
 CREATE TABLE `submission` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `cameraReady` bit(1) NOT NULL,
+  `camera_ready` bit(1) NOT NULL,
   `moment` datetime DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `ticker` varchar(255) DEFAULT NULL,
-  `conference_id` int(11) DEFAULT NULL,
-  `paper_id` int(11) DEFAULT NULL,
+  `conference` int(11) DEFAULT NULL,
+  `paper` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_eo0uw4evjwgn80h1sh2gho4ft` (`ticker`),
-  KEY `FK_fh4c3gb4lrqtg2i460d9odyqn` (`conference_id`),
-  KEY `FK_iy3ke3778fryfva48l6nqth93` (`paper_id`),
-  CONSTRAINT `FK_iy3ke3778fryfva48l6nqth93` FOREIGN KEY (`paper_id`) REFERENCES `paper` (`id`),
-  CONSTRAINT `FK_fh4c3gb4lrqtg2i460d9odyqn` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`)
+  UNIQUE KEY `UK_9ayhftkow8judgm0cblwdb9mi` (`ticker`),
+  KEY `FK_1vynnfw6cw1l40c8e342st672` (`conference`),
+  KEY `FK_3osm3qjvt3r41xau9xwf5nkdt` (`paper`),
+  CONSTRAINT `FK_3osm3qjvt3r41xau9xwf5nkdt` FOREIGN KEY (`paper`) REFERENCES `paper` (`id`),
+  CONSTRAINT `FK_1vynnfw6cw1l40c8e342st672` FOREIGN KEY (`conference`) REFERENCES `conference` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1039,30 +1010,30 @@ INSERT INTO `submission` VALUES (614,0,'\0','2019-01-06 00:00:00','ACCEPTED','MA
 UNLOCK TABLES;
 
 --
--- Table structure for table `submission_reviewer`
+-- Table structure for table `submission_reviewers`
 --
 
-DROP TABLE IF EXISTS `submission_reviewer`;
+DROP TABLE IF EXISTS `submission_reviewers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `submission_reviewer` (
-  `Submission_id` int(11) NOT NULL,
-  `reviewers_id` int(11) NOT NULL,
-  KEY `FK_muyi2dby1y0pxmry59mao464k` (`reviewers_id`),
-  KEY `FK_dm2uyw06gtiw6ur1917pm7q8h` (`Submission_id`),
-  CONSTRAINT `FK_dm2uyw06gtiw6ur1917pm7q8h` FOREIGN KEY (`Submission_id`) REFERENCES `submission` (`id`),
-  CONSTRAINT `FK_muyi2dby1y0pxmry59mao464k` FOREIGN KEY (`reviewers_id`) REFERENCES `reviewer` (`id`)
+CREATE TABLE `submission_reviewers` (
+  `submission` int(11) NOT NULL,
+  `reviewers` int(11) NOT NULL,
+  KEY `FK_rx31lgg0k67efoplhxv8len0c` (`reviewers`),
+  KEY `FK_iwsj2ioiue7vmn5bnhxb2oatb` (`submission`),
+  CONSTRAINT `FK_iwsj2ioiue7vmn5bnhxb2oatb` FOREIGN KEY (`submission`) REFERENCES `submission` (`id`),
+  CONSTRAINT `FK_rx31lgg0k67efoplhxv8len0c` FOREIGN KEY (`reviewers`) REFERENCES `reviewer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `submission_reviewer`
+-- Dumping data for table `submission_reviewers`
 --
 
-LOCK TABLES `submission_reviewer` WRITE;
-/*!40000 ALTER TABLE `submission_reviewer` DISABLE KEYS */;
-INSERT INTO `submission_reviewer` VALUES (614,622),(615,622),(617,621),(618,621);
-/*!40000 ALTER TABLE `submission_reviewer` ENABLE KEYS */;
+LOCK TABLES `submission_reviewers` WRITE;
+/*!40000 ALTER TABLE `submission_reviewers` DISABLE KEYS */;
+INSERT INTO `submission_reviewers` VALUES (614,622),(615,622),(617,621),(618,621);
+/*!40000 ALTER TABLE `submission_reviewers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1075,8 +1046,8 @@ DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `englishName` varchar(255) DEFAULT NULL,
-  `spanishName` varchar(255) DEFAULT NULL,
+  `english_name` varchar(255) DEFAULT NULL,
+  `spanish_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1101,15 +1072,15 @@ DROP TABLE IF EXISTS `tutorial`;
 CREATE TABLE `tutorial` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `endMoment` datetime DEFAULT NULL,
+  `end_moment` datetime DEFAULT NULL,
   `room` varchar(255) DEFAULT NULL,
-  `startMoment` datetime DEFAULT NULL,
+  `start_moment` datetime DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `conference_id` int(11) DEFAULT NULL,
+  `conference` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_c8vb4fwcxjasyddbco6rrvxtb` (`conference_id`),
-  CONSTRAINT `FK_c8vb4fwcxjasyddbco6rrvxtb` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`)
+  KEY `FK_gd8wor872gtoqt1siaw2k4din` (`conference`),
+  CONSTRAINT `FK_gd8wor872gtoqt1siaw2k4din` FOREIGN KEY (`conference`) REFERENCES `conference` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1124,55 +1095,55 @@ INSERT INTO `tutorial` VALUES (629,0,'2019-01-01 16:45:00','room1','2019-01-01 1
 UNLOCK TABLES;
 
 --
--- Table structure for table `useraccount`
+-- Table structure for table `user_account`
 --
 
-DROP TABLE IF EXISTS `useraccount`;
+DROP TABLE IF EXISTS `user_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `useraccount` (
+CREATE TABLE `user_account` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_csivo9yqa08nrbkog71ycilh5` (`username`)
+  UNIQUE KEY `UK_castjbvpeeus0r8lbpehiu0e4` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `useraccount`
+-- Dumping data for table `user_account`
 --
 
-LOCK TABLES `useraccount` WRITE;
-/*!40000 ALTER TABLE `useraccount` DISABLE KEYS */;
-INSERT INTO `useraccount` VALUES (550,0,'21232f297a57a5a743894a0e4a801fc3','admin'),(551,0,'b312ba4ffd5245fa2a1ab819ec0d0347','author1'),(552,0,'6ce19528a40dde9521d97cf7ba264eca','reviewer1'),(553,0,'2693b57f0f59df94caacefb811e99851','reviewer2'),(554,0,'9bd97baef2b853ec00cc3cffd269f679','author2'),(555,0,'d5cee333abe432891a0de57d0ee38713','administrator1'),(556,0,'82954495ff7e2a735ed2192c35b2cd00','administrator2');
-/*!40000 ALTER TABLE `useraccount` ENABLE KEYS */;
+LOCK TABLES `user_account` WRITE;
+/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
+INSERT INTO `user_account` VALUES (550,0,'21232f297a57a5a743894a0e4a801fc3','admin'),(551,0,'b312ba4ffd5245fa2a1ab819ec0d0347','author1'),(552,0,'6ce19528a40dde9521d97cf7ba264eca','reviewer1'),(553,0,'2693b57f0f59df94caacefb811e99851','reviewer2'),(554,0,'9bd97baef2b853ec00cc3cffd269f679','author2'),(555,0,'d5cee333abe432891a0de57d0ee38713','administrator1'),(556,0,'82954495ff7e2a735ed2192c35b2cd00','administrator2');
+/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `useraccount_authorities`
+-- Table structure for table `user_account_authorities`
 --
 
-DROP TABLE IF EXISTS `useraccount_authorities`;
+DROP TABLE IF EXISTS `user_account_authorities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `useraccount_authorities` (
-  `UserAccount_id` int(11) NOT NULL,
+CREATE TABLE `user_account_authorities` (
+  `user_account` int(11) NOT NULL,
   `authority` varchar(255) DEFAULT NULL,
-  KEY `FK_b63ua47r0u1m7ccc9lte2ui4r` (`UserAccount_id`),
-  CONSTRAINT `FK_b63ua47r0u1m7ccc9lte2ui4r` FOREIGN KEY (`UserAccount_id`) REFERENCES `useraccount` (`id`)
+  KEY `FK_pao8cwh93fpccb0bx6ilq6gsl` (`user_account`),
+  CONSTRAINT `FK_pao8cwh93fpccb0bx6ilq6gsl` FOREIGN KEY (`user_account`) REFERENCES `user_account` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `useraccount_authorities`
+-- Dumping data for table `user_account_authorities`
 --
 
-LOCK TABLES `useraccount_authorities` WRITE;
-/*!40000 ALTER TABLE `useraccount_authorities` DISABLE KEYS */;
-INSERT INTO `useraccount_authorities` VALUES (550,'ADMIN'),(551,'AUTHOR'),(552,'REVIEWER'),(553,'REVIEWER'),(554,'AUTHOR'),(555,'ADMIN'),(556,'ADMIN');
-/*!40000 ALTER TABLE `useraccount_authorities` ENABLE KEYS */;
+LOCK TABLES `user_account_authorities` WRITE;
+/*!40000 ALTER TABLE `user_account_authorities` DISABLE KEYS */;
+INSERT INTO `user_account_authorities` VALUES (550,'ADMIN'),(551,'AUTHOR'),(552,'REVIEWER'),(553,'REVIEWER'),(554,'AUTHOR'),(555,'ADMIN'),(556,'ADMIN');
+/*!40000 ALTER TABLE `user_account_authorities` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1184,5 +1155,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-21 16:55:13
+-- Dump completed on 2019-08-22  8:42:20
 commit;
