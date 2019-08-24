@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ConferenceService;
 import services.ReportService;
 import services.ReviewerService;
+import services.SubmissionService;
 import domain.Report;
 
 @Controller
@@ -28,18 +30,31 @@ public class ReportReviewerController extends AbstractController {
 	@Autowired
 	ConferenceService	conferenceService;
 
+	@Autowired
+	SubmissionService	submissionService;
+
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int subId) {
 		ModelAndView result;
 		Report report;
-
-		report = this.reportService.create(subId);
-		result = this.createEditModelAndView(report);
+		try {
+			Assert.isTrue(this.submissionService.findSubmissionsOfReviewer(this.reviewerService.findByPrincipal()).contains(this.submissionService.findOne(subId)), "hacking");
+			Assert.isTrue(!this.reportService.reportDone(subId, this.reviewerService.findByPrincipal()), "HA HECHO YA UN REPORT");
+			report = this.reportService.create(subId);
+			result = this.createEditModelAndView(report);
+		} catch (final Throwable oops) {
+			// TODO: handle exception
+			if (oops.getMessage().equals("hacking"))
+				result = new ModelAndView("misc/403");
+			else if (oops.getMessage().equals("HA HECHO YA UN REPORT"))
+				result = new ModelAndView("misc/403");
+			else
+				result = new ModelAndView("redirect:/");
+		}
 
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndView(final Report report) {
 		ModelAndView result;
 
