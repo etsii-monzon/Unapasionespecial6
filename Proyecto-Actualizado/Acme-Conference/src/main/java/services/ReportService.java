@@ -85,4 +85,11 @@ public class ReportService {
 		return this.reportRepository.findReportsOfSubmission(s);
 	}
 
+	public boolean reportDone(final int submissionId, final Reviewer r) {
+
+		for (final Report rep : r.getReports())
+			if (rep.getSubmission().equals(this.submissionService.findOne(submissionId)))
+				return true;
+		return false;
+	}
 }
