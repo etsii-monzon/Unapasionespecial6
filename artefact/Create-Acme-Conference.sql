@@ -1,19 +1,3 @@
-﻿start transaction;
-
-drop database if exists `Acme-Conference`;
-
-create database `Acme-Conference`;
-
-use `Acme-Conference`;
-
-grant select, insert, update, delete 
-	on `Acme-Conference`.* to 'acme-user'@'%';
-
-grant select, insert, update, delete, create, drop, references, index, alter, 
-        create temporary tables, lock tables, create view, create routine, 
-        alter routine, execute, trigger, show view
-    on `Acme-Conference`.* to 'acme-manager'@'%';
-
 -- MySQL dump 10.13  Distrib 5.5.29, for Win64 (x86)
 --
 -- Host: localhost    Database: Acme-Conference
@@ -50,7 +34,7 @@ CREATE TABLE `activity_optional_attachments` (
 
 LOCK TABLES `activity_optional_attachments` WRITE;
 /*!40000 ALTER TABLE `activity_optional_attachments` DISABLE KEYS */;
-INSERT INTO `activity_optional_attachments` VALUES (630,'http://attachment1.com'),(630,'http://attachment2.com'),(630,'http://attachment3.com');
+INSERT INTO `activity_optional_attachments` VALUES (680,'http://attachment1.com'),(680,'http://attachment2.com'),(680,'http://attachment3.com');
 /*!40000 ALTER TABLE `activity_optional_attachments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +57,7 @@ CREATE TABLE `activity_speakers` (
 
 LOCK TABLES `activity_speakers` WRITE;
 /*!40000 ALTER TABLE `activity_speakers` DISABLE KEYS */;
-INSERT INTO `activity_speakers` VALUES (628,'José Luis'),(629,'José Vicente'),(630,'José Vicente'),(630,'María Luisa'),(630,'Omar Montes');
+INSERT INTO `activity_speakers` VALUES (678,'José Luis'),(679,'José Vicente'),(680,'José Vicente'),(680,'María Luisa'),(680,'Omar Montes');
 /*!40000 ALTER TABLE `activity_speakers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +82,7 @@ CREATE TABLE `actor_messages` (
 
 LOCK TABLES `actor_messages` WRITE;
 /*!40000 ALTER TABLE `actor_messages` DISABLE KEYS */;
-INSERT INTO `actor_messages` VALUES (613,627),(621,627);
+INSERT INTO `actor_messages` VALUES (663,677),(671,677);
 /*!40000 ALTER TABLE `actor_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +119,7 @@ CREATE TABLE `administrator` (
 
 LOCK TABLES `administrator` WRITE;
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
-INSERT INTO `administrator` VALUES (599,0,'Monzón 28','admin@','Marín Mateos','Juan José','','+34 675359045','Marín Mateos',592,550),(600,0,'Monzón 29','admin2@','María','José','','+34 675359045','Marquez',597,555),(601,0,'Monzón 29','admin3@','','Manola','','+34 675359045','Del Pino Fuentes',598,556);
+INSERT INTO `administrator` VALUES (644,0,'Monzón 28','admin@','Marín Mateos','Juan José','','+34 675359045','Marín Mateos',637,595),(645,0,'Monzón 29','admin2@','María','José','','+34 675359045','Marquez',642,600),(646,0,'Monzón 29','admin3@','','Manola','','+34 675359045','Del Pino Fuentes',643,601);
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +146,7 @@ CREATE TABLE `administrator_conferences` (
 
 LOCK TABLES `administrator_conferences` WRITE;
 /*!40000 ALTER TABLE `administrator_conferences` DISABLE KEYS */;
-INSERT INTO `administrator_conferences` VALUES (599,602),(599,603),(599,604),(599,605),(599,606),(599,607),(599,608),(599,609),(599,610),(599,611),(599,612);
+INSERT INTO `administrator_conferences` VALUES (644,647),(644,648),(644,649),(644,650),(644,651),(644,652),(644,653),(644,654),(644,655),(644,656),(644,657),(644,658),(644,659),(644,660),(644,661),(644,662);
 /*!40000 ALTER TABLE `administrator_conferences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +183,7 @@ CREATE TABLE `author` (
 
 LOCK TABLES `author` WRITE;
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
-INSERT INTO `author` VALUES (613,0,'Monzón 28','author1@hotmail.com','Ayacuch','Manuel','','+34 602145205','Saez yure',593,551),(620,0,'Barqueta 4','author2@hotmail.com','','José','','+34 602145204','López Retamino',594,554);
+INSERT INTO `author` VALUES (663,0,'Monzón 28','author1@hotmail.com','Ayacuch','Manuel','','+34 602145205','Saez yure',638,596),(670,0,'Barqueta 4','author2@hotmail.com','','José','','+34 602145204','López Retamino',639,599);
 /*!40000 ALTER TABLE `author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +210,7 @@ CREATE TABLE `author_registrations` (
 
 LOCK TABLES `author_registrations` WRITE;
 /*!40000 ALTER TABLE `author_registrations` DISABLE KEYS */;
-INSERT INTO `author_registrations` VALUES (613,619);
+INSERT INTO `author_registrations` VALUES (663,669);
 /*!40000 ALTER TABLE `author_registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,7 +237,7 @@ CREATE TABLE `author_submissions` (
 
 LOCK TABLES `author_submissions` WRITE;
 /*!40000 ALTER TABLE `author_submissions` DISABLE KEYS */;
-INSERT INTO `author_submissions` VALUES (613,614),(613,615),(613,617),(620,616),(620,618);
+INSERT INTO `author_submissions` VALUES (663,664),(663,665),(663,667),(670,666),(670,668);
 /*!40000 ALTER TABLE `author_submissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +266,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (572,0,'CONFERENCE','CONFERENCIA',NULL),(573,0,'Computer Science','Informática',572),(574,0,'Physics','Física',572),(575,0,'Biology','Biología',572),(576,0,'Artificial Intelligence','Inteligencia Artificial',573),(577,0,'Software Engineering','Ingeniería Software',573),(578,0,'Deep Learning','Aprendizaje Profundo',576),(579,0,'Instance-based learning','Aprendizaje basado en instancias',576),(580,0,'Regression','Regresión',576),(581,0,'Big Data','Big Data',577),(582,0,'Big Processing','Big Processing',577),(583,0,'Methods','Métodos',577),(584,0,'Tools','Herramientas',577),(585,0,'Cinematic','Cinemática',574),(586,0,'Electicity','Electricidad',574),(587,0,'Electronic','Electrónica',574),(588,0,'Animals','Animales',575),(589,0,'Plants','Plantas',575),(590,0,'Fungi','Hongos',575);
+INSERT INTO `category` VALUES (617,0,'CONFERENCE','CONFERENCIA',NULL),(618,0,'Computer Science','Informática',617),(619,0,'Physics','Física',617),(620,0,'Biology','Biología',617),(621,0,'Artificial Intelligence','Inteligencia Artificial',618),(622,0,'Software Engineering','Ingeniería Software',618),(623,0,'Deep Learning','Aprendizaje Profundo',621),(624,0,'Instance-based learning','Aprendizaje basado en instancias',621),(625,0,'Regression','Regresión',621),(626,0,'Big Data','Big Data',622),(627,0,'Big Processing','Big Processing',622),(628,0,'Methods','Métodos',622),(629,0,'Tools','Herramientas',622),(630,0,'Cinematic','Cinemática',619),(631,0,'Electicity','Electricidad',619),(632,0,'Electronic','Electrónica',619),(633,0,'Animals','Animales',620),(634,0,'Plants','Plantas',620),(635,0,'Fungi','Hongos',620);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,7 +293,7 @@ CREATE TABLE `category_children` (
 
 LOCK TABLES `category_children` WRITE;
 /*!40000 ALTER TABLE `category_children` DISABLE KEYS */;
-INSERT INTO `category_children` VALUES (572,573),(572,574),(572,575),(573,576),(573,577),(574,585),(574,586),(574,587),(575,588),(575,589),(575,590),(576,578),(576,579),(576,580),(577,581),(577,582),(577,583),(577,584);
+INSERT INTO `category_children` VALUES (617,618),(617,619),(617,620),(618,621),(618,622),(619,630),(619,631),(619,632),(620,633),(620,634),(620,635),(621,623),(621,624),(621,625),(622,626),(622,627),(622,628),(622,629);
 /*!40000 ALTER TABLE `category_children` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +321,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (568,0,'Anonymous','2019-02-02 20:00:00','Muy buena conferencía,recomendable.','Good Conference!'),(569,0,'Anonymous','2019-02-02 20:00:00','Muy buena conferencía.','Recomendado 100%'),(570,0,'Anonymous','2019-02-02 20:00:00','Muy buena conferencía,recomendable.','Good Presentation'),(571,0,'Antonio','2019-02-03 20:00:00','Muy buena conferencía.','Recomendado 100%');
+INSERT INTO `comment` VALUES (613,0,'Anonymous','2019-02-02 20:00:00','Muy buena conferencía,recomendable.','Good Conference!'),(614,0,'Anonymous','2019-02-02 20:00:00','Muy buena conferencía.','Recomendado 100%'),(615,0,'Anonymous','2019-02-02 20:00:00','Muy buena conferencía,recomendable.','Good Presentation'),(616,0,'Antonio','2019-02-03 20:00:00','Muy buena conferencía.','Recomendado 100%');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +346,7 @@ CREATE TABLE `comment_entity_comments` (
 
 LOCK TABLES `comment_entity_comments` WRITE;
 /*!40000 ALTER TABLE `comment_entity_comments` DISABLE KEYS */;
-INSERT INTO `comment_entity_comments` VALUES (611,568),(611,569),(630,570),(630,571);
+INSERT INTO `comment_entity_comments` VALUES (656,613),(656,614),(680,615),(680,616);
 /*!40000 ALTER TABLE `comment_entity_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,7 +384,7 @@ CREATE TABLE `conference` (
 
 LOCK TABLES `conference` WRITE;
 /*!40000 ALTER TABLE `conference` DISABLE KEYS */;
-INSERT INTO `conference` VALUES (602,0,'LU','2020-03-06 00:00:00','\0','2020-05-06 20:00:00',24.99,'2020-02-06 00:00:00','2020-05-06 16:00:00','2020-02-01 14:04:00','ETSII','Learn Unity','ETSII',576),(603,0,'HACK','2020-09-20 00:00:00','\0','2020-10-06 20:00:00',249.99,'2020-09-17 00:00:00','2020-10-06 16:00:00','2020-09-15 14:04:00','Reina Mercedes','Hacking','Reina Mercedes',578),(604,0,'A4','2020-01-20 00:00:00','\0','2020-02-10 20:00:00',9.99,'2020-01-17 00:00:00','2020-02-06 16:00:00','2020-01-15 14:04:00','Cartuja','Andr4All','Cartuja',581),(605,0,'BD','2019-06-20 00:00:00','\0','2019-09-20 20:00:00',599,'2019-06-17 00:00:00','2019-07-01 16:00:00','2019-06-15 14:04:00','Reina Sofia','BigData','Reina Sofia',582),(606,0,'J10','2019-06-20 00:00:00','\0','2020-07-01 20:00:00',359,'2019-06-17 00:00:00','2019-07-01 16:00:00','2019-06-15 14:04:00','Fibes','Java 10','Fibes',581),(607,0,'PD','2019-06-20 00:00:00','\0','2019-09-15 20:00:00',199.99,'2019-04-12 00:00:00','2019-07-01 16:00:00','2018-06-10 14:04:00','Sant    Patrick','Pyhton and Django','Sant Patrick',581),(608,0,'LearDj','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',15,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','Plantinar','Learn Django','Plantinar',582),(609,0,'MD','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',150,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','summary','Metadatos','ETSII',583),(610,0,'LA3','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',250,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','summary','Learn Angular3','ETSII',583),(611,0,'Cr','2018-10-20 00:00:00','\0','2019-01-02 20:00:00',80,'2018-10-01 00:00:00','2019-01-01 16:00:00','2017-12-12 14:04:00','summary','Criptografia','ETSII',584),(612,0,'DcK','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',158,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','sumamry','Learn Dockers','ETSII',579);
+INSERT INTO `conference` VALUES (647,0,'LU','2020-03-06 00:00:00','\0','2020-05-06 20:00:00',24.99,'2020-02-06 00:00:00','2020-05-06 16:00:00','2020-02-01 14:04:00','ETSII','Learn Unity','ETSII',621),(648,0,'HACK','2020-09-20 00:00:00','\0','2020-10-06 20:00:00',249.99,'2020-09-17 00:00:00','2020-10-06 16:00:00','2020-09-15 14:04:00','Reina Mercedes','Hacking','Reina Mercedes',623),(649,0,'A4','2020-01-20 00:00:00','\0','2020-02-10 20:00:00',9.99,'2020-01-17 00:00:00','2020-02-06 16:00:00','2020-01-15 14:04:00','Cartuja','Andr4All','Cartuja',626),(650,0,'BD','2019-06-20 00:00:00','\0','2019-09-20 20:00:00',599,'2019-06-17 00:00:00','2019-07-01 16:00:00','2019-06-15 14:04:00','Reina Sofia','BigData','Reina Sofia',627),(651,0,'J10','2019-06-20 00:00:00','\0','2020-07-01 20:00:00',359,'2019-06-17 00:00:00','2019-07-01 16:00:00','2019-06-15 14:04:00','Fibes','Java 10','Fibes',626),(652,0,'PD','2019-06-20 00:00:00','\0','2019-09-15 20:00:00',199.99,'2019-04-12 00:00:00','2019-07-01 16:00:00','2018-06-10 14:04:00','Sant    Patrick','Pyhton and Django','Sant Patrick',626),(653,0,'LearDj','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',15,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','Plantinar','Learn Django','Plantinar',627),(654,0,'MD','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',150,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','summary','Metadatos','ETSII',628),(655,0,'LA3','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',250,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','summary','Learn Angular3','ETSII',628),(656,0,'Cr','2018-10-20 00:00:00','\0','2019-01-02 20:00:00',80,'2018-10-01 00:00:00','2019-01-01 16:00:00','2017-12-12 14:04:00','summary','Criptografia','ETSII',629),(657,0,'DcK','2019-10-20 00:00:00','\0','2020-11-10 20:00:00',158,'2019-10-01 00:00:00','2020-11-01 16:00:00','2018-12-12 14:04:00','sumamry','Learn Dockers','ETSII',624),(658,0,'M+','2019-09-07 00:00:00','\0','2019-09-09 20:00:00',200,'2019-09-06 00:00:00','2019-09-08 16:00:00','2019-09-05 14:04:00','sumamry','Math','ETSII',621),(659,0,'Anac','2019-09-12 00:00:00','\0','2019-09-14 20:00:00',25,'2019-09-11 00:00:00','2019-09-13 16:00:00','2019-09-10 14:04:00','sumamry','Anaconda','ETSII',617),(660,0,'CandF','2019-09-17 00:00:00','\0','2019-09-19 20:00:00',15,'2019-09-16 00:00:00','2019-09-18 16:00:00','2019-09-15 14:04:00','sumamry','Computer and Football','ETSII',617),(661,0,'Comp','2019-09-22 00:00:00','\0','2019-09-24 20:00:00',50,'2019-09-21 00:00:00','2019-09-23 16:00:00','2019-09-20 14:04:00','sumamry','Create a company','ETSII',617),(662,0,'App','2019-09-27 00:00:00','\0','2019-09-29 20:00:00',10,'2019-09-26 00:00:00','2019-09-28 16:00:00','2019-09-25 14:04:00','sumamry','Create an application','ETSII',617);
 /*!40000 ALTER TABLE `conference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -429,7 +413,7 @@ CREATE TABLE `configuration` (
 
 LOCK TABLES `configuration` WRITE;
 /*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
-INSERT INTO `configuration` VALUES (591,0,'https://i.ibb.co/GVpZCtM/acme-conference.png','34','Acme Conference','Welcome to Acme Conference! Your scientific event manager','¡Bienvenidos a Acme Conference! Su gestor de eventos científicos');
+INSERT INTO `configuration` VALUES (636,0,'https://i.ibb.co/GVpZCtM/acme-conference.png','34','Acme Conference','Welcome to Acme Conference! Your scientific event manager','¡Bienvenidos a Acme Conference! Su gestor de eventos científicos');
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,7 +438,7 @@ CREATE TABLE `configuration_makes` (
 
 LOCK TABLES `configuration_makes` WRITE;
 /*!40000 ALTER TABLE `configuration_makes` DISABLE KEYS */;
-INSERT INTO `configuration_makes` VALUES (591,'VISA'),(591,'MASTER'),(591,'DINNERS'),(591,'AMEX');
+INSERT INTO `configuration_makes` VALUES (636,'VISA'),(636,'MASTER'),(636,'DINNERS'),(636,'AMEX');
 /*!40000 ALTER TABLE `configuration_makes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -481,7 +465,7 @@ CREATE TABLE `configuration_topics` (
 
 LOCK TABLES `configuration_topics` WRITE;
 /*!40000 ALTER TABLE `configuration_topics` DISABLE KEYS */;
-INSERT INTO `configuration_topics` VALUES (591,563),(591,564),(591,565),(591,566),(591,567);
+INSERT INTO `configuration_topics` VALUES (636,608),(636,609),(636,610),(636,611),(636,612);
 /*!40000 ALTER TABLE `configuration_topics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -511,7 +495,7 @@ CREATE TABLE `credit_card` (
 
 LOCK TABLES `credit_card` WRITE;
 /*!40000 ALTER TABLE `credit_card` DISABLE KEYS */;
-INSERT INTO `credit_card` VALUES (562,0,'VISA',123,10,22,'Manuel','4111111111111111');
+INSERT INTO `credit_card` VALUES (607,0,'VISA',123,10,22,'Manuel','4111111111111111');
 /*!40000 ALTER TABLE `credit_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -542,7 +526,7 @@ CREATE TABLE `finder` (
 
 LOCK TABLES `finder` WRITE;
 /*!40000 ALTER TABLE `finder` DISABLE KEYS */;
-INSERT INTO `finder` VALUES (592,0,NULL,NULL,NULL,NULL,NULL),(593,0,NULL,NULL,NULL,NULL,NULL),(594,0,NULL,NULL,NULL,NULL,NULL),(595,0,NULL,NULL,NULL,NULL,NULL),(596,0,NULL,NULL,NULL,NULL,NULL),(597,0,NULL,NULL,NULL,NULL,NULL),(598,0,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `finder` VALUES (637,0,NULL,NULL,NULL,NULL,NULL),(638,0,NULL,NULL,NULL,NULL,NULL),(639,0,NULL,NULL,NULL,NULL,NULL),(640,0,NULL,NULL,NULL,NULL,NULL),(641,0,NULL,NULL,NULL,NULL,NULL),(642,0,NULL,NULL,NULL,NULL,NULL),(643,0,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `finder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -620,7 +604,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (627,0,'TEST','2019-01-06 00:00:00','IMPORTANT','OTHER',613);
+INSERT INTO `message` VALUES (677,0,'TEST','2019-01-06 00:00:00','IMPORTANT','OTHER',663);
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -645,7 +629,7 @@ CREATE TABLE `message_recipients` (
 
 LOCK TABLES `message_recipients` WRITE;
 /*!40000 ALTER TABLE `message_recipients` DISABLE KEYS */;
-INSERT INTO `message_recipients` VALUES (627,621);
+INSERT INTO `message_recipients` VALUES (677,671);
 /*!40000 ALTER TABLE `message_recipients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -677,7 +661,7 @@ CREATE TABLE `panel` (
 
 LOCK TABLES `panel` WRITE;
 /*!40000 ALTER TABLE `panel` DISABLE KEYS */;
-INSERT INTO `panel` VALUES (628,0,'2019-01-01 16:30:00','room1','2019-01-01 16:01:00','summary1','Panel',611);
+INSERT INTO `panel` VALUES (678,0,'2019-01-01 16:30:00','room1','2019-01-01 16:01:00','summary1','Panel',656);
 /*!40000 ALTER TABLE `panel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -704,7 +688,7 @@ CREATE TABLE `paper` (
 
 LOCK TABLES `paper` WRITE;
 /*!40000 ALTER TABLE `paper` DISABLE KEYS */;
-INSERT INTO `paper` VALUES (557,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper title'),(558,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper title'),(559,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper1'),(560,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','PAPER'),(561,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper10');
+INSERT INTO `paper` VALUES (602,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper title'),(603,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper title'),(604,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper1'),(605,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','PAPER'),(606,0,'http://bibing.us.es/proyectos/abreproy/11247/fichero/Memoria%252F6-Conceptos+previos.pdf','Summary','paper10');
 /*!40000 ALTER TABLE `paper` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -731,7 +715,7 @@ CREATE TABLE `paper_authors` (
 
 LOCK TABLES `paper_authors` WRITE;
 /*!40000 ALTER TABLE `paper_authors` DISABLE KEYS */;
-INSERT INTO `paper_authors` VALUES (557,620),(558,613),(559,613),(560,613),(560,620),(561,620);
+INSERT INTO `paper_authors` VALUES (602,670),(603,663),(604,663),(605,663),(605,670),(606,670);
 /*!40000 ALTER TABLE `paper_authors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -766,7 +750,7 @@ CREATE TABLE `presentation` (
 
 LOCK TABLES `presentation` WRITE;
 /*!40000 ALTER TABLE `presentation` DISABLE KEYS */;
-INSERT INTO `presentation` VALUES (630,0,'2019-01-01 17:00:00','room1','2019-01-01 16:45:00','summary conference','presentation1',611,618);
+INSERT INTO `presentation` VALUES (680,0,'2019-01-01 17:00:00','room1','2019-01-01 16:45:00','summary conference','presentation1',656,668);
 /*!40000 ALTER TABLE `presentation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -796,7 +780,7 @@ CREATE TABLE `registration` (
 
 LOCK TABLES `registration` WRITE;
 /*!40000 ALTER TABLE `registration` DISABLE KEYS */;
-INSERT INTO `registration` VALUES (619,0,602,562);
+INSERT INTO `registration` VALUES (669,0,647,607);
 /*!40000 ALTER TABLE `registration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -828,7 +812,7 @@ CREATE TABLE `report` (
 
 LOCK TABLES `report` WRITE;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
-INSERT INTO `report` VALUES (623,0,'No comments.','ACCEPT',8,7,5,617),(624,0,'No comments.','ACCEPT',8,8,7,614),(625,0,'No comments.','ACCEPT',7,10,7,615),(626,0,'No comments.','ACCEPT',7,10,7,618);
+INSERT INTO `report` VALUES (673,0,'No comments.','ACCEPT',8,7,5,667),(674,0,'No comments.','ACCEPT',8,8,7,664),(675,0,'No comments.','ACCEPT',7,10,7,665),(676,0,'No comments.','ACCEPT',7,10,7,668);
 /*!40000 ALTER TABLE `report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -865,7 +849,7 @@ CREATE TABLE `reviewer` (
 
 LOCK TABLES `reviewer` WRITE;
 /*!40000 ALTER TABLE `reviewer` DISABLE KEYS */;
-INSERT INTO `reviewer` VALUES (621,0,'Sol 28','reviewer1@hotmail.com','','Ana','','+34 620148002','Gómez',595,552),(622,0,'Gran Via 28','anagon@hotmail.com','','Anastasia','','+34 633148002','Gónzalez',596,553);
+INSERT INTO `reviewer` VALUES (671,0,'Sol 28','reviewer1@hotmail.com','','Ana','','+34 620148002','Gómez',640,597),(672,0,'Gran Via 28','anagon@hotmail.com','','Anastasia','','+34 633148002','Gónzalez',641,598);
 /*!40000 ALTER TABLE `reviewer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -890,7 +874,7 @@ CREATE TABLE `reviewer_keywords` (
 
 LOCK TABLES `reviewer_keywords` WRITE;
 /*!40000 ALTER TABLE `reviewer_keywords` DISABLE KEYS */;
-INSERT INTO `reviewer_keywords` VALUES (621,'submission1'),(621,'Learn'),(622,'Python'),(622,'Plantinar');
+INSERT INTO `reviewer_keywords` VALUES (671,'submission1'),(671,'Learn'),(672,'Python'),(672,'Plantinar');
 /*!40000 ALTER TABLE `reviewer_keywords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -917,7 +901,7 @@ CREATE TABLE `reviewer_reports` (
 
 LOCK TABLES `reviewer_reports` WRITE;
 /*!40000 ALTER TABLE `reviewer_reports` DISABLE KEYS */;
-INSERT INTO `reviewer_reports` VALUES (621,623),(621,626),(622,624),(622,625);
+INSERT INTO `reviewer_reports` VALUES (671,673),(671,676),(672,674),(672,675);
 /*!40000 ALTER TABLE `reviewer_reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -946,7 +930,7 @@ CREATE TABLE `section` (
 
 LOCK TABLES `section` WRITE;
 /*!40000 ALTER TABLE `section` DISABLE KEYS */;
-INSERT INTO `section` VALUES (631,0,'summary1','section1',629);
+INSERT INTO `section` VALUES (681,0,'summary1','section1',679);
 /*!40000 ALTER TABLE `section` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1005,7 +989,7 @@ CREATE TABLE `submission` (
 
 LOCK TABLES `submission` WRITE;
 /*!40000 ALTER TABLE `submission` DISABLE KEYS */;
-INSERT INTO `submission` VALUES (614,0,'\0','2019-01-06 00:00:00','ACCEPTED','MAS-8K8Q',609,560),(615,0,'','2019-01-06 00:00:00','ACCEPTED','MAS-5L2B',610,558),(616,0,'\0','2019-01-06 00:00:00','UNDER-REVIEW','JXL-8K7L',612,557),(617,0,'\0','2019-01-06 00:00:00','UNDER-REVIEW','MAS-8K6L',608,559),(618,0,'','2019-01-06 00:00:00','ACCEPTED','JXL-213L',611,561);
+INSERT INTO `submission` VALUES (664,0,'\0','2019-01-06 00:00:00','ACCEPTED','MAS-8K8Q',654,605),(665,0,'','2019-01-06 00:00:00','ACCEPTED','MAS-5L2B',655,603),(666,0,'\0','2019-01-06 00:00:00','UNDER-REVIEW','JXL-8K7L',657,602),(667,0,'\0','2019-01-06 00:00:00','UNDER-REVIEW','MAS-8K6L',653,604),(668,0,'','2019-01-06 00:00:00','ACCEPTED','JXL-213L',656,606);
 /*!40000 ALTER TABLE `submission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1032,7 +1016,7 @@ CREATE TABLE `submission_reviewers` (
 
 LOCK TABLES `submission_reviewers` WRITE;
 /*!40000 ALTER TABLE `submission_reviewers` DISABLE KEYS */;
-INSERT INTO `submission_reviewers` VALUES (614,622),(615,622),(617,621),(618,621);
+INSERT INTO `submission_reviewers` VALUES (664,672),(665,672),(667,671),(668,671);
 /*!40000 ALTER TABLE `submission_reviewers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1058,7 +1042,7 @@ CREATE TABLE `topic` (
 
 LOCK TABLES `topic` WRITE;
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
-INSERT INTO `topic` VALUES (563,0,'INQUIRY','INVESTIGACIÓN'),(564,0,'REBUTTAL','REFUTACIÓN'),(565,0,'TOPICS','TEMAS'),(566,0,'REGISTRATION','REGISTRO'),(567,0,'OTHER','OTRO');
+INSERT INTO `topic` VALUES (608,0,'INQUIRY','INVESTIGACIÓN'),(609,0,'REBUTTAL','REFUTACIÓN'),(610,0,'TOPICS','TEMAS'),(611,0,'REGISTRATION','REGISTRO'),(612,0,'OTHER','OTRO');
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1090,7 +1074,7 @@ CREATE TABLE `tutorial` (
 
 LOCK TABLES `tutorial` WRITE;
 /*!40000 ALTER TABLE `tutorial` DISABLE KEYS */;
-INSERT INTO `tutorial` VALUES (629,0,'2019-01-01 16:45:00','room1','2019-01-01 16:30:00','summary1','tutorial1',611);
+INSERT INTO `tutorial` VALUES (679,0,'2019-01-01 16:45:00','room1','2019-01-01 16:30:00','summary1','tutorial1',656);
 /*!40000 ALTER TABLE `tutorial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1117,7 +1101,7 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (550,0,'21232f297a57a5a743894a0e4a801fc3','admin'),(551,0,'b312ba4ffd5245fa2a1ab819ec0d0347','author1'),(552,0,'6ce19528a40dde9521d97cf7ba264eca','reviewer1'),(553,0,'2693b57f0f59df94caacefb811e99851','reviewer2'),(554,0,'9bd97baef2b853ec00cc3cffd269f679','author2'),(555,0,'d5cee333abe432891a0de57d0ee38713','administrator1'),(556,0,'82954495ff7e2a735ed2192c35b2cd00','administrator2');
+INSERT INTO `user_account` VALUES (595,0,'21232f297a57a5a743894a0e4a801fc3','admin'),(596,0,'b312ba4ffd5245fa2a1ab819ec0d0347','author1'),(597,0,'6ce19528a40dde9521d97cf7ba264eca','reviewer1'),(598,0,'2693b57f0f59df94caacefb811e99851','reviewer2'),(599,0,'9bd97baef2b853ec00cc3cffd269f679','author2'),(600,0,'d5cee333abe432891a0de57d0ee38713','administrator1'),(601,0,'82954495ff7e2a735ed2192c35b2cd00','administrator2');
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1142,7 +1126,7 @@ CREATE TABLE `user_account_authorities` (
 
 LOCK TABLES `user_account_authorities` WRITE;
 /*!40000 ALTER TABLE `user_account_authorities` DISABLE KEYS */;
-INSERT INTO `user_account_authorities` VALUES (550,'ADMIN'),(551,'AUTHOR'),(552,'REVIEWER'),(553,'REVIEWER'),(554,'AUTHOR'),(555,'ADMIN'),(556,'ADMIN');
+INSERT INTO `user_account_authorities` VALUES (595,'ADMIN'),(596,'AUTHOR'),(597,'REVIEWER'),(598,'REVIEWER'),(599,'AUTHOR'),(600,'ADMIN'),(601,'ADMIN');
 /*!40000 ALTER TABLE `user_account_authorities` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1155,5 +1139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-22  8:42:20
-commit;
+-- Dump completed on 2019-08-26 17:09:48
