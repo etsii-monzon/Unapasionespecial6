@@ -139,6 +139,8 @@
 		<spring:message code="reviewer.email" />
 	</form:label>
 	<form:input path="email" />
+	<spring:message var="x" code="reviewer.email.pattern" />
+	<jstl:out value="${x }"></jstl:out>
 	<form:errors class="error" path="email" />
 	<br>
 	<br>

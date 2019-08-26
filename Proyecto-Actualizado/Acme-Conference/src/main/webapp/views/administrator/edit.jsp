@@ -108,6 +108,8 @@
 		<spring:message code="administrator.email" />
 	</form:label>
 	<form:input path="email" />
+	<spring:message var="x" code="administrator.email.pattern" />
+	<jstl:out value="${x }"></jstl:out>
 	<form:errors class="error" path="email" />
 	<br>
 	<br>
@@ -130,4 +132,5 @@
 		value="<spring:message code="administrator.cancel" />"
 		onClick="javascript: window.location.replace('welcome/index.do');" />
 </form:form>
+
 

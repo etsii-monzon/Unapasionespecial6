@@ -141,6 +141,8 @@
 		<spring:message code="author.email" />
 	</form:label>
 	<form:input path="email" />
+	<spring:message var="x" code="author.email.pattern" />
+	<jstl:out value="${x }"></jstl:out>
 	<form:errors class="error" path="email" />
 	<br>
 	<br>

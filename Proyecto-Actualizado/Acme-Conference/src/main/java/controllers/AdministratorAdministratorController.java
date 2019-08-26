@@ -76,7 +76,6 @@ public class AdministratorAdministratorController extends AbstractController {
 			result = this.createEditModelAndView(adminsitrator);
 		} else
 			try {
-				System.out.println(adminsitrator.getPhoneNumber());
 				this.administratorService.save(adminsitrator);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final DataIntegrityViolationException oops) {
